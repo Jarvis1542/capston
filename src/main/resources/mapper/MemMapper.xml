@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?> <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fivekm_home.charge.mapper.MemMapper">
+    <select id="memberList" resultType="com.fivekm_home.charge.domain.USER.MemberList">
+        select * from member
+     </select>
+
+    <insert id="join">
+        insert into member_view(email, password, name, created_Date, role) values(
+        #{email},
+        #{password},
+        #{name},
+        sysdate,
+        '일반')
+    </insert>
+
+    <select id="checkId" resultType="int">
+        select count(*)
+        from member_view
+        where email = #{email}
+    </select>
+
+    <select id="login" resultType="com.fivekm_home.charge.domain.USER.Login">
+        select *
+        from member_view
+        where email = #{email}
+        and password = #{password}
+    </select>
+</mapper>
