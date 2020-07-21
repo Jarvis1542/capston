@@ -4,10 +4,10 @@ create table member(
     email varchar2(255),
     password  varchar2(255) not null,
     name varchar2(255) not null,
-    phone varchar2(255) not null,
+    phone varchar2(255),
     picture varchar2(255),
     role varchar2(255) not null,
-    create_date timestamp(6),
+    created_date timestamp(6),
     modified_date timestamp(6),
     constraint member_email_pk primary key(email)
 );
@@ -61,13 +61,13 @@ CREATE SEQUENCE  parking_seq
     NOCYCLE;
 
 /* 뷰 생성 */
-create view view_member
+create view member_view
 as select * from member; /* member 뷰 작성*/
 
-create view view_parking
+create view parking_view
 as select * from parking; /* parking 뷰 작성*/
 
-create view view_CS
+create view CS_view
 as select * from CS;    /* CS 뷰 작성*/
 
 /* 커밋 */
