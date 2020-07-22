@@ -124,6 +124,17 @@
     }
 }
 
+/* 중간 정렬 */
+.center{
+    text-align: center;
+}
+
+/* 간격 두기 */
+.interval{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
 .carousel-caption-custom{
     position: absolute;
     right: 15%;
