@@ -28,4 +28,6 @@ public class HPController {
     public String hpHistory(Model model){
         return "/HP/hpHistory";
     }
+
+
 }

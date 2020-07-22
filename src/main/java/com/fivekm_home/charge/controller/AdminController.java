@@ -29,10 +29,10 @@ public class AdminController {
         return "/admin/csRequest";
     }
 
-//    @GetMapping("/happyParkingRequest")
-//    public String hpRequest(Model model){
-//        return "/admin/hpRequest";
-//    }
+    @GetMapping("/happyParkingRequest")
+    public String hpRequest(Model model){
+        return "/admin/hpRequest";
+    }
 
     @GetMapping("/happyParkingRequestList")
     public String hpRequestList(Model model){
