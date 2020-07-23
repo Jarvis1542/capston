@@ -17,7 +17,7 @@ import org.springframework.context.annotation.PropertySource;
 import javax.sql.DataSource;
 
 @Configuration
-@PropertySource("classpath:/application-oauth.properties")
+@PropertySource("classpath:/application-oauth.properties") /* application-mail.properties가 oauth에 병합됨(document 메모 참고) */
 public class EmailConfig {
 
     @Value("${mail.smtp.port}")
