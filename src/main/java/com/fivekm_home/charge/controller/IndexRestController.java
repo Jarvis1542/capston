@@ -25,7 +25,7 @@ public class IndexRestController {
     public int checkId(LoginCheck loginCheck){
         System.out.println("아이디 중복체크: "+loginCheck.toString());
         return memService.checkId(loginCheck);
-    }
+    } 
 
     @PostMapping("/rest/login")
     public Object login(Login login, HttpSession httpSession){

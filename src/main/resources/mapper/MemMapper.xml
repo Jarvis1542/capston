@@ -16,7 +16,7 @@
 
     <select id="checkId" resultType="int">
         select count(*)
-        from member_view
+        from member
         where email = #{email}
     </select>
 

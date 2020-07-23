@@ -27,36 +27,42 @@
                                 <h3>회원가입</h3>
                             </div>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-10">
                             <div class="single_field">
-                                <input id="id" type="email" placeholder="이메일 형식으로 입력해주세요">
+                                <input id="email" type="email" placeholder="이메일 형식으로 입력해주세요">
                             </div>
                         </div>
                         <div class="single_field">
                             <button id="checkId" class="genric-btn info-border">중복확인</button>
                         </div>
+                        <div class="single_field" id="errEmail"></div>
                         <div class="col-md-12">
                             <div class="single_field">
                                 <input id="password" type="password" placeholder="비밀번호 입력">
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <div class="single_field">
-                                <input type="password" placeholder="비밀번호 확인">
-                            </div>
-                        </div>
+                        <div class="single_field" id="errPassword"></div>
                         <div class="col-md-12">
                             <div class="single_field">
                                 <input id="name" type="text" placeholder="이름">
                             </div>
                         </div>
-                        <div class="col-md-9">
+                        <div class="single_field" id="errName"></div>
+                        <div class="col-md-10">
                             <div class="single_field">
-                                <input type="text" placeholder="인증 번호">
+                                <input type="text" placeholder="이메일 주소">
                             </div>
                         </div>
                         <div class="single_field">
-                            <a href="#" class="genric-btn info-border">확인</a>
+                            <button id="emailAuth" class="genric-btn info-border">메일인증</button>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="single_field">
+                                <input type="text" placeholder="이메일 인증번호">
+                            </div>
+                        </div>
+                        <div class="single_field">
+                            <button id="asdf" class="genric-btn info-border">인증하기</button>
                         </div>
                         <div class="col-md-12">
                             <div class="submit_btn">
