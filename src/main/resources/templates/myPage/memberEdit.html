@@ -65,22 +65,20 @@
 
 
                         <!-- 회원구분 선택 -->
-                        <div class="col-md-12">
-                            <div class="center" style="display: block;">
-                                <label class="interval">
-                                    <input type="radio" name="memberType" value="typeNormal">
-                                    일반 회원
-                                </label> <label class="interval">
-                                <input type="radio" name="memberType" value="typeSecurity">
+                        <div class="col-md-12 center">
+                            <label class="interval">
+                                <input type="radio" name="memberRole" value="normal">
+                                일반 회원
+                            </label> <label class="interval">
+                                <input type="radio" name="memberRole" value="guard">
                                 경비 회원
                             </label> <label class="interval">
-                                <input type="radio" name="memberType" value="typeAdmin">
+                                <input type="radio" name="memberRole" value="register">
                                 등록자 회원
                             </label>
-                            </div>
                         </div>
 
-                        <div id="securityForm" style="display: none;">
+                        <div id="guardForm" style="display: none;">
                             <div class="col-md-12">
                                 <div class="single_field">
                                     <input type="text" placeholder="관리업체 이름">
@@ -100,7 +98,7 @@
                             </div>
                         </div>
 
-                        <div id="adminForm" style="display: none;">
+                        <div id="registerForm" style="display: none;">
                             <div class="col-md-12">
                                 <div class="single_field">
                                     <input type="text" placeholder="계좌 번호">
