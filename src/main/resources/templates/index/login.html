@@ -53,14 +53,14 @@
 
                 <!--소셜 로그인 버튼 영역-->
                 <div class="col-md-12 center">
-                    <a href="#">    <!--여기에 구글 로그인 링크 연결-->
-                        <img class="socialLogin googleLogin" src="/img/socialLogin/googleLogin.png">
-                    </a> &nbsp&nbsp&nbsp&nbsp&nbsp
-                    <a href="#">    <!--여기에 네이버 로그인 링크 연결-->
-                        <img class="socialLogin naverLogin" src="/img/socialLogin/naverLogin.png">
-                    </a>
+                    <button style="border: none; background: none;">
+                        <img class="socialLogin googleLogin" src="/img/socialLogin/googleLogin.png" th:onclick="|javascript:googleLogin()|">
+                    </button>
+ &nbsp&nbsp&nbsp&nbsp&nbsp
+                    <button style="border: none; background: none;">
+                        <img class="socialLogin naverLogin" src="/img/socialLogin/naverLogin.png" th:onclick="|javascript:naverLogin()|">
+                    </button>
                 </div>
-
             </div>
         </div>
     </div>
