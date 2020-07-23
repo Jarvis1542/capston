@@ -33,6 +33,28 @@
                                 <input type="text" name="chargeName" id="chargeName" placeholder="주차장 이름">
                             </div>
                         </div>
+                        <!-- 충전타입 선택 -->
+                        <div class="col-md-12">
+                            <div class="center" style="display: block;">
+                                <label class="interval">
+                                    <input type="radio" name="memberType" value="typeNormal">
+                                    DC 차데모
+                                </label> <label class="interval">
+                                <input type="radio" name="memberType" value="typeSecurity">
+                                DC 콤보
+                            </label> <label class="interval">
+                                <input type="radio" name="memberType" value="typeAdmin">
+                                슈퍼 차져
+                            </label> <label class="interval">
+                                <input type="radio" name="memberType" value="typeAdmin">
+                                AC 3상 5핀
+                            </label> <label class="interval">
+                                <input type="radio" name="memberType" value="typeAdmin">
+                                AC 3상 7핀
+                            </label>
+                            </div>
+                        </div>
+
                         <div class="col-md-12">
                             <div class="single_field field_custom">
                                 <div class="field_divide">
@@ -113,7 +135,8 @@
                                     </div>
                                     <span>03.둘 다 가능</span>
                                     <div class="primary-radio">
-                                        <input type="checkbox" name="cable" id="default-radio-3" value="chargeCableAndCarCable">
+                                        <input type="checkbox" name="cable" id="default-radio-3"
+                                               value="chargeCableAndCarCable">
                                         <label for="default-radio-3"></label>
                                     </div>
                                 </div>
@@ -123,12 +146,17 @@
                         <div class="col-xl-6 col-md-6 col-lg-4 field_col_margin">
                             <h3>주소</h3>
                             <form action="#" class="newsletter_form">
-                                <input type="text" name="postcode" id="postcode" placeholder="우편번호" value="" class="single-input" />
+                                <input type="text" name="postcode" id="postcode" placeholder="우편번호" value=""
+                                       class="single-input"/>
                                 <button type="submit" class="genric-btn default-border">주소 검색</button>
-                                <input type="text" name="roadAddress" id="roadAddress" placeholder="도로명주소" value="" class="single-input" />
-                                <input type="text" name="jibunAddress" id="jibunAddress" placeholder="지번주소" value="" class="single-input" />
-                                <input type="text" name="detailAddress" id="detailAddress" placeholder="상세주소" value="" class="single-input" />
-                                <input type="text" name="extraAddress" id="extraAddress" placeholder="참고항목" value="" class="single-input" />
+                                <input type="text" name="roadAddress" id="roadAddress" placeholder="도로명주소" value=""
+                                       class="single-input"/>
+                                <input type="text" name="jibunAddress" id="jibunAddress" placeholder="지번주소" value=""
+                                       class="single-input"/>
+                                <input type="text" name="detailAddress" id="detailAddress" placeholder="상세주소" value=""
+                                       class="single-input"/>
+                                <input type="text" name="extraAddress" id="extraAddress" placeholder="참고항목" value=""
+                                       class="single-input"/>
                             </form>
                             <p class="newsletter_text">주소를 검색하여 주소를 등록해주세요.</p>
                         </div>
@@ -137,9 +165,9 @@
                             <h3>사진 등록</h3>
                             <form action="#" class="newsletter_form">
                                 <label for="image1">충전소 사진 업로드1</label>
-                                <input type="file" name="file1" id="image1" accept="image/*" class="single-input" />
+                                <input type="file" name="file1" id="image1" accept="image/*" class="single-input"/>
                                 <label for="image2">충전소 사진 업로드2</label>
-                                <input type="file" name="file2" id="image2" accept="image/*" class="single-input" />
+                                <input type="file" name="file2" id="image2" accept="image/*" class="single-input"/>
                                 <button type="upload" class="genric-btn default-border">사진 등록</button>
                             </form>
                             <p class="newsletter_text">충전소 사진을 등록해주세요.</p>

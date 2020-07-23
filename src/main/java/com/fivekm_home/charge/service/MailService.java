@@ -31,7 +31,6 @@ public class MailService {
         msgg+= "<h1> 안녕하세요  5km home charge입니다!!! </h1>";
         msgg+= "<br>";
         msgg+= "<p>아래 코드를 회원가입 창으로 돌아가 입력해주세요<p>";
-        msgg+= "<a href='http://localhost:3000/index/join>회원가입 하러 가기 </a>'";
         msgg+= "<br>";
         msgg+= "<p>감사합니다!<p>";
         msgg+= "<br>";
