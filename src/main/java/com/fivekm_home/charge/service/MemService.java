@@ -5,6 +5,7 @@ import com.fivekm_home.charge.domain.USER.Login;
 import com.fivekm_home.charge.domain.USER.LoginCheck;
 import com.fivekm_home.charge.domain.USER.MemberList;
 import com.fivekm_home.charge.mapper.MemMapper;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -69,6 +69,7 @@
             #pagination {margin:10px auto;text-align: center;}
             #pagination a {display:inline-block;margin-right:10px;}
             #pagination .on {font-weight: bold; cursor: default;color:#777;}
+
         </style>
     </head>
     <body>
@@ -127,22 +128,19 @@
                     <div class="container-fluid">
                         <div class="header_bottom_border">
                             <div class="row align-items-center">
-                                <div class="col-xl-2 col-lg-2">
+                                <div class="col-lg-2">
                                     <div class="logo">
                                         <a th:href="@{/}">
                                             <img src="/img/logo.png" alt="">
                                         </a>
                                     </div>
                                 </div>
-                                <div class="col-xl-7 col-lg-8">
+                                <div class="col-xl-8 col-lg-12">
                                     <div class="main-menu  d-none d-lg-block">
                                         <nav>
                                             <ul id="navigation">
-                                                <!-- Home 대신 로고 사용
-                                                <li><a href="/">Home</a></li>
-                                                -->
                                                 <!-- 메뉴 : SCS -->
-                                                <li><a href="#">SCS<i class="ti-angle-down"></i></a>
+                                                <li><a href="#" style="color: white; font-size: 18px;">SCS<i class="ti-angle-down"></i></a>
                                                     <ul class="submenu">
                                                         <li><a th:href="@{/chargingStation/chargingRegister}">충전소 등록</a></li>
                                                         <li><a th:href="@{/chargingStation/chargingSearch}">충전소 찾기</a></li>
@@ -152,7 +150,7 @@
                                                 </li>
 
                                                 <!-- 메뉴 : 해피 파킹 -->
-                                                <li><a href="#">Happy Parking<i class="ti-angle-down"></i></a>
+                                                <li><a href="#" style="color: white; font-size: 18px;">Happy Parking<i class="ti-angle-down"></i></a>
                                                     <ul class="submenu">
                                                         <li><a th:href="@{/happyParking/happyParkingRegister}">주차장 등록</a></li>
                                                         <li><a th:href="@{/happyParking/happyParkingSearch}">주차장 찾기</a></li>
@@ -162,10 +160,10 @@
                                                 </li>
 
                                                 <!-- 메뉴 : 와치 비히클 -->
-                                                <li><a th:href="@{/watchVehicle}">Watch Vehicle</a></li>
+                                                <li><a th:href="@{/watchVehicle}" style="color: white; font-size: 18px;">Watch Vehicle</a></li>
 
                                                 <!-- 메뉴 : 부가 서비스 -->
-                                                <li><a href="#">부가서비스<i class="ti-angle-down"></i></a>
+                                                <li><a href="#" style="color: white; font-size: 18px;">부가서비스<i class="ti-angle-down"></i></a>
                                                     <ul class="submenu">
                                                         <li><a th:href="@{/otherService/parkingMap}">Parking Map</a></li>
                                                         <li><a th:href="@{/otherService/EZCharging}">Ez Charging</a></li>
@@ -175,7 +173,7 @@
                                                 </li>
 
                                                 <!-- 메뉴 : 마이 페이지 -->
-                                                <li><a href="#">마이페이지<i class="ti-angle-down"></i></a>
+                                                <li><a href="#" style="color: white; font-size: 18px;">마이페이지<i class="ti-angle-down"></i></a>
                                                     <ul class="submenu">
                                                         <li><a th:href="@{/myPage/memberEdit}">정보 수정</a></li>
                                                         <li><a th:href="@{/myPage/residence}">거주지 등록</a></li>
@@ -203,31 +201,21 @@
                                 </div>
                                 <div class="col-xl-2 col-lg-2 d-none d-lg-block">
                                     <div class="Appointment">
-                                        <!-- 연락 아이콘 + 전화 번호
-                                        <div class="phone_num d-none d-xl-block">
-                                            <a href="#"> <i class="fa fa-phone"></i> +10 673 567 367</a>
-                                        </div>
-                                        -->
                                         <!-- 가입 버튼 -->
                                         <span th:if="${session.user==null}">
                                             <div class="d-none d-lg-block">
-                                                <a class="boxed-btn4" th:href="@{/index/join}">회원 가입</a>
+                                                <a th:href="@{/index/join}" style="color: white; font-size: 15px;">회원 가입</a>&emsp14;&emsp14;
                                             </div>
-                                            <div class="d-none d-lg-block gj-margin-left-10">
-                                                <a class="boxed-btn4" th:href="@{/index/login}">로그인</a>
-                                            </div>
+                                                <a th:href="@{/index/login}" style="color: white; font-size: 15px;">로그인</a>
                                         </span>
 
                                         <span th:unless="${session.user==null}">
-                                            <div class="d-none d-lg-block">
-<!--                                                <a class="boxed-btn4" href="/myPage/memberEdit"></a>-->
-                                                <div class="boxed-btn4" th:text="${session.user.name}"></div>
-                                            </div>
-                                            <div class="d-none d-lg-block gj-margin-left-10">
-                                                <a class="boxed-btn4" th:href="@{/logout}">로그아웃</a>
+                                            <div class="button-group-area mt-40">
+                                                <img th:src="${session.user.picture}" style="width: 50px; height: 40px"/>&emsp14;
+                                                    <span th:text="${session.user.name + '님'}" style="color: white; font-size: 15px;"/>&emsp14;
+                                                    <a th:href="@{/logout}" style="color: white; font-size: 15px;">로그아웃</a>
                                             </div>
                                         </span>
-
                                     </div>
                                 </div>
                                 <div class="col-12">
