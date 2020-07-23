@@ -17,7 +17,7 @@ import org.springframework.context.annotation.PropertySource;
 import javax.sql.DataSource;
 
 @Configuration
-@PropertySource("classpath:/application-oauth.properties")
+@PropertySource("classpath:/application-mail.properties")
 public class EmailConfig {
 
     @Value("${mail.smtp.port}")
