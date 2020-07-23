@@ -42,25 +42,6 @@ IndexController {
         return "redirect:/";
     }
 
-    @PostMapping("/service/mail/*")
-    @ResponseBody
-    public void emailConfirm(Email email)throws Exception{
-        System.out.println("전달 받은 이메일 : " + email.getUserId());
-        mailService.sendSimpleMessage(email.getUserId());
-    }
-    @PostMapping("/verifyCode")
-    @ResponseBody
-    public int verifyCode(String code) {
-        int result = 0;
-        System.out.println("code : "+code);
-        System.out.println("code match : "+ MailService.ePw.equals(code));
-        if(MailService.ePw.equals(code)) {
-            result = 1;
-        }
-
-        return result;
-    }
-
     // 부트스트랩
     @GetMapping("/about")
     public String about(){

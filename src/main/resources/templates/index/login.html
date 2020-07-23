@@ -30,14 +30,16 @@
                         </div>
                         <div class="col-md-12">
                             <div class="single_field">
-                                <input id="id" type="email" placeholder="asdf@naver.com">
+                                <input id="email" type="email" placeholder="asdf@naver.com">
                             </div>
                         </div>
+                        <div id="errEmail"></div>
                         <div class="col-md-12">
                             <div class="single_field">
                                 <input id="password" type="text" placeholder="password">
                             </div>
                         </div>
+                        <div id="errPassword"></div>
                         <div class="col-md-12">
                             <div class="submit_btn">
                                 <button id="login" class="boxed-btn3">로그인</button>
@@ -53,13 +55,12 @@
                 </div>
                 <div class="col-md-12">
                     <div class="submit_btn">
-                        <button class="boxed-btn3" onclick="location.href='/oauth2/authorization/google}'">구글계정으로 로그인</button>
-                        <a th:href="@{/oauth2/authorization/google}">구글 계정으로 로그인</a>
+                        <button class="boxed-btn3" th:onclick="|javascript:googleLogin()|">구글계정으로 로그인</button>
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="submit_btn">
-                        <button class="boxed-btn3" onclick="location.href='/oauth2/authorization/naver}'">네이버 계정으로 로그인</button>
+                        <button class="boxed-btn3" th:onclick="location.href=='/oauth2/authorization/naver}'">네이버 계정으로 로그인</button>
                         <a th:href="@{/oauth2/authorization/naver}">네이버 계정으로 로그인</a>
                     </div>
                 </div>

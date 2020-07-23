@@ -1,12 +1,15 @@
 package com.fivekm_home.charge.controller;
 
 import com.fivekm_home.charge.config.auth.dto.SessionUser;
+import com.fivekm_home.charge.domain.USER.Email;
 import com.fivekm_home.charge.domain.USER.Join;
 import com.fivekm_home.charge.domain.USER.Login;
 import com.fivekm_home.charge.domain.USER.LoginCheck;
+import com.fivekm_home.charge.service.MailService;
 import com.fivekm_home.charge.service.MemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
@@ -15,6 +18,8 @@ import javax.servlet.http.HttpSession;
 public class IndexRestController {
     @Autowired
     MemService memService;
+    @Autowired
+    MailService mailService;
 
     @PostMapping("/rest/join")
     public void join(Join join){
@@ -39,5 +44,24 @@ public class IndexRestController {
         }else{
             return "로그인 실패";
         }
+    }
+
+    @PostMapping("/service/mail/*")
+    @ResponseBody
+    public void emailConfirm(Email email)throws Exception{
+        System.out.println("전달 받은 이메일 : " + email.getUserId());
+        mailService.sendSimpleMessage(email.getUserId());
+    }
+    @PostMapping("/verifyCode")
+    @ResponseBody
+    public int verifyCode(Email email) {
+        int result = 0;
+        System.out.println("code : "+email.getEmailAuthText());
+        System.out.println("code match : "+ MailService.ePw.equals(email.getEmailAuthText()));
+        if(MailService.ePw.equals(email.getEmailAuthText())) {
+            result = 1;
+        }
+
+        return result;
     }
 }
