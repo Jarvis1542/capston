@@ -26,6 +26,16 @@ IndexController {
         return "/index/index";
     }
 
+    @GetMapping("/index/searchId")
+    public String searchId() {
+        return "/index/searchId";
+    }
+
+    @GetMapping("/index/searchPassword")
+    public String searchPassword() {
+        return "/index/searchPassword";
+    }
+
     @GetMapping("/index/join")
     public String join() {
         return "/index/join";
