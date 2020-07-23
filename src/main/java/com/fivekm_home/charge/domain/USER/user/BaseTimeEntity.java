@@ -16,8 +16,8 @@ import java.util.Date;
 public abstract class BaseTimeEntity { // 모든 Entity의 상위 클래스가 되어 필드를 자동 관리 역할
 
     @CreatedDate // Entity가 생성되어 저장될 때 시간이 자동 저장
-    private Date createdDate;
+    private LocalDateTime create_date;
 
     @LastModifiedDate // 조회된 Entity값이 변경될 때 시간이 자동 저장
-    private Date modifiedDate;
+    private LocalDateTime modified_date;
 }

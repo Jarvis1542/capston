@@ -6,11 +6,13 @@
      </select>
 
     <insert id="join">
-        insert into member_view(email, password, name, created_Date, role) values(
+        insert into member_view(email, create_date, modified_date, name, password, phone, role) values(
         #{email},
-        #{password},
-        #{name},
         sysdate,
+        null,
+        #{name},
+        #{password},
+        #{phone},
         '일반')
     </insert>
 

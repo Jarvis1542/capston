@@ -33,18 +33,6 @@ $('#checkId').click(function () {
 
 // 회원가입
 $('#join').click(function () {
-    if($('#email').val()==undefined){
-        errEmail();
-        return;
-    }
-    if($('#email').val()==null){
-        errEmail();
-        return;
-    }
-    if($('#email').val()==0){
-        errEmail();
-        return;
-    }
     if(valid($('#email').val())){
         errEmail();
         return;
@@ -57,11 +45,24 @@ $('#join').click(function () {
         errName();
         return;
     }
+    if(valid($('#phone').val())){
+        errPhone();
+        return;
+    }
+    if(valid($('#memEditId').val())){
+        errMemEditId();
+        return;
+    }
+    if(valid($('#emailAuthText').val())){
+        errEmailAuthBtn();
+        return;
+    }
 
     var data = {
         email : $('#email').val(),
         password : $('#password').val(),
-        name : $('#name').val()
+        name : $('#name').val(),
+        phone : $('#phone').val()
     };
 
     $.ajax({
@@ -69,7 +70,8 @@ $('#join').click(function () {
         url: '/rest/join',
         data: data
     }).done(function(){
-        window.location.href="/index/login";
+            alert('회원가입 완료되었습니다!');
+            window.location.href="/index/login";
     }).fail(function (error) {
         alert(error);
     });
@@ -77,26 +79,46 @@ $('#join').click(function () {
     function errEmail() {
         var html = "";
         html += '<p style="font-size: 80%; color: red; ' +
-            'text-indent: 3em;"><strong>이메일을 다시 확인해주세요.</strong></p>';
+            'text-indent: 3em;"><strong>이메일을 입력 하신지 다시 확인해주세요.</strong></p>';
         $('#errEmail').empty();
         $('#errEmail').append(html);
     }
     function errPassword() {
         var html = "";
         html += '<p style="font-size: 80%; color: red; ' +
-            'text-indent: 3em;"><strong>비밀번호를 다시 확인해주세요.</strong></p>';
+            'text-indent: 3em;"><strong>비밀번호를 입력 하신지 다시 확인해주세요.</strong></p>';
         $('#errPassword').empty();
         $('#errPassword').append(html);
     }
     function errName() {
         var html = "";
         html += '<p style="font-size: 80%; color: red; ' +
-            'text-indent: 3em;"><strong>이름을 다시 확인해주세요.</strong></p>';
+            'text-indent: 3em;"><strong>이름을 입력 하신지 다시 확인해주세요.</strong></p>';
         $('#errName').empty();
         $('#errName').append(html);
     }
+    function errMemEditId() {
+        var html = "";
+        html += '<p style="font-size: 80%; color: red; ' +
+            'text-indent: 3em;"><strong>이메일 인증을 해주세요.</strong></p>';
+        $('#errEmailAuth').empty();
+        $('#errEmailAuth').append(html);
+    }
+    function errPhone() {
+        var html = "";
+        html += '<p style="font-size: 80%; color: red; ' +
+            'text-indent: 3em;"><strong>폰번호를 입력해 주세요.</strong></p>';
+        $('#errPhone').empty();
+        $('#errPhone').append(html);
+    }
+    function errEmailAuthBtn() {
+        var html = "";
+        html += '<p style="font-size: 80%; color: red; ' +
+            'text-indent: 3em;"><strong>인증번호가 없습니다.</strong></p>';
+        $('#errEmailAuthBtn').empty();
+        $('#errEmailAuthBtn').append(html);
+    }
     function valid(val) {
-        if(val === '') return false;
         if(val === null) return true;
         if(typeof val === 'string' && val === '') return true;
         if(typeof val === 'undefined') return true;
@@ -155,11 +177,6 @@ $('#login').click(function () {
 
 // 이메일 인증 전송 버튼
 $('#emailAuth').click(function () {
-    var userId =  $('#memEditId').val();
-    var data = {
-        userId : $('#memEditId').val()
-    };
-
     if(valid($('#memEditId').val())){
         var html = "";
         html += '<p style="font-size: 80%; color: red; ' +
@@ -167,6 +184,11 @@ $('#emailAuth').click(function () {
         $('#errEmailAuth').empty();
         $('#errEmailAuth').append(html);
     }
+
+    var userId =  $('#memEditId').val();
+    var data = {
+        userId : $('#memEditId').val()
+    };
 
     $.ajax({
        data : data,
@@ -204,7 +226,7 @@ $('#EmailAuthBtn').click(function () {
     }).done(function (data) {
         if(data==0){
             var html = "";
-            html += '<p style="font-size: 80%; color: green; ' +
+            html += '<p class="asdf" style="font-size: 80%; color: red; ' +
                 'text-indent: 3em;"><strong>인증코드와 맞지 않습니다.</strong></p>';
             $('#errEmailAuthBtn').empty();
             $('#errEmailAuthBtn').append(html);

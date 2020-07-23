@@ -10,6 +10,7 @@ public class Join {
     private String email;
     private String password;
     private String name;
+    private String phone;
     private LocalDateTime created_Date;
 }
 

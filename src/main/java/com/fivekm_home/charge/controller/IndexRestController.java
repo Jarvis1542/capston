@@ -60,8 +60,24 @@ public class IndexRestController {
         System.out.println("code match : "+ MailService.ePw.equals(email.getEmailAuthText()));
         if(MailService.ePw.equals(email.getEmailAuthText())) {
             result = 1;
+            System.out.println("인증 결과 : " + result);
+            System.out.println("ver(result) : " + ver(result));
+            ver(result);
+            return result;
+        }else{
+            result = 0;
+            System.out.println("인증 결과 : " + result);
+            System.out.println("ver(result) : " + ver(result));
+            ver(result);
+            return result;
         }
-
-        return result;
+    }
+    public static int ver(int ver){
+        int result = 0;
+        if(ver==1){
+            return 1;
+        }else{
+            return 0;
+        }
     }
 }
