@@ -31,15 +31,14 @@
                         <th>이름</th>
                         <th>폰번호</th>
                         <th>등록날짜</th>
-                        <th>회원유형</th>
                     </tr>
                     </thead>
                     <tbody id="tbody">
                     <tr th:each ="memberList : ${memberList}">
-                        <td><span th:text="${memberList.id}"/></td>
+                        <td><span th:text="${memberList.email}"/></td>
                         <td><span th:text="${memberList.name}"/></td>
                         <td><span th:text="${memberList.phone}"/></td>
-                        <td><span th:text="${memberList.createDate}"/></td>
+                        <td><span th:text="${memberList.created_date}"/></td>
                     </tr>
                     </tbody>
                 </table>
