@@ -1,5 +1,6 @@
 package com.fivekm_home.charge.domain.USER;
 
+import com.fivekm_home.charge.domain.USER.user.Role;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -9,6 +10,6 @@ public class MemberList {
     private String email;
     private String name;
     private String phone;
-    private LocalDateTime created_date;
-//    private Role role;
+    private LocalDateTime create_date;
+    private Role role;
 }
