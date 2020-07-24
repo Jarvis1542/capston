@@ -29,7 +29,12 @@ public class OtherServiceController {
     }
 
     @GetMapping("/FAQ")
-    public String bestQnA() {
+    public String FAQ() {
         return "/otherService/FAQ";
+    }
+
+    @GetMapping("/graph")
+    public String Graph() {
+        return "/otherService/graph";
     }
 }

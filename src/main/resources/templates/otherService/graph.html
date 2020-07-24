@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"/>
+<body>
+<header th:replace="layout/layout :: header"/>
+<!-- bradcam_area  -->
+<div class="bradcam_area hp_bg_06">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text">
+                    <h3>GRAPH ROOM</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="width:80%; height: 100%; border: solid 1px black; margin-left: 100px; margin-top:30px;">
+    <canvas id="myChart"></canvas>
+</div>
+
+<footer th:replace="layout/layout :: footer"/>
+</body>
+<script th:replace="layout/layout :: script"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var we = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'January', 'February', 'March', 'April', 'May', 'June', 'AC']
+    var ac = [8400, 11000, 45000, 78300, 67000, 90200, 84000, 8400, 11000, 45000, 78300, 67000, 90200, 84000];
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: we,
+            datasets: [{
+                label: '매출 현황',
+                backgroundColor: 'rgb(77,173,255)',
+                borderColor: 'rgb(141,99,255)',
+                data: ac
+            }]
+        },
+
+        // Configuration options go here
+        options: {}
+    });
+</script>
+</html>

@@ -27,7 +27,7 @@
         and password = #{password}
     </select>
 
-    <select id="MemberEdit" resultType="com.fivekm_home.charge.domain.USER.MemberEdit">
+    <select id="memberEdit" resultType="com.fivekm_home.charge.domain.USER.MemberEdit">
         select email, name, phone
         from member_view
         where email = #{email}

@@ -1,16 +1,17 @@
 /* 테이블 생성 */
 /* email PK 반영 */
-create table member(
-    email varchar2(255),
-    password  varchar2(255) not null,
-    name varchar2(255) not null,
-    phone varchar2(255),
-    picture varchar2(255),
-    role varchar2(255) not null,
-    created_date timestamp(6),
-    modified_date timestamp(6),
-    constraint member_email_pk primary key(email)
-);
+/* 하버네이트 생성 권장(서버실행시 자동생성) */
+-- create table member(
+--     email varchar2(255),
+--     password  varchar2(255) not null,
+--     name varchar2(255) not null,
+--     phone varchar2(255),
+--     picture varchar2(255),
+--     role varchar2(255) not null,
+--     created_date timestamp(6),
+--     modified_date timestamp(6),
+--     constraint member_email_pk primary key(email)
+-- );
 
 create table parking( /*주차장*/
     parkingIdx number, /*주차장코드*/
