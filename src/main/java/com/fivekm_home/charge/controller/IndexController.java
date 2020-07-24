@@ -1,17 +1,19 @@
 package com.fivekm_home.charge.controller;
 
 import com.fivekm_home.charge.config.auth.dto.SessionUser;
-import com.fivekm_home.charge.domain.USER.*;
+import com.fivekm_home.charge.domain.USER.SearchId;
+import com.fivekm_home.charge.domain.USER.SearchPassword;
 import org.codehaus.jackson.JsonNode;
+import com.fivekm_home.charge.domain.USER.Kakao;
 import com.fivekm_home.charge.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import static com.fivekm_home.charge.domain.USER.user.Role.일반;
@@ -25,6 +27,8 @@ IndexController {
     HPService hpService;
     @Autowired
     MailService mailService;
+    @Autowired
+    KakaoLoginService kakaoLoginService;
 
     @GetMapping("/")
     public String index() {
@@ -32,12 +36,14 @@ IndexController {
     }
 
     @GetMapping("/index/searchId")
-    public String searchId() {
+    public String searchId(Model model, HttpSession httpSession) {
+        model.addAttribute("selId", httpSession.getAttribute("selectId"));
         return "/index/searchId";
     }
 
     @GetMapping("/index/searchPassword")
-    public String searchPassword() {
+    public String searchPassword(Model model, HttpSession httpSession) {
+        model.addAttribute("selPw", httpSession.getAttribute("selectPw"));
         return "/index/searchPassword";
     }
 
@@ -57,9 +63,50 @@ IndexController {
         return "redirect:/";
     }
 
+    @PostMapping("/rest/searchId")
+    public String searchId(SearchId searchId, HttpSession httpSession, Model model) {
+        httpSession.setAttribute("selectId",memService.searchId(searchId));
+//        model.addAttribute("seId", memService.searchId(searchId));
+        model.addAttribute("seId", httpSession.getAttribute("selectId"));
+        System.out.println("세션정보 : " + httpSession.getAttribute("selectId"));
+
+        return "redirect:/index/searchId";
+    }
+
+    @PostMapping("/rest/searchPassword")
+    public String searchPassword(SearchPassword searchPassword, HttpSession httpSession, Model model) {
+        httpSession.setAttribute("selectPw",memService.searchPassword(searchPassword));
+//        model.addAttribute("seId", memService.searchId(searchId));
+        model.addAttribute("sePw", httpSession.getAttribute("selectPw"));
+        System.out.println("세션정보 : " + httpSession.getAttribute("selectPw"));
+
+        return "redirect:/index/searchPassword";
+    }
+
+
+    @GetMapping("/kakao")
+    public String kakao(@RequestParam("code") String code, HttpSession httpSession, Kakao kakao){
+        System.out.println("code : " + code);
+        String access_Token = kakaoLoginService.getAccessToken(code);
+        System.out.println("controller access_token : " + access_Token);
+        HashMap<String, Object> userInfo = kakaoLoginService.getUserInfo(access_Token);
+        System.out.println("login Controller : " + userInfo);
+        /*userInfo.get("email");
+        userInfo.get("nickname");*/
+        //    클라이언트의 이메일이 존재할 때 세션에 해당 이메일과 토큰 등록
+        if (userInfo.get("email") != null) {
+            System.out.println("유저 이메일 : " + userInfo.get("email"));
+            System.out.println("유저 이름 : " + userInfo.get("nickname"));
+            System.out.println("유저 사진 : " + userInfo.get("thumbnail_image"));
+            httpSession.setAttribute("userId", userInfo.get("email"));
+            httpSession.setAttribute("access_Token", access_Token);
+        }
+        return "/";
+    }
+
     @GetMapping("/MS/kakaologin")
-    public String kakaoLogina(@RequestParam("code") String code, RedirectAttributes ra,
-                             Kakao kakao, HttpSession httpSession, KakaoLogin kakaoLogin) throws Exception{
+    public String kakaoLogin(@RequestParam("code") String code, RedirectAttributes ra,
+                    Kakao kakao, HttpSession httpSession, HttpServletResponse response){
         System.out.println("kakao code : " + code);
         JsonNode accessToken;
         org.codehaus.jackson.JsonNode jsonToken = KakaoAccessToken.getKakaoAccessToken(code);
@@ -91,53 +138,9 @@ IndexController {
         kakao.setEmail(email);
         kakao.setPicture(picture);
         kakao.setRole(일반);
-
-        kakaoLogin.setEmail(email);
-        System.out.println("카카오에서 받은 이메일 : " + email);
-        System.out.println("왜 안됨 : " + memService.kakaoLoginCheck(kakaoLogin));
-        String asdf = memService.kakaoLoginCheck(kakaoLogin).toString();
-        System.out.println("asdf : " + asdf);
-
-
-
-            if( asdf.indexOf("null")>0 ){
-                System.out.println("카카오로  로그인");
-                System.out.println("카카오 회원가입 전 메일 : " + memService.kakaoLoginCheck(kakaoLogin));
-                KakaoJoin kakaoJoin = new KakaoJoin();
-                kakaoJoin.setEmail(email+"_kakao");
-                kakaoJoin.setName(name);
-                kakaoJoin.setPicture(picture);
-
-
-                KakaoLogin kakaoLogin1 = new KakaoLogin();
-                kakaoLogin1.setEmail(email);
-                kakaoLogin1.setName(name);
-                kakaoLogin1.setPicture(picture);
-                kakaoLogin1.setRole(일반);
-                SessionUser user = new SessionUser(kakaoLogin1);
-                httpSession.setAttribute("user", user);
-                return "/index/index";
-
-            }else{
-                System.out.println("카카오로 사이트 회원가입하고 로그인");
-                System.out.println("카카오 회원가입 전 메일 : " + memService.kakaoLoginCheck(kakaoLogin));
-                System.out.println("asdf.indexof() : " + asdf.indexOf("null"));
-                KakaoJoin kakaoJoin = new KakaoJoin();
-                kakaoJoin.setEmail(email+"_kakao");
-                kakaoJoin.setName(name);
-                kakaoJoin.setPicture(picture);
-
-                memService.kakaoJoin(kakaoJoin); // 카카오 계정으로 회원가입
-
-                KakaoLogin kakaoLogin1 = new KakaoLogin();
-                kakaoLogin1.setEmail(email);
-                kakaoLogin1.setName(name);
-                kakaoLogin1.setPicture(picture);
-                kakaoLogin1.setRole(일반);
-                SessionUser user = new SessionUser(kakaoLogin1);
-                httpSession.setAttribute("user", user);
-                return "/index/index";
-            }
+        SessionUser user = new SessionUser(kakao);
+        httpSession.setAttribute("user", user);
+        return"/index/index";
     }
     // 부트스트랩
     @GetMapping("/about")

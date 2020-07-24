@@ -1,13 +1,11 @@
 package com.fivekm_home.charge.controller;
 
 import com.fivekm_home.charge.config.auth.dto.SessionUser;
-import com.fivekm_home.charge.domain.USER.Email;
-import com.fivekm_home.charge.domain.USER.Join;
-import com.fivekm_home.charge.domain.USER.Login;
-import com.fivekm_home.charge.domain.USER.LoginCheck;
+import com.fivekm_home.charge.domain.USER.*;
 import com.fivekm_home.charge.service.MailService;
 import com.fivekm_home.charge.service.MemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +18,7 @@ public class IndexRestController {
     MemService memService;
     @Autowired
     MailService mailService;
+
 
     @PostMapping("/rest/join")
     public void join(Join join){
