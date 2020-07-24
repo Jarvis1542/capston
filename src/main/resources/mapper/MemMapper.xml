@@ -6,16 +6,34 @@
      </select>
 
     <insert id="join">
-        insert into member_view(email, create_date, modified_date, name, password, phone, role) values(
+        insert into member_view(mem_seq, created_date, modified_date, email, name, password, phone, picture, role) values(
+        member_seq.nextval,
         #{email},
         sysdate,
         null,
         #{name},
-        #{password},
+        #{password,jdbcType=VARCHAR},
         #{phone},
+        #{picture},
         '일반')
     </insert>
 
+    <insert id="kakaoJoin">
+        insert into member_view(mem_seq, created_date, modified_date, email, name, picture, role) values(
+            member_seq.nextval,
+            sysdate,
+            null,
+            #{email},
+            #{name},
+            #{picture},
+            '일반'
+        )
+    </insert>
+
+    <select id="kakaoLoginCheck" resultType="com.fivekm_home.charge.domain.USER.KakaoLogin">
+        select email from member_view
+        where email = concat(#{email},'_kakao')
+    </select>
     <select id="checkId" resultType="int">
         select count(*) from member_view
         where email = #{email}

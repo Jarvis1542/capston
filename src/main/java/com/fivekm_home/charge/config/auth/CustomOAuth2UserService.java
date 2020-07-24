@@ -35,7 +35,14 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         OAuthAttributes attributes = OAuthAttributes // OAuth2UserService를 통해 가져온 OAtuth2User의 attribute를 담는 클래스
                 .of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
 
+        System.out.println("registrationId : " + registrationId);
+        System.out.println("userNameAttributeName : " + userNameAttributeName);
+
         Member member = saveOrUpdate(attributes);
+
+        System.out.println(member.getName());
+        System.out.println(member.getEmail());
+
         httpSession.setAttribute("user", new SessionUser(member)); // SessionUser : 세션에 사용자 정보를 저장하는 DTO클래스
                                                                              // 왜 User 클래스를 따로 사용하지 않느냐? 나중에 설명
         return new DefaultOAuth2User(

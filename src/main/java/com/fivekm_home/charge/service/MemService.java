@@ -1,9 +1,6 @@
 package com.fivekm_home.charge.service;
 
-import com.fivekm_home.charge.domain.USER.Join;
-import com.fivekm_home.charge.domain.USER.Login;
-import com.fivekm_home.charge.domain.USER.LoginCheck;
-import com.fivekm_home.charge.domain.USER.MemberList;
+import com.fivekm_home.charge.domain.USER.*;
 import com.fivekm_home.charge.mapper.MemMapper;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +20,20 @@ public class MemService {
 
     //회원가입
     public void join(Join join){
+        System.out.println("join dto : " + join.toString());
         memMapper.join(join);
+    }
+
+    // 카카오 회원가입
+    public void kakaoJoin(KakaoJoin kakaoJoin){
+        System.out.println("kakaoJoinDTO : " + kakaoJoin.toString());
+        memMapper.kakaoJoin(kakaoJoin);
+    }
+
+    // 카카오 로그인 체크
+    public ArrayList<KakaoLogin> kakaoLoginCheck(KakaoLogin kakaoLogin) throws Exception{
+        System.out.println("kakaoLoginDTO : " + kakaoLogin.toString());
+        return memMapper.kakaoLoginCheck(kakaoLogin);
     }
 
     // 아이디 체크

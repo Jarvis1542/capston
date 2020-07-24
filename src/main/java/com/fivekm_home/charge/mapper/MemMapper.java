@@ -10,4 +10,6 @@ public interface MemMapper {
     int checkId(LoginCheck loginCheck);
     Login login(Login login);
     MemberEdit MemberEdit(MemberEdit memberEdit);
+    void kakaoJoin(KakaoJoin kakaoJoin);
+    ArrayList<KakaoLogin> kakaoLoginCheck(KakaoLogin kakaoLogin) throws Exception;
 }

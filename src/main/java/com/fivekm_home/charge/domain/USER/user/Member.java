@@ -1,33 +1,39 @@
 package com.fivekm_home.charge.domain.USER.user;
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Data
+@Getter
 @NoArgsConstructor
+@SequenceGenerator(name = "member_seq_gen", sequenceName = "member_seq", initialValue = 1, allocationSize = 1)
 @Entity
 public class Member extends BaseTimeEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "member_seq_gen")
+    @Column(columnDefinition = "number")
+    private Long memSeq;
+
+    @Column(columnDefinition = "varchar2(100)")
     private String email;
 
-    @Column
+    @Column(columnDefinition = "varchar2(100)")
     private String password;
 
-    @Column
+    @Column(columnDefinition = "varchar2(30)")
     private String name;
 
-    @Column
+    @Column(columnDefinition = "varchar2(20)")
     private String phone;
 
-    @Column
+    @Column(columnDefinition = "varchar2(1000)")
     private String picture;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "varchar2(10)")
     private Role role;
 
     @Builder
