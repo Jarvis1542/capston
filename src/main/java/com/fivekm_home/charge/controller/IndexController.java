@@ -1,15 +1,19 @@
 package com.fivekm_home.charge.controller;
 
 import com.fivekm_home.charge.config.auth.dto.SessionUser;
-import com.fivekm_home.charge.domain.USER.Email;
-import com.fivekm_home.charge.service.HPService;
-import com.fivekm_home.charge.service.MailService;
-import com.fivekm_home.charge.service.MemService;
+import org.codehaus.jackson.JsonNode;
+import com.fivekm_home.charge.domain.USER.Kakao;
+import com.fivekm_home.charge.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+
+import static com.fivekm_home.charge.domain.USER.user.Role.일반;
 
 @Controller
 public class
@@ -20,6 +24,8 @@ IndexController {
     HPService hpService;
     @Autowired
     MailService mailService;
+    @Autowired
+    KakaoLoginService kakaoLoginService;
 
     @GetMapping("/")
     public String index() {
@@ -51,7 +57,64 @@ IndexController {
         httpSession.invalidate();
         return "redirect:/";
     }
+    @GetMapping("/kakao")
+    public String kakao(@RequestParam("code") String code, HttpSession httpSession, Kakao kakao){
+        System.out.println("code : " + code);
+        String access_Token = kakaoLoginService.getAccessToken(code);
+        System.out.println("controller access_token : " + access_Token);
+        HashMap<String, Object> userInfo = kakaoLoginService.getUserInfo(access_Token);
+        System.out.println("login Controller : " + userInfo);
+        /*userInfo.get("email");
+        userInfo.get("nickname");*/
+        //    클라이언트의 이메일이 존재할 때 세션에 해당 이메일과 토큰 등록
+        if (userInfo.get("email") != null) {
+            System.out.println("유저 이메일 : " + userInfo.get("email"));
+            System.out.println("유저 이름 : " + userInfo.get("nickname"));
+            System.out.println("유저 사진 : " + userInfo.get("thumbnail_image"));
+            httpSession.setAttribute("userId", userInfo.get("email"));
+            httpSession.setAttribute("access_Token", access_Token);
+        }
+        return "/";
+    }
 
+    @GetMapping("/MS/kakaologin")
+    public String kakaoLogin(@RequestParam("code") String code, RedirectAttributes ra,
+                    Kakao kakao, HttpSession httpSession, HttpServletResponse response){
+        System.out.println("kakao code : " + code);
+        JsonNode accessToken;
+        org.codehaus.jackson.JsonNode jsonToken = KakaoAccessToken.getKakaoAccessToken(code);
+        accessToken = jsonToken.get("access_token");
+        System.out.println("access token : " + accessToken);
+
+        // access_token을 통해 사용자 정보 요청
+        JsonNode userInfo = KakaoUserInfo.getKakaoUserInfo(accessToken);
+
+        // get id
+        String id = userInfo.path("id").asText();
+        String name = null;
+        String email = null;
+        String picture = null;
+
+        // 유저정보 카카오에서 가져오기 Get properties
+        JsonNode properties = userInfo.path("properties");
+        JsonNode kakao_account = userInfo.path("kakao_account");
+
+        name = properties.path("nickname").asText();
+        email = kakao_account.path("email").asText();
+        picture = properties.path("thumbnail_image").asText();
+
+        System.out.println("id : " + id);
+        System.out.println("name : " + name);
+        System.out.println("email : " + email);
+        System.out.println("picture : " + picture);
+        kakao.setName(name);
+        kakao.setEmail(email);
+        kakao.setPicture(picture);
+        kakao.setRole(일반);
+        SessionUser user = new SessionUser(kakao);
+        httpSession.setAttribute("user", user);
+        return"/index/index";
+    }
     // 부트스트랩
     @GetMapping("/about")
     public String about(){

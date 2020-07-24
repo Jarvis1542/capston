@@ -2,7 +2,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fivekm_home.charge.mapper.MemMapper">
     <select id="memberList" resultType="com.fivekm_home.charge.domain.USER.MemberList">
-        select * from member
+        select * from member_view
      </select>
 
     <insert id="join">
@@ -17,15 +17,24 @@
     </insert>
 
     <select id="checkId" resultType="int">
-        select count(*)
-        from member
+        select count(*) from member_view
         where email = #{email}
     </select>
 
     <select id="login" resultType="com.fivekm_home.charge.domain.USER.Login">
-        select *
-        from member_view
+        select * from member_view
         where email = #{email}
         and password = #{password}
+    </select>
+
+    <select id="MemberEdit" resultType="com.fivekm_home.charge.domain.USER.MemberEdit">
+        select email, name, phone
+        from member_view
+        where email = #{email}
+    </select>
+
+    <select id="updatePassword" resultType="int">
+        select password from member_view
+        where email = #{email}
     </select>
 </mapper>

@@ -2,7 +2,14 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout/layout :: head"/>
 <body>
+<style>
+    p {
+        line-height: 40px;
+        font-size: 20px;
+    }
+</style>
 <header th:replace="layout/layout :: header"/>
+<input type="hidden" id="sessionId" th:value="${session.user.email}">
 <!-- bradcam_area  -->
 <div class="bradcam_area bradcam_bg_1">
     <div class="container">
@@ -30,39 +37,27 @@
                         </div>
                         <div class="col-md-12">
                             <div class="single_field">
-                                <input id="memEditId" type="text" placeholder="아이디">
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="single_field">
-                                <input type="text" placeholder="비밀번호 입력">
+                                <p>아이디&emsp14;&emsp14;&emsp14;:&emsp14;&emsp14;&emsp14;ㅁㄴㅇㄹ</p>
                             </div>
                         </div>
                         <div class="col-md-9">
                             <div class="single_field">
-                                <input type="text" placeholder="비밀번호 확인">
-
+                                <input id="password" type="text" placeholder="수정할 비밀번호를 입력하세요.">
                             </div>
                         </div>
                         <div class="single_field">
-                            <button class="genric-btn info-border">비밀번호 수정</button>
+                            <button id="updatePassword" class="genric-btn info-border">수정하기</button>
                         </div>
                         <div class="col-md-12">
                             <div class="single_field">
-                                <input type="text" placeholder="이름">
+                                <p>이름&emsp14;&emsp14;&emsp14;:&emsp14;&emsp14;&emsp14;ㅁㄴㅇㄹ</p>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="single_field">
-                                <input type="text" placeholder="카드 번호">
+                                <p>폰번호&emsp14;&emsp14;&emsp14;:&emsp14;&emsp14;&emsp14;ㅁㄴㅇㄹ</p>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <div class="single_field">
-                                <input type="text" placeholder="유효 기간">
-                            </div>
-                        </div>
-
 
                         <!-- 회원구분 선택 -->
                         <div class="col-md-12 center">
