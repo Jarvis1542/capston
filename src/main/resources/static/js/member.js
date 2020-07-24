@@ -129,6 +129,16 @@ $('#join').click(function () {
 
 //아이디 찾기
 $('#searchId').click(function () {
+    if(valid($('#name').val())){
+        errName();
+        return;
+    }
+
+    if(valid($('#phone').val())){
+        errPhone();
+        return;
+    }
+
     var data = {
         name : $('#name').val(),
         phone : $('#phone').val(),
@@ -144,6 +154,29 @@ $('#searchId').click(function () {
     }).fail(function (error) {
         alert(error);
     });
+
+    function errName() {
+        var html = "";
+        html += '<p style="font-size: 80%; color: red; ' +
+            'text-indent: 3em;"><strong>이름 입력하세요.</strong></p>';
+        $('#errName').empty();
+        $('#errName').append(html);
+    }
+    function errPhone() {
+        var html = "";
+        html += '<p style="font-size: 80%; color: red; ' +
+            'text-indent: 3em;"><strong>폰번호 입력하세요..</strong></p>';
+        $('#errPhone').empty();
+        $('#errPhone').append(html);
+    }
+
+    function valid(val) {
+        if(val === null) return true;
+        if(typeof val === 'string' && val === '') return true;
+        if(typeof val === 'undefined') return true;
+
+        return false;
+    }
 });
 
 //아이디 찾기
