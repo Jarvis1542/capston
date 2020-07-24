@@ -21,7 +21,7 @@ public class AdminController {
     @GetMapping("/memberList")
     public String memberList(Model model){
         model.addAttribute("memberList", memService.memberList());
-        return "/admin/memberList";
+        return "admin/memberList";
     }
 
     @GetMapping("/chargingRequest")

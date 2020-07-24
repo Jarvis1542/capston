@@ -39,7 +39,7 @@
                         <td><span th:text="${memberList.email}"/></td>
                         <td><span th:text="${memberList.name}"/></td>
                         <td><span th:text="${memberList.phone}"/></td>
-                        <td><span th:text="${memberList.create_date}"/></td>
+                        <td><span th:text="${#dates.format(memberList.create_date, 'YYYY-MM-dd HH:mm:ss')}"/></td>
                         <td><span th:text="${memberList.role}"/></td>
 
                     </tr>
