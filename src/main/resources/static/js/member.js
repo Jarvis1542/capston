@@ -140,7 +140,7 @@ $('#searchId').click(function () {
         data : data
     }).done(function () {
         alert('아이디 찾기완료');
-        window.location.href='/';
+        window.location.href='/index/searchId';
     }).fail(function (error) {
         alert(error);
     });

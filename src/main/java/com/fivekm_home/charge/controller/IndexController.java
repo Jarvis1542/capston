@@ -36,6 +36,7 @@ IndexController {
 
     @GetMapping("/index/searchId")
     public String searchId(Model model, HttpSession httpSession) {
+        model.addAttribute("selId", httpSession.getAttribute("selectId"));
         return "/index/searchId";
     }
 
@@ -62,7 +63,11 @@ IndexController {
 
     @PostMapping("/rest/searchId")
     public String searchId(SearchId searchId, HttpSession httpSession, Model model) {
-        model.addAttribute("seId", memService.searchId(searchId));
+        httpSession.setAttribute("selectId",memService.searchId(searchId));
+//        model.addAttribute("seId", memService.searchId(searchId));
+        model.addAttribute("seId", httpSession.getAttribute("selectId"));
+        System.out.println("세션정보 : " + httpSession.getAttribute("selectId"));
+
         return "redirect:/index/searchId";
     }
 
