@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/admin/*")
 public class AdminController {
-    @Autowired
+    @Autowired(required = false)
     private MemService memService;
 
     @Autowired

@@ -127,6 +127,25 @@ $('#join').click(function () {
     }
 });
 
+//아이디 찾기
+$('#searchId').click(function () {
+    var data = {
+        name : $('#name').val(),
+        phone : $('#phone').val(),
+    };
+
+    $.ajax({
+        type : 'post',
+        url : '/rest/searchId',
+        data : data
+    }).done(function () {
+        alert('아이디 찾기완료');
+        window.location.href='/';
+    }).fail(function (error) {
+        alert(error);
+    });
+});
+
 // 로그인
 $('#login').click(function () {
     if(valid($('#email').val())){

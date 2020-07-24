@@ -1,9 +1,6 @@
 package com.fivekm_home.charge.service;
 
-import com.fivekm_home.charge.domain.USER.Join;
-import com.fivekm_home.charge.domain.USER.Login;
-import com.fivekm_home.charge.domain.USER.LoginCheck;
-import com.fivekm_home.charge.domain.USER.MemberList;
+import com.fivekm_home.charge.domain.USER.*;
 import com.fivekm_home.charge.mapper.MemMapper;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +23,13 @@ public class MemService {
         memMapper.join(join);
     }
 
+    //아이디찾기
+    public SearchId searchId(SearchId searchId)
+    {
+        System.out.println("아이디 찾기 : " + memMapper.searchId(searchId));
+       return memMapper.searchId(searchId);
+    }
+
     // 아이디 체크
     public int checkId(LoginCheck loginCheck) {
         return memMapper.checkId(loginCheck);
@@ -36,4 +40,5 @@ public class MemService {
         System.out.println("로그인 정보 : " + login.toString());
         return memMapper.login(login);
     }
+
 }

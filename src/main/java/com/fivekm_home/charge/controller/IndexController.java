@@ -1,11 +1,13 @@
 package com.fivekm_home.charge.controller;
 
 import com.fivekm_home.charge.config.auth.dto.SessionUser;
+import com.fivekm_home.charge.domain.USER.SearchId;
 import org.codehaus.jackson.JsonNode;
 import com.fivekm_home.charge.domain.USER.Kakao;
 import com.fivekm_home.charge.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -33,7 +35,7 @@ IndexController {
     }
 
     @GetMapping("/index/searchId")
-    public String searchId() {
+    public String searchId(Model model, HttpSession httpSession) {
         return "/index/searchId";
     }
 
@@ -57,6 +59,13 @@ IndexController {
         httpSession.invalidate();
         return "redirect:/";
     }
+
+    @PostMapping("/rest/searchId")
+    public String searchId(SearchId searchId, HttpSession httpSession, Model model) {
+        model.addAttribute("seId", memService.searchId(searchId));
+        return "redirect:/index/searchId";
+    }
+
     @GetMapping("/kakao")
     public String kakao(@RequestParam("code") String code, HttpSession httpSession, Kakao kakao){
         System.out.println("code : " + code);
