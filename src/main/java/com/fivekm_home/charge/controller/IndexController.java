@@ -2,6 +2,7 @@ package com.fivekm_home.charge.controller;
 
 import com.fivekm_home.charge.config.auth.dto.SessionUser;
 import com.fivekm_home.charge.domain.USER.SearchId;
+import com.fivekm_home.charge.domain.USER.SearchPassword;
 import org.codehaus.jackson.JsonNode;
 import com.fivekm_home.charge.domain.USER.Kakao;
 import com.fivekm_home.charge.service.*;
@@ -41,7 +42,8 @@ IndexController {
     }
 
     @GetMapping("/index/searchPassword")
-    public String searchPassword() {
+    public String searchPassword(Model model, HttpSession httpSession) {
+        model.addAttribute("selPw", httpSession.getAttribute("selectPw"));
         return "/index/searchPassword";
     }
 
@@ -70,6 +72,17 @@ IndexController {
 
         return "redirect:/index/searchId";
     }
+
+    @PostMapping("/rest/searchPassword")
+    public String searchPassword(SearchPassword searchPassword, HttpSession httpSession, Model model) {
+        httpSession.setAttribute("selectPw",memService.searchPassword(searchPassword));
+//        model.addAttribute("seId", memService.searchId(searchId));
+        model.addAttribute("sePw", httpSession.getAttribute("selectPw"));
+        System.out.println("세션정보 : " + httpSession.getAttribute("selectPw"));
+
+        return "redirect:/index/searchPassword";
+    }
+
 
     @GetMapping("/kakao")
     public String kakao(@RequestParam("code") String code, HttpSession httpSession, Kakao kakao){

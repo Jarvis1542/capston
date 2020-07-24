@@ -33,6 +33,12 @@
         and phone = #{phone}
     </select>
 
+    <select id="searchPassword" resultType="com.fivekm_home.charge.domain.USER.SearchPassword">
+        select password from member_view
+        where email = #{email}
+        and phone = #{phone}
+    </select>
+
     <select id="MemberEdit" resultType="com.fivekm_home.charge.domain.USER.MemberEdit">
         select email, name, phone
         from member_view

@@ -30,6 +30,13 @@ public class MemService {
        return memMapper.searchId(searchId);
     }
 
+    //비밀번호찾기
+    public SearchPassword searchPassword(SearchPassword searchPassword)
+    {
+        System.out.println("비밀번호 찾기 : " + memMapper.searchPassword(searchPassword));
+        return memMapper.searchPassword(searchPassword);
+    }
+
     // 아이디 체크
     public int checkId(LoginCheck loginCheck) {
         return memMapper.checkId(loginCheck);

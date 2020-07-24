@@ -10,6 +10,7 @@ public interface MemMapper {
     ArrayList<MemberList> memberList();
     void join(Join join);
     int checkId(LoginCheck loginCheck);
+    SearchPassword searchPassword(SearchPassword searchPassword);
     SearchId searchId(SearchId searchId);
     Login login(Login login);
     MemberEdit MemberEdit(MemberEdit memberEdit);

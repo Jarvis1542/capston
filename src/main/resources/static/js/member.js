@@ -146,6 +146,25 @@ $('#searchId').click(function () {
     });
 });
 
+//아이디 찾기
+$('#searchPassword').click(function () {
+    var data = {
+        email : $('#email').val(),
+        phone : $('#phone').val(),
+    };
+
+    $.ajax({
+        type : 'post',
+        url : '/rest/searchPassword',
+        data : data
+    }).done(function () {
+        alert('비밀번호 찾기완료');
+        window.location.href='/index/searchPassword';
+    }).fail(function (error) {
+        alert(error);
+    });
+});
+
 // 로그인
 $('#login').click(function () {
     if(valid($('#email').val())){
