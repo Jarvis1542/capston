@@ -39,8 +39,8 @@ public class OtherServiceController {
 
     @GetMapping("/graph")
     public String graph(Model model, GRAPHDTO graphdto) {
-        model.addAttribute("graph", addService.graph(graphdto));
-        System.out.println("그래프 컨트롤러" + addService.graph(graphdto));
+        model.addAttribute("", addService.graphList());
+        System.out.println("그래프 컨트롤러" + addService.graphList());
         return "/otherService/graph";
     }
 

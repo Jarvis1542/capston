@@ -2,8 +2,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fivekm_home.charge.mapper.AddMapper">
 
-    <select id="graphData" resultType="int">
-        select count(*)
+    <select id="graphList" resultType="com.fivekm_home.charge.domain.USER.GraphList">
+        select CREATE_DATE
         from member
      </select>
 
