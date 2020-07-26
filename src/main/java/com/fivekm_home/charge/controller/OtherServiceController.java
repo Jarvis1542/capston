@@ -1,7 +1,9 @@
 package com.fivekm_home.charge.controller;
 
+import com.fivekm_home.charge.domain.ADDITION.GRAPHDTO;
 import com.fivekm_home.charge.mapper.AddMapper;
 import com.fivekm_home.charge.service.AddService;
+import org.hibernate.graph.Graph;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,8 +38,9 @@ public class OtherServiceController {
     }
 
     @GetMapping("/graph")
-    public String Graph(Model model) {
-        model.addAttribute("graph", addService.graph());
+    public String graph(Model model, GRAPHDTO graphdto) {
+        model.addAttribute("graph", addService.graph(graphdto));
+        System.out.println("그래프 컨트롤러" + addService.graph(graphdto));
         return "/otherService/graph";
     }
 

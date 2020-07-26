@@ -1,9 +1,7 @@
 package com.fivekm_home.charge.mapper;
 
-import com.fivekm_home.charge.domain.ADDITION.GRAPH;
-
-import java.util.ArrayList;
+import com.fivekm_home.charge.domain.ADDITION.GRAPHDTO;
 
 public interface AddMapper {
-    ArrayList<GRAPH> Graph();
+    int graphData(GRAPHDTO graphdto);
 }
