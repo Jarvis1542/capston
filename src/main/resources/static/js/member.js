@@ -179,8 +179,18 @@ $('#searchId').click(function () {
     }
 });
 
-//아이디 찾기
+//비밀번호 찾기
 $('#searchPassword').click(function () {
+    if(valid($('#email').val())){
+        errPwEmail();
+        return;
+    }
+
+    if(valid($('#phone').val())){
+        errPwPhone();
+        return;
+    }
+
     var data = {
         email : $('#email').val(),
         phone : $('#phone').val(),
@@ -196,6 +206,21 @@ $('#searchPassword').click(function () {
     }).fail(function (error) {
         alert(error);
     });
+
+    function errPwEmail() {
+        var html = "";
+        html += '<p style="font-size: 80%; color: red; ' +
+            'text-indent: 3em;"><strong>이메일을 입력하세요.</strong></p>';
+        $('#errPwEmail').empty();
+        $('#errPwEmail').append(html);
+    }
+    function errPwPhone() {
+        var html = "";
+        html += '<p style="font-size: 80%; color: red; ' +
+            'text-indent: 3em;"><strong>폰번호 입력하세요..</strong></p>';
+        $('#errPwPhone').empty();
+        $('#errPwPhone').append(html);
+    }
 });
 
 // 로그인

@@ -2282,7 +2282,7 @@ label {
 /* line 15, ../../Arafath/CL/December/234. Finance/HTML/scss/_accordion_area.scss */
 .accordion_area::before {
   position: absolute;
-  left: 0;
+  left: 50px;
   width: 50%;
   top: 0;
   height: 100%;
