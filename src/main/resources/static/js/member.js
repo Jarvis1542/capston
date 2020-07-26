@@ -181,45 +181,54 @@ $('#searchId').click(function () {
 
 //비밀번호 찾기
 $('#searchPassword').click(function () {
-    if(valid($('#email').val())){
-        errPwEmail();
+    if (valid($('#email').val())) {
+        errEmail();
         return;
     }
 
-    if(valid($('#phone').val())){
-        errPwPhone();
+    if (valid($('#phone').val())) {
+        errPhone();
         return;
     }
 
     var data = {
-        email : $('#email').val(),
-        phone : $('#phone').val(),
+        email: $('#email').val(),
+        phone: $('#phone').val(),
     };
 
     $.ajax({
-        type : 'post',
-        url : '/rest/searchPassword',
-        data : data
+        type: 'post',
+        url: '/rest/searchPassword',
+        data: data
     }).done(function () {
         alert('비밀번호 찾기완료');
-        window.location.href='/index/searchPassword';
+        window.location.href = '/index/searchPassword';
     }).fail(function (error) {
         alert(error);
     });
 
-    function errPwEmail() {
+    function errEmail() {
         var html = "";
         html += '<p style="font-size: 80%; color: red; ' +
             'text-indent: 3em;"><strong>이메일을 입력하세요.</strong></p>';
-        $('#errPwEmail').empty();
-        $('#errPwEmail').append(html);
+        $('#errEmail').empty();
+        $('#errEmail').append(html);
     }
-    function errPwPhone() {
+
+    function errPhone() {
         var html = "";
         html += '<p style="font-size: 80%; color: red; ' +
             'text-indent: 3em;"><strong>폰번호 입력하세요..</strong></p>';
-        $('#errPwPhone').empty();
-        $('#errPwPhone').append(html);
+        $('#errPhone').empty();
+        $('#errPhone').append(html);
+    }
+    
+    function valid(val) {
+        if(val === null) return true;
+        if(typeof val === 'string' && val === '') return true;
+        if(typeof val === 'undefined') return true;
+
+        return false;
     }
 });
 
