@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/otherService")
 public class OtherServiceController {
-    @Autowired
+    @Autowired(required = false)
     AddService addService;
 
     @GetMapping("/parkingMap")

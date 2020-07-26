@@ -3,8 +3,7 @@
 <mapper namespace="com.fivekm_home.charge.mapper.AddMapper">
 
     <select id="graphList" resultType="com.fivekm_home.charge.domain.USER.GraphList">
-        select CREATE_DATE
-        from member
+        select * from member_view
      </select>
 
 </mapper>

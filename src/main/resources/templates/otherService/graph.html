@@ -19,7 +19,24 @@
 <div style="width:80%; height: 100%; border: solid 1px black; margin-left: 10%; margin-top:30px;">
     <canvas id="myChart"></canvas>
 
-    <span th:text="${graphList}"/>
+    <table class="table table-horizontal" table-border>
+        <thead class="thead-strong">
+        <tr>
+            <th>아이디</th>
+            <th>이름</th>
+            <th>폰번호</th>
+            <th>등록날짜</th>
+            <th>역할</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        <tr th:each ="memberList : ${graphList}">
+            <td><span th:text="${graphList.create_date}"/></td>
+
+        </tr>
+        </tbody>
+    </table>
+
 </div>
 
 

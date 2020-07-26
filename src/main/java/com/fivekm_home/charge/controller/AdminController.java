@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/admin/*")
 public class AdminController {
-    @Autowired
+    @Autowired(required = false)
     private MemService memService;
 
     @Autowired
@@ -21,7 +21,7 @@ public class AdminController {
     @GetMapping("/memberList")
     public String memberList(Model model){
         model.addAttribute("memberList", memService.memberList());
-        return "/admin/memberList";
+        return "admin/memberList";
     }
 
     @GetMapping("/chargingRequest")
