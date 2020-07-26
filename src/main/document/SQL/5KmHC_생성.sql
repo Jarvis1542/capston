@@ -63,7 +63,7 @@ CREATE SEQUENCE  parking_seq
 
 /* 뷰 생성 */
 create view member_view
-as select * from member; /* member 뷰 작성*/
+as select * from MEMBER; /* member 뷰 작성*/
 
 create view parking_view
 as select * from parking; /* parking 뷰 작성*/
@@ -73,3 +73,8 @@ as select * from CS;    /* CS 뷰 작성*/
 
 /* 커밋 */
 commit;
+
+/* for GRAPH */
+create table graph(
+    date
+)
