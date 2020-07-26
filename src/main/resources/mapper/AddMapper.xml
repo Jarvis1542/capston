@@ -3,7 +3,7 @@
 <mapper namespace="com.fivekm_home.charge.mapper.AddMapper">
 
     <select id="graph" resultType="com.fivekm_home.charge.domain.ADDITION.GRAPH">
-        select count(CREATE_DATE) as "7월 이후 가입자 수"
+        select count(CREATE_DATE)
         from member
         where to_char(create_date, 'YYYYMMDD') > 20200701;
      </select>
