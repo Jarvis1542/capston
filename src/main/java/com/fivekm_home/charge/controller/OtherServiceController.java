@@ -39,7 +39,7 @@ public class OtherServiceController {
 
     @GetMapping("/graph")
     public String graph(Model model, GRAPHDTO graphdto) {
-        model.addAttribute("", addService.graphList());
+        model.addAttribute("graphList", addService.graphList());
         System.out.println("그래프 컨트롤러" + addService.graphList());
         return "/otherService/graph";
     }
