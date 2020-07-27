@@ -1,18 +1,18 @@
 package com.fivekm_home.charge.controller;
 
 import com.fivekm_home.charge.config.auth.dto.SessionUser;
-import com.fivekm_home.charge.domain.USER.Email;
-import com.fivekm_home.charge.domain.USER.Join;
-import com.fivekm_home.charge.domain.USER.Login;
-import com.fivekm_home.charge.domain.USER.LoginCheck;
+import com.fivekm_home.charge.domain.USER.*;
+import com.fivekm_home.charge.service.AddService;
 import com.fivekm_home.charge.service.MailService;
 import com.fivekm_home.charge.service.MemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 @RestController
 public class IndexRestController {
@@ -20,6 +20,15 @@ public class IndexRestController {
     MemService memService;
     @Autowired
     MailService mailService;
+    @Autowired
+    AddService addService;
+
+    @PostMapping("/rest/GraphList")
+    public ArrayList<GraphList> GraphList(Model model) {
+        model.addAttribute("graphList", addService.graphList());
+        System.out.println("그래프 컨트롤러" + addService.graphList());
+        return addService.graphList();
+    }
 
     @PostMapping("/rest/join")
     public void join(Join join){

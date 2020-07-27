@@ -1,6 +1,8 @@
 package com.fivekm_home.charge.controller;
 
 import com.fivekm_home.charge.domain.ADDITION.GRAPHDTO;
+import com.fivekm_home.charge.domain.ADDITION.GRAPHDTO2;
+import com.fivekm_home.charge.domain.USER.GraphList;
 import com.fivekm_home.charge.mapper.AddMapper;
 import com.fivekm_home.charge.service.AddService;
 import org.hibernate.graph.Graph;
@@ -10,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/otherService")
@@ -39,8 +42,8 @@ public class OtherServiceController {
 
     @GetMapping("/graph")
     public String graph(Model model, GRAPHDTO graphdto) {
-        model.addAttribute("graphList", addService.graphList());
-        System.out.println("그래프 컨트롤러" + addService.graphList());
+        //model.addAttribute("graphList", addService.graphList());
+        //System.out.println("그래프 컨트롤러" + addService.graphList());
         return "/otherService/graph";
     }
 
