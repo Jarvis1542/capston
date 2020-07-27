@@ -22,7 +22,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 posts-list">
-                        <h1>주소 등록</h1><br>
+                <h1>주소 등록</h1><br>
                 <ul>
                     <li>asdf</li>
                 </ul>
@@ -44,8 +44,12 @@
                     키워드 : <input type="text" value="이태원 맛집" id="keyword" size="15">
                     <button type="submit">검색하기</button>
                 </form><br>
-                위도 : <span id="lat"></span>
-                경도 : <span id="lng"></span>
+
+                <div style="margin-left: 100px;">
+                    위도 : <span id="lat"></span>&emsp14;&emsp14;
+                    경도 : <span id="lng"></span>
+                </div>
+                <br>
                 <div id="complete"></div>
                 <div class="map_wrap">
                     <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
@@ -88,6 +92,11 @@
                     </aside>
 
                 </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="submit_btn">
+                <br><button id="residence" class="boxed-btn3 row-cols-md-6" style="float: right">가입</button>
             </div>
         </div>
     </div>

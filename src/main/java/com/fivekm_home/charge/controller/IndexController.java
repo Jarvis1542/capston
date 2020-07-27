@@ -62,7 +62,6 @@ IndexController {
     @PostMapping("/rest/searchId")
     public String searchId(SearchId searchId, HttpSession httpSession, Model model) {
         httpSession.setAttribute("selectId",memService.searchId(searchId));
-//        model.addAttribute("seId", memService.searchId(searchId));
         model.addAttribute("seId", httpSession.getAttribute("selectId"));
         System.out.println("세션정보 : " + httpSession.getAttribute("selectId"));
 
@@ -72,9 +71,7 @@ IndexController {
     @PostMapping("/rest/searchPassword")
     public String searchPassword(SearchPassword searchPassword, HttpSession httpSession, Model model) {
         httpSession.setAttribute("selectPw",memService.searchPassword(searchPassword));
-//        model.addAttribute("seId", memService.searchId(searchId));
         model.addAttribute("sePw", httpSession.getAttribute("selectPw"));
-        System.out.println("세션정보 : " + httpSession.getAttribute("selectPw"));
 
         return "redirect:/index/searchPassword";
     }
@@ -82,11 +79,9 @@ IndexController {
     @GetMapping("/MS/kakaologin")
     public String kakaoLogina(@RequestParam("code") String code, RedirectAttributes ra,
                               Kakao kakao, HttpSession httpSession, KakaoLogin kakaoLogin) throws Exception{
-        System.out.println("kakao code : " + code);
         JsonNode accessToken;
         org.codehaus.jackson.JsonNode jsonToken = KakaoAccessToken.getKakaoAccessToken(code);
         accessToken = jsonToken.get("access_token");
-        System.out.println("access token : " + accessToken);
 
         // access_token을 통해 사용자 정보 요청
         JsonNode userInfo = KakaoUserInfo.getKakaoUserInfo(accessToken);
@@ -105,26 +100,15 @@ IndexController {
         email = kakao_account.path("email").asText();
         picture = properties.path("thumbnail_image").asText();
 
-        System.out.println("id : " + id);
-        System.out.println("name : " + name);
-        System.out.println("email : " + email);
-        System.out.println("picture : " + picture);
         kakao.setName(name);
         kakao.setEmail(email);
         kakao.setPicture(picture);
         kakao.setRole(일반);
 
         kakaoLogin.setEmail(email);
-        System.out.println("카카오에서 받은 이메일 : " + email);
-        System.out.println("왜 안됨 : " + memService.kakaoLoginCheck(kakaoLogin));
         String asdf = memService.kakaoLoginCheck(kakaoLogin).toString();
-        System.out.println("asdf : " + asdf);
-
-
 
         if( asdf.indexOf("null")>0 ){
-            System.out.println("카카오로  로그인");
-            System.out.println("카카오 회원가입 전 메일 : " + memService.kakaoLoginCheck(kakaoLogin));
             KakaoJoin kakaoJoin = new KakaoJoin();
             kakaoJoin.setEmail(email+"_kakao");
             kakaoJoin.setName(name);
@@ -141,8 +125,6 @@ IndexController {
             return "/index/index";
 
         }else{
-            System.out.println("카카오로 사이트 회원가입하고 로그인");
-            System.out.println("카카오 회원가입 전 메일 : " + memService.kakaoLoginCheck(kakaoLogin));
             System.out.println("asdf.indexof() : " + asdf.indexOf("null"));
             KakaoJoin kakaoJoin = new KakaoJoin();
             kakaoJoin.setEmail(email+"_kakao");

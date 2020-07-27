@@ -55,8 +55,8 @@
         and phone = #{phone}
     </select>
 
-    <select id="MemberEdit" resultType="com.fivekm_home.charge.domain.USER.MemberEdit">
-        select email, name, phone
+    <select id="MemberEdit" resultType="com.fivekm_home.charge.domain.USER.MemberEdit2">
+        select *
         from member_view
         where email = #{email}
     </select>

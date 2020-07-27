@@ -13,7 +13,7 @@ public interface MemMapper {
     SearchPassword searchPassword(SearchPassword searchPassword);
     SearchId searchId(SearchId searchId);
     Login login(Login login);
-    MemberEdit MemberEdit(MemberEdit memberEdit);
+    MemberEdit2 MemberEdit(MemberEdit memberEdit);
     void kakaoJoin(KakaoJoin kakaoJoin);
     ArrayList<KakaoLogin> kakaoLoginCheck(KakaoLogin kakaoLogin) throws Exception;
 }

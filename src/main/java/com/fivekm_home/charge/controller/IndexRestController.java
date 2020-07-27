@@ -34,9 +34,6 @@ public class IndexRestController {
     @PostMapping("/rest/login")
     public Object login(Login login, HttpSession httpSession){
         SessionUser user = new SessionUser(memService.login(login));
-        System.out.println("sessionUser.getName() : " + user.getName());
-        System.out.println("sessionUser.getEmail() : " + user.getEmail());
-        System.out.println("sessionUser.getRole() : " + user.getRole());
         httpSession.setAttribute("user", user);
         if(httpSession.getAttribute("user") != null){
             return "로그인 성공";
@@ -48,25 +45,18 @@ public class IndexRestController {
     @PostMapping("/service/mail/*")
     @ResponseBody
     public void emailConfirm(Email email)throws Exception{
-        System.out.println("전달 받은 이메일 : " + email.getUserId());
         mailService.sendSimpleMessage(email.getUserId());
     }
     @PostMapping("/verifyCode")
     @ResponseBody
     public int verifyCode(Email email) {
         int result = 0;
-        System.out.println("code : "+email.getEmailAuthText());
-        System.out.println("code match : "+ MailService.ePw.equals(email.getEmailAuthText()));
         if(MailService.ePw.equals(email.getEmailAuthText())) {
             result = 1;
-            System.out.println("인증 결과 : " + result);
-            System.out.println("ver(result) : " + ver(result));
             ver(result);
             return result;
         }else{
             result = 0;
-            System.out.println("인증 결과 : " + result);
-            System.out.println("ver(result) : " + ver(result));
             ver(result);
             return result;
         }

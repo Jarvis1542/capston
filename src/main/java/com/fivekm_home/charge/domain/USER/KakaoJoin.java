@@ -9,4 +9,5 @@ public class KakaoJoin {
     private String name;
     private String picture;
     private Role role;
+    private String phone;
 }

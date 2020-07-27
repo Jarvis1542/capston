@@ -9,4 +9,6 @@ public class Login {
     private String password;
     private String name;
     private Role role;
+    private String picture;
+    private String phone;
 }

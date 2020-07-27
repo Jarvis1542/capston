@@ -9,4 +9,5 @@ public class Kakao {
     private String name;
     private String picture;
     private Role role;
+    private String phone;
 }
