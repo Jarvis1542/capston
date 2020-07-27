@@ -15,23 +15,20 @@
         </div>
     </div>
 </div>
-
+<section class="contact-section section_padding">
+    <div class="container">
 <div style="width:80%; height: 100%; border: solid 1px black; margin-left: 10%; margin-top:30px;">
     <canvas id="myChart"></canvas>
 
     <table class="table table-horizontal" table-border>
         <thead class="thead-strong">
         <tr>
-            <th>아이디</th>
-            <th>이름</th>
-            <th>폰번호</th>
-            <th>등록날짜</th>
-            <th>역할</th>
+            <th>날짜</th>
         </tr>
         </thead>
         <tbody id="tbody">
-        <tr th:each ="memberList : ${graphList}">
-            <td><span th:text="${graphList.create_date}"/></td>
+        <tr th:each ="graphList : ${graphList}">
+            <td><span th:text="${#dates.format(graphList.create_date, 'YYYY-MM-dd HH:mm:ss')}"/></td>
 
         </tr>
         </tbody>
@@ -39,7 +36,8 @@
 
 </div>
 
-
+    </div>
+</section>
 <footer th:replace="layout/layout :: footer"/>
 </body>
 <script th:replace="layout/layout :: script"/>
@@ -65,7 +63,6 @@
         // Configuration options go here
         options: {}
     });
-
 
 </script>
 </html>

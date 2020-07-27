@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/otherService")
 public class OtherServiceController {
     @Autowired(required = false)
-    AddService addService;
+    private AddService addService;
 
     @GetMapping("/parkingMap")
     public String ParkingMap() {
@@ -38,7 +38,7 @@ public class OtherServiceController {
     }
 
     @GetMapping("/graph")
-    public String graph(Model model, GRAPHDTO graphdto) {
+    public String graphList(Model model) {
         model.addAttribute("graphList", addService.graphList());
         System.out.println("그래프 컨트롤러" + addService.graphList());
         return "/otherService/graph";
