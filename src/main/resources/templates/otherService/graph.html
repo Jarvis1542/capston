@@ -16,6 +16,37 @@
     </div>
 </div>
 
+<div>
+    <select name="year">
+        <option value="year2020" selected="selected">2020년</option>
+        <option value="year2019">2019년</option>
+        <option value="year2018">2018년</option>
+    </select>
+    <select name="month">
+        <option value="yearAll" selected="selected">년도 전체</option>
+        <option value="month01">1월</option>
+        <option value="month02">2월</option>
+        <option value="month03">3월</option>
+        <option value="month04">4월</option>
+        <option value="month05">5월</option>
+        <option value="month06">6월</option>
+        <option value="month07">7월</option>
+        <option value="month08">8월</option>
+        <option value="month09">9월</option>
+        <option value="month10">10월</option>
+        <option value="month11">11월</option>
+        <option value="month12">12월</option>
+    </select>
+    <select name="week">
+        <option value="monthAll" selected="selected">월 전체</option>
+        <option value="week1">1주</option>
+        <option value="week2">2주</option>
+        <option value="week3">3주</option>
+        <option value="week4">4주</option>
+        <option value="week5">5주</option>
+    </select>
+</div>
+
 <div style="width:80%; height: 100%; border: solid 1px black; margin-left: 10%; margin-top:30px;">
     <canvas id="myChart"></canvas>
 </div>
@@ -162,9 +193,6 @@
         }).fail(function (error) {
         console.log("에러 : ", error);
     });
-
-
-
 
 
 
