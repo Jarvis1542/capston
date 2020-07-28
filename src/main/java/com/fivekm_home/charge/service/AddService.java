@@ -1,6 +1,6 @@
 package com.fivekm_home.charge.service;
 
-import com.fivekm_home.charge.domain.ADDITION.GRAPHDTO;
+import com.fivekm_home.charge.domain.ADDITION.WEEKLISTDTO;
 import com.fivekm_home.charge.domain.USER.GraphList;
 import com.fivekm_home.charge.mapper.AddMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,5 +16,10 @@ public class AddService {
     public ArrayList<GraphList> graphList(){
         System.out.println("그래프 서비스" + addMapper.graphList());
         return addMapper.graphList();
+    }
+
+    public ArrayList<WEEKLISTDTO> weekList(){
+        System.out.println("위크 서비스 : " + addMapper.weekList());
+        return addMapper.weekList();
     }
 }

@@ -1,6 +1,5 @@
 package com.fivekm_home.charge.controller;
 
-import com.fivekm_home.charge.domain.ADDITION.GRAPHDTO;
 import com.fivekm_home.charge.domain.ADDITION.GRAPHDTO2;
 import com.fivekm_home.charge.domain.USER.GraphList;
 import com.fivekm_home.charge.mapper.AddMapper;
@@ -41,7 +40,7 @@ public class OtherServiceController {
     }
 
     @GetMapping("/graph")
-    public String graph(Model model, GRAPHDTO graphdto) {
+    public String graph(Model model) {
         //model.addAttribute("graphList", addService.graphList());
         //System.out.println("그래프 컨트롤러" + addService.graphList());
         return "/otherService/graph";

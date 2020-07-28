@@ -1,6 +1,7 @@
 package com.fivekm_home.charge.controller;
 
 import com.fivekm_home.charge.config.auth.dto.SessionUser;
+import com.fivekm_home.charge.domain.ADDITION.WEEKLISTDTO;
 import com.fivekm_home.charge.domain.USER.*;
 import com.fivekm_home.charge.service.AddService;
 import com.fivekm_home.charge.service.MailService;
@@ -28,6 +29,12 @@ public class IndexRestController {
         model.addAttribute("graphList", addService.graphList());
         System.out.println("그래프 컨트롤러" + addService.graphList());
         return addService.graphList();
+    }
+    @PostMapping("/rest/weekList")
+    public ArrayList<WEEKLISTDTO> weekList(Model model) {
+        model.addAttribute("weekList", addService.weekList());
+        System.out.println("위크 컨트롤러" + addService.weekList());
+        return addService.weekList();
     }
 
     @PostMapping("/rest/join")

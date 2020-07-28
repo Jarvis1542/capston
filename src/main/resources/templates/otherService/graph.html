@@ -20,6 +20,15 @@
     <canvas id="myChart"></canvas>
 </div>
 
+<hr>
+<div style="width:80%; height: 100%; border: solid 1px black; margin-left: 10%; margin-top:30px;">
+    <canvas id="myChart2"></canvas>
+</div>
+<hr>
+<div style="width:80%; height: 100%; border: solid 1px black; margin-left: 10%; margin-top:30px;">
+    <canvas id="myChart3"></canvas>
+</div>
+
 
 <footer th:replace="layout/layout :: footer"/>
 </body>
@@ -93,6 +102,68 @@
     }).fail(function (error) {
         alert("에러 : " + error);
     });
+
+    var ctx2 = document.getElementById('myChart2').getContext('2d');
+    var chart2 = new Chart(ctx2, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: ['2018', '2019', '2020'],
+            datasets: [{
+                label: '전기차 매출 현황',
+                fill: false,
+                borderColor: 'rgb(48,208,238)',
+                data: [3, 7, 18,],
+                lineTension: 0.1
+            }]
+        },
+
+        // Configuration options go here
+        options: {}
+    });
+
+
+    // 여기임!!!!!!!!!
+    $.ajax({
+        method: "post",
+        url: "/rest/weekList"
+    })
+        .done(function( msg ) {
+            for(var i = 0; i < msg.length; i++) {
+                console.log(msg[i].week_FIRST);
+
+
+                //var d = new Date(msg[i].create_date);
+
+            }
+            // 일주일 가입자 그래프
+            var ctx3 = document.getElementById('myChart3').getContext('2d');
+            var chart3 = new Chart(ctx3, {
+                // The type of chart we want to create
+                type: 'bar',
+
+                // The data for our dataset
+                data: {
+                    labels: ['일', '월', '화', '수', '목', '금', '토'],
+                    datasets: [{
+                        label: '주간 가입자 통계',
+                        backgroundColor: 'rgb(255,171,45)',
+                        borderColor: 'rgb(64,64,64)',
+                        data: [2, 10, 5, 2, 20, 30, 45]
+                    }]
+                },
+
+                // Configuration options go here
+                options: {}
+            });
+            console.log("맞나 :", msg);
+        }).fail(function (error) {
+        console.log("에러 : ", error);
+    });
+
+
 
 
 

@@ -5,5 +5,11 @@
     <select id="graphList" resultType="com.fivekm_home.charge.domain.USER.GraphList">
         select CREATE_DATE from member_view
      </select>
+<!--    그 날짜에 해당하는 월요일로 출력 -->
+    <select id="weekList" resultType="com.fivekm_home.charge.domain.ADDITION.WEEKLISTDTO">
+        SELECT TRUNC(CREATE_DATE, 'iw') as WEEK_FIRST,
+        CREATE_DATE
+        FROM MEMBER_VIEW
+     </select>
 
 </mapper>
