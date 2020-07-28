@@ -17,13 +17,13 @@
 </div>
 
 <div>
-    <select name="year">
+    <select name="year" id="year">
         <option value="year2020" selected="selected">2020년</option>
         <option value="year2019">2019년</option>
         <option value="year2018">2018년</option>
     </select>
-    <select name="month">
-        <option value="yearAll" selected="selected">년도 전체</option>
+    <select name="month" class="month">
+        <option value="yearAll" selected="selected">월</option>
         <option value="month01">1월</option>
         <option value="month02">2월</option>
         <option value="month03">3월</option>
@@ -38,13 +38,14 @@
         <option value="month12">12월</option>
     </select>
     <select name="week">
-        <option value="monthAll" selected="selected">월 전체</option>
+        <option value="monthAll" selected="selected">주간</option>
         <option value="week1">1주</option>
         <option value="week2">2주</option>
         <option value="week3">3주</option>
         <option value="week4">4주</option>
         <option value="week5">5주</option>
     </select>
+    <button type="button" class="lookup">조회</button>
 </div>
 
 <div style="width:80%; height: 100%; border: solid 1px black; margin-left: 10%; margin-top:30px;">
@@ -67,7 +68,16 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
 <script>
-
+    var select_inner = "";
+    $(".month").click(function() {
+        for(var i = 0; i < 12; i++) {
+            if ($(".month").val() == cnt_month[i]) {
+                for(var j = 1; j <= cnt_month[j]; j++) {
+                    //select_inner;
+                }
+            }
+        }
+    });
     $.ajax({
         method: "post",
         url: "/rest/GraphList"
@@ -79,30 +89,30 @@
             date_arr[j] = 0;
         }
         for(var i = 0; i < msg.length; i++) {
-            var d = new Date(msg[i].create_date);
-            if(d.getMonth()+1 == 12) {
+            var month = new Date(msg[i].create_date);
+            if(month.getMonth()+1 == 12) {
                 date_arr[11] += 1;
-            } else if(d.getMonth()+1 == 11) {
+            } else if(month.getMonth()+1 == 11) {
                 date_arr[10] += 1;
-            } else if(d.getMonth()+1 == 10) {
+            } else if(month.getMonth()+1 == 10) {
                 date_arr[9] += 1;
-            } else if(d.getMonth()+1 == 9) {
+            } else if(month.getMonth()+1 == 9) {
                 date_arr[8] += 1;
-            } else if(d.getMonth()+1 == 8) {
+            } else if(month.getMonth()+1 == 8) {
                 date_arr[7] += 1;
-            } else if(d.getMonth()+1 == 7) {
+            } else if(month.getMonth()+1 == 7) {
                 date_arr[6] += 1;
-            } else if(d.getMonth()+1 == 6) {
+            } else if(month.getMonth()+1 == 6) {
                 date_arr[5] += 1;
-            } else if(d.getMonth()+1 == 5) {
+            } else if(month.getMonth()+1 == 5) {
                 date_arr[4] += 1;
-            } else if(d.getMonth()+1 == 4) {
+            } else if(month.getMonth()+1 == 4) {
                 date_arr[3] += 1;
-            } else if(d.getMonth()+1 == 3) {
+            } else if(month.getMonth()+1 == 3) {
                 date_arr[2] += 1;
-            } else if(d.getMonth()+1 == 2) {
+            } else if(month.getMonth()+1 == 2) {
                 date_arr[1] += 1;
-            } else if(d.getMonth()+1 == 1) {
+            } else if(month.getMonth()+1 == 1) {
                 date_arr[0] += 1;
             }
         }
@@ -155,18 +165,67 @@
         options: {}
     });
 
-
+    var week_52 = [];
+    var week_match = [];
+    var cnt_month = [];
+    var cnt = 0;
     // 여기임!!!!!!!!!
     $.ajax({
         method: "post",
         url: "/rest/weekList"
     })
         .done(function( msg ) {
+            var year = $("#year option:selected").text();
+            year = year.replace("년","");
+            year += "-01-01";
+            var curr = new Date(year); // get current date
+            var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
+            var last = first + 6; // last day is the first day + 6
+
+            var firstday = new Date(curr.setDate(first)).toUTCString();
+            var lastday = new Date(curr.setDate(last)).toUTCString();
+
+            for(var k = 0; k <= 11; k++) {
+                cnt_month[k] = 0;
+            }
+            for(var j = 1; j <= 52; j++) {
+                week_match[j] = 0;
+                firstday = new Date(addDays(firstday, 7));
+            }
+            console.log("week_52", week_52);
+            for(var m = 0; m < week_52.length; m++) {
+                for (var a = 0; a < 12; a++) {
+                    if (week_52[m].getMonth() + 1 == a + 1) {
+                        console.log("몇번 들어오냐 ㅅㅂ");
+                        cnt_month[a] += 1;
+                    }
+                }
+            }
             for(var i = 0; i < msg.length; i++) {
-                console.log(msg[i].week_FIRST);
+                var day = new Date(msg[i].week_FIRST);
+                /*
+                console.log("day : " + day);
+                console.log("day getDate : " + day.getDate());
+                */
 
-
+                for(var m = 0; m < week_52.length; m++) {
+                    if(week_52[m].getMonth()+1 == day.getMonth()+1 && week_52[m].getDate() == day.getDate() - 1) {
+                        /*
+                        console.log("M : " + m);
+                        console.log("week__52 getDATE : " + week_52[m].getDate());
+                        console.log("week__52 getMonth : " + week_52[m].getMonth());
+                        console.log("day getDate : " + day.getDate());
+                        console.log("day getMonth : " + day.getMonth());
+                         */
+                        week_match[m] += 1;
+                    }
+                }
                 //var d = new Date(msg[i].create_date);
+
+            }
+            //console.log("week_match", week_match);
+            console.log("cnt_month : " + cnt_month);
+            for(var b = 0; b < 12; b++) {
 
             }
             // 일주일 가입자 그래프
@@ -193,6 +252,15 @@
         }).fail(function (error) {
         console.log("에러 : ", error);
     });
+
+    function addDays(date, days) {
+        var result = new Date(date);
+        result.setDate(result.getDate() + days);
+        week_52[cnt] = result;
+        cnt++;
+        return result;
+    }
+
 
 
 
