@@ -13,6 +13,7 @@ public class HPController {
     @Autowired
     HPService hpService;
 
+
     @GetMapping("/happyParkingRegister")
     public String hpRegister(){
         return "/HP/hpRegister";
