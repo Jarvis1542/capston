@@ -10,9 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
 
 import static com.fivekm_home.charge.domain.USER.user.Role.일반;
 
@@ -25,6 +23,8 @@ IndexController {
     HPService hpService;
     @Autowired
     MailService mailService;
+    @Autowired
+    StorageService storageService;
 
     @GetMapping("/")
     public String index() {
@@ -144,6 +144,28 @@ IndexController {
         }
     }
 
+    @GetMapping("/uploadForm2")
+    public String uuploadForm2(){
+        return  "uploadForm2";
+    }
+    @GetMapping("/uploadForm3")
+    public String uploadForm3(){
+        return  "uploadForm3";
+    }
+    @GetMapping("/uploadForm4")
+    public String uploadForm4(){
+        return  "uploadForm4";
+    }
+/*    @PostMapping("/rest/join")
+    public String join(Join join, @RequestParam("file") MultipartFile file){
+        System.out.println("join : " + join + "       file : " + file);
+        System.out.println("파일상태 : " + storageService.store(file));
+        join.setPicture(file.getOriginalFilename());
+        System.out.println("join : " + join);
+        memService.join(join);
+        return "redirect:/";
+    }
+*/
     // 부트스트랩
     @GetMapping("/about")
     public String about(){
@@ -179,7 +201,7 @@ IndexController {
     }
     @GetMapping("/asdfasdf")
     public String asdfasdf(){
-        return "/index/asdfasdf";
+        return "/main/resources/templates/layout/asdfasdf.html";
     }
     @GetMapping("/main")
     public String mainn(){

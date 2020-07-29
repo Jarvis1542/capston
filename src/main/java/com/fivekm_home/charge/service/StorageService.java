@@ -29,7 +29,7 @@ public class StorageService {
         this.rootLocation = Paths.get(properties.getLocation());
     }
 
-    public void store(MultipartFile file) {
+    public String store(MultipartFile file) {
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
         try {
             if (file.isEmpty()) {
@@ -44,14 +44,20 @@ public class StorageService {
                 Files.copy(inputStream, this.rootLocation.resolve(filename),
                         StandardCopyOption.REPLACE_EXISTING);
             }
+            System.out.println("통과함");
         }
         catch (IOException e) {
             throw new StorageException("저장 실패 " + filename, e);
         }
+        return "file name : " + filename + " 저장 성공";
     }
 
     public Stream<Path> loadAll() {
         try {
+            System.out.println("rootLocation : " + this.rootLocation);
+            System.out.println("Files.walk : " + Files.walk(this.rootLocation, 1)
+                    .filter(path -> !path.equals(this.rootLocation))
+                    .map(this.rootLocation::relativize));
             return Files.walk(this.rootLocation, 1)
                     .filter(path -> !path.equals(this.rootLocation))
                     .map(this.rootLocation::relativize);
@@ -69,6 +75,7 @@ public class StorageService {
         try {
             Path file = load(filename);
             Resource resource = new UrlResource(file.toUri());
+            System.out.println("resource : "  + resource);
             if (resource.exists() || resource.isReadable()) {
                 return resource;
             }

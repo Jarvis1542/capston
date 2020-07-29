@@ -3,8 +3,18 @@
 <head th:replace="layout/layout :: head"/>
 <body>
 <header th:replace="layout/layout :: header"/>
+<div th:unless="${session.user==null}">
+    <input type="hidden" id="picture" th:value="${session.user.picture}"/>
+</div>
+<div th:if="${session.user==null}">
+</div>
+<script>
+    $(document).ready(function () {
+        var pic = $('#picture').val();
+        console.log("pic : " + pic);
+    });
+</script>
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-
     <ol class="carousel-indicators zindex1">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>

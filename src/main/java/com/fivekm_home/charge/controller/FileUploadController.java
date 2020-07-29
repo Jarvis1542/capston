@@ -23,6 +23,7 @@ public class FileUploadController {
     @Autowired
     private StorageService storageService;
 
+    // 불러오기
     @GetMapping(value={"", "/"})
     public String files(Model model){
 
@@ -34,17 +35,20 @@ public class FileUploadController {
         return "/files/uploadForm";
     }
 
+    // 다운로드
     @GetMapping(value="/{filename:.+}")
     public ResponseEntity<Resource> serveFile(@PathVariable String filename){
+        System.out.println("filename : " +filename);
         Resource file = storageService.loadAsResource(filename);
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
                 "attachment; filename=\"" + file.getFilename() + "\"").body(file);
-
     }
+
+    // 업로드
     @PostMapping(value={"", "/"})
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
                                    RedirectAttributes redirectAttributes) {
-        storageService.store(file);
+        System.out.println("asdf :  " + storageService.store(file));
         redirectAttributes.addFlashAttribute("message",
                 "성공!! " + file.getOriginalFilename() + "!");
         return "redirect:/files";

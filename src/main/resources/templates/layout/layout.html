@@ -6,7 +6,7 @@
         <title>5Km HC</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
         <!-- <link rel="manifest" href="site.webmanifest"> -->
         <link rel="shortcut icon" type="image/x-icon" th:href="@{img/favicon.png}">
         <!-- Place favicon.ico in the root directory -->
@@ -87,9 +87,9 @@
                     "chatbot_uid": "7bc08bd095a0416fb78ff0552b8287f2",
                     "origin_uid": "7bc08bd095a0416fb78ff0552b8287f2"
                 };
-                (function() {
+                function a() {
                     if (window.LatteAI) {
-                        return (window.console.error || window.console.log || function(){})('LatteAI script included twice.');
+                        return (window.console.error || window.console.log);
                     }
                     var LatteAI = function() {
                         LatteAI.c(arguments);
@@ -121,7 +121,8 @@
                         window.addEventListener('DOMContentLoaded', loadScript, false);
                         window.addEventListener('load', loadScript, false);
                     }
-                })();
+                };
+                a();
             </script>
             <div class="header-area">
                 <div id="sticky-header" class="main-header-area">

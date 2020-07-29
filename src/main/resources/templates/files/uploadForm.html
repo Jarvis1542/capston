@@ -10,6 +10,8 @@
 <ul>
     <li th:each="file : ${files}">
         <a th:href="${file}" th:text="${file}">file</a>
+        <img th:src="@{'/images/' + ${file}}" alt="" title="" />
+        <img src="C:\\joinUpload\\주석 2020-07-27 144607.png" alt="test" title="test" />
     </li>
 </ul>
 </body>

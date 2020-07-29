@@ -4,11 +4,10 @@ import com.fivekm_home.charge.config.auth.dto.SessionUser;
 import com.fivekm_home.charge.domain.USER.*;
 import com.fivekm_home.charge.service.MailService;
 import com.fivekm_home.charge.service.MemService;
+import com.fivekm_home.charge.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 
@@ -18,12 +17,8 @@ public class IndexRestController {
     MemService memService;
     @Autowired
     MailService mailService;
-
-
-    @PostMapping("/rest/join")
-    public void join(Join join){
-        memService.join(join);
-    }
+    @Autowired
+    StorageService storageService;
 
     @PostMapping("/rest/checkId")
     public int checkId(LoginCheck loginCheck){
@@ -33,6 +28,7 @@ public class IndexRestController {
 
     @PostMapping("/rest/login")
     public Object login(Login login, HttpSession httpSession){
+        System.out.println(memService.login(login));
         SessionUser user = new SessionUser(memService.login(login));
         httpSession.setAttribute("user", user);
         if(httpSession.getAttribute("user") != null){
@@ -40,6 +36,31 @@ public class IndexRestController {
         }else{
             return "로그인 실패";
         }
+    }
+
+//    @PostMapping("/rest/join")
+//    public void join(Join join, @RequestPart("file") MultipartFile file) throws Exception {
+//        if(!file.isEmpty()){
+//            String fileName = file.getOriginalFilename();
+//            String dir2 = "D:\\Backup\\F\\Java_Workspace\\charge\\src\\main\\resources\\static\\img\\upload\\";
+//            System.out.println("dir2 : " + dir2);
+//            String path = Paths.get(dir2, fileName).toString();
+//            System.out.println("path  : " + path);
+//
+//            BufferedOutputStream steam = new BufferedOutputStream(new FileOutputStream(new File(path)));
+//            steam.write(file.getBytes());
+//            steam.close();
+//
+//            join.setPicture("/img/upload/"+fileName);
+//        }
+//
+//        memService.join(join);
+//    }
+
+    @PostMapping("/rest/join")
+    public void join(Join join, @RequestPart("file") MultipartFile file){
+        storageService.store(file);
+        memService.join(join);
     }
 
     @PostMapping("/service/mail/*")
