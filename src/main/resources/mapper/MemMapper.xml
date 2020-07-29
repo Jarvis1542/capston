@@ -6,14 +6,15 @@
      </select>
 
     <insert id="join">
-        insert into member_view(mem_seq, created_date, email, name, password, phone, role) values(
+        insert into member_view(mem_seq, created_date, email, name, password, phone, role, picture) values(
         member_seq.nextval,
         sysdate,
         #{email},
         #{name},
         #{password},
         #{phone},
-        '일반')
+        '일반',
+        #{picture})
     </insert>
 
     <insert id="kakaoJoin">

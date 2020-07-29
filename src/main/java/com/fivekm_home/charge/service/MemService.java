@@ -52,7 +52,6 @@ public class MemService {
 
     // 로그인
     public Login login(Login login){
-        System.out.println("로그인 정보 : " + login.toString());
         return memMapper.login(login);
     }
 }
