@@ -60,6 +60,7 @@ public class IndexRestController {
     @PostMapping("/rest/join")
     public void join(Join join, @RequestPart("file") MultipartFile file){
         storageService.store(file);
+        join.setPicture("/img/upload/"+file.getOriginalFilename());
         memService.join(join);
     }
 
