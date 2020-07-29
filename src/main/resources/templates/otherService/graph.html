@@ -17,49 +17,79 @@
 </div>
 
 <div>
-    <div class="default-select" id="default-select1">
-        <select style="display: none;" name="year" id="year">
-            <option value="2020">2020</option>
-            <option value="2019">2019</option>
-            <option value="2018">2018</option>
-        </select>
-        <div class="nice-select open" tabindex="0"><span class="current">English</span>
-            <ul class="list">
-                <li data-value="2020" class="option selected focus">2020</li>
-                <li data-value="2019" class="option">2019</li>
-                <li data-value="2018" class="option">2018</li>
-            </ul>
+    <div class="form_box_center">
+        <div class="default-select" id="default-select1">
+            <select style="display: none;" name="year" id="year">
+                <option>년</option>
+                <option value="2020">2020</option>
+                <option value="2019">2019</option>
+                <option value="2018">2018</option>
+            </select>
+            <div class="nice-select" tabindex="0"><span class="current">년</span>
+                <ul class="list">
+                    <li class="option selected focus">년</li>
+                    <li data-value="2020" class="option">2020</li>
+                    <li data-value="2019" class="option">2019</li>
+                    <li data-value="2018" class="option">2018</li>
+                </ul>
+            </div>
         </div>
+        <div class="default-select" id="default-select2">
+            <select style="display: none;" name="month" id="month">
+                <option>월</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
+            <div class="nice-select" tabindex="0"><span class="current">월</span>
+                <ul class="list">
+                    <li class="option selected focus">월</li>
+                    <li data-value="1" class="option">1</li>
+                    <li data-value="2" class="option">2</li>
+                    <li data-value="3" class="option">3</li>
+                    <li data-value="4" class="option">4</li>
+                    <li data-value="5" class="option">5</li>
+                    <li data-value="6" class="option">6</li>
+                    <li data-value="7" class="option">7</li>
+                    <li data-value="8" class="option">8</li>
+                    <li data-value="9" class="option">9</li>
+                    <li data-value="10" class="option">10</li>
+                    <li data-value="11" class="option">11</li>
+                    <li data-value="12" class="option">12</li>
+                </ul>
+            </div>
+        </div>
+        <div class="default-select" id="default-select3">
+            <select style="display: none;" name="week" id="week">
+                <option>월</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <div class="nice-select" tabindex="0"><span class="current">주간</span>
+                <ul class="list">
+                    <li class="option selected focus">주간</li>
+                    <li data-value="1" class="option">1</li>
+                    <li data-value="2" class="option">2</li>
+                    <li data-value="3" class="option">3</li>
+                    <li data-value="4" class="option">4</li>
+                    <li data-value="5" class="option">5</li>
+                </ul>
+            </div>
+        </div>
+        <button href="#" class="genric-btn success-border year_button">년도 조회</button>
     </div>
-    <select name="year" id="year">
-        <option value="year2020" selected="selected">2020년</option>
-        <option value="year2019">2019년</option>
-        <option value="year2018">2018년</option>
-    </select>
-    <select name="month" class="month">
-        <option value="yearAll" selected="selected">월</option>
-        <option value="month01">1월</option>
-        <option value="month02">2월</option>
-        <option value="month03">3월</option>
-        <option value="month04">4월</option>
-        <option value="month05">5월</option>
-        <option value="month06">6월</option>
-        <option value="month07">7월</option>
-        <option value="month08">8월</option>
-        <option value="month09">9월</option>
-        <option value="month10">10월</option>
-        <option value="month11">11월</option>
-        <option value="month12">12월</option>
-    </select>
-    <select name="week">
-        <option value="monthAll" selected="selected">주간</option>
-        <option value="week1">1주</option>
-        <option value="week2">2주</option>
-        <option value="week3">3주</option>
-        <option value="week4">4주</option>
-        <option value="week5">5주</option>
-    </select>
-    <button type="button" class="lookup">조회</button>
 </div>
 
 <div style="width:80%; height: 100%; border: solid 1px black; margin-left: 10%; margin-top:30px;">
@@ -67,10 +97,163 @@
 </div>
 
 <hr>
+
+<div>
+    <div class="form_box_center">
+        <div class="default-select" id="default-select1-2">
+            <select style="display: none;" name="year" id="year">
+                <option>년</option>
+                <option value="2020">2020</option>
+                <option value="2019">2019</option>
+                <option value="2018">2018</option>
+            </select>
+            <div class="nice-select" tabindex="0"><span class="current">년</span>
+                <ul class="list">
+                    <li class="option selected focus">년</li>
+                    <li data-value="2020" class="option">2020</li>
+                    <li data-value="2019" class="option">2019</li>
+                    <li data-value="2018" class="option">2018</li>
+                </ul>
+            </div>
+        </div>
+        <div class="default-select" id="default-select2-2">
+            <select style="display: none;" name="month" id="month">
+                <option>월</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
+            <div class="nice-select" tabindex="0"><span class="current">월</span>
+                <ul class="list">
+                    <li class="option selected focus">월</li>
+                    <li data-value="1" class="option">1</li>
+                    <li data-value="2" class="option">2</li>
+                    <li data-value="3" class="option">3</li>
+                    <li data-value="4" class="option">4</li>
+                    <li data-value="5" class="option">5</li>
+                    <li data-value="6" class="option">6</li>
+                    <li data-value="7" class="option">7</li>
+                    <li data-value="8" class="option">8</li>
+                    <li data-value="9" class="option">9</li>
+                    <li data-value="10" class="option">10</li>
+                    <li data-value="11" class="option">11</li>
+                    <li data-value="12" class="option">12</li>
+                </ul>
+            </div>
+        </div>
+        <div class="default-select" id="default-select3-2">
+            <select style="display: none;" name="week" id="week">
+                <option>월</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <div class="nice-select" tabindex="0"><span class="current">주간</span>
+                <ul class="list">
+                    <li class="option selected focus">주간</li>
+                    <li data-value="1" class="option">1</li>
+                    <li data-value="2" class="option">2</li>
+                    <li data-value="3" class="option">3</li>
+                    <li data-value="4" class="option">4</li>
+                    <li data-value="5" class="option">5</li>
+                </ul>
+            </div>
+        </div>
+        <button href="#" class="genric-btn success-border month_button">월별 조회</button>
+    </div>
+</div>
 <div style="width:80%; height: 100%; border: solid 1px black; margin-left: 10%; margin-top:30px;">
     <canvas id="myChart2"></canvas>
 </div>
 <hr>
+
+
+<div>
+    <div class="form_box_center">
+        <div class="default-select" id="default-select1-3">
+            <select style="display: none;" name="year" id="year">
+                <option>년</option>
+                <option value="2020">2020</option>
+                <option value="2019">2019</option>
+                <option value="2018">2018</option>
+            </select>
+            <div class="nice-select" tabindex="0"><span class="current">년</span>
+                <ul class="list">
+                    <li class="option selected focus">년</li>
+                    <li data-value="2020" class="option">2020</li>
+                    <li data-value="2019" class="option">2019</li>
+                    <li data-value="2018" class="option">2018</li>
+                </ul>
+            </div>
+        </div>
+        <div class="default-select" id="default-select2-3">
+            <select style="display: none;" name="month" id="month">
+                <option>월</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+            </select>
+            <div class="nice-select" tabindex="0"><span class="current">월</span>
+                <ul class="list">
+                    <li class="option selected focus">월</li>
+                    <li data-value="1" class="option">1</li>
+                    <li data-value="2" class="option">2</li>
+                    <li data-value="3" class="option">3</li>
+                    <li data-value="4" class="option">4</li>
+                    <li data-value="5" class="option">5</li>
+                    <li data-value="6" class="option">6</li>
+                    <li data-value="7" class="option">7</li>
+                    <li data-value="8" class="option">8</li>
+                    <li data-value="9" class="option">9</li>
+                    <li data-value="10" class="option">10</li>
+                    <li data-value="11" class="option">11</li>
+                    <li data-value="12" class="option">12</li>
+                </ul>
+            </div>
+        </div>
+        <div class="default-select" id="default-select3-3">
+            <select style="display: none;" name="week" id="week">
+                <option>월</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <div class="nice-select" tabindex="0"><span class="current">주간</span>
+                <ul class="list">
+                    <li class="option selected focus">주간</li>
+                    <li data-value="1" class="option">1</li>
+                    <li data-value="2" class="option">2</li>
+                    <li data-value="3" class="option">3</li>
+                    <li data-value="4" class="option">4</li>
+                    <li data-value="5" class="option">5</li>
+                </ul>
+            </div>
+        </div>
+        <button href="#" class="genric-btn success-border week_button">주간 조회</button>
+    </div>
+</div>
 <div style="width:80%; height: 100%; border: solid 1px black; margin-left: 10%; margin-top:30px;">
     <canvas id="myChart3"></canvas>
 </div>
@@ -82,10 +265,54 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
 <script>
+    var year_input = 2016;
+    var month_arr = [];
+    for(var i = 0; i < 12; i++){
+        if(year_input % 4 == 0 && year_input % 100 != 0 || year_input % 400 == 0) {
+            month_arr[i] = 29;
+            console.log(year_input + "년은 윤년입니다.");
+        } else {
+            if(i == 1 || i == 3 || i == 5 || i == 7 || i == 8 || i == 10 || i == 12) {
+                month_arr[i] = 31;
+            } else {
+                month_arr[i] = 30;
+            }
+            console.log(year_input + "년은 윤년이 아닙니다.");
+        }
+    }
+
     var select_inner = "";
-    $(".month").click(function() {
-        console.log(1111);
+    $(".year_button").change(function() {
+        for(var i = 0; i < 12; i++) {
+            if ($(".month").val() == cnt_month[i]) {
+                for(var j = 1; j <= cnt_month[j]; j++) {
+                    console.log("cnt_month : "+ j + " : " + cnt_month[j]);
+                    //select_inner;
+                }
+            }
+        }
     });
+    $(".month_button").change(function() {
+        for(var i = 0; i < 12; i++) {
+            if ($(".month").val() == i) {
+                for(var j = 1; j <= cnt_month[i]; j++) {
+                    console.log("cnt_month : "+ j + " : " + cnt_month[j]);
+                    //select_inner;
+                }
+            }
+        }
+    });
+    $(".week_button").change(function() {
+        for(var i = 0; i < 12; i++) {
+            if ($(".month").val() == cnt_month[i]) {
+                for(var j = 1; j <= cnt_month[j]; j++) {
+                    console.log("cnt_month : "+ j + " : " + cnt_month[j]);
+                    //select_inner;
+                }
+            }
+        }
+    });
+
     /*
     $(".option").click(function() {
         console.log($(this).val());
