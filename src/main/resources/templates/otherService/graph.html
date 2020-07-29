@@ -17,6 +17,20 @@
 </div>
 
 <div>
+    <div class="default-select" id="default-select1">
+        <select style="display: none;" name="year" id="year">
+            <option value="2020">2020</option>
+            <option value="2019">2019</option>
+            <option value="2018">2018</option>
+        </select>
+        <div class="nice-select open" tabindex="0"><span class="current">English</span>
+            <ul class="list">
+                <li data-value="2020" class="option selected focus">2020</li>
+                <li data-value="2019" class="option">2019</li>
+                <li data-value="2018" class="option">2018</li>
+            </ul>
+        </div>
+    </div>
     <select name="year" id="year">
         <option value="year2020" selected="selected">2020년</option>
         <option value="year2019">2019년</option>
@@ -70,14 +84,22 @@
 <script>
     var select_inner = "";
     $(".month").click(function() {
+        console.log(1111);
+    });
+    /*
+    $(".option").click(function() {
+        console.log($(this).val());
         for(var i = 0; i < 12; i++) {
             if ($(".month").val() == cnt_month[i]) {
                 for(var j = 1; j <= cnt_month[j]; j++) {
+                    console.log("cnt_month : "+ j + " : " + cnt_month[j]);
                     //select_inner;
                 }
             }
         }
     });
+
+     */
     $.ajax({
         method: "post",
         url: "/rest/GraphList"
