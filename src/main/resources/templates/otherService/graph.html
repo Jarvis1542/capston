@@ -107,6 +107,15 @@
     <canvas id="myChart3"></canvas>
 </div>
 
+<ul class="list">
+    <li class="option selected focus">주간</li>
+    <li data-value="1" class="option">1</li>
+    <li data-value="2" class="option">2</li>
+    <li data-value="3" class="option">3</li>
+    <li data-value="4" class="option">4</li>
+    <li data-value="5" class="option">5</li>
+</ul>
+
 
 <footer th:replace="layout/layout :: footer"/>
 </body>
@@ -132,18 +141,32 @@
             $(".chart2").css({"display":"none"});
             $(".chart3").css({"display":"none"});
         }
+        $("#myChart").remove();
+        $("#myChart2").remove();
+        $("#myChart3").remove();
+        $(".chart1").append("<canvas id='myChart'></canvas>");
+        $(".chart2").append("<canvas id='myChart2'></canvas>");
+        $(".chart3").append("<canvas id='myChart3'></canvas>");
         data_func($("#year option:selected").attr("value"), $("#month option:selected").attr("value"), $("#week option:selected").attr("value"));
     });
 
     $("#month").change(function() {
-        week_prev_next($("#month option:selected").attr("value"));
+        $("#default-select3 .list").find("li").remove();
+        $("#default-select3 .list").append('<li class="option selected focus">주간</li>');
+        for(var m = 0; m < cnt_month.length; m++) {
+            if(m == $("#month option:selected").attr("value") - 1) {
+                for (var i = 1; i <= cnt_month[m]; i++) {
+                    $("#default-select3 .list").append("<li data-value=" + i + " class='option'>" + i + "</li>");
+                }
+            }
+        }
     });
 
     var f_day, l_day;
     var date, year_date, month_date;
+    var year, month, result;
     var week_52 = [], week_match = [], cnt_month = [], addDays_cnt = 0, week_52_cnt = 0, week_cnt = 0;
     var year_arr = [], month_arr = [], week_arr = [], week_list_arr = [];
-    var year, month, result;
     var items = new Array(12);
 
     var chart, chart2, chart3;
@@ -156,27 +179,6 @@
         week_52[addDays_cnt] = result;
         addDays_cnt++;
         return result;
-    }
-    function week_prev_next(month_data) {
-        console.log("들어오긴하는가..");
-        for (var k = 0; k <= 11; k++) {
-            cnt_month[k] = 0;
-        }
-        for (var m = 0; m < week_52.length; m++) {
-            for (var a = 0; a < 12; a++) {
-                if (week_52[m].getMonth() + 1 == a + 1) {
-                    cnt_month[a] += 1;
-                }
-            }
-        }
-        $("#default-select3 .list").find("li").remove();
-        for(var m = 0; m < cnt_month.length; m++) {
-            if(m == month_data - 1) {
-                for (var i = 1; i <= cnt_month[m]; i++) {
-                    $("#default-select3 .list").append("<li data-value=" + i + "><option value=" + i + ">" + i + "</option></li>");
-                }
-            }
-        }
     }
 
     function first_day(year_input, month_input) {
@@ -232,11 +234,21 @@
         var week_first = new Date(curr.setDate(first)).toUTCString();
         var week_last = new Date(curr.setDate(last)).toUTCString();
 
+
+        for (var k = 0; k <= 11; k++) {
+            cnt_month[k] = 0;
+        }
         for (var j = 0; j < 52; j++) {
             week_match[j] = 0;
             week_first = new Date(addDays(week_first, 7));
         }
-
+        for (var m = 0; m < week_52.length; m++) {
+            for (var a = 0; a < 12; a++) {
+                if (week_52[m].getMonth() + 1 == a + 1) {
+                    cnt_month[a] += 1;
+                }
+            }
+        }
         for (var i = 0; i < msg.length; i++) {
             var day = new Date(msg[i].week_FIRST);
             for (var m = 0; m < week_52.length; m++) {
@@ -245,7 +257,6 @@
                 }
             }
         }
-
         for (var i = 0; i < items.length; i++) {
             items[i] = new Array(cnt_month[i]);
         }
@@ -255,9 +266,9 @@
                 week_52_cnt++;
             }
         }
+        console.log(week_data);
         for(var k = 0; k < items.length; k++) {
             if(k == month_data - 1) {
-                console.log(items[k][week_data-1].getDate());
                 for(var a = items[k][week_data-1].getDate(); a <= items[k][week_data-1].getDate()+6; a++) {
                     week_arr[week_cnt] = a;
                     week_list_arr[week_cnt] = 0;
@@ -275,8 +286,7 @@
                 }
             }
         }
-        week_52_cnt = 0, week_cnt = 0, addDays_cnt = 0;
-        week_match = [], cnt_month = [], items = new Array(12), week_52 = [];
+
 
     }
     function year_func() {
@@ -365,24 +375,32 @@
             url: "/rest/GraphList"
         })
         .done(function (msg) {
-            year_arr_func(msg, year_data);
-            year_func();
-
-            month_arr_func(msg, year_data, month_data);
-            month_func();
+            if(year_data != undefined) {
+                year_arr_func(msg, year_data);
+                year_func();
+            }
+            if(month_data != undefined) {
+                month_arr_func(msg, year_data, month_data);
+                month_func();
+            }
         }).fail(function (error) {
             alert("에러 : " + error);
         });
-        $.ajax({
-            method: "post",
-            url: "/rest/weekList"
-        }).done(function (msg) {
-            week_arr_func(msg, year_data, month_data, week_data);
-            week_func();
-        }).fail(function (error) {
-            console.log("에러 : ", error);
-        });
+        if(week_data != undefined) {
+            $.ajax({
+                method: "post",
+                url: "/rest/weekList"
+            }).done(function (msg) {
+                week_arr_func(msg, year_data, month_data, week_data);
+                week_func();
+            }).fail(function (error) {
+                console.log("에러 : ", error);
+            });
+        }
 
+        week_52 = [], week_match = [], cnt_month = [], addDays_cnt = 0, week_52_cnt = 0, week_cnt = 0;
+        year_arr = [], month_arr = [], week_arr = [], week_list_arr = [];
+        items = new Array(12);
 
     }
 
