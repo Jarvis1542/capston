@@ -122,6 +122,8 @@ IndexController {
             kakaoLogin1.setRole(일반);
             SessionUser user = new SessionUser(kakaoLogin1);
             httpSession.setAttribute("user", user);
+            httpSession.setAttribute("role", user.getRole());
+            System.out.println("롤 : " + user.getRole());
             return "/index/index";
 
         }else{
@@ -140,6 +142,8 @@ IndexController {
             kakaoLogin1.setRole(일반);
             SessionUser user = new SessionUser(kakaoLogin1);
             httpSession.setAttribute("user", user);
+            httpSession.setAttribute("role", user.getRole());
+            System.out.println("롤 : " + user.getRole());
             return "/index/index";
         }
     }

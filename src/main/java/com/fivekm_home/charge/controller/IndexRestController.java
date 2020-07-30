@@ -6,6 +6,7 @@ import com.fivekm_home.charge.service.MailService;
 import com.fivekm_home.charge.service.MemService;
 import com.fivekm_home.charge.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,10 +28,12 @@ public class IndexRestController {
     } 
 
     @PostMapping("/rest/login")
-    public Object login(Login login, HttpSession httpSession){
+    public Object login(Login login, HttpSession httpSession, Model model){
         System.out.println(memService.login(login));
-        SessionUser user = new SessionUser(memService.login(login));
+        SessionUser user = new SessionUser(memService.login(login));;
         httpSession.setAttribute("user", user);
+        httpSession.setAttribute("role", user.getRole());
+        System.out.println("롤 : " + user.getRole());
         if(httpSession.getAttribute("user") != null){
             return "로그인 성공";
         }else{

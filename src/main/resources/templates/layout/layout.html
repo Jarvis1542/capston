@@ -143,20 +143,39 @@
                                                 <!-- 메뉴 : SCS -->
                                                 <li><a href="#" style="color: white; font-size: 18px;">SCS<i class="ti-angle-down"></i></a>
                                                     <ul class="submenu">
+                                                        <div th:if="${session.user==null}">
+                                                            <li><a th:href="@{/chargingStation/chargingSearch}">충전소 찾기</a></li>
+                                                            <li><a th:href="@{/chargingStation/chargingHistory}">이용 내역</a></li>
+                                                            <li><a th:href="@{/admin/chargingRequest}">충전소 요청</a></li>
+                                                        </div>
+                                                        <div th:unless="${session.user==null}">
+                                                        <div th:if="${session.user.role.getTitle()=='등록자'}">
                                                         <li><a th:href="@{/chargingStation/chargingRegister}">충전소 등록</a></li>
+                                                        </div>
                                                         <li><a th:href="@{/chargingStation/chargingSearch}">충전소 찾기</a></li>
                                                         <li><a th:href="@{/chargingStation/chargingHistory}">이용 내역</a></li>
                                                         <li><a th:href="@{/admin/chargingRequest}">충전소 요청</a></li>
+                                                        </div>
+
                                                     </ul>
                                                 </li>
 
                                                 <!-- 메뉴 : 해피 파킹 -->
                                                 <li><a href="#" style="color: white; font-size: 18px;">Happy Parking<i class="ti-angle-down"></i></a>
                                                     <ul class="submenu">
+                                                        <div th:if="${session.user==null}">
+                                                            <li><a th:href="@{/happyParking/happyParkingSearch}">주차장 찾기</a></li>
+                                                            <li><a th:href="@{/happyParking/happyParkingHistory}">이용 내역</a></li>
+                                                            <li><a th:href="@{/admin/happyParkingRequest}">주차장 요청</a></li>
+                                                        </div>
+                                                        <div th:unless="${session.user==null}">
+                                                        <div th:if="${session.user.role.getTitle()=='등록자'}">
                                                         <li><a th:href="@{/happyParking/happyParkingRegister}">주차장 등록</a></li>
+                                                        </div>
                                                         <li><a th:href="@{/happyParking/happyParkingSearch}">주차장 찾기</a></li>
                                                         <li><a th:href="@{/happyParking/happyParkingHistory}">이용 내역</a></li>
                                                         <li><a th:href="@{/admin/happyParkingRequest}">주차장 요청</a></li>
+                                                        </div>
                                                     </ul>
                                                 </li>
 
@@ -179,8 +198,12 @@
                                                         <li><a th:href="@{/myPage/memberEdit}">정보 수정</a></li>
                                                         <li><a th:href="@{/myPage/residence}">거주지 등록</a></li>
                                                         <li><a th:href="@{/myPage/bookmark}">즐겨 찾기</a></li>
+                                                        <div th:if="${session.user!=null}">
+                                                        <div th:if="${session.user.role.getTitle()=='등록자'}">
                                                         <li><a th:href="@{/chargingStation/chargingRegister}">충전소 등록</a></li>
                                                         <li><a th:href="@{/happyParking/happyParkingRegister}">주차장 등록</a></li>
+                                                        </div>
+                                                        </div>
                                                         <li><a th:href="@{/myPage/history}">이용 내역</a></li>
                                                         <li><a th:href="@{/admin/memberList}">회원 목록</a></li>
                                                     </ul>
@@ -212,6 +235,7 @@
 
                                         <span th:unless="${session.user==null}">
                                             <div class="button-group-area mt-40">
+                                                <p th:text="${session.user.role}"></p>
                                                 <img th:src="${session.user.picture}" style="width: 50px; height: 40px"/>&emsp14;
                                                     <span th:text="${session.user.name + '님'}" style="color: white; font-size: 15px;"/>&emsp14;
                                                     <a th:href="@{/logout}" style="color: white; font-size: 15px;">로그아웃</a>
