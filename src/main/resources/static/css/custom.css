@@ -150,6 +150,28 @@
     z-index: 1 !important;
 }
 
+/*index 페이지 - TOP3 추천 슬라이드 padding*/
+.custom_testimonial_area{
+    padding:100px !important;
+}
+
+/* icon css(layout-footer) */
+.icon64{
+    width:64px; height:64px;
+}
+.icon48{
+    width:48px; height:48px;
+}
+.margin5{
+    margin:5px;
+}
+.margin2{
+    margin:2px;
+}
+.circleIcon{
+    border-radius: 8px;
+}
+
 /* -- //content -- */
 
 /* -- footer -- */
