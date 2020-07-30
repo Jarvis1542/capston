@@ -141,7 +141,7 @@
     var year, month, result;
 
 
-    data_func(2020,1);
+    data_func(2020,1, 1);
 
     function addDays(date_input, days_input) {
         result = new Date(date_input);
@@ -152,6 +152,7 @@
     }
 
     function first_day(year_input, month_input) {
+        console.log("너가 먼저냐");
         console.log("year_input : " + year_input);
         console.log("month_input : " + month_input);
         year = year_input;
@@ -162,6 +163,7 @@
     }
 
     function last_day(year_input, month_input) {
+        console.log("애가 먼저인가");
         console.log("year_input : " + year_input);
         console.log("month_input : " + month_input);
         year = year_input;
@@ -171,18 +173,25 @@
         l_day = date;
     }
 
-    function week_first_last(msg) {
+    function week_arr_func(msg, year_data, month_data, week_data) {
+
+        if(month_data == 1) {
+            first_day(year_data - 1, 12);
+        } else {
+            first_day(year_data, month_data-1);
+        }
+
         var curr = date; // get current date
         var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
         var last = first + 6; // last day is the first day + 6
 
         var week_first = new Date(curr.setDate(first)).toUTCString();
         var week_last = new Date(curr.setDate(last)).toUTCString();
-
+        console.log("week first : ", week_first);
         for (var k = 0; k <= 11; k++) {
             cnt_month[k] = 0;
         }
-        for (var j = 1; j <= 52; j++) {
+        for (var j = 0; j < 52; j++) {
             week_match[j] = 0;
             week_first = new Date(addDays(week_first, 7));
         }
@@ -201,6 +210,27 @@
                 }
             }
         }
+        var items = new Array(12);
+        var match_cnt = 0;
+        for (var i = 0; i < items.length; i++) {
+            items[i] = new Array(cnt_month[i]);
+        }
+        for(var j = 0; j < items.length; j++) {
+            for(var m = 0; m < cnt_month[j]; m++) {
+                items[j][m] = week_52[match_cnt];
+                match_cnt++;
+            }
+        }
+        console.log("items : ", items);
+        /*
+        console.log(items[0][0]); // 1월
+        console.log(items[0][1]); // 1-5주간데이터
+        console.log(items[1][0]); // 2월
+        console.log(items[1][1]); // 2-2
+        console.log(items);
+
+         */
+
         console.log("msg : ", msg);
         console.log("week_52 : ", week_52);
         console.log("week_match : ", week_match);
@@ -231,16 +261,14 @@
         for (var i = 0; i < msg.length; i++) {
             month_date = new Date(msg[i].create_date);
             for (var k = l_day.getDate(); k > 1; k--) {
-                if (month_date.getMonth() + 1 == k && month_date.getFullYear() == year_data) {
+                if (month_date.getDate() + 1 == k && month_date.getFullYear() == year_data) {
                     month_arr[k - 1] += 1;
                 }
             }
         }
         console.log("month_arr : ", month_arr);
     }
-
     function year_func() {
-            console.log("inner year_func year arr : " + year_arr);
             var ctx = document.getElementById('myChart').getContext('2d');
             var chart = new Chart(ctx, {
                 // The type of chart we want to create
@@ -263,19 +291,6 @@
 
     }
 
-    var lineChartData = { labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13',
-            '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'], datasets: [] };
-
-    for(var i = 0; i <= 10; i++) {
-        lineChartData.datasets.push({
-            label: '주간 가입자 통계',
-            backgroundColor: 'rgb(255,171,45)',
-            borderColor: 'rgb(64,64,64)',
-            data: JSON.parse(i)
-        });
-    }
-    console.log("lineChart Data : ", lineChartData);
-
     function month_func() {
         var ctx2 = document.getElementById('myChart2').getContext('2d');
         var chart2 = new Chart(ctx2, {
@@ -284,12 +299,10 @@
 
             // The data for our dataset
             data: {
-                labels: ['일', '월', '화', '수', '목', '금', '토'],
                 datasets: [{
                     label: '주간 가입자 통계',
                     backgroundColor: 'rgb(255,171,45)',
-                    borderColor: 'rgb(64,64,64)',
-                    data: [1, 2, 3]
+                    borderColor: 'rgb(64,64,64)'
                 }]
             },
 
@@ -297,7 +310,12 @@
             options: {}
         });
         //chart2.data.datasets.data.push(lineChartData)
-        chart2.data.datasets[0].data.push(4);
+
+        for(var i = 0; i < month_arr.length; i++) {
+            chart2.data.labels.push(i+1);
+            chart2.data.datasets[0].data.push(month_arr[i]);
+        }
+
         console.log("chart2 data : ", chart2.data.datasets);
         chart2.update();
     }
@@ -324,7 +342,7 @@
         });
     }
 
-    function data_func(year_data, month_data) {
+    function data_func(year_data, month_data, week_data) {
         last_day(year_data, month_data);
         if(month_data == 1) {
             first_day(year_data - 1, 12);
@@ -348,7 +366,7 @@
             method: "post",
             url: "/rest/weekList"
         }).done(function (msg) {
-            week_first_last(msg);
+            week_arr_func(msg, year_data, month_data, week_data);
         }).fail(function (error) {
             console.log("에러 : ", error);
         });
