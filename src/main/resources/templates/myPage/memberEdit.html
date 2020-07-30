@@ -12,15 +12,15 @@
         opacity: 0;
     }
 
-    #upload2 {
-        opacity: 0;
-    }
-
     #upload-label {
         position: absolute;
         top: 50%;
         left: 1rem;
         transform: translateY(-50%);
+    }
+
+    #upload2 {
+        opacity: 0;
     }
 
     #upload-label2 {
@@ -54,13 +54,7 @@
         position: relative;
     }
 
-    /*
-    *
-    * ==========================================
-    * FOR DEMO PURPOSES
-    * ==========================================
-    *
-    */
+
 </style>
 <header th:replace="layout/layout :: header"/>
 <div class="bradcam_area bradcam_bg_1">
@@ -79,7 +73,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <div class="apply_form">
+                <form id="editForm" class="apply_form">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="apply_info_text text-center">
@@ -89,32 +83,33 @@
                         </div>
                         <div class="col-md-12">
                             <div class="single_field">
-                                <p>이메일&emsp14;&emsp14;&emsp14;:&emsp14;&emsp14;&emsp14;<input type="text" th:value="${memberEdit.email}" class="col-md-10"></p>
+                                <p>이메일&emsp14;&emsp14;&emsp14;:&emsp14;&emsp14;&emsp14;<input type="text" id="editEmail" name="email" th:value="${memberEdit.email}" class="col-md-10" readonly></p>
                             </div>
                         </div>
                         <div class="col-md-9">
                             <div class="single_field">
-                                <p>비밀번호&emsp14;:&emsp14;<input id="password" type="text" placeholder="수정할 비밀번호를 입력하세요." class="col-md-9"></p>
+                                <p>비밀번호&emsp14;:&emsp14;<input id="editPassword" type="password" placeholder="수정할 비밀번호를 입력하세요." class="col-md-9"></p>
                             </div>
+                            <div id="comUpdatePass"></div>
                         </div>
                         <div class="single_field">
                             <button id="updatePassword" class="genric-btn info-border e-large">수정</button>
                         </div>
                         <div class="col-md-12">
                             <div class="single_field">
-                                <p>이름&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;:&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;<input type="text" th:value="${memberEdit.name}" class="col-md-10"></p>
+                                <p>이름&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;:&emsp14;&emsp14;&emsp14;&emsp14;&emsp14;<input type="text" id="name" name="name" th:value="${memberEdit.name}" class="col-md-10"></p>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="single_field">
-                                <p>폰번호&emsp14;&emsp14;&emsp14;:&emsp14;&emsp14;&emsp14;<input type="text" th:value="${memberEdit.phone}" class="col-md-10"></p>
+                                <p>폰번호&emsp14;&emsp14;&emsp14;:&emsp14;&emsp14;&emsp14;<input type="text" name="phone" th:value="${memberEdit.phone}" class="col-md-10"></p>
                             </div>
                         </div>
 
                         <!-- 회원구분 선택 -->
                         <div class="col-md-12 center">
                             <label class="interval">
-                                <input type="radio" name="memberRole" value="normal">
+                                <input type="radio" name="memberRole" value="normal" checked>
                                 일반 회원
                             </label> <label class="interval">
                                 <input type="radio" name="memberRole" value="guard">
@@ -125,97 +120,92 @@
                             </label>
                         </div>
 
+                        <div class="col-md-12">
+                            <div class="submit_btn">
+                                <button id="normalEdit" class="boxed-btn3">수정</button>
+                            </div>
+                        </div>
+
+                        <!-- 경비부분 -->
                         <div id="guardForm" style="display: none;" class="container"><br>
                             <div class="col-md-12">
                                 <div class="single_field">
-                                    <input type="text" placeholder="관리업체 이름">
+                                    <input type="text" id="guardCo" name="guardCo" placeholder="관리업체 이름">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="single_field">
-                                    <input type="text" placeholder="관리업체 번호">
+                                    <input type="text" id="guardCoNum" name="guardCoNum" placeholder="관리업체 번호">
                                 </div>
                             </div><br>
-                            <div class="col-md-12">
-
-                                    <span style="font-size: 20px">경비 교육 이수증</span>
-                                    <div class="row py-4">
-                                        <!-- Upload image input-->
-                                        <div class="input-group mb-3 px-2 py-2 bg-white shadow-sm">
-                                            <input id="upload" type="file" onchange="readURL(this);" class="form-control border-0">
-                                            <label id="upload-label" for="upload" class="font-weight-light text-muted">파일 업로드</label>
-                                            <div class="input-group-append">
-                                                <label for="upload" class="btn btn-light m-0 rounded-pill px-4">
-                                                    <i class="fa fa-cloud-upload mr-2 text-muted"></i>
-                                                    <small class="text-uppercase font-weight-bold text-muted">파일 업로드</small>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <!-- Uploaded image area-->
-                                        <div class="image-area mt-4">
-                                            <img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block">
-                                        </div>
-                                    </div><br>
-
-                                    <div class="submit_btn">
-                                        <button id="guardUpload" class="genric-btn info-border">사진 등록</button>
+                            <div class="col-lg-12">
+                                <span style="font-size: 20px">경비 교육 이수증</span>
+                                <div class="input-group mb-0 px-2 py-2 bg-white shadow-sm">
+                                    <input id="upload" name="upload" type="file" onchange="readURL(this);" class="form-control border-0">
+                                    <label id="upload-label" for="upload" class="font-weight-light text-muted">파일 업로드</label>
+                                    <div class="input-group-append">
+                                        <label for="upload" class="btn btn-light m-0 rounded-pill px-2">
+                                            <i class="fa fa-cloud-upload mr-1 text-muted"></i>
+                                            <small class="text-uppercase font-weight-bold text-muted">파일 업로드</small>
+                                        </label>
                                     </div>
-
+                                </div>
+                                <div class="image-area mt-1">
+                                    <img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="submit_btn">
+                                    <button id="guardEdit" class="boxed-btn3">경비 요청</button>
+                                </div>
                             </div>
                         </div>
 
+                        <!-- 등록자부분 -->
                         <div id="registerForm" style="display: none;" class="container"><br>
                             <div class="col-md-12">
                                 <div class="single_field">
-                                    <input type="text" placeholder="계좌번호">
+                                    <input type="text" id="bankName" name="bankName" placeholder="은행이름">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="single_field">
-                                    <input type="text" placeholder="은행이름">
+                                    <input type="text" id="accountNum" name="accountNum" placeholder="계좌번호">
                                 </div>
                             </div><br>
-                            <div class="col-md-12">
-                                <div class="newsletter_form">
-                                    <span style="font-size: 20px">등록자 증명 서류</span>
-                                    <div class="row py-4">
-                                            <!-- Upload image input-->
-                                            <div class="input-group mb-3 px-2 py-2 bg-white shadow-sm">
-                                                <input id="upload2" type="file" onchange="readURL2(this);" class="form-control border-0">
-                                                <label id="upload-label2" for="upload2" class="font-weight-light text-muted">파일 업로드</label>
-                                                <div class="input-group-append">
-                                                    <label for="upload2" class="btn btn-light m-0 rounded-pill px-4">
-                                                        <i class="fa fa-cloud-upload mr-2 text-muted"></i>
-                                                        <small class="text-uppercase font-weight-bold text-muted">파일 업로드</small>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <!-- Uploaded image area-->
-                                            <div class="image-area mt-4">
-                                                <img id="imageResult2" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block">
-                                            </div>
-                                    </div>
-
-                                    <div class="submit_btn">
-                                        <button id="registerUpload" class="genric-btn info-border">사진 등록</button>
+                            <div class="col-lg-12">
+                                <span style="font-size: 20px">아파트 대표 인증 사진</span>
+                                <div class="input-group mb-0 px-2 py-2 bg-white shadow-sm">
+                                    <input id="upload2" name="upload2" type="file" onchange="readURL2(this);" class="form-control border-0">
+                                    <label id="upload-label2" for="upload2" class="font-weight-light text-muted">파일 업로드</label>
+                                    <div class="input-group-append">
+                                        <label for="upload2" class="btn btn-light m-0 rounded-pill px-2">
+                                            <i class="fa fa-cloud-upload mr-1 text-muted"></i>
+                                            <small class="text-uppercase font-weight-bold text-muted">파일 업로드</small>
+                                        </label>
                                     </div>
                                 </div>
+                                <div class="image-area mt-1">
+                                    <img id="imageResult2" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block">
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="col-md-12">
-                            <div class="submit_btn">
-                                <button class="boxed-btn3">수정</button>
+                            <div class="col-md-12">
+                                <div class="submit_btn">
+                                    <button id="registerEdit" class="boxed-btn3">등록자 요청</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
 <script>
-    // 경비
+    $(document).load(function () {
+        $('editForm')[0].reset();
+    });
+    //경비
     function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
@@ -234,9 +224,6 @@
         });
     });
 
-    /*  ==========================================
-        SHOW UPLOADED IMAGE NAME
-    * ========================================== */
     var input = document.getElementById( 'upload' );
     var infoArea = document.getElementById( 'upload-label' );
 
@@ -244,19 +231,19 @@
     function showFileName( event ) {
         var input = event.srcElement;
         var fileName = input.files[0].name;
-        infoArea.textContent = 'File name: ' + fileName;
+        infoArea.textContent = '파일 이름 : ' + fileName;
     }
 
-    // 등록자
+    //등록자
     function readURL2(input) {
         if (input.files && input.files[0]) {
-            var reader = new FileReader();
+            var reader2 = new FileReader();
 
-            reader.onload = function (e) {
+            reader2.onload = function (e) {
                 $('#imageResult2')
                     .attr('src', e.target.result);
             };
-            reader.readAsDataURL(input.files[0]);
+            reader2.readAsDataURL(input.files[0]);
         }
     }
 
@@ -266,17 +253,14 @@
         });
     });
 
-    /*  ==========================================
-        SHOW UPLOADED IMAGE NAME
-    * ========================================== */
-    var input = document.getElementById( 'upload2' );
-    var infoArea = document.getElementById( 'upload-label2' );
+    var input2 = document.getElementById( 'upload2' );
+    var infoArea2 = document.getElementById( 'upload-label2' );
 
-    input.addEventListener( 'change', showFileName );
-    function showFileName( event ) {
+    input2.addEventListener( 'change', showFileName2 );
+    function showFileName2( event ) {
         var input = event.srcElement;
         var fileName = input.files[0].name;
-        infoArea.textContent = 'File name: ' + fileName;
+        infoArea2.textContent = '파일 이름 : ' + fileName;
     }
 </script>
 <footer th:replace="layout/layout :: footer"/>

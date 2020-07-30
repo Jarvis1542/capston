@@ -16,4 +16,6 @@ public interface MemMapper {
     MemberEdit2 MemberEdit(MemberEdit memberEdit);
     void kakaoJoin(KakaoJoin kakaoJoin);
     ArrayList<KakaoLogin> kakaoLoginCheck(KakaoLogin kakaoLogin) throws Exception;
+    void updateGuard(UpdateMem updateMem);
+    void updateRegister(UpdateMem updateMem);
 }

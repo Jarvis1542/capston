@@ -6,15 +6,15 @@
      </select>
 
     <insert id="join">
-        insert into member_view(mem_seq, created_date, email, name, password, phone, role, picture) values(
-        member_seq.nextval,
+        insert into member_view(created_date, email, name, password, phone, role, picture) values(
         sysdate,
         #{email},
         #{name},
         #{password},
         #{phone},
         '일반',
-        #{picture})
+        #{picture}
+        )
     </insert>
 
     <insert id="kakaoJoin">
@@ -62,8 +62,13 @@
         where email = #{email}
     </select>
 
-    <select id="updatePassword" resultType="int">
-        select password from member_view
+    <update id="updateGuard">
+        update member set role = '경비'
         where email = #{email}
-    </select>
+    </update>
+
+    <update id="updateRegister">
+        update member set role = '등록자'
+        where email = #{email}
+    </update>
 </mapper>

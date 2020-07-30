@@ -8,15 +8,16 @@ import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor
-@SequenceGenerator(name = "member_seq_gen", sequenceName = "member_seq", initialValue = 1, allocationSize = 1)
+//@SequenceGenerator(name = "member_seq_gen", sequenceName = "member_seq", initialValue = 1, allocationSize = 1)
 @Entity
 public class Member extends BaseTimeEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "member_seq_gen")
-    @Column(columnDefinition = "number")
-    private Long memSeq;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "member_seq_gen")
+//    @Column(columnDefinition = "number")
+//    private Long memSeq;
 
+    @Id
     @Column(columnDefinition = "varchar2(100)")
     private String email;
 
