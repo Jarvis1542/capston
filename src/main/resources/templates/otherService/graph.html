@@ -88,7 +88,7 @@
                 </ul>
             </div>
         </div>
-        <button href="#" class="genric-btn success-border year_button">년도 조회</button>
+        <button href="#" class="genric-btn success-border search_button">년도 조회</button>
     </div>
 </div>
 
@@ -117,7 +117,7 @@
 
     $(".chart2").css({"display":"none"});
     $(".chart3").css({"display":"none"});
-    $(".year_button").click(function() {
+    $(".search_button").click(function() {
         if ($("#year option:selected").attr("value") != undefined && $("#month option:selected").attr("value") != undefined &&
             $("#week option:selected").attr("value") != undefined) {
             $(".chart1").css({"display":"none"});
@@ -132,10 +132,11 @@
             $(".chart2").css({"display":"none"});
             $(".chart3").css({"display":"none"});
         }
-        console.log($("#year option:selected").attr("value"));
-        console.log($("#month option:selected").attr("value"));
-        console.log($("#week option:selected").attr("value"));
         data_func($("#year option:selected").attr("value"), $("#month option:selected").attr("value"), $("#week option:selected").attr("value"));
+    });
+
+    $("#month").change(function() {
+        week_prev_next($("#month option:selected").attr("value"));
     });
 
     var f_day, l_day;
@@ -145,6 +146,8 @@
     var year, month, result;
     var items = new Array(12);
 
+    var chart, chart2, chart3;
+
     data_func(2020,1,1);
 
     function addDays(date_input, days_input) {
@@ -153,6 +156,27 @@
         week_52[addDays_cnt] = result;
         addDays_cnt++;
         return result;
+    }
+    function week_prev_next(month_data) {
+        console.log("들어오긴하는가..");
+        for (var k = 0; k <= 11; k++) {
+            cnt_month[k] = 0;
+        }
+        for (var m = 0; m < week_52.length; m++) {
+            for (var a = 0; a < 12; a++) {
+                if (week_52[m].getMonth() + 1 == a + 1) {
+                    cnt_month[a] += 1;
+                }
+            }
+        }
+        $("#default-select3 .list").find("li").remove();
+        for(var m = 0; m < cnt_month.length; m++) {
+            if(m == month_data - 1) {
+                for (var i = 1; i <= cnt_month[m]; i++) {
+                    $("#default-select3 .list").append("<li data-value=" + i + "><option value=" + i + ">" + i + "</option></li>");
+                }
+            }
+        }
     }
 
     function first_day(year_input, month_input) {
@@ -207,20 +231,12 @@
 
         var week_first = new Date(curr.setDate(first)).toUTCString();
         var week_last = new Date(curr.setDate(last)).toUTCString();
-        for (var k = 0; k <= 11; k++) {
-            cnt_month[k] = 0;
-        }
+
         for (var j = 0; j < 52; j++) {
             week_match[j] = 0;
             week_first = new Date(addDays(week_first, 7));
         }
-        for (var m = 0; m < week_52.length; m++) {
-            for (var a = 0; a < 12; a++) {
-                if (week_52[m].getMonth() + 1 == a + 1) {
-                    cnt_month[a] += 1;
-                }
-            }
-        }
+
         for (var i = 0; i < msg.length; i++) {
             var day = new Date(msg[i].week_FIRST);
             for (var m = 0; m < week_52.length; m++) {
@@ -265,7 +281,7 @@
     }
     function year_func() {
             var ctx = document.getElementById('myChart').getContext('2d');
-            var chart = new Chart(ctx, {
+            chart = new Chart(ctx, {
                 // The type of chart we want to create
                 type: 'bar',
 
@@ -288,7 +304,7 @@
 
     function month_func() {
         var ctx2 = document.getElementById('myChart2').getContext('2d');
-        var chart2 = new Chart(ctx2, {
+        chart2 = new Chart(ctx2, {
             // The type of chart we want to create
             type: 'bar',
 
@@ -316,7 +332,7 @@
     function week_func() {
         // 일주일 가입자 그래프
         var ctx3 = document.getElementById('myChart3').getContext('2d');
-        var chart3 = new Chart(ctx3, {
+        chart3 = new Chart(ctx3, {
             // The type of chart we want to create
             type: 'bar',
             // The data for our dataset
@@ -343,6 +359,7 @@
     function data_func(year_data, month_data, week_data) {
         last_day(year_data, month_data);
         first_day(year_data - 1, 12);
+        chart = null, chart2 = null, chart3 = null;
         $.ajax({
             method: "post",
             url: "/rest/GraphList"
