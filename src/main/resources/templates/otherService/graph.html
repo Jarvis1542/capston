@@ -115,7 +115,8 @@
 
 <script>
 
-
+    $(".chart2").css({"display":"none"});
+    $(".chart3").css({"display":"none"});
     $(".year_button").click(function() {
         if ($("#year option:selected").attr("value") != undefined && $("#month option:selected").attr("value") != undefined &&
             $("#week option:selected").attr("value") != undefined) {
@@ -131,55 +132,74 @@
             $(".chart2").css({"display":"none"});
             $(".chart3").css({"display":"none"});
         }
-
+        console.log($("#year option:selected").attr("value"));
+        console.log($("#month option:selected").attr("value"));
+        console.log($("#week option:selected").attr("value"));
+        data_func($("#year option:selected").attr("value"), $("#month option:selected").attr("value"), $("#week option:selected").attr("value"));
     });
 
     var f_day, l_day;
     var date, year_date, month_date;
-    var week_52 = [], week_match = [], cnt_month = [], cnt = 0;
-    var year_arr = [], month_arr = [], week_arr = [];
+    var week_52 = [], week_match = [], cnt_month = [], addDays_cnt = 0, week_52_cnt = 0, week_cnt = 0;
+    var year_arr = [], month_arr = [], week_arr = [], week_list_arr = [];
     var year, month, result;
+    var items = new Array(12);
 
-
-    data_func(2020,1, 1);
+    data_func(2020,1,1);
 
     function addDays(date_input, days_input) {
         result = new Date(date_input);
         result.setDate(result.getDate() + days_input);
-        week_52[cnt] = result;
-        cnt++;
+        week_52[addDays_cnt] = result;
+        addDays_cnt++;
         return result;
     }
 
     function first_day(year_input, month_input) {
-        console.log("너가 먼저냐");
-        console.log("year_input : " + year_input);
-        console.log("month_input : " + month_input);
         year = year_input;
         month = month_input;
         date = new Date(year, month, 1);
-        console.log("first date : " + date);
         f_day = date;
     }
 
     function last_day(year_input, month_input) {
-        console.log("애가 먼저인가");
-        console.log("year_input : " + year_input);
-        console.log("month_input : " + month_input);
         year = year_input;
         month = month_input;
         date = new Date(year, month, 0);
-        console.log("last date : " + date);
         l_day = date;
     }
 
-    function week_arr_func(msg, year_data, month_data, week_data) {
-
-        if(month_data == 1) {
-            first_day(year_data - 1, 12);
-        } else {
-            first_day(year_data, month_data-1);
+    function year_arr_func(msg, year_data) {
+        for (var j = 0; j < 12; j++) {
+            year_arr[j] = 0;
         }
+        for (var i = 0; i < msg.length; i++) {
+            year_date = new Date(msg[i].create_date);
+            for (var k = 12; k > 1; k--) {
+                if (year_date.getMonth() + 1 == k && year_date.getFullYear() == year_data) {
+                    year_arr[k - 1] += 1;
+                }
+            }
+        }
+    }
+
+    function month_arr_func(msg, year_data, month_data) {
+        last_day(year_data, month_data);
+        for (var j = 0; j < l_day.getDate(); j++) {
+            month_arr[j] = 0;
+        }
+        for (var i = 0; i < msg.length; i++) {
+            month_date = new Date(msg[i].create_date);
+            for (var k = l_day.getDate(); k > 1; k--) {
+                if (month_date.getMonth() + 1 == month_data && month_date.getDate() == k && month_date.getFullYear() == year_data) {
+                    month_arr[k - 1] += 1;
+                }
+            }
+        }
+    }
+
+    function week_arr_func(msg, year_data, month_data, week_data) {
+        first_day(year_data - 1, 12);
 
         var curr = date; // get current date
         var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
@@ -187,7 +207,6 @@
 
         var week_first = new Date(curr.setDate(first)).toUTCString();
         var week_last = new Date(curr.setDate(last)).toUTCString();
-        console.log("week first : ", week_first);
         for (var k = 0; k <= 11; k++) {
             cnt_month[k] = 0;
         }
@@ -210,63 +229,39 @@
                 }
             }
         }
-        var items = new Array(12);
-        var match_cnt = 0;
+
         for (var i = 0; i < items.length; i++) {
             items[i] = new Array(cnt_month[i]);
         }
         for(var j = 0; j < items.length; j++) {
             for(var m = 0; m < cnt_month[j]; m++) {
-                items[j][m] = week_52[match_cnt];
-                match_cnt++;
+                items[j][m] = week_52[week_52_cnt];
+                week_52_cnt++;
             }
         }
-        console.log("items : ", items);
-        /*
-        console.log(items[0][0]); // 1월
-        console.log(items[0][1]); // 1-5주간데이터
-        console.log(items[1][0]); // 2월
-        console.log(items[1][1]); // 2-2
-        console.log(items);
+        for(var k = 0; k < items.length; k++) {
+            if(k == month_data - 1) {
+                console.log(items[k][week_data-1].getDate());
+                for(var a = items[k][week_data-1].getDate(); a <= items[k][week_data-1].getDate()+6; a++) {
+                    week_arr[week_cnt] = a;
+                    week_list_arr[week_cnt] = 0;
+                    week_cnt++;
+                }
+                for(var b = 0; b < msg.length; b++) {
+                    if(new Date(msg[b].create_DATE).getMonth() + 1 == month_data) {
+                        for(var c = 0 ; c < week_arr.length; c++) {
+                            if(new Date(msg[b].create_DATE).getDate() == week_arr[c]) {
+                                week_list_arr[c] += 1;
+                            }
+                        }
 
-         */
-
-        console.log("msg : ", msg);
-        console.log("week_52 : ", week_52);
-        console.log("week_match : ", week_match);
-        console.log("cnt_month : ", cnt_month);
-    }
-
-    function year_arr_func(msg, year_data) {
-        for (var j = 0; j < 12; j++) {
-            year_arr[j] = 0;
-        }
-        for (var i = 0; i < msg.length; i++) {
-            year_date = new Date(msg[i].create_date);
-            for (var k = 12; k > 1; k--) {
-                if (year_date.getMonth() + 1 == k && year_date.getFullYear() == year_data) {
-                    year_arr[k - 1] += 1;
+                    }
                 }
             }
         }
-        console.log("year_arr : ", year_arr);
-    }
+        week_52_cnt = 0, week_cnt = 0, addDays_cnt = 0;
+        week_match = [], cnt_month = [], items = new Array(12), week_52 = [];
 
-    function month_arr_func(msg, year_data, month_data) {
-        last_day(year_data, month_data);
-        console.log("l day get Date : " + l_day.getDate());
-        for (var j = 0; j < l_day.getDate(); j++) {
-            month_arr[j] = 0;
-        }
-        for (var i = 0; i < msg.length; i++) {
-            month_date = new Date(msg[i].create_date);
-            for (var k = l_day.getDate(); k > 1; k--) {
-                if (month_date.getDate() + 1 == k && month_date.getFullYear() == year_data) {
-                    month_arr[k - 1] += 1;
-                }
-            }
-        }
-        console.log("month_arr : ", month_arr);
     }
     function year_func() {
             var ctx = document.getElementById('myChart').getContext('2d');
@@ -309,14 +304,12 @@
             // Configuration options go here
             options: {}
         });
-        //chart2.data.datasets.data.push(lineChartData)
 
         for(var i = 0; i < month_arr.length; i++) {
             chart2.data.labels.push(i+1);
             chart2.data.datasets[0].data.push(month_arr[i]);
         }
 
-        console.log("chart2 data : ", chart2.data.datasets);
         chart2.update();
     }
 
@@ -328,27 +321,28 @@
             type: 'bar',
             // The data for our dataset
             data: {
-                labels: ['일', '월', '화', '수', '목', '금', '토'],
                 datasets: [{
                     label: '주간 가입자 통계',
                     backgroundColor: 'rgb(255,171,45)',
-                    borderColor: 'rgb(64,64,64)',
-                    data: [2, 10, 5, 2, 20, 30, 45]
+                    borderColor: 'rgb(64,64,64)'
                 }]
             },
 
             // Configuration options go here
             options: {}
         });
+
+
+        for(var i = 0; i < week_arr.length; i++) {
+            chart3.data.labels.push(week_arr[i]);
+            chart3.data.datasets[0].data.push(week_list_arr[i]);
+        }
+        chart3.update();
     }
 
     function data_func(year_data, month_data, week_data) {
         last_day(year_data, month_data);
-        if(month_data == 1) {
-            first_day(year_data - 1, 12);
-        } else {
-            first_day(year_data, month_data-1);
-        }
+        first_day(year_data - 1, 12);
         $.ajax({
             method: "post",
             url: "/rest/GraphList"
@@ -367,6 +361,7 @@
             url: "/rest/weekList"
         }).done(function (msg) {
             week_arr_func(msg, year_data, month_data, week_data);
+            week_func();
         }).fail(function (error) {
             console.log("에러 : ", error);
         });
