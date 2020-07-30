@@ -54,4 +54,14 @@ public class MemService {
     public Login login(Login login){
         return memMapper.login(login);
     }
+
+    // 경비 회원으로 바꾸기
+    public void updateGuard(UpdateMem updateMem){
+        memMapper.updateGuard(updateMem);
+    }
+
+    // 등록자 회원으로 바꾸기
+    public void updateRegister(UpdateMem updateMem){
+        memMapper.updateRegister(updateMem);
+    }
 }

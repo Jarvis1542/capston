@@ -50,6 +50,49 @@ create table CS(
     chargeType varchar2(50) NULL
 );
 
+/* 등록자 */
+create table register(
+    email           varchar2(100), /*등록자 (pk, fk)*/
+    registerLicence varchar2(2000), /*아파트 대표 증명 사진*/
+    accountNum      varchar2(200), /*계좌 번호*/
+    bankName        varchar2(200), /*은행 이름*/
+    regDate         date, /*등록자 등록 일자*/
+    constraint register_email_pk primary key (email),
+    constraint register_email_fk foreign key (email) references member (email)
+        on delete cascade
+);
+
+/* 거주지 */
+create table residence(
+    resName       varchar2(300), /*거주지 이름*/
+    postCode      varchar2(10), /*우편 번호*/
+    roadAddress   varchar2(300), /*도로명 주소*/
+    jibunAddress  varchar2(300), /*지번 주소*/
+    detailAddress varchar2(300), /*상세 주소*/
+    extraAddress  varchar2(300), /*참고 항목*/
+    lat           number null, /*위도*/
+    lng           number null, /*경도*/
+    regDate       date, /*등록 날짜*/
+    email         varchar2(100), /*등록자(fk)*/
+    constraint residence_resName_pk primary key (resName),
+    constraint residence_email_fk foreign key (email) references register(email)
+    on delete cascade
+);
+
+/* 경비 */
+create table guard(
+    email varchar2(100), /* 경비 회원 이메일*/
+    guardLicence    varchar2(2000), /*경비 교육 이수증*/
+    guardCo    varchar2(100), /*관리업체 이름*/
+    guardCoNum varchar2(20), /*관리업체 번호*/
+    regDate    date, /*경비 등록 일자*/
+    resName    varchar2(300), /*거주지이름 (fk)*/
+    constraint guard_email_pk primary key (email),
+    constraint gurad_resName_fk foreign key (resName) references residence (resName),
+    constraint guard_email_fk foreign key (email) references member (email)
+    on delete cascade
+);
+
 /* 시퀀스 생성 */
 CREATE SEQUENCE  parking_seq
     MINVALUE 1
@@ -70,5 +113,13 @@ as select * from parking; /* parking 뷰 작성*/
 create view CS_view
 as select * from CS;    /* CS 뷰 작성*/
 
+create view guard_view /* 경비 뷰 작성*/
+as select * from guard;
+
+create view register_view /* 등록자 뷰 작성*/
+as select * from register;
+
+create view residence_view /* 거주지 뷰 작성*/
+as select * from residence;
 /* 커밋 */
 commit;

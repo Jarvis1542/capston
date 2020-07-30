@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?> <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fivekm_home.charge.mapper.MyPageMapper">
+    <update id="updatePassword">
+        update member_view set password = #{password}
+        where email = #{email}
+    </update>
+
+    <insert id="regGuard">
+        insert into guard_view values (
+            #{email},
+            #{guardLicence},
+            #{guardCo},
+            #{guardCoNum},
+            sysdate,
+            null
+        )
+    </insert>
+
+    <insert id="regRegister">
+        insert into register_view values (
+            #{email},
+            #{registerLicence},
+            #{accountNum},
+            #{bankName},
+            sysdate
+        )
+    </insert>
+</mapper>

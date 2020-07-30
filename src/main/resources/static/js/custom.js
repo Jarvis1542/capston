@@ -11,14 +11,17 @@ $('input[type=radio][name=memberRole]').on('click', function() {
     if (chkValue == 'normal') {
         $('#guardForm').css('display', 'none');
         $('#registerForm').css('display', 'none');
+        $('#normalEdit').show();
         // return false;
     } else if (chkValue == 'guard') {
         $('#guardForm').css('display', 'block');
         $('#registerForm').css('display', 'none');
+        $('#normalEdit').hide();
         // return false;
     } else if (chkValue == 'register') {
         $('#guardForm').css('display', 'none');
         $('#registerForm').css('display', 'block');
+        $('#normalEdit').hide();
         // return false;
     }
 });

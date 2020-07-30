@@ -144,28 +144,6 @@ IndexController {
         }
     }
 
-    @GetMapping("/uploadForm2")
-    public String uuploadForm2(){
-        return  "uploadForm2";
-    }
-    @GetMapping("/uploadForm3")
-    public String uploadForm3(){
-        return  "uploadForm3";
-    }
-    @GetMapping("/uploadForm4")
-    public String uploadForm4(){
-        return  "uploadForm4";
-    }
-/*    @PostMapping("/rest/join")
-    public String join(Join join, @RequestParam("file") MultipartFile file){
-        System.out.println("join : " + join + "       file : " + file);
-        System.out.println("파일상태 : " + storageService.store(file));
-        join.setPicture(file.getOriginalFilename());
-        System.out.println("join : " + join);
-        memService.join(join);
-        return "redirect:/";
-    }
-*/
     // 부트스트랩
     @GetMapping("/about")
     public String about(){

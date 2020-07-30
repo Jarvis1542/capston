@@ -31,6 +31,7 @@ public class StorageService {
 
     public String store(MultipartFile file) {
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
+        System.out.println("StorageService file name : " + filename);
         try {
             if (file.isEmpty()) {
                 throw new StorageException("빈 파일: " + filename);

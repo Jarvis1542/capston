@@ -1,4 +1,4 @@
-$(document).ready(function () {
+
     // 아이디 중복 체크
     $('#checkId').click(function () {
         var data = {
@@ -34,6 +34,7 @@ $(document).ready(function () {
 
 // 회원가입
     $('#join').click(function (evt) {
+        evt.preventDefault();
         if(valid($('#email').val())){
             errEmail();
             return;
@@ -69,9 +70,7 @@ $(document).ready(function () {
             cache: false,
             data : formData,
             success : function () {
-                evt.preventDefault();
-                alert("성공");
-                window.location.href = "/";
+                window.location.href = "/index/login";
             }
         });
 
@@ -345,4 +344,118 @@ $(document).ready(function () {
             alert(JSON.stringify(error));
         });
     });
-});
+
+    // 비밀번호 업데이트 버튼
+    $('#updatePassword').on('click', function (event) {
+        event.preventDefault();
+        var data = {
+            email : $('#editEmail').val(),
+            password : $('#editPassword').val()
+        }
+        $.ajax({
+           data : data,
+           type : 'post',
+           url : '/rest/updatePassword',
+           success : function (data) {
+                var html = "";
+                html += '<p class="asdf" style="font-size: 80%; color: green; ' +
+                    'text-indent: 7em;"><strong>비밀번호 변경 완료되었습니다.</strong></p>';
+                $('#comUpdatePass').empty();
+               $('#comUpdatePass').append(html);
+           },
+           error : function (error) {
+                alert(JSON.stringify(error));
+           }
+        });
+    });
+
+    // 회원 정보 수정 버튼
+    $('#normalEdit').on('click', function (event) {
+        event.preventDefault();
+
+        var formData = new FormData();
+        formData.append(`email`, $('#editEmail').val());
+        formData.append(`name`, $('#name').val());
+        formData.append(`phone`, $('#phone').val());
+        
+        $.ajax({
+            type : 'POST',
+            url : '/rest/edit',
+            enctype: 'multipart/form-data',
+            processData: false,
+            contentType: false,
+            cache: false,
+            data : formData,
+            success : function (data) {
+                if(data==3){
+                    alert('회원 정보 수정 완료했습니다.');
+                    window.location.href = "/";
+                }else{
+                    event.preventDefault();
+                    alert('다시 입력');
+                }
+            },
+            error : function (error) {
+                alert(JSON.stringify(error));
+            }
+        });
+    });
+
+    // 회원 정보 경비 요청 버튼
+    $('#guardEdit').on('click', function (event) {
+        event.preventDefault();
+        var form = $('#editForm')[0];
+        var formData = new FormData(form);
+        
+        $.ajax({
+            type : 'POST',
+            url : '/rest/edit',
+            enctype: 'multipart/form-data',
+            processData: false,
+            contentType: false,
+            cache: false,
+            data : formData,
+            success : function (data) {
+                if(data==1){
+                    alert('경비 요청 완료했습니다.');
+                    window.location.href = "/";
+                }else{
+                    event.preventDefault();
+                    alert('다시 입력');
+                }
+            },
+            error : function (error) {
+                alert(JSON.stringify(error));
+            }
+        });
+    });
+
+    // 회원 정보 등록자 요청 버튼
+    $('#registerEdit').on('click', function (event) {
+        event.preventDefault();
+        var form = $('#editForm')[0];
+        var formData = new FormData(form);
+
+        $.ajax({
+            type : 'POST',
+            url : '/rest/edit',
+            enctype: 'multipart/form-data',
+            processData: false,
+            contentType: false,
+            cache: false,
+            data : formData,
+            success : function (data) {
+                if(data==2){
+                    alert('등록자 요청 완료했습니다.');
+                    window.location.href = "/";
+                }else{
+                    event.preventDefault();
+                    alert('다시 입력');
+                }
+            },
+            error : function (error) {
+                alert(JSON.stringify(error));
+            }
+        });
+    });
+
