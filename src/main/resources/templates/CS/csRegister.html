@@ -2,6 +2,56 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout/layout :: head"/>
 <body>
+<style>
+
+    #upload {
+        opacity: 0;
+    }
+
+    #upload-label {
+        position: absolute;
+        top: 50%;
+        left: 1rem;
+        transform: translateY(-50%);
+    }
+
+    #upload2 {
+        opacity: 0;
+    }
+
+    #upload-label2 {
+        position: absolute;
+        top: 50%;
+        left: 1rem;
+        transform: translateY(-50%);
+    }
+
+    .image-area {
+        border: 2px dashed rgba(255, 255, 255, 0.7);
+        padding: 1rem;
+        position: relative;
+    }
+
+    .image-area::before {
+        content: 'Uploaded image result';
+        color: #fff;
+        font-weight: bold;
+        text-transform: uppercase;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 0.8rem;
+        z-index: 1;
+    }
+
+    .image-area img {
+        z-index: 2;
+        position: relative;
+    }
+
+
+</style>
 <header th:replace="layout/layout :: header"/>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -67,7 +117,7 @@
         <div class="row">
             <div class="col-xl-12">
                 <div class="bradcam_text">
-                    <h3>SCS 서비스</h3><br>
+                    <h3>충전소 등록</h3><br>
                 </div>
             </div>
         </div>
@@ -76,43 +126,55 @@
 
 <div class="apply_form_area">
     <div class="container">
-    <form action="/rest/chargingRegister" method="post">
-        <div class="row justify-content-center">
-            <div class="col-lg-9 apply_form">
+        <form action="/rest/chargingRegister" method="post">
+            <div class="row justify-content-center">
+                <div class="col-lg-9 apply_form">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="apply_info_text text-center">
-                                <h3>충전소 등록</h3>
-                                <p>등록할 충전소의 정보를 기입하세요! 제출 후 심사를 통해 등록됩니다.</p>
+                                <h1>충전소 등록</h1>
+                                <p>등록할 충전소의 정보를 기입하세요!</p>
+                                <p>제출 후 심사를 통해 등록됩니다.</p>
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <div class="single_field">
-                                <input type="text" name="chargeName" id="chargeName" placeholder="충전소 이름">
+                            <div class="single_field col-md-12">
+                                충전소 명&ensp;&ensp;&ensp;<input type="text" class="single_field col-md-10" name="chargeName" id="chargeName" placeholder="충전소 명">
                             </div>
                         </div>
-                        <!-- 충전타입 선택(csType) -->
+
                         <div class="col-md-12 center">
+                            <br><h4>충전 타입</h4>
                             <label class="interval">
-                                <input type="checkbox" name="csType" value="dcChademo" class="d-inline-block">
-                                DC 차데모
-                            </label> <label class="interval">
-                                <input type="checkbox" name="csType" value="dcCombo" class="d-inline-block">
-                                DC 콤보
-                            </label> <label class="interval">
-                                <input type="checkbox" name="csType" value="super" class="d-inline-block">
-                                슈퍼 차져
-                            </label> <label class="interval">
-                                <input type="checkbox" name="csType" value="ac5pin" class="d-inline-block">
-                                AC 3상 5핀
-                            </label> <label class="interval">
-                                <input type="checkbox" name="csType" value="ac7pin" class="d-inline-block">
-                                AC 3상 7핀
+                                <p style="font-size: 18px">
+                                    <input type="checkbox" name="csType" value="dcChademo" class="d-inline-block">&ensp;DC 차데모
+                                </p>
+                            </label>
+                            <label class="interval">
+                                <p style="font-size: 18px">
+                                    <input type="checkbox" name="csType" value="dcCombo" class="d-inline-block">&ensp;DC 콤보
+                                </p>
+                            </label>
+                            <label class="interval">
+                                <p style="font-size: 18px">
+                                    <input type="checkbox" name="csType" value="super" class="d-inline-block">&ensp;슈퍼 차져
+                                </p>
+                            </label>
+                            <label class="interval">
+                                <p style="font-size: 18px">
+                                    <input type="checkbox" name="csType" value="ac5pin" class="d-inline-block">&ensp;AC 3상 5핀
+                                </p>
+                            </label>
+                            <label class="interval">
+                                <p style="font-size: 18px">
+                                    <input type="checkbox" name="csType" value="ac7pin" class="d-inline-block">&ensp;AC 3상 7핀
+                                </p>
                             </label>
                         </div>
 
                         <div class="col-md-12">
-                            <div class="single_field">
+                            <br><span style="line-height: 2.5; margin-left: 0.7em">운영 기관</span>
+                            <div class="single_field col-md-10" style="position: relative; float: right">
                                 <select class="wide" name="operation" id="operation">
                                     <option data-display="운영기관을 선택해주세요">운영기관을 선택해주세요</option>
                                     <option value="환경부(한국자동차환경협회)" selected>환경부(한국자동차환경협회))</option>
@@ -126,58 +188,95 @@
                             </div>
                         </div>
 
-                        <div class="col-md-12">
-                            <div class="single_field">
-                                <input type="text" name="changeSpeed" id="changeSpeed" placeholder="충전 속도(단위:Kw)">
-                            </div>
+                        <div class="col-md-12 center">
+                            <br><h4>케이블</h4>
+                            <label class="interval">
+                                <p style="font-size: 18px">
+                                    <input type="checkbox" name="csType" value="dcChademo" class="d-inline-block">&ensp;장착된 케이블
+                                </p>
+                            </label>
+                            <label class="interval">
+                                <p style="font-size: 18px">
+                                    <input type="checkbox" name="csType" value="dcCombo" class="d-inline-block">&ensp;차주 케이블
+                                </p>
+                            </label>
+                            <label class="interval">
+                                <p style="font-size: 18px">
+                                    <input type="checkbox" name="csType" value="super" class="d-inline-block">&ensp;둘 다
+                                </p>
+                            </label>
                         </div>
 
                         <div class="col-md-12">
-                            <div class="single_field field_custom">
-                                <div class="field_divide">
-                                    <span>01.장착된 케이블 있음</span>
-                                    <div class="primary-radio">
-                                        <input type="checkbox" name="cable" id="default-radio" value="chargeCable">
-                                        <label for="default-radio"></label>
-                                    </div>
-                                    <span>02.차주 케이블 있음</span>
-                                    <div class="primary-radio">
-                                        <input type="checkbox" name="cable" id="default-radio-2" value="carCable">
-                                        <label for="default-radio-2"></label>
-                                    </div>
-                                    <span>03.둘 다 가능</span>
-                                    <div class="primary-radio">
-                                        <input type="checkbox" name="cable" id="default-radio-3"
-                                               value="chargeCableAndCarCable">
-                                        <label for="default-radio-3"></label>
-                                    </div>
-                                </div>
+                            <div class="single_field col-md-12">
+                                <br>충전 속도&ensp;&ensp;&ensp;<input type="text" class="single_field col-md-10" placeholder="ex)&ensp;100&ensp;&ensp;충전 속도(단위:Kw)">
                             </div>
                         </div>
-
+                        <div class="col-md-12">
+                            <div class="single_field col-md-12">
+                                기본 요금&ensp;&ensp;&ensp;<input type="text" class="single_field col-md-10" placeholder="ex)&ensp;30분당 500원">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="single_field col-md-12">
+                                추가 요금&ensp;&ensp;&ensp;<input type="text" class="single_field col-md-10" placeholder="ex)&ensp;10분당 500원">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="single_field col-md-12">
+                                운영 시작 시간&ensp;&ensp;&ensp;&ensp;<input type="text" class="single_field col-md-9" placeholder="ex)&ensp;09:00">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="single_field col-md-12">
+                                운영 종료 시간&ensp;&ensp;&ensp;&ensp;<input type="text" class="single_field col-md-9" placeholder="ex)&ensp;16:00">
+                            </div>
+                        </div>
                         <div class="col-xl-6 col-md-6 col-lg-4 field_col_margin">
-                            <h3>주소</h3>
+                            <br><h4>주소</h4>
+                            <p class="newsletter_text">주소를 검색하여 주소를 등록해주세요.</p>
                             <div class="newsletter_form">
-                                <button type="button" onclick="sample4_execDaumPostcode()" class="btn btn-outline-primary">주소 검색</button>
+                                <button type="button" onclick="sample4_execDaumPostcode()" class="btn btn-outline-primary">주소 불러오기</button>
                                 <input type="text" name="postcode" id="postcode" placeholder="우편번호" value="" class="single-input" />
                                 <input type="text" name="roadAddress" id="roadAddress" placeholder="도로명주소" value="" class="single-input" />
                                 <input type="text" name="jibunAddress" id="jibunAddress" placeholder="지번주소" value="" class="single-input" />
                                 <input type="text" name="extraAddress" id="extraAddress" placeholder="참고항목" value="" class="single-input" />
                                 <input type="text" name="detailAddress" id="detailAddress" placeholder="상세주소" value="" class="single-input"/>
                             </div>
-                            <p class="newsletter_text">주소를 검색하여 주소를 등록해주세요.</p>
+                            <div class="image-area mt-1">
+                                <img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block">
+                            </div>
                         </div>
 
                         <div class="col-xl-6 col-md-6 col-lg-4 field_col_margin">
-                            <h3>사진 등록</h3>
-                            <form action="#" class="newsletter_form">
-                                <label for="image1">충전소 사진 업로드1</label>
-                                <input type="file" name="file1" id="image1" accept="image/*" class="single-input"/>
-                                <label for="image2">충전소 사진 업로드2</label>
-                                <input type="file" name="file2" id="image2" accept="image/*" class="single-input"/>
-                                <button type="upload" class="genric-btn default-border">사진 등록</button>
-                            </form>
-                            <p class="newsletter_text">충전소 사진을 등록해주세요.</p>
+                            <br><h4>사진 등록</h4>
+                            <p class="newsletter_text">충전소 사진과 아파트 내부 단지 지도를 <br>등록해주세요.</p>
+                            <span style="font-size: 20px">충전소 사진</span>
+                            <div class="input-group mb-0 px-2 py-2 bg-white shadow-sm">
+                                <input id="upload" name="upload" type="file" onchange="readURL(this);" class="form-control border-0">
+                                <label id="upload-label" for="upload" class="font-weight-light text-muted">파일 업로드</label>
+                                <div class="input-group-append">
+                                    <label for="upload" class="btn btn-light m-0 rounded-pill px-2">
+                                        <i class="fa fa-cloud-upload mr-1 text-muted"></i>
+                                        <small class="text-uppercase font-weight-bold text-muted">파일 업로드</small>
+                                    </label>
+                                </div>
+                            </div>
+                            <br>
+                            <span style="font-size: 20px">아파트 내부 단지 지도(사진)</span>
+                            <div class="input-group mb-0 px-2 py-2 bg-white shadow-sm">
+                                <input id="upload2" name="upload2" type="file" onchange="readURL2(this);" class="form-control border-0">
+                                <label id="upload-label2" for="upload2" class="font-weight-light text-muted">파일 업로드</label>
+                                <div class="input-group-append">
+                                    <label for="upload2" class="btn btn-light m-0 rounded-pill px-2">
+                                        <i class="fa fa-cloud-upload mr-1 text-muted"></i>
+                                        <small class="text-uppercase font-weight-bold text-muted">파일 업로드</small>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="image-area mt-1">
+                                <img id="imageResult2" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block">
+                            </div>
                         </div>
                         <div class="col-md-12">
                             <div class="submit_btn">
@@ -186,12 +285,71 @@
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
     </div>
 </div>
 </div>
+<script>
+    //주차장 사진
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#imageResult')
+                    .attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $(function () {
+        $('#upload').on('change', function () {
+            readURL(input);
+        });
+    });
+
+    var input = document.getElementById( 'upload' );
+    var infoArea = document.getElementById( 'upload-label' );
+
+    input.addEventListener( 'change', showFileName );
+    function showFileName( event ) {
+        var input = event.srcElement;
+        var fileName = input.files[0].name;
+        infoArea.textContent = '파일 이름 : ' + fileName;
+    }
+
+    //아파트 내부 단지 지도(사진)
+    function readURL2(input2) {
+        if (input2.files && input2.files[0]) {
+            var reader2 = new FileReader();
+
+            reader2.onload = function (e2) {
+                $('#imageResult2')
+                    .attr('src', e2.target.result);
+            };
+            reader2.readAsDataURL(input2.files[0]);
+        }
+    }
+
+    $(function () {
+        $('#upload2').on('change', function () {
+            readURL2(input2);
+        });
+    });
+
+    var input2 = document.getElementById( 'upload2' );
+    var infoArea2 = document.getElementById( 'upload-label2' );
+
+    input2.addEventListener( 'change', showFileName2 );
+    function showFileName2( event2 ) {
+        var input2 = event2.srcElement;
+        var fileName2 = input2.files[0].name;
+        infoArea2.textContent = '파일 이름 : ' + fileName2;
+    }
+</script>
 <footer th:replace="layout/layout :: footer"/>
 </body>
 <script th:replace="layout/layout :: script"/>
