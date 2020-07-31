@@ -145,7 +145,17 @@
     $("#month").change(function() {
         $("#default-select3 .list").find("li").remove();
         $("#default-select3 .list").append('<li class="option selected focus">주간</li>');
-        week_prev_next();
+
+        if (typeof cnt_month != "undefined"
+            && cnt_month != null
+            && cnt_month.length != null
+            && cnt_month.length > 0) {
+            output = true;
+        } else {
+            week_prev_next();
+            output = false;
+        }
+        //
         for(var m = 0; m < cnt_month.length; m++) {
             if(m == $("#month option:selected").attr("value") - 1) {
                 for (var i = 1; i <= cnt_month[m]; i++) {
@@ -162,6 +172,7 @@
     var year_arr = [], month_arr = [], week_arr = [], week_list_arr = [], year_arr_all = [ [0], [0], [0] ];
     var items = new Array(12);
     var chart, chart2, chart3;
+    var output;
 
     data_func(2020,1,1);
 
@@ -179,7 +190,6 @@
 
         var week_first = new Date(curr.setDate(first)).toUTCString();
         var week_last = new Date(curr.setDate(last)).toUTCString();
-
 
         for (var k = 0; k <= 11; k++) {
             cnt_month[k] = 0;
