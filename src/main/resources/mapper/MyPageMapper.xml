@@ -26,4 +26,9 @@
             sysdate
         )
     </insert>
+
+    <select id="checkResidence" resultType="int">
+        select count(*) from residence
+        where resName = #{resName}
+    </select>
 </mapper>

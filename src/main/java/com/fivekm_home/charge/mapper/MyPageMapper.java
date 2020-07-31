@@ -7,4 +7,5 @@ public interface MyPageMapper {
     int updatePassword(EditPassword editPassword);
     void regGuard(UpdateMem updateMem);
     void regRegister(UpdateMem updateMem);
+    int checkResidence(String resName);
 }

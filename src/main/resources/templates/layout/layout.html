@@ -30,47 +30,6 @@
         <link rel="stylesheet" th:href="@{/css/custom.css}">  <!-- 반응형 및 기타 CSS -->
         <link rel="stylesheet" th:href="@{/css/background.css}">  <!-- 배경 이미지 링크 CSS -->
         <!-- <link rel="stylesheet" href="css/responsive.css"> -->
-
-        <!-- 카카오 지도 api css -->
-        <style>
-            .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
-            .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
-            .map_wrap {position:relative;width:100%;height:500px;}
-            #menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
-            .bg_white {background:#fff;}
-            #menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
-            #menu_wrap .option{text-align: center;}
-            #menu_wrap .option p {margin:10px 0;}
-            #menu_wrap .option button {margin-left:5px;}
-            #placesList li {list-style: none;}
-            #placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
-            #placesList .item span {display: block;margin-top:4px;}
-            #placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
-            #placesList .item .info{padding:10px 0 10px 55px;}
-            #placesList .info .gray {color:#8a8a8a;}
-            #placesList .info .jibun {padding-left:26px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
-            #placesList .info .tel {color:#009900;}
-            #placesList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;}
-            #placesList .item .marker_1 {background-position: 0 -10px;}
-            #placesList .item .marker_2 {background-position: 0 -56px;}
-            #placesList .item .marker_3 {background-position: 0 -102px}
-            #placesList .item .marker_4 {background-position: 0 -148px;}
-            #placesList .item .marker_5 {background-position: 0 -194px;}
-            #placesList .item .marker_6 {background-position: 0 -240px;}
-            #placesList .item .marker_7 {background-position: 0 -286px;}
-            #placesList .item .marker_8 {background-position: 0 -332px;}
-            #placesList .item .marker_9 {background-position: 0 -378px;}
-            #placesList .item .marker_10 {background-position: 0 -423px;}
-            #placesList .item .marker_11 {background-position: 0 -470px;}
-            #placesList .item .marker_12 {background-position: 0 -516px;}
-            #placesList .item .marker_13 {background-position: 0 -562px;}
-            #placesList .item .marker_14 {background-position: 0 -608px;}
-            #placesList .item .marker_15 {background-position: 0 -654px;}
-            #pagination {margin:10px auto;text-align: center;}
-            #pagination a {display:inline-block;margin-right:10px;}
-            #pagination .on {font-weight: bold; cursor: default;color:#777;}
-
-        </style>
     </head>
     <body>
 
@@ -121,7 +80,7 @@
                         window.addEventListener('DOMContentLoaded', loadScript, false);
                         window.addEventListener('load', loadScript, false);
                     }
-                };
+                }
                 a();
             </script>
             <div class="header-area">
@@ -141,49 +100,74 @@
                                         <nav>
                                             <ul id="navigation">
                                                 <!-- 메뉴 : SCS -->
-                                                <li><a href="#" style="color: white; font-size: 18px;">SCS<i class="ti-angle-down"></i></a>
+                                                <li><a href="#" style="color: white; font-size: 19px;">SCS</a>
                                                     <ul class="submenu">
                                                         <div th:if="${session.user==null}">
                                                             <li><a th:href="@{/chargingStation/chargingSearch}">충전소 찾기</a></li>
                                                             <li><a th:href="@{/chargingStation/chargingHistory}">이용 내역</a></li>
-                                                            <li><a th:href="@{/admin/chargingRequest}">충전소 요청</a></li>
                                                         </div>
                                                         <div th:unless="${session.user==null}">
-                                                        <div th:if="${session.user.role.getTitle()=='등록자'}">
-                                                        <li><a th:href="@{/chargingStation/chargingRegister}">충전소 등록</a></li>
+                                                            <div th:if="${session.user.role.getTitle()=='관리자'}">
+                                                                <li><a th:href="@{/admin/chargingRequest}">충전소 요청</a></li>
+                                                                <li><a th:href="@{#}">충전소 매출 현황</a></li>
+                                                                <li><a th:href="@{/chargingStation/chargingSearch}">충전소 찾기</a></li>
+                                                                <li><a th:href="@{/chargingStation/chargingHistory}">이용 내역</a></li>
+                                                            </div>
+                                                            <div th:if="${session.user.role.getTitle()=='등록자'}">
+                                                                <li><a th:href="@{/chargingStation/chargingRegister}">충전소 등록</a></li>
+                                                                <li><a th:href="@{/chargingStation/chargingSearch}">충전소 찾기</a></li>
+                                                                <li><a th:href="@{/chargingStation/chargingHistory}">이용 내역</a></li>
+                                                            </div>
+                                                            <div th:if="${session.user.role.getTitle()=='경비'}">
+                                                                <li><a th:href="@{#}">충전소 관리</a></li>
+                                                                <li><a th:href="@{/chargingStation/chargingSearch}">충전소 찾기</a></li>
+                                                                <li><a th:href="@{/chargingStation/chargingHistory}">이용 내역</a></li>
+                                                            </div>
+                                                            <div th:if="${session.user.role.getTitle()=='일반'}">
+                                                                <li><a th:href="@{/chargingStation/chargingSearch}">충전소 찾기</a></li>
+                                                                <li><a th:href="@{/chargingStation/chargingHistory}">이용 내역</a></li>
+                                                            </div>
                                                         </div>
-                                                        <li><a th:href="@{/chargingStation/chargingSearch}">충전소 찾기</a></li>
-                                                        <li><a th:href="@{/chargingStation/chargingHistory}">이용 내역</a></li>
-                                                        <li><a th:href="@{/admin/chargingRequest}">충전소 요청</a></li>
-                                                        </div>
-
                                                     </ul>
                                                 </li>
 
                                                 <!-- 메뉴 : 해피 파킹 -->
-                                                <li><a href="#" style="color: white; font-size: 18px;">Happy Parking<i class="ti-angle-down"></i></a>
+                                                <li><a href="#" style="color: white; font-size: 19px;">Happy Parking</a>
                                                     <ul class="submenu">
                                                         <div th:if="${session.user==null}">
                                                             <li><a th:href="@{/happyParking/happyParkingSearch}">주차장 찾기</a></li>
                                                             <li><a th:href="@{/happyParking/happyParkingHistory}">이용 내역</a></li>
-                                                            <li><a th:href="@{/admin/happyParkingRequest}">주차장 요청</a></li>
                                                         </div>
                                                         <div th:unless="${session.user==null}">
-                                                        <div th:if="${session.user.role.getTitle()=='등록자'}">
-                                                        <li><a th:href="@{/happyParking/happyParkingRegister}">주차장 등록</a></li>
-                                                        </div>
-                                                        <li><a th:href="@{/happyParking/happyParkingSearch}">주차장 찾기</a></li>
-                                                        <li><a th:href="@{/happyParking/happyParkingHistory}">이용 내역</a></li>
-                                                        <li><a th:href="@{/admin/happyParkingRequest}">주차장 요청</a></li>
+                                                            <div th:if="${session.user.role.getTitle()=='관리자'}">
+                                                                <li><a th:href="@{/admin/happyParkingRequest}">주차장 요청</a></li>
+                                                                <li><a th:href="@{#}">주차장 매출 현황</a></li>
+                                                                <li><a th:href="@{/happyParking/happyParkingSearch}">주차장 찾기</a></li>
+                                                                <li><a th:href="@{/happyParking/happyParkingHistory}">주차장 이용 내역</a></li>
+                                                            </div>
+                                                            <div th:if="${session.user.role.getTitle()=='등록자'}">
+                                                                <li><a th:href="@{/happyParking/happyParkingRegister}">주차장 등록</a></li>
+                                                                <li><a th:href="@{/happyParking/happyParkingSearch}">주차장 찾기</a></li>
+                                                                <li><a th:href="@{/happyParking/happyParkingHistory}">이용 내역</a></li>
+                                                            </div>
+                                                            <div th:if="${session.user.role.getTitle()=='경비'}">
+                                                                <li><a th:href="@{#}">주차장 관리</a></li>
+                                                                <li><a th:href="@{/happyParking/happyParkingSearch}">주차장 찾기</a></li>
+                                                                <li><a th:href="@{/happyParking/happyParkingHistory}">이용 내역</a></li>
+                                                            </div>
+                                                            <div th:if="${session.user.role.getTitle()=='일반'}">
+                                                                <li><a th:href="@{/happyParking/happyParkingSearch}">주차장 찾기</a></li>
+                                                                <li><a th:href="@{/happyParking/happyParkingHistory}">이용 내역</a></li>
+                                                            </div>
                                                         </div>
                                                     </ul>
                                                 </li>
 
                                                 <!-- 메뉴 : 와치 비히클 -->
-                                                <li><a th:href="@{/watchVehicle}" style="color: white; font-size: 18px;">Watch Vehicle</a></li>
+                                                <li><a th:href="@{/watchVehicle}" style="color: white; font-size: 19px;">Watch Vehicle</a></li>
 
                                                 <!-- 메뉴 : 부가 서비스 -->
-                                                <li><a href="#" style="color: white; font-size: 18px;">부가서비스<i class="ti-angle-down"></i></a>
+                                                <li><a href="#" style="color: white; font-size: 19px;">부가서비스</a>
                                                     <ul class="submenu">
                                                         <li><a th:href="@{/otherService/parkingMap}">Parking Map</a></li>
                                                         <li><a th:href="@{/otherService/EZCharging}">Ez Charging</a></li>
@@ -193,30 +177,52 @@
                                                 </li>
 
                                                 <!-- 메뉴 : 마이 페이지 -->
-                                                <li><a href="#" style="color: white; font-size: 18px;">마이페이지<i class="ti-angle-down"></i></a>
-                                                    <ul class="submenu">
-                                                        <li><a th:href="@{/myPage/memberEdit}">정보 수정</a></li>
-                                                        <li><a th:href="@{/myPage/residence}">거주지 등록</a></li>
-                                                        <li><a th:href="@{/myPage/bookmark}">즐겨 찾기</a></li>
-                                                        <div th:if="${session.user!=null}">
-                                                        <div th:if="${session.user.role.getTitle()=='등록자'}">
-                                                        <li><a th:href="@{/chargingStation/chargingRegister}">충전소 등록</a></li>
-                                                        <li><a th:href="@{/happyParking/happyParkingRegister}">주차장 등록</a></li>
+                                                <li><a href="#" style="color: white; font-size: 19px;">마이페이지</a>
+                                                    <ul class="submenu login_none">
+                                                        <div th:if="${session.user==null}">
+                                                            <li class="login_none"><a th:href="@{/myPage/memberEdit}">정보 수정</a></li>
+                                                            <li class="login_none"><a th:href="@{/myPage/bookmark}">즐겨 찾기</a></li>
                                                         </div>
+                                                        <div th:unless="${session.user==null}">
+                                                            <div th:if="${session.user.role.getTitle()=='관리자'}">
+                                                                <li><a th:href="@{/admin/memberList}">회원 목록</a></li>
+                                                                <li><a th:href="@{#}">충전소 요청</a></li>
+                                                                <li><a th:href="@{#}">주차장 요청</a></li>
+                                                                <li><a th:href="@{#}">충전소 매출 현황</a></li>
+                                                                <li><a th:href="@{#}">주차장 매출 현황</a></li>
+                                                                <li><a th:href="@{/myPage/history}">이용 내역</a></li>
+                                                            </div>
+                                                            <div th:if="${session.user.role.getTitle()=='등록자'}">
+                                                                <li><a th:href="@{/myPage/memberEdit}">정보 수정</a></li>
+                                                                <li><a th:href="@{/myPage/bookmark}">즐겨 찾기</a></li>
+                                                                <li><a th:href="@{/myPage/residence}">거주지 등록</a></li>
+                                                                <li><a th:href="@{/chargingStation/chargingRegister}">충전소 등록</a></li>
+                                                                <li><a th:href="@{/happyParking/happyParkingRegister}">주차장 등록</a></li>
+                                                                <li><a th:href="@{/myPage/history}">이용 내역</a></li>
+                                                            </div>
+                                                            <div th:if="${session.user.role.getTitle()=='경비'}">
+                                                                <li><a th:href="@{/myPage/memberEdit}">정보 수정</a></li>
+                                                                <li><a th:href="@{/myPage/bookmark}">즐겨 찾기</a></li>
+                                                                <li><a th:href="@{/myPage/bookmark}">관리 아파트</a></li>
+                                                                <li><a th:href="@{/myPage/history}">이용 내역</a></li>
+                                                            </div>
+                                                            <div th:if="${session.user.role.getTitle()=='일반'}">
+                                                                <li class="login_none"><a th:href="@{/myPage/memberEdit}">정보 수정</a></li>
+                                                                <li class="login_none"><a th:href="@{/myPage/bookmark}">즐겨 찾기</a></li>
+                                                                <li class="login_none"><a th:href="@{/myPage/history}">이용 내역</a></li>
+                                                            </div>
                                                         </div>
-                                                        <li><a th:href="@{/myPage/history}">이용 내역</a></li>
-                                                        <li><a th:href="@{/admin/memberList}">회원 목록</a></li>
                                                     </ul>
                                                 </li>
 
                                                 <!--모바일 메뉴에서 로그인 및 가입 버튼, custom.css에서 login_none 참조-->
                                                 <div th:if="${session.user==null}">
-                                                <li class="login_none"><a th:href="@{/index/join}">회원가입<i class="ti-angle-down"></i></a></li>
-                                                <li class="login_none"><a th:href="@{/index/login}">로그인<i class="ti-angle-down"></i></a></li>
+                                                    <li class="login_none"><a th:href="@{/index/join}">회원가입</a></li>
+                                                    <li class="login_none"><a th:href="@{/index/login}">로그인</i></a></li>
                                                 </div>
                                                 <div th:unless="${session.user==null}">
-                                                <li class="login_none"><a class="boxed-btn4" th:href="@{/myPage/memberEdit}">d</a></li>
-                                                <li class="login_none"><a class="boxed-btn4" th:href="@{/logout}">로그아웃</a></li>
+                                                    <li class="login_none"><a class="boxed-btn4" th:href="@{/myPage/memberEdit}">정보수정</a></li>
+                                                    <li class="login_none"><a class="boxed-btn4" th:href="@{/logout}">로그아웃</a></li>
                                                 </div>
 
                                             </ul>
@@ -235,7 +241,6 @@
 
                                         <span th:unless="${session.user==null}">
                                             <div class="button-group-area mt-40">
-                                                <p th:text="${session.user.role}"></p>
                                                 <img th:src="${session.user.picture}" style="width: 50px; height: 40px"/>&emsp14;
                                                     <span th:text="${session.user.name + '님'}" style="color: white; font-size: 15px;"/>&emsp14;
                                                     <a th:href="@{/logout}" style="color: white; font-size: 15px;">로그아웃</a>
@@ -253,9 +258,7 @@
                 </div>
             </div>
         </header>
-        <!--        <section th:fragment="content">-->
-        <!--            content-->
-        <!--        </section>-->
+
         <footer class="footer" th:fragment="footer">
             <div class="footer_top">
                 <div class="container">
@@ -353,7 +356,6 @@
                                     <img th:src="@{/img/source/googleLogin.png}" class="icon48 margin2">
                                     <img th:src="@{/img/source/kakaoLogin.png}" class="icon48 margin2">
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -382,7 +384,7 @@
         <!-- JS here -->
         <section th:fragment="script">
             <script th:src="@{/js/vendor/modernizr-3.5.0.min.js}"></script>
-            <script th:src="@{/js/vendor/jquery-1.12.4.min.js}"></script>
+<!--            <script th:src="@{/js/vendor/jquery-1.12.4.min.js}"></script>-->
             <script th:src="@{/js/bootstrap/bootstrap-4.5.0.min.js}"></script>
             <!--<script src="/js/bootstrap/popper.min.js"></script>-->  <!-- 템플릿 지도 관련으로 사용 않함 -->
 
@@ -414,6 +416,7 @@
             <script th:src="@{/js/member.js}"></script>
             <script th:src="@{/js/custom.js}"></script>
             <script th:src="@{/js/index.js}"></script>
+            <script th:src="@{/js/residence.js}"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
         </section>

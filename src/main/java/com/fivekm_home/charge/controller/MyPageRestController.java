@@ -8,6 +8,7 @@ import com.fivekm_home.charge.service.MyPageService;
 import com.fivekm_home.charge.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -54,5 +55,10 @@ public class MyPageRestController {
         }
     } // end of edit
 
+    @PostMapping("/rest/checkResidence")
+    public int checkResidenec(@RequestParam("resName") String resName){
+        System.out.println("이름 : " + resName);
+        return myPageService.checkResidence(resName);
+    }
 
 } // end of MyPageRestController

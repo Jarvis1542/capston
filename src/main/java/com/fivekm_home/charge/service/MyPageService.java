@@ -34,4 +34,9 @@ public class MyPageService {
     public void regRegister(UpdateMem updateMem){
         myPageMapper.regRegister(updateMem);
     }
+
+    // 아파트 이름 중복검사
+    public int checkResidence(String resName){
+        return myPageMapper.checkResidence(resName);
+    }
 }

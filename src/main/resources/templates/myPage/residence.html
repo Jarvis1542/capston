@@ -15,39 +15,49 @@
         </div>
     </div>
 </div>
-<!--/ bradcam_area  -->
 
-<!--================Blog Area =================-->
 <section class="blog_area single-post-area section-padding">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 posts-list">
                 <h1>주소 등록</h1><br>
-                <ul>
-                    <li>asdf</li>
+                <ul id="showStoreRes">
                 </ul>
                 <!-- 컨텐츠 부분 -->
                 <div class="comments-area">
-                    <p class="newsletter_text">주소를 검색하여 주소를 등록해주세요.</p>
+                    <p>주차장 이름을 등록해주세요.</p>
+                    이름&emsp14;&emsp14;:&emsp14;&emsp14;<input type="text" id="resName" name="resName" class="col-md-8">
+                    &emsp14;&emsp14;<button id="checkResidence" class="genric-btn info">중복검사</button><br>
+                    <div id="resultChk"></div>
+                    <br>
                     <div class="single_field">
-                            <button type="button" onclick="sample4_execDaumPostcode()" class="genric-btn info">주소 검색</button>
-                            <input type="text" name="postcode" id="postcode" placeholder="우편번호" value="" class="single-input" />
-                            <input type="text" name="roadAddress" id="roadAddress" placeholder="도로명주소" value="" class="single-input" />
-                            <input type="text" name="jibunAddress" id="jibunAddress" placeholder="지번주소" value="" class="single-input" />
-                            <input type="text" name="extraAddress" id="extraAddress" placeholder="참고항목" value="" class="single-input" />
-                            <input type="text" name="detailAddress" id="detailAddress" placeholder="상세주소" value="" class="single-input"/>
+                        <button type="button" onclick="execDaumPostcode()" class="genric-btn info">주소 검색</button>
+                        <div style="float: right">
+                            <p>주소를 검색하여 주소를 등록해주세요.</p>
+                        </div>
+                        <input type="text" name="postcode" id="postcode" placeholder="우편번호" value="" class="single-input" />
+                        <input type="text" name="roadAddress" id="roadAddress" placeholder="도로명주소" value="" class="single-input" />
+                        <input type="text" name="jibunAddress" id="jibunAddress" placeholder="지번주소" value="" class="single-input" />
+                        <input type="text" name="extraAddress" id="extraAddress" placeholder="참고항목" value="" class="single-input" />
+                        <input type="text" name="detailAddress" id="detailAddress" placeholder="ex) 102동 앞 주차장 20칸" value="" class="single-input"/>
                     </div>
                 </div>
                 <h1>지도 등록</h1><br><hr><br>
                 <p>지도를 클릭해주세요!</p>
                 <form onsubmit="searchPlaces(); return false;">
-                    키워드 : <input type="text" value="이태원 맛집" id="keyword" size="15">
-                    <button type="submit">검색하기</button>
+                    키워드&emsp14;&emsp14;:&emsp14;&emsp14;<input type="text" value="이태원 맛집" id="keyword" class="col-md-8">
+                    &emsp14;&emsp14;&emsp14;&emsp14;&emsp14;<button type="submit" class="genric-btn info">검색하기</button>
                 </form><br>
 
-                <div style="margin-left: 100px;">
+                <div>
                     위도 : <span id="lat"></span>&emsp14;&emsp14;
                     경도 : <span id="lng"></span>
+                    <div style="float: right">
+                        <button id="firstReg" class="genric-btn info">등록</button>
+                    </div>
+                </div><br>
+                <div style="float: right">
+                    <p>등록 버튼을 누르셔서 여러 거주지를 등록할 수 있습니다.</p>
                 </div>
                 <br>
                 <div id="complete"></div>
@@ -96,7 +106,7 @@
         </div>
         <div class="col-md-8">
             <div class="submit_btn">
-                <br><button id="residence" class="boxed-btn3 row-cols-md-6" style="float: right">가입</button>
+                <br><button id="residence" class="boxed-btn3 row-cols-md-6" style="float: right">최종 등록</button>
             </div>
         </div>
     </div>
@@ -112,7 +122,7 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=31e2bf5613ce6e27d859ca41bb71d46e&libraries=services"></script>
 <script>
     //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
-    function sample4_execDaumPostcode() {
+    function execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
