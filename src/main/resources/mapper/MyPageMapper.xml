@@ -31,4 +31,19 @@
         select count(*) from residence
         where resName = #{resName}
     </select>
+
+    <insert id="regResidence">
+        insert into residence_view values (
+            #{resName},
+            #{postcode},
+            #{roadAddress},
+            #{jibunAddress},
+            #{extraAddress},
+            #{detailAddress},
+            #{lat},
+            #{lng},
+            sysdate,
+            #{email}
+        )
+    </insert>
 </mapper>

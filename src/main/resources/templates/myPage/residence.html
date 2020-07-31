@@ -25,6 +25,7 @@
                 </ul>
                 <!-- 컨텐츠 부분 -->
                 <div class="comments-area">
+                    <input type="hidden" id="email" th:value="${session.user.email}">
                     <p>주차장 이름을 등록해주세요.</p>
                     이름&emsp14;&emsp14;:&emsp14;&emsp14;<input type="text" id="resName" name="resName" class="col-md-8">
                     &emsp14;&emsp14;<button id="checkResidence" class="genric-btn info">중복검사</button><br>
@@ -49,7 +50,7 @@
                     &emsp14;&emsp14;&emsp14;&emsp14;&emsp14;<button type="submit" class="genric-btn info">검색하기</button>
                 </form><br>
 
-                <div>
+                <div style="margin-left: 60px;">
                     위도 : <span id="lat"></span>&emsp14;&emsp14;
                     경도 : <span id="lng"></span>
                     <div style="float: right">
@@ -57,7 +58,10 @@
                     </div>
                 </div><br>
                 <div style="float: right">
-                    <p>등록 버튼을 누르셔서 여러 거주지를 등록할 수 있습니다.</p>
+                    <p style="font-size: 17px">등록 버튼을 누르셔서 여러 거주지를 등록할 수 있습니다.</p>
+                </div>
+                <div style="float: right">
+                <p style="font-size: 17px">등록된 아파트는 상단에 바로 볼 수 있습니다.</p>
                 </div>
                 <br>
                 <div id="complete"></div>
@@ -103,7 +107,7 @@
 
                 </div>
             </div>
-        </div>
+        </div><br>
         <div class="col-md-8">
             <div class="submit_btn">
                 <br><button id="residence" class="boxed-btn3 row-cols-md-6" style="float: right">최종 등록</button>

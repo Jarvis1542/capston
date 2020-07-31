@@ -1,5 +1,6 @@
 package com.fivekm_home.charge.service;
 
+import com.fivekm_home.charge.domain.RES.Residence;
 import com.fivekm_home.charge.domain.USER.EditPassword;
 import com.fivekm_home.charge.domain.USER.MemberEdit;
 import com.fivekm_home.charge.domain.USER.MemberEdit2;
@@ -8,6 +9,9 @@ import com.fivekm_home.charge.mapper.MemMapper;
 import com.fivekm_home.charge.mapper.MyPageMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class MyPageService {
@@ -38,5 +42,10 @@ public class MyPageService {
     // 아파트 이름 중복검사
     public int checkResidence(String resName){
         return myPageMapper.checkResidence(resName);
+    }
+
+    // 거주지 등록
+    public void regResidence(Residence residence){
+        myPageMapper.regResidence(residence);
     }
 }

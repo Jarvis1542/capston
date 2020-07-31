@@ -246,7 +246,7 @@
 
                                         <span th:unless="${session.user==null}">
                                             <div class="button-group-area mt-40">
-                                                <img th:src="${session.user.picture}" style="width: 50px; height: 40px"/>&emsp14;
+                                                <img th:src="${session.user.picture}" style="width: 60px; height: 60px"/>&emsp14;
                                                     <span th:text="${session.user.name + '님'}" style="color: white; font-size: 15px;"/>&emsp14;
                                                     <a th:href="@{/logout}" style="color: white; font-size: 15px;">로그아웃</a>
                                             </div>

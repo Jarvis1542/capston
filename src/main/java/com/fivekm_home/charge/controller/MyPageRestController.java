@@ -1,5 +1,6 @@
 package com.fivekm_home.charge.controller;
 
+import com.fivekm_home.charge.domain.RES.Residence;
 import com.fivekm_home.charge.domain.USER.EditPassword;
 import com.fivekm_home.charge.domain.USER.MemberEdit;
 import com.fivekm_home.charge.domain.USER.UpdateMem;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class MyPageRestController {
@@ -56,9 +60,47 @@ public class MyPageRestController {
     } // end of edit
 
     @PostMapping("/rest/checkResidence")
-    public int checkResidenec(@RequestParam("resName") String resName){
+    public int checkResidence(@RequestParam("resName") String resName){
         System.out.println("이름 : " + resName);
         return myPageService.checkResidence(resName);
     }
 
+    @PostMapping("/rest/residence")
+    public void regResidence(@RequestParam("totalData[]") List<String> str, Residence residence){
+        if(str.size()<10){
+            residence.setResName(str.get(0));
+            residence.setPostcode(str.get(1));
+            residence.setRoadAddress(str.get(2));
+            residence.setJibunAddress(str.get(3));
+            residence.setExtraAddress(str.get(4));
+            residence.setDetailAddress(str.get(5));
+            residence.setLat(str.get(6));
+            residence.setLng(str.get(7));
+            residence.setEmail(str.get(8));
+            myPageService.regResidence(residence);
+        }else if(str.size()<19){
+            residence.setResName(str.get(0));
+            residence.setPostcode(str.get(1));
+            residence.setRoadAddress(str.get(2));
+            residence.setJibunAddress(str.get(3));
+            residence.setExtraAddress(str.get(4));
+            residence.setDetailAddress(str.get(5));
+            residence.setLat(str.get(6));
+            residence.setLng(str.get(7));
+            residence.setEmail(str.get(8));
+            myPageService.regResidence(residence);
+            residence.setResName(str.get(9));
+            residence.setPostcode(str.get(10));
+            residence.setRoadAddress(str.get(11));
+            residence.setJibunAddress(str.get(12));
+            residence.setExtraAddress(str.get(13));
+            residence.setDetailAddress(str.get(14));
+            residence.setLat(str.get(15));
+            residence.setLng(str.get(16));
+            residence.setEmail(str.get(17));
+            myPageService.regResidence(residence);
+        }
+
+
+    }
 } // end of MyPageRestController
