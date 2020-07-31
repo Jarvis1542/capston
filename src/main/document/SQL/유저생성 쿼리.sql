@@ -3,9 +3,9 @@
 conn sys as sysdba;
 1234
 
-create user cap2 identified by 1234;
-grant connect, resource, dba to cap2;
+create user cap identified by 1234;
+grant connect, resource, dba to cap;
 
-conn cap2/1234;
+conn cap/1234;
 
 commit;
