@@ -116,6 +116,7 @@
 
 <script>
 
+
     $(".chart2").css({"display":"none"});
     $(".chart3").css({"display":"none"});
     $(".search_button").click(function() {
@@ -145,17 +146,10 @@
     $("#month").change(function() {
         $("#default-select3 .list").find("li").remove();
         $("#default-select3 .list").append('<li class="option selected focus">주간</li>');
-
-        if (typeof cnt_month != "undefined"
-            && cnt_month != null
-            && cnt_month.length != null
-            && cnt_month.length > 0) {
-            output = true;
-        } else {
-            week_prev_next();
-            output = false;
+        if (!Array.isArray(cnt_month) || !cnt_month.length) {
+            week_data_func();
         }
-        //
+
         for(var m = 0; m < cnt_month.length; m++) {
             if(m == $("#month option:selected").attr("value") - 1) {
                 for (var i = 1; i <= cnt_month[m]; i++) {
@@ -170,11 +164,12 @@
     var year, month, result;
     var week_52 = [], week_match = [], cnt_month = [], addDays_cnt = 0, week_52_cnt = 0, week_cnt = 0;
     var year_arr = [], month_arr = [], week_arr = [], week_list_arr = [], year_arr_all = [ [0], [0], [0] ];
+    var year_comp_arr = [ 2020, 2019, 2018 ];
     var items = new Array(12);
     var chart, chart2, chart3;
-    var output;
+    var data_bool;
 
-    data_func(2020,1,1);
+    data_func();
 
     function addDays(date_input, days_input) {
         result = new Date(date_input);
@@ -183,8 +178,12 @@
         addDays_cnt++;
         return result;
     }
-    function week_prev_next() {
-        var curr = date; // get current date
+    function week_data_func() {
+        var date_modify = "";
+        date_modify += date.getFullYear().toString();
+        date_modify += "-01-01";
+
+        var curr = new Date(date_modify); // get current date
         var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
         var last = first + 6; // last day is the first day + 6
 
@@ -235,19 +234,15 @@
         }
     }
     function year_arr_all_func(msg) {
-        for(var j = 0; j < msg.length; j++) {
-            year_date = new Date(msg[j].create_date);
-            if (year_date.getFullYear() == 2020) {
-                year_arr_all[0][0] += 1;
-            } else if (year_date.getFullYear() == 2019) {
-                year_arr_all[0][1] += 1;
-            } else if (year_date.getFullYear() == 2018) {
-                year_arr_all[0][2] += 1;
+        for(var i = 0; i < msg.length; i++) {
+            year_date = new Date(msg[i].create_date);
+            for(var j = 0; j < year_comp_arr.length; j++) {
+                if (year_date.getFullYear() == year_comp_arr[j]) {
+                    year_arr_all[j][0] += 1;
+                }
             }
         }
-
     }
-
     function month_arr_func(msg, year_data, month_data) {
         last_day(year_data, month_data);
         for (var j = 0; j < l_day.getDate(); j++) {
@@ -265,8 +260,6 @@
 
     function week_arr_func(msg, year_data, month_data, week_data) {
         first_day(year_data - 1, 12);
-        week_prev_next();
-
         for (var i = 0; i < msg.length; i++) {
             var day = new Date(msg[i].week_FIRST);
             for (var m = 0; m < week_52.length; m++) {
@@ -284,6 +277,7 @@
                 week_52_cnt++;
             }
         }
+
         for(var k = 0; k < items.length; k++) {
             if(k == month_data - 1) {
                 for(var a = items[k][week_data-1].getDate(); a <= items[k][week_data-1].getDate()+6; a++) {
@@ -296,15 +290,13 @@
                         for(var c = 0 ; c < week_arr.length; c++) {
                             if(new Date(msg[b].create_DATE).getDate() == week_arr[c]) {
                                 week_list_arr[c] += 1;
+
                             }
                         }
-
                     }
                 }
             }
         }
-
-
     }
     function year_all_func() {
         var ctx4 = document.getElementById('myChart').getContext('2d');
@@ -314,38 +306,40 @@
 
             // The data for our dataset
             data: {
-                labels: ['2020년', '2019년', '2018년'],
                 datasets: [{
                     label: '년도별 가입자 통계',
                     backgroundColor: 'rgb(62,147,0)',
+                    borderColor: 'rgb(64,64,64)'
+                }]
+            },
+            options: {}
+        });
+        for(var i = 0; i < year_arr_all.length; i++) {
+            chart.data.labels.push(year_comp_arr[i]+"년");
+            chart.data.datasets[0].data.push(year_arr_all[i][0]);
+        }
+        chart.update();
+    }
+    function year_func() {
+        var ctx = document.getElementById('myChart').getContext('2d');
+        chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'bar',
+
+            // The data for our dataset
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                datasets: [{
+                    label: '2020년 가입자 통계',
+                    backgroundColor: 'rgb(62,147,0)',
                     borderColor: 'rgb(64,64,64)',
-                    data: [year_arr_all[0][0], year_arr_all[0][1], year_arr_all[0][2]]
+                    data: [year_arr[0], year_arr[1], year_arr[2], year_arr[3], year_arr[4], year_arr[5], year_arr[6],
+                        year_arr[7], year_arr[8], year_arr[9], year_arr[10], year_arr[11]]
                 }]
             },
 
             options: {}
         });
-    }
-    function year_func() {
-            var ctx = document.getElementById('myChart').getContext('2d');
-            chart = new Chart(ctx, {
-                // The type of chart we want to create
-                type: 'bar',
-
-                // The data for our dataset
-                data: {
-                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                    datasets: [{
-                        label: '2020년 가입자 통계',
-                        backgroundColor: 'rgb(62,147,0)',
-                        borderColor: 'rgb(64,64,64)',
-                        data: [year_arr[0], year_arr[1], year_arr[2], year_arr[3], year_arr[4], year_arr[5], year_arr[6],
-                            year_arr[7], year_arr[8], year_arr[9], year_arr[10], year_arr[11]]
-                    }]
-                },
-
-                options: {}
-            });
 
     }
 
@@ -395,55 +389,85 @@
             options: {}
         });
 
-
         for(var i = 0; i < week_arr.length; i++) {
             chart3.data.labels.push(week_arr[i]);
             chart3.data.datasets[0].data.push(week_list_arr[i]);
         }
         chart3.update();
     }
-
+    function reset_func() {
+        week_52 = [], week_match = [], cnt_month = [], addDays_cnt = 0, week_52_cnt = 0, week_cnt = 0;
+        year_arr = [], month_arr = [], week_arr = [], week_list_arr = [], year_arr_all = [ [0], [0], [0] ];
+        items = new Array(12);
+    }
     function data_func(year_data, month_data, week_data) {
-        last_day(year_data, month_data);
-        first_day(year_data - 1, 12);
-        chart = null, chart2 = null, chart3 = null;
-        $.ajax({
-            method: "post",
-            url: "/rest/GraphList"
-        })
-        .done(function (msg) {
+        if (typeof(year_data) === "undefined" && year_data !== null) {
+            first_day(2020 - 1, 12);
+        } else if (typeof(month_data) === "undefined" && month_data !== null) {
+            last_day(2020, 1);
+        } else {
+            first_day(year_data - 1, 12);
+            last_day(year_data, month_data);
+        }
 
-            if(year_data != undefined && month_data == undefined && week_data == undefined) {
-                year_arr_func(msg, year_data);
-                year_func();
-            } else if(year_data != undefined && month_data != undefined && week_data == undefined) {
-                month_arr_func(msg, year_data, month_data);
-                month_func();
-            } else {
-                year_arr_all_func(msg);
-                year_all_func();
-            }
-        }).fail(function (error) {
-            alert("에러 : " + error);
-        });
-        if(week_data != undefined) {
+        if (!Array.isArray(cnt_month) || !cnt_month.length) {
+            week_data_func();
+        }
+        data_bool = false;
+
+
+        if((year_data !== undefined || month_data !== undefined) && week_data === undefined) {
+            $.ajax({
+                method: "post",
+                url: "/rest/GraphList"
+            })
+                .done(function (msg) {
+                    if ((year_data !== undefined && month_data === undefined) && week_data === undefined) {
+                        year_arr_func(msg, year_data);
+                        year_func();
+                    } else if ((year_data !== undefined && month_data !== undefined) && week_data === undefined) {
+                        month_arr_func(msg, year_data, month_data);
+                        month_func();
+                    }
+                    data_bool = true;
+                    if (data_bool == true) {
+                        reset_func();
+                    }
+                }).fail(function (error) {
+                alert("에러 : " + error);
+            });
+        } else if((year_data !== undefined && month_data !== undefined) && week_data !== undefined) {
             $.ajax({
                 method: "post",
                 url: "/rest/weekList"
             }).done(function (msg) {
                 week_arr_func(msg, year_data, month_data, week_data);
                 week_func();
+                data_bool = true;
+                if (data_bool == true) {
+                    reset_func();
+                }
             }).fail(function (error) {
                 console.log("에러 : ", error);
             });
+        } else {
+            $.ajax({
+                method: "post",
+                url: "/rest/GraphList"
+            })
+                .done(function (msg) {
+
+                    year_arr_all_func(msg);
+                    year_all_func();
+                    data_bool = true;
+                    if (data_bool == true) {
+                        reset_func();
+                    }
+                }).fail(function (error) {
+                alert("에러 : " + error);
+            });
         }
-
-        week_52 = [], week_match = [], cnt_month = [], addDays_cnt = 0, week_52_cnt = 0, week_cnt = 0;
-        year_arr = [], month_arr = [], week_arr = [], week_list_arr = [];
-        items = new Array(12);
-
     }
-
 
 
 
