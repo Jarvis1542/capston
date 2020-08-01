@@ -27,11 +27,12 @@
                 <table class="table table-horizontal" table-border>
                     <thead class="thead-strong">
                     <tr>
-                        <th>아이디</th>
+                        <th>이메일</th>
                         <th>이름</th>
                         <th>폰번호</th>
-                        <th>등록날짜</th>
-                        <th>역할</th>
+                        <th>프로필 사진</th>
+                        <th>유형</th>
+                        <th>가입일</th>
                     </tr>
                     </thead>
                     <tbody id="tbody">
@@ -39,9 +40,9 @@
                         <td><span th:text="${memberList.email}"/></td>
                         <td><span th:text="${memberList.name}"/></td>
                         <td><span th:text="${memberList.phone}"/></td>
-                        <td><span th:text="${#dates.format(memberList.create_date, 'YYYY-MM-dd HH:mm:ss')}"/></td>
+                        <td><img th:src="${memberList.picture}" style="width: 70px; height: 60px"></td>
                         <td><span th:text="${memberList.role}"/></td>
-
+                        <td><span th:text="${#dates.format(memberList.created_date, 'YYYY-MM-dd HH:mm:ss')}"/></td>
                     </tr>
                     </tbody>
                 </table>

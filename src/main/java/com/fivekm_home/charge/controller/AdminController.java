@@ -24,9 +24,10 @@ public class AdminController {
         return "admin/memberList";
     }
 
-    @GetMapping("/chargingRequest")
-    public String csRequest(Model model){
-        return "/admin/csRequest";
+    @GetMapping("/happyParkingRequestList")
+    public String hpRequestList(Model model){
+        model.addAttribute("requestList", hpService.hpRequestList());
+        return "/admin/hpRequestList";
     }
 
     @GetMapping("/happyParkingRequest")
@@ -34,10 +35,9 @@ public class AdminController {
         return "/admin/hpRequest";
     }
 
-    @GetMapping("/happyParkingRequestList")
-    public String hpRequestList(Model model){
-        model.addAttribute("requestList", hpService.hpRequestList());
-        return "/admin/memberList";
+    @GetMapping("/chargingRequest")
+    public String csRequest(Model model){
+        return "/admin/csRequest";
     }
 
     @GetMapping("/requestHappyParking/{parkingName}")

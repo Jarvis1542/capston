@@ -1,3 +1,4 @@
+'use strict';
 // 마커를 담을 배열입니다
 var markers = [];
 

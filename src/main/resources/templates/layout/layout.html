@@ -10,7 +10,12 @@
         <!-- <link rel="manifest" href="site.webmanifest"> -->
         <link rel="shortcut icon" type="image/x-icon" th:href="@{img/favicon.png}">
         <!-- Place favicon.ico in the root directory -->
-
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+        <!-- 부트스트랩 -->
+<!--        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">-->
+<!--        <script src="//code.jquery.com/jquery.min.js"></script>-->
+<!--        <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>-->
         <!-- CSS here -->
         <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap-4.5.0.min.css}">
         <link rel="stylesheet" th:href="@{/css/bootstrap/owl.carousel.min.css}">
@@ -189,7 +194,7 @@
                                                             <div th:if="${session.user.role.getTitle()=='관리자'}">
                                                                 <li><a th:href="@{/admin/memberList}">회원 목록</a></li>
                                                                 <li><a th:href="@{#}">충전소 요청</a></li>
-                                                                <li><a th:href="@{#}">주차장 요청</a></li>
+                                                                <li><a th:href="@{/admin/happyParkingRequestList}">주차장 요청</a></li>
                                                                 <li><a th:href="@{#}">충전소 매출 현황</a></li>
                                                                 <li><a th:href="@{#}">주차장 매출 현황</a></li>
                                                                 <li><a th:href="@{/myPage/residence}">거주지 등록</a></li>
@@ -422,8 +427,13 @@
             <script th:src="@{/js/custom.js}"></script>
             <script th:src="@{/js/index.js}"></script>
             <script th:src="@{/js/residence.js}"></script>
+            <script th:src="@{/js/hp.js}"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
+            <!-- 모달 -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
         </section>
     </body>
 </html>

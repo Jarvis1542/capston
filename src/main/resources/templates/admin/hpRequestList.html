@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"/>
+<body>
+<header th:replace="layout/layout :: header"/>
+<!-- bradcam_area  -->
+<div class="bradcam_area bradcam_bg_3">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text">
+                    <h3>주차장 요청</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ================ contact section start ================= -->
+<section class="contact-section section_padding">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col">
+                <div class="def_mar">
+                    <h1>주차장 요청 목록</h1><br>
+                </div>
+                <table class="table table-striped">
+                    <thead class="thead-strong">
+                    <tr>
+                        <th>순번</th>
+                        <th>주차장 이름</th>
+                        <th>주차장 타입</th>
+                        <th>주차장 칸 수</th>
+                        <th>아파트 이름</th>
+                        <th>도로명 주소</th>
+                        <th>지번 주소</th>
+                        <th>상세 주소</th>
+                        <th>등록일</th>
+                        <th>등록자</th>
+                        <th>관리자 승인</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tbody">
+                    <tr th:each ="requestList, num : ${requestList}">
+                        <td><span th:text="${num.count}"></span></td>
+                        <td><span th:text="${requestList.parkingName}"/></td>
+                        <td><span th:text="${requestList.parkingType}"/></td>
+                        <td><span th:text="${requestList.place}"/></td>
+                        <td><span th:text="${requestList.resName}"/></td>
+                        <td><span th:text="${requestList.roadAddress}"/></td>
+                        <td><span th:text="${requestList.jibunAddress}"/></td>
+                        <td><span th:text="${requestList.detailAddress}"/></td>
+                        <td><span th:text="${#dates.format(requestList.regDate, 'YYYY-MM-dd HH:mm:ss')}"/></td>
+                        <td><span th:text="${requestList.name}"/></td>
+                        <td><span th:text="${requestList.parkingChk}"/></td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+<footer th:replace="layout/layout :: footer"/>
+</body>
+<script th:replace="layout/layout :: script"/>
+</html>

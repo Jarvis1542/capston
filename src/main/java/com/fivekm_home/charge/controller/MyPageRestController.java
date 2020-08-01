@@ -35,15 +35,14 @@ public class MyPageRestController {
     public int edit(@RequestPart("upload")MultipartFile upload,    // 경비 교육 이수증
                      @RequestPart("upload2")MultipartFile upload2,  // 아파트 대표 증명 사진
                      UpdateMem updateMem){
-        System.out.println("내용 : " + updateMem.toString() + "   파일 :"+ upload + "   파일2 :" + upload2);
         // 경비
         if(updateMem.getMemberRole().equals("guard")){
             System.out.println("경비 : " + updateMem + "    파일 : " + upload.getOriginalFilename());
-            storageService.store(upload);
+//            storageService.store(upload);
             updateMem.setGuardLicence("/img/upload/"+upload.getOriginalFilename());
             System.out.println("파일 저장 통과 후 : "  + updateMem.toString());
-            myPageService.regGuard(updateMem);
-            memService.updateGuard(updateMem);
+//            myPageService.regGuard(updateMem);
+//            memService.updateGuard(updateMem);
             return 1;
         // 등록자
         }else if(updateMem.getMemberRole().equals("register")){

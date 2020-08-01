@@ -1,28 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?> <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fivekm_home.charge.mapper.HPMapper">
+    <select id="loadResidence" resultType="com.fivekm_home.charge.domain.HP.HP_loadRes">
+        select resName, postcode, roadAddress, jibunAddress, extraAddress, detailAddress, email
+        from residence_view
+    </select>
+
     <insert id="hpReg">
-        insert into PARKING (parkingIdx, PARKINGNAME, PARKINGTYPE, MIN30FEE, ADDMIN10FEE, PLACE,
-        sample4_postcode, sample4_roadAddress, sample4_jibunAddress, sample4_detailAddress,
-        sample4_extraAddress, dayTime, weeTime, holTime, aptMap, parkingPic, id, PARKINGDATE) values(
-        PARKING_SEQ.nextval,
-        #{parkingName,jdbcType=VARCHAR},
-        #{parkingType,jdbcType=VARCHAR},
-        #{min30Fee,jdbcType=INTEGER},
-        #{addMin10Fee,jdbcType=INTEGER},
-        #{place,jdbcType=INTEGER},
-        #{sample4_postcode,jdbcType=VARCHAR},
-        #{sample4_roadAddress,jdbcType=VARCHAR},
-        #{sample4_jibunAddress,jdbcType=VARCHAR},
-        #{sample4_detailAddress,jdbcType=VARCHAR},
-        #{sample4_extraAddress,jdbcType=VARCHAR},
-        #{dayTime,jdbcType=VARCHAR},
-        #{weeTime,jdbcType=VARCHAR},
-        #{holTime,jdbcType=VARCHAR},
-        #{aptMap,jdbcType=VARCHAR},
-        #{parkingPic,jdbcType=VARCHAR},
-        #{id,jdbcType=VARCHAR},
-        sysdate)
+        insert into parking_view values(
+            #{parkingName},
+            #{parkingType},
+            #{place},
+            #{min30Fee},
+            #{addMin10Fee},
+            #{manageTime},
+            #{parkingPic},
+            #{aptMap},
+            sysdate,
+            'N',
+            #{resName}
+        )
     </insert>
 
     <select id="hpRequest" resultType="com.fivekm_home.charge.domain.HP.HP_request">
@@ -34,10 +31,11 @@
     </select>
 
     <select id="hpRequestList" resultType="com.fivekm_home.charge.domain.HP.HP_requestList">
-        select ID, PARKINGNAME, PARKINGTYPE, PLACE,
-        SAMPLE4_ROADADDRESS, SAMPLE4_DETAILADDRESS,
-        SAMPLE4_EXTRAADDRESS, PARKINGDATE
-        from PARKING
+        select parkingName, parkingType, place, p.resName, r.roadAddress, r.jibunAddress,
+         r.detailAddress, p.regDate, m.name, parkingChk
+        from parking_view p, residence_view r, member_view m
+        where p.resName = r.resName
+        and m.email = r.email
     </select>
     
     <select id="hpBook" resultType="com.fivekm_home.charge.domain.HP.HP_book">

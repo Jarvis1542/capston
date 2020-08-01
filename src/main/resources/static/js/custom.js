@@ -1,3 +1,4 @@
+'use strict';
 // 메인 index 슬라이드 시간 설정
 $('.carousel').carousel({
     interval: 4000,
