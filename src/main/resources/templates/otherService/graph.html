@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"/>
+<body>
+<header th:replace="layout/layout :: header"/>
+<!-- bradcam_area  -->
+<div class="bradcam_area hp_bg_06">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text">
+                    <h3>GRAPH ROOM</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 차트 canvas 영역 -->
+<select id="Years">
+    <option value="2020">2020</option>
+</select>
+<select id="Months">
+    <option value="1">1</option>
+</select>
+<button id="select">조회</button>
+<div style="width:80%; height: 100%; border: solid 1px black; margin-left: 10%; margin-top:30px;" class="chart1">
+    <canvas id="myChart"></canvas>
+</div>
+
+<footer th:replace="layout/layout :: footer"/>
+</body>
+<script th:replace="layout/layout :: script"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script src="/js/graph.js"></script>    <!-- canvas 그리기 -->
+<!-- 차트 script 영역 -->
+<script>
+
+</script>
+</html>

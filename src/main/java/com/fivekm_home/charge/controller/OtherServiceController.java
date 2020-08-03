@@ -32,4 +32,9 @@ public class OtherServiceController {
     public String bestQnA() {
         return "/otherService/FAQ";
     }
+
+    @GetMapping("/graph")
+    public String graph() {
+        return "/otherService/graph";
+    }
 }
