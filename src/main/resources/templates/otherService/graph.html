@@ -116,6 +116,16 @@
 
 <script>
 
+    $.ajax({
+        method: "post",
+        url: "/rest/SCSList"
+    })
+    .done(function (msg) {
+        console.log("매출현황 내용 : ", msg);
+    }).fail(function (error) {
+        console.log("에러 : ", error);
+    });
+
     // 다른 차트 숨기기
     $(".chart2").css({"display":"none"});
     $(".chart3").css({"display":"none"});

@@ -24,6 +24,12 @@ public class IndexRestController {
     @Autowired
     AddService addService;
 
+    @PostMapping("/rest/SCSList")
+    public ArrayList<SCSList> SCSList(Model model) {
+        model.addAttribute("scsList", addService.scsList());
+        System.out.println("매출현황 컨트롤러" + addService.scsList());
+        return addService.scsList();
+    }
     @PostMapping("/rest/GraphList")
     public ArrayList<GraphList> GraphList(Model model) {
         model.addAttribute("graphList", addService.graphList());
