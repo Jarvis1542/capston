@@ -1,14 +1,11 @@
+// 걍 지우지 마셈
 'use strict';
-var resultData = [];
-function valid(val) {
-    if(val === null) return true;
-    if(typeof val === 'string' && val === '') return true;
-    if(typeof val === 'undefined') return true;
 
-    return false;
-}
+// 거주지를 한꺼번에 등록할 배열
+let resultData = []; 
+
 $('#loadResidence').on('click', function () {
-    var data = {
+    let data = {
         email : $('#email').val()
     }
     $.ajax({
@@ -16,7 +13,7 @@ $('#loadResidence').on('click', function () {
         type : 'post',
         url : '/rest/loadResidence',
         success : function (data) {
-            for(var i=0; i<=data.length; i++){
+            for(let i=0; i<=data.length; i++){
                 resultData.push(data[i]);
                 if($('#resName'+i+'').length==0){
                     $('#loadResidenceList').append(
@@ -69,7 +66,7 @@ $(document).on('click', '#resName2', function () {
 
 // 기타 버튼 눌리면 기타 입력란 제공
 $('input[type=radio][name=parkingType]').on('click', function() {
-    var chkValue = $('input[type=radio][name=parkingType]:checked').val();
+    let chkValue = $('input[type=radio][name=parkingType]:checked').val();
     if (chkValue == '단독 주택') {
         $('#showEtc').hide();
     } else if (chkValue == '개인 사유지') {
@@ -81,7 +78,7 @@ $('input[type=radio][name=parkingType]').on('click', function() {
     }
 });
 
-
+// 주차장 등록
 $('#hpReg').on('click', function (event) {
     event.preventDefault();
     if($('#parkingName').val()=='' || $('#parkingName').val()==null){
@@ -89,7 +86,7 @@ $('#hpReg').on('click', function (event) {
         return;
     }
     function errParkingName() {
-        var html = "";
+        let html = "";
         html += '<p style="font-size: 80%; color: red; ' +
             'text-indent: 10em;"><strong>주차장 이름을 입력해주세요.</strong></p>';
         $('#parkingName').focus();
@@ -103,7 +100,7 @@ $('#hpReg').on('click', function (event) {
         }
     }
     function errEtc() {
-        var html = "";
+        let html = "";
         html += '<p style="font-size: 80%; color: red; ' +
             'text-indent: 10em;"><strong>주차장 타입을 입력해주세요.</strong></p>';
         $('#etc').focus();
@@ -115,7 +112,7 @@ $('#hpReg').on('click', function (event) {
         return;
     }
     function errPlace() {
-        var html = "";
+        let html = "";
         html += '<p style="font-size: 80%; color: red; ' +
             'text-indent: 10em;"><strong>주차장 타입을 입력해주세요.</strong></p>';
         $('#place').focus();
@@ -127,7 +124,7 @@ $('#hpReg').on('click', function (event) {
         return;
     }
     function errMin30Fee() {
-        var html = "";
+        let html = "";
         html += '<p style="font-size: 80%; color: red; ' +
             'text-indent: 10em;"><strong>주차장 타입을 입력해주세요.</strong></p>';
         $('#min30Fee').focus();
@@ -139,7 +136,7 @@ $('#hpReg').on('click', function (event) {
         return;
     }
     function errAddMin10Fee() {
-        var html = "";
+        let html = "";
         html += '<p style="font-size: 80%; color: red; ' +
             'text-indent: 10em;"><strong>주차장 타입을 입력해주세요.</strong></p>';
         $('#addMin10Fee').focus();
@@ -151,7 +148,7 @@ $('#hpReg').on('click', function (event) {
         return;
     }
     function errManageTime() {
-        var html = "";
+        let html = "";
         html += '<p style="font-size: 80%; color: red; ' +
             'text-indent: 10em;"><strong>주차장 타입을 입력해주세요.</strong></p>';
         $('#manageTime').focus();
@@ -159,7 +156,7 @@ $('#hpReg').on('click', function (event) {
         $('#errManageTime').append(html);
     }
 
-    var formData = new FormData($('#hpForm')[0]);
+    let formData = new FormData($('#hpForm')[0]);
 
     $.ajax({
         type : 'POST',
@@ -176,5 +173,48 @@ $('#hpReg').on('click', function (event) {
         error : function (error) {
             alert(JSON.stringify(error));
         }
+    });
+});
+
+$(document).ready(function () {
+    if($('input[type=radio][name=parkingType][value="기타"]:checked')){
+        $('#showEtc').show();
+    }
+});
+
+// 주차장 요청 리스트로 뒤로가기
+$('#back').on('click', function () {
+    window.location.href = '/admin/happyParkingRequestList';
+});
+
+// 주차장 요청 승인하여 check를 n -> y 로 바꿈
+$('#request').on('click', function () {
+    let data = {
+        parkingName : $('#parkingName'). val()
+    }
+
+    $.ajax({
+       data : data,
+       type : 'put',
+        url : '/admin/updateParkingChk',
+        success : function () {
+            alert('승인 완료 되었습니다.');
+            window.location.href = '/admin/happyParkingRequestList';
+        },
+        error : function (error) {
+            alert(JSON.stringify(error));
+        }
+    });
+});
+
+$(document).on('click', '#book', function () {
+    var data = {
+        parkingName : $('#parkingName').text()
+    }
+
+    $.ajax({
+        data : data,
+        type : 'get',
+        url : '/happyParking/happyParkingBook/'+data.parkingName
     });
 });

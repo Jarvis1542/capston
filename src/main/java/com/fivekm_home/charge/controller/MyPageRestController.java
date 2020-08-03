@@ -99,7 +99,5 @@ public class MyPageRestController {
             residence.setEmail(str.get(17));
             myPageService.regResidence(residence);
         }
-
-
     }
 } // end of MyPageRestController

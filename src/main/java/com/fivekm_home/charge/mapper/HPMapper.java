@@ -10,4 +10,6 @@ public interface HPMapper {
     HP_request hpRequest(String parkingName);
     ArrayList<HP_requestList> hpRequestList();
     HP_book hpBook();
+    void updateParkingChk(String parkingName);
+    ArrayList<HP_search> hpSearchDataList();
 }

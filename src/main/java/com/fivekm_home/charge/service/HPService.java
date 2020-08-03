@@ -35,4 +35,14 @@ public class HPService {
     public HP_book hpBook(){
         return hpMapper.hpBook();
     }
+
+    // 주차장 승인
+    public void updateParkingChk(String parkingName){
+        hpMapper.updateParkingChk(parkingName);
+    }
+
+    // 지도에 마크를 찍을 데이터 불러오기
+    public ArrayList<HP_search> hpSearchDataList(){
+        return hpMapper.hpSearchDataList();
+    }
 }

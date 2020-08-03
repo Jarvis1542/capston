@@ -2,13 +2,11 @@ package com.fivekm_home.charge.controller;
 
 import com.fivekm_home.charge.domain.HP.HP_loadRes;
 import com.fivekm_home.charge.domain.HP.HP_reg;
+import com.fivekm_home.charge.domain.HP.HP_search;
 import com.fivekm_home.charge.service.HPService;
 import com.fivekm_home.charge.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
@@ -44,5 +42,10 @@ public class HPRestController {
         hpService.hpReg(hp_reg);
     }
 
-
+    // 지도에 마크를 찍을 데이터 불러오기
+    @GetMapping("/rest/hpSearchData")
+    public ArrayList<HP_search> hpSearchDataList(){
+        System.out.println("return : " + hpService.hpSearchDataList());
+        return hpService.hpSearchDataList();
+    }
 }

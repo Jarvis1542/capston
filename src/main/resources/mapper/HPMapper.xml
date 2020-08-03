@@ -22,24 +22,40 @@
         )
     </insert>
 
-    <select id="hpRequest" resultType="com.fivekm_home.charge.domain.HP.HP_request">
-        select PARKINGNAME, parkingType, min30Fee, addMin10Fee, place, sample4_postcode,
-        sample4_roadAddress, sample4_jibunAddress, sample4_detailAddress,
-        sample4_extraAddress, dayTime, weeTime, holTime, aptMap, parkingPic
-        from PARKING
-        where PARKINGNAME = #{parkingName,jdbcType=VARCHAR}
-    </select>
-
     <select id="hpRequestList" resultType="com.fivekm_home.charge.domain.HP.HP_requestList">
         select parkingName, parkingType, place, p.resName, r.roadAddress, r.jibunAddress,
-         r.detailAddress, p.regDate, m.name, parkingChk
+               r.detailAddress, p.regDate, m.name, parkingChk
         from parking_view p, residence_view r, member_view m
         where p.resName = r.resName
         and m.email = r.email
     </select>
-    
+
+    <select id="hpRequest" parameterType="com.fivekm_home.charge.domain.HP.HP_request" resultType="com.fivekm_home.charge.domain.HP.HP_request">
+        select m.name, parkingName, parkingType, place, min30Fee, addMin10Fee, manageTime,
+                r.postcode, r.roadAddress, r.jibunAddress, r.detailAddress, r.extraAddress,
+                p.aptMap, p.parkingPic, r.lat, r.lng
+        from parking_view p, residence_view r, member_view m
+        where p.resName = r.resName
+          and m.email = r.email
+          and parkingName = #{parkingName}
+    </select>
+
     <select id="hpBook" resultType="com.fivekm_home.charge.domain.HP.HP_book">
         select PARKINGPIC, PARKINGNAME, DAYTIME, WEETIME, HOLTIME, place
         from PARKING
+    </select>
+
+    <update id="updateParkingChk">
+        update parking_view
+        set parkingChk = 'Y'
+        where parkingName = #{parkingName}
+    </update>
+    
+    <select id="hpSearchDataList" resultType="com.fivekm_home.charge.domain.HP.HP_search">
+        select parkingName, parkingType, min30Fee, addMin10Fee, roadAddress, extraAddress,
+        manageTime, place, parkingPic, lat, lng
+        from parking_view p, residence_view r
+        where p.resName = r.resName
+        and parkingChk = 'Y'
     </select>
 </mapper>

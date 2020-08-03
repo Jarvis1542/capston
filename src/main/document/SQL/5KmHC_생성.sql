@@ -1,3 +1,4 @@
+/* 테이블 만들고 자료 넣고 commit!!! */
 /* 테이블 생성 */
 /* email PK 반영 */
 create table member(

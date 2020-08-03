@@ -43,7 +43,7 @@
                     <tbody id="tbody">
                     <tr th:each ="requestList, num : ${requestList}">
                         <td><span th:text="${num.count}"></span></td>
-                        <td><span th:text="${requestList.parkingName}"/></td>
+                        <td><a th:href="@{'/admin/requestHappyParking/' + ${requestList.parkingName}}"><span th:text="${requestList.parkingName}"/></a></td>
                         <td><span th:text="${requestList.parkingType}"/></td>
                         <td><span th:text="${requestList.place}"/></td>
                         <td><span th:text="${requestList.resName}"/></td>
