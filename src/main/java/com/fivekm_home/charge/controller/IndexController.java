@@ -72,7 +72,6 @@ IndexController {
     public String searchPassword(SearchPassword searchPassword, HttpSession httpSession, Model model) {
         httpSession.setAttribute("selectPw",memService.searchPassword(searchPassword));
         model.addAttribute("sePw", httpSession.getAttribute("selectPw"));
-
         return "redirect:/index/searchPassword";
     }
 

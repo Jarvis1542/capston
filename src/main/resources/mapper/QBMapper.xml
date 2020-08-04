@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?> <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fivekm_home.charge.mapper.QBMapper">
+    <insert id="qbwrite">
+        insert into q_board values(
+        q_board_seq.nextval,
+        #{title},
+        #{content},
+        #{writer},
+        sysdate,
+        0,
+        0
+        )
+    </insert>
+
+    <select id="qboardList" resultType="com.fivekm_home.charge.domain.OS.QBoardList">
+            select bno, title, writer, regDate, noCount, noReco
+            from q_board_view
+        </select>
+
+    <select id="select" resultType="com.fivekm_home.charge.domain.OS.QBSelect">
+            select bno, title, writer, regDate, content, noCount,noReco
+            from q_board_view
+            where bno = #{bno}
+        </select>
+
+    <update id="noCount">
+        update q_board_view
+        set noCount = noCount + 1
+        where bno = #{bno}
+    </update>
+
+</mapper>

@@ -93,6 +93,20 @@ create table guard(
     on delete cascade
 );
 
+create table q_board(
+                        bno number not null,
+                        title varchar2(100) not null,
+                        content varchar2(1000) not null,
+                        writer varchar2(50) not null,
+                        regDate date,
+                        noCount number,
+                        noReco number,
+                        mbo number,
+                        constraint q_board_bno_pk primary key (bno)
+
+
+);
+
 /* 시퀀스 생성 */
 CREATE SEQUENCE  parking_seq
     MINVALUE 1
@@ -102,6 +116,11 @@ CREATE SEQUENCE  parking_seq
     CACHE 20
     NOORDER
     NOCYCLE;
+
+CREATE SEQUENCE  q_board_seq
+    INCREMENT BY 1
+    START WITH 1;
+
 
 /* 뷰 생성 */
 create view member_view
@@ -121,5 +140,9 @@ as select * from register;
 
 create view residence_view /* 거주지 뷰 작성*/
 as select * from residence;
+
+create view q_board_view
+as select * from q_board;
+
 /* 커밋 */
 commit;
