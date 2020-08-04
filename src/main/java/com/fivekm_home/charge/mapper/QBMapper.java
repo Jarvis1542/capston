@@ -10,5 +10,4 @@ public interface QBMapper {
     ArrayList<QBoardList> qboardList();
     void noCount(long bno);
     void delete(QBDelete qbdelete);
-
 }
