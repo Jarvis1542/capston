@@ -1,3 +1,4 @@
+'use strict';
 // 비밀번호 수정하기 버튼
 $('#updatePassword').click(function () {
     var data = {

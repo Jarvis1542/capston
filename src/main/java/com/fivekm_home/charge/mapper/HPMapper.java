@@ -1,15 +1,15 @@
 package com.fivekm_home.charge.mapper;
 
-import com.fivekm_home.charge.domain.HP.HP_book;
-import com.fivekm_home.charge.domain.HP.HP_register;
-import com.fivekm_home.charge.domain.HP.HP_request;
-import com.fivekm_home.charge.domain.HP.HP_requestList;
+import com.fivekm_home.charge.domain.HP.*;
 
 import java.util.ArrayList;
 
 public interface HPMapper {
-    void hpReg(HP_register hp_register);
+    ArrayList<HP_loadRes> loadResidence(String email);
+    void hpReg(HP_reg hp_reg);
     HP_request hpRequest(String parkingName);
     ArrayList<HP_requestList> hpRequestList();
     HP_book hpBook();
+    void updateParkingChk(String parkingName);
+    ArrayList<HP_search> hpSearchDataList();
 }

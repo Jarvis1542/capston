@@ -1,3 +1,4 @@
+'use strict';
 var totalData = [];
 
 // 중복검사 버튼

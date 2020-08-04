@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class HP_requestList {
+public class HP_requestListReturn {
     private String parkingName;
     private String parkingType;
     private String place;

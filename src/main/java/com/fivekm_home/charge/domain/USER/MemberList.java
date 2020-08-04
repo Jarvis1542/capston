@@ -11,6 +11,7 @@ public class MemberList {
     private String email;
     private String name;
     private String phone;
-    private Date create_date;
+    private String picture;
     private Role role;
+    private Date created_date;
 }

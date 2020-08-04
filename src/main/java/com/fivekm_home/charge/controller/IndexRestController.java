@@ -32,14 +32,10 @@ public class IndexRestController {
     } 
 
     @PostMapping("/rest/login")
-    public Object login(Login login, HttpSession httpSession, Model model){
+    public Object login(Login login, HttpSession httpSession){
         System.out.println(memService.login(login));
         SessionUser user = new SessionUser(memService.login(login));;
         httpSession.setAttribute("user", user);
-        System.out.println("email : " + memService.login(login).getEmail());
-        System.out.println("name : " + memService.login(login).getName());
-        System.out.println("role : " + memService.login(login).getRole());
-
         if(httpSession.getAttribute("user") != null){
             return "로그인 성공";
         }else{

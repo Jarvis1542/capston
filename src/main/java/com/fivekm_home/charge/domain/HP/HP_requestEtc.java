@@ -3,7 +3,7 @@ package com.fivekm_home.charge.domain.HP;
 import lombok.Data;
 
 @Data
-public class HP_request {
+public class HP_requestEtc {
     private String name;
     private String parkingName;
     private String parkingType;

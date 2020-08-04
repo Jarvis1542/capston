@@ -1,4 +1,4 @@
-
+'use strict';
     // 아이디 중복 체크
     $('#checkId').click(function () {
         var data = {
@@ -78,6 +78,7 @@
             var html = "";
             html += '<p style="font-size: 80%; color: red; ' +
                 'text-indent: 3em;"><strong>이메일을 입력 하신지 다시 확인해주세요.</strong></p>';
+            $('#email').focus();
             $('#errEmail').empty();
             $('#errEmail').append(html);
         }
@@ -85,6 +86,7 @@
             var html = "";
             html += '<p style="font-size: 80%; color: red; ' +
                 'text-indent: 3em;"><strong>비밀번호를 입력 하신지 다시 확인해주세요.</strong></p>';
+            $('#password').focus();
             $('#errPassword').empty();
             $('#errPassword').append(html);
         }
@@ -92,6 +94,7 @@
             var html = "";
             html += '<p style="font-size: 80%; color: red; ' +
                 'text-indent: 3em;"><strong>이름을 입력 하신지 다시 확인해주세요.</strong></p>';
+            $('#name').focus();
             $('#errName').empty();
             $('#errName').append(html);
         }
@@ -99,6 +102,7 @@
             var html = "";
             html += '<p style="font-size: 80%; color: red; ' +
                 'text-indent: 3em;"><strong>이메일 인증을 해주세요.</strong></p>';
+            $('#errEmailAuth').focus();
             $('#errEmailAuth').empty();
             $('#errEmailAuth').append(html);
         }
@@ -106,6 +110,7 @@
             var html = "";
             html += '<p style="font-size: 80%; color: red; ' +
                 'text-indent: 3em;"><strong>폰번호를 입력해 주세요.</strong></p>';
+            $('#phone').focus();
             $('#errPhone').empty();
             $('#errPhone').append(html);
         }
@@ -113,6 +118,7 @@
             var html = "";
             html += '<p style="font-size: 80%; color: red; ' +
                 'text-indent: 3em;"><strong>인증번호가 없습니다.</strong></p>';
+            $('#EmailAuthBtn').focus();
             $('#errEmailAuthBtn').empty();
             $('#errEmailAuthBtn').append(html);
         }
@@ -157,6 +163,7 @@
             var html = "";
             html += '<p style="font-size: 80%; color: red; ' +
                 'text-indent: 3em;"><strong>이름 입력하세요.</strong></p>';
+            $('#Name').empty();
             $('#errName').empty();
             $('#errName').append(html);
         }
@@ -164,6 +171,7 @@
             var html = "";
             html += '<p style="font-size: 80%; color: red; ' +
                 'text-indent: 3em;"><strong>폰번호 입력하세요..</strong></p>';
+            $('#phone').empty();
             $('#errPhone').empty();
             $('#errPhone').append(html);
         }
@@ -216,7 +224,7 @@
         function errPhone() {
             var html = "";
             html += '<p style="font-size: 80%; color: red; ' +
-                'text-indent: 3em;"><strong>폰번호 입력하세요..</strong></p>';
+                'text-indent: 3em;"><strong>폰번호 입력하세요.</strong></p>';
             $('#errPhone').empty();
             $('#errPhone').append(html);
         }

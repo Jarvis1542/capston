@@ -1,16 +1,12 @@
 package com.fivekm_home.charge.controller;
 
 import com.fivekm_home.charge.domain.CS.CS_register;
-import com.fivekm_home.charge.domain.HP.HP_register;
 import com.fivekm_home.charge.service.CSService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 
