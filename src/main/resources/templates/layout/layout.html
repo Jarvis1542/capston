@@ -6,16 +6,12 @@
         <title>5Km HC</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-        <!-- <link rel="manifest" href="site.webmanifest"> -->
         <link rel="shortcut icon" type="image/x-icon" th:href="@{img/favicon.png}">
         <!-- Place favicon.ico in the root directory -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
-        <!-- 부트스트랩 -->
-<!--        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">-->
-<!--        <script src="//code.jquery.com/jquery.min.js"></script>-->
-<!--        <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>-->
+
+        <!-- JS는 푸터 script 영역에 선언해주세요! -->
         <!-- CSS here -->
         <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap-4.5.0.min.css}">
         <link rel="stylesheet" th:href="@{/css/bootstrap/owl.carousel.min.css}">
@@ -30,11 +26,10 @@
         <link rel="stylesheet" th:href="@{/css/bootstrap/slicknav.css}">
         <link rel="stylesheet" th:href="@{/css/bootstrap/style.css}">
 
-        <!-- 우리가 추가한 CSS -->
+        <!-- 우리가 추가한 custom CSS -->
         <link rel="stylesheet" th:href="@{/css/kakaomap.css}">  <!-- 카카오 지도 API CSS -->
         <link rel="stylesheet" th:href="@{/css/custom.css}">  <!-- 반응형 및 기타 CSS -->
         <link rel="stylesheet" th:href="@{/css/background.css}">  <!-- 배경 이미지 링크 CSS -->
-        <!-- <link rel="stylesheet" href="css/responsive.css"> -->
     </head>
     <body>
 
@@ -390,14 +385,16 @@
             </div>
         </footer>
 
-        <!-- link that opens popup -->
+        <!-- CSS는 Head 영역에 선언해주세요! -->
         <!-- JS here -->
         <section th:fragment="script">
+            <!-- 핵심 JS는 항상 제일 상단에 선언해주세요! (ex: jquery, bootstrap 등...) -->
+            <script th:src="@{/js/vendor/jquery-3.5.1.min.js}"></script>
+            <script th:src="@{/js/vendor/popper-1.16.0.min.js}"></script>
             <script th:src="@{/js/vendor/modernizr-3.5.0.min.js}"></script>
-<!--            <script th:src="@{/js/vendor/jquery-1.12.4.min.js}"></script>-->
-            <script th:src="@{/js/bootstrap/bootstrap-4.5.0.min.js}"></script>
-            <!--<script src="/js/bootstrap/popper.min.js"></script>-->  <!-- 템플릿 지도 관련으로 사용 않함 -->
+            <script th:src="@{/js/vendor/bootstrap-4.5.0.min.js}"></script>
 
+            <!-- Bootstrap js -->
             <script th:src="@{/js/bootstrap/owl.carousel.min.js}"></script>
             <script th:src="@{/js/bootstrap/isotope.pkgd.min.js}"></script>
             <script th:src="@{/js/bootstrap/ajax-form.js}"></script>
@@ -413,7 +410,6 @@
             <script th:src="@{/js/bootstrap/plugins.js}"></script>
             <script th:src="@{/js/bootstrap/gijgo.min.js}"></script>
             <script th:src="@{/js/bootstrap/slick.min.js}"></script>
-
             <!--contact js-->
             <script th:src="@{/js/bootstrap/contact.js}"></script>
             <script th:src="@{/js/bootstrap/jquery.ajaxchimp.min.js}"></script>
@@ -422,18 +418,12 @@
             <script th:src="@{/js/bootstrap/mail-script.js}"></script>
             <script th:src="@{/js/bootstrap/main.js}"></script>
 
-            <!--우리가 추가한 JS-->
+            <!--우리가 추가한 custom JS-->
             <script th:src="@{/js/member.js}"></script>
             <script th:src="@{/js/custom.js}"></script>
             <script th:src="@{/js/index.js}"></script>
             <script th:src="@{/js/residence.js}"></script>
             <script th:src="@{/js/hp.js}"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-
-            <!-- 모달 -->
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
         </section>
     </body>
 </html>
