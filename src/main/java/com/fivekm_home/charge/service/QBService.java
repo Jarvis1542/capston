@@ -30,7 +30,6 @@ public class QBService {
 
     //게시판 리스트 뽑는곳
     public ArrayList<QBoardList> qboardlist() { return qbMapper.qboardList();}
-    
-        }
+}
 
 

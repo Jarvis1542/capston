@@ -12,28 +12,9 @@ $('#boardwrite').on('click', function () {
         type : 'post'
     }).done(function () {
         alert('글등록 완료');
-        window.location.href='/';
+        window.location.href='/otherService/QnA';
     }).fail(function (error) {
         JSON.stringify(alert(error));
-    });
-});
-
-$('#reply').click(function () {
-
-    var data = {
-        rwriter : $('#rwriter').val(),
-        rcontent : $('#rcontent').val()
-    };
-
-    $.ajax({
-        type : 'post',
-        url : '/rest/reply',
-        data : data
-    }).done(function () {
-        alert('댓글달기 완료');
-        window.location.href='/select/'+bno;
-    }).fail(function (error) {
-        alert(error);
     });
 });
 
@@ -48,7 +29,7 @@ $('#delete').click(function () {
         data : data
     }).done(function () {
         alert('삭제 완료');
-        window.location.href='/';
+        window.location.href='/otherService/QnA';
     }).fail(function (error) {
         alert(error);
     });

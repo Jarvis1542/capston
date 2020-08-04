@@ -1,5 +1,6 @@
 package com.fivekm_home.charge.controller;
 
+import com.fivekm_home.charge.domain.OS.QBDelete;
 import com.fivekm_home.charge.service.QBService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,7 @@ public class OtherServiceController {
         model.addAttribute("boardList",qbService.qboardlist());
         return "/otherService/QnA";
     }
+
 
     @GetMapping("/select/{bno}")
     public String select(@PathVariable long bno, Model model, HttpSession httpSession){
