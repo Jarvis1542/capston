@@ -30,4 +30,10 @@
         where bno = #{bno}
     </update>
 
+    <delete id="delete">
+        delete
+        from q_board_view
+        where bno = #{bno}
+        </delete>
+
 </mapper>

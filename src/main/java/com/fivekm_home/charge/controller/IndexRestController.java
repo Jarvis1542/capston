@@ -1,6 +1,7 @@
 package com.fivekm_home.charge.controller;
 
 import com.fivekm_home.charge.config.auth.dto.SessionUser;
+import com.fivekm_home.charge.domain.OS.QBDelete;
 import com.fivekm_home.charge.domain.OS.QB_write;
 import com.fivekm_home.charge.domain.USER.*;
 import com.fivekm_home.charge.service.MailService;
@@ -29,7 +30,12 @@ public class IndexRestController {
     public int checkId(LoginCheck loginCheck){
         System.out.println("아이디 중복체크: "+loginCheck.toString());
         return memService.checkId(loginCheck);
-    } 
+    }
+
+    @PostMapping("/rest/delete")
+    public void delete(QBDelete qbDelete) {
+        qbService.delete(qbDelete);
+    }
 
     @PostMapping("/rest/login")
     public Object login(Login login, HttpSession httpSession){

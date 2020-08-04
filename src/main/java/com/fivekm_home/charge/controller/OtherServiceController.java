@@ -1,14 +1,12 @@
 package com.fivekm_home.charge.controller;
 
 import com.fivekm_home.charge.config.auth.dto.SessionUser;
+import com.fivekm_home.charge.domain.OS.Reply;
 import com.fivekm_home.charge.service.QBService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -40,6 +38,7 @@ public class OtherServiceController {
         qbService.noCount(bno);
         return "/otherService/select";
     }
+
 
     @GetMapping("/FAQ")
     public String bestQnA() {

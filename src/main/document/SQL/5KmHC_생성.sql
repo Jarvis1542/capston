@@ -93,7 +93,7 @@ create table guard(
     constraint guard_email_fk foreign key (email) references member (email)
     on delete cascade
 );
-
+/* QnA 게시판 테이블 작성*/
 create table q_board(
                         bno number not null,
                         title varchar2(100) not null,
@@ -118,6 +118,7 @@ CREATE SEQUENCE  parking_seq
     NOORDER
     NOCYCLE;
 
+/* QnA 게시판 시퀀스 작성*/
 CREATE SEQUENCE  q_board_seq
     INCREMENT BY 1
     START WITH 1;
@@ -142,7 +143,7 @@ as select * from register;
 create view residence_view /* 거주지 뷰 작성*/
 as select * from residence;
 
-create view q_board_view
+create view q_board_view /* QnA 게시판 뷰 작성*/
 as select * from q_board;
 
 /* 커밋 */
