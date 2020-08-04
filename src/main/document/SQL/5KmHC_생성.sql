@@ -123,3 +123,5 @@ create view residence_view /* 거주지 뷰 작성*/
 as select * from residence;
 /* 커밋 */
 commit;
+
+select * from member;
