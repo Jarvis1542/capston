@@ -8,9 +8,7 @@ public interface QBMapper {
     void qbwrite(QB_write qb_write);
     QBSelect select(long bno);
     ArrayList<QBoardList> qboardList();
-    ArrayList<ReplyList> replyList(long bno);
     void noCount(long bno);
     void delete(QBDelete qbdelete);
-    void reply(Reply reply);
 
 }
