@@ -1,3 +1,6 @@
+/* 시퀀스 삭제 */
+drop sequence q_board_seq;
+
 /* 뷰 삭제 */
 drop view q_board_view;
 drop view CS_view;
