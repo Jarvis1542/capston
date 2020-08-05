@@ -6,9 +6,7 @@ import java.util.ArrayList;
 
 public interface OtherMapper {
     int membersYears();
-    ArrayList<MembersMonths> membersMonths();
-    ArrayList<MembersDays> membersDays();
-    ArrayList<MembersTerm> membersTerm();
+    ArrayList<MembersDate> membersDate();
 
 
 }
