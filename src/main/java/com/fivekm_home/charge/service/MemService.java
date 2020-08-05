@@ -69,4 +69,10 @@ public class MemService {
     public void updateRegister(UpdateMem updateMem){
         memMapper.updateRegister(updateMem);
     }
+
+    // 일반 회원 정보 업데이트
+    public void updateNormal(UpdateMem updateMem){
+        System.out.println("UpdateMem Service : " + updateMem.toString());
+        memMapper.updateNormal(updateMem);
+    }
 }

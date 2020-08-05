@@ -19,4 +19,5 @@ public interface MemMapper {
     ArrayList<KakaoLogin> kakaoLoginCheck(String email) throws Exception;
     void updateGuard(UpdateMem updateMem);
     void updateRegister(UpdateMem updateMem);
+    void updateNormal(UpdateMem updateMem);
 }

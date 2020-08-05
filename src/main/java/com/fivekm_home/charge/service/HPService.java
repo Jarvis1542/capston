@@ -32,9 +32,9 @@ public class HPService {
         return hpMapper.hpRequestList();
     }
 
-    // 주차장 예약
-    public HP_book hpBook(String parkingName){
-        return hpMapper.hpBook(parkingName);
+    // 주차장 예약 페이지
+    public HP_bookPage hpBookPage(String parkingName){
+        return hpMapper.hpBookPage(parkingName);
     }
 
     // 주차장 승인
@@ -60,5 +60,16 @@ public class HPService {
     // 주차장 예약 페이지에서 사용자가 즐겨찾기를 판단
     public int checkBookmark(HP_chkBookmark hp_chkBookmark){
         return hpMapper.checkBookmark(hp_chkBookmark);
+    }
+
+    // 주차장 예약
+    public void hpBook(HP_book hp_book){
+        hpMapper.hpBook(hp_book);
+    }
+
+    // 주차장 결제
+    public void hpPay(HP_pay hp_pay){
+        System.out.println("HP_PAY : " + hp_pay.toString());
+        hpMapper.hpPay(hp_pay);
     }
 }

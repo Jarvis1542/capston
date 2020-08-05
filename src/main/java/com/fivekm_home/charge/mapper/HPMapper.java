@@ -11,8 +11,10 @@ public interface HPMapper {
     ArrayList<HP_requestList> hpRequestList(); // 주차장 요청 리스트
     void updateParkingChk(String parkingName); // 주차장 승인(주차장 요청 리스트에 n -> y
     ArrayList<HP_search> hpSearchDataList(); // 카카오 지도에 마크 등 데이터 불러오기
-    HP_book hpBook(String parkingName); // 해당 주차장 예약
+    HP_bookPage hpBookPage(String parkingName); // 해당 주차장 예약 페이지
     void addBookmark(HP_bookmark hp_bookmark); // 주차장 즐겨찾기 추가
     void deleteBookmark(HP_bookmark hp_bookmark); // 주차장 즐겨찾기 삭제
     int checkBookmark(HP_chkBookmark hp_chkBookmark); // 주차장 예약 페이지에서 사용자가 즐겨찾기를 판단
+    void hpBook(HP_book hp_book); // 주차장 예약
+    void hpPay(HP_pay hp_pay); // 주차장 결제
 }

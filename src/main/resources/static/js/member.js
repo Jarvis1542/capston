@@ -417,20 +417,16 @@
     // 회원 정보 수정 버튼
     $('#normalEdit').on('click', function (event) {
         event.preventDefault();
-
-        var formData = new FormData();
-        formData.append(`email`, $('#editEmail').val());
-        formData.append(`name`, $('#name').val());
-        formData.append(`phone`, $('#phone').val());
+        var data = {
+            name : $('#name').val(),
+            phone : $('#phone').val(),
+            email : $('#email').text()
+        }
         
         $.ajax({
             type : 'POST',
             url : '/rest/edit',
-            enctype: 'multipart/form-data',
-            processData: false,
-            contentType: false,
-            cache: false,
-            data : formData,
+            data : data,
             success : function (data) {
                 if(data==3){
                     alert('회원 정보 수정 완료했습니다.');

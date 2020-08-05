@@ -5,11 +5,10 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class HP_book {
+public class HP_pay {
     private String parkingName;
+    private String price;
     private String email;
-    private Date startDate;
-    private Date endDate;
-    private Date startUseTime;
-    private Date endUseTime;
+    private String userName;
+    private String phone;
 }

@@ -33,11 +33,12 @@ public class HPController {
         return "/HP/hpHistory";
     }
 
+    // 주차장 예약 페이지
     @GetMapping("/happyParkingBook/{parkingName}+{email}")
-    public String hpBook(@PathVariable String parkingName,
+    public String hpBookPage(@PathVariable String parkingName,
             @PathVariable String email, Model model){
         System.out.println("주차장 이름 : " + parkingName + "    사용자 이메일 : " + email);
-        model.addAttribute("parking", hpService.hpBook(parkingName));
+        model.addAttribute("parking", hpService.hpBookPage(parkingName));
 
         // 북마크 검사
         HP_chkBookmark hp_chkBookmark = new HP_chkBookmark();
@@ -47,4 +48,6 @@ public class HPController {
         model.addAttribute("checkBookmark", hpService.checkBookmark(hp_chkBookmark));
         return "/HP/hpBook";
     }
+
+
 }

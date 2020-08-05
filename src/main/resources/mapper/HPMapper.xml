@@ -41,7 +41,7 @@
           and parkingName = #{parkingName}
     </select>
 
-    <select id="hpBook" resultType="com.fivekm_home.charge.domain.HP.HP_book">
+    <select id="hpBookPage" resultType="com.fivekm_home.charge.domain.HP.HP_bookPage">
         select parkingPic, parkingName, place, min30Fee, addmin10Fee, aptMap,
                 roadAddress, extraAddress, name, phone, manageTime, m.email
         from member_view m, parking_view p, residence_view r
@@ -83,4 +83,19 @@
         where email = #{email}
         and parkingName = #{parkingName}
     </select>
+
+    <insert id="hpBook">
+        insert into parkingBook_view values (
+            concat(concat(to_char(sysdate,'YYYY/MM/DD'),#{parkingName}),#{email}), #{startDate},
+            #{endDate}, 'N', #{email}, #{parkingName}, sysdate
+        )
+    </insert>
+
+    <insert id="hpPay">
+        insert into parkingPay_view values (
+            concat(to_char(sysdate,'YYYY/MM/DD'),#{email}), 'card', #{userName}, #{price},
+            #{email}, #{parkingName}, #{phone}, concat(concat(to_char(sysdate,'YYYY/MM/DD'),#{parkingName}),#{email}),
+            sysdate
+        )
+    </insert>
 </mapper>

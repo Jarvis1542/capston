@@ -1,5 +1,9 @@
--- # 테이블 생성 쿼리(쿼리 순서대로 실행 권장) --------------------------------------------------------------
+/* QnA 게시판 시퀀스 작성*/
+CREATE SEQUENCE  q_board_seq
+    INCREMENT BY 1
+    START WITH 1;
 
+-- # 테이블 생성 쿼리(쿼리 순서대로 실행 권장) --------------------------------------------------------------
 create table member(
     email varchar2(100),
     created_date timestamp,
@@ -96,20 +100,50 @@ create table CS
 );
 
 /* QnA 게시판 테이블 작성 */
-create table q_board(
-        bno number not null,
-        title varchar2(100) not null,
-        content varchar2(1000) not null,
-        writer varchar2(50) not null,
-        regDate date,
-        noCount number,
-        noReco number,
-        mbo number,
-        constraint q_board_bno_pk primary key (bno)
+create table q_board
+(
+    bno     number         not null,
+    title   varchar2(100)  not null,
+    content varchar2(1000) not null,
+    writer  varchar2(50)   not null,
+    regDate date,
+    noCount number,
+    noReco  number,
+    mbo     number,
+    constraint q_board_bno_pk primary key (bno)
 );
 
--- # 뷰 생성 쿼리 --------------------------------------------------------------
+create table parkingBook
+(
+    bookId      varchar2(100), /* YYYY/MM/dd + parkingName + email */
+    startDate   timestamp,
+    endDate     timestamp,
+    payState    varchar2(1) default 'N',
+    email       varchar2(100),
+    parkingName varchar2(300),
+    bookDate    timestamp,
+    constraint parkingBook_id_pk primary key (bookId),
+    constraint parkingBook_email_fk foreign key (email) references member (email),
+    constraint parkingBook_parkingName_fk foreign key (parkingName) references parking (parkingName)
+        on delete cascade
+);
 
+
+create table parkingPay(
+    payId varchar2(100), /* YYYY/MM/dd + email */
+    payMethod varchar2(20),
+    name varchar2(10),
+    price number,
+    email varchar2(30),
+    parkingName varchar2(300),
+    phone varchar2(15),
+    bookId varchar2(100), /* parkingBook (fk) */
+    payDate timestamp,
+    constraint parkingPay_id_pk primary key (payId),
+    constraint parkingPay_bookId_fk foreign key (bookId) references parkingBook(bookId)
+);
+-- # 뷰 생성 쿼리 --------------------------------------------------------------
+drop table parkingPay;
 /* 멤버 */
 create view member_view
 as select * from member;
@@ -135,9 +169,10 @@ as select * from CS;
 create view q_board_view
 as select * from q_board;
 
+create view parkingBook_view
+as select * from parkingBook;
+
+create view parkingPay_view
+as select * from parkingPay;
 -- # 시퀀스 생성 쿼리 --------------------------------------------------------------
 
-/* QnA 게시판 시퀀스 작성*/
-CREATE SEQUENCE  q_board_seq
-    INCREMENT BY 1
-    START WITH 1;

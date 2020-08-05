@@ -33,30 +33,35 @@ public class MyPageRestController {
     }
 
     @PostMapping("/rest/edit")
-    public int edit(@RequestPart("upload")MultipartFile upload,    // 경비 교육 이수증
-                     @RequestPart("upload2")MultipartFile upload2,  // 아파트 대표 증명 사진
+    public int edit(@RequestPart(value = "upload", required = false)MultipartFile upload,    // 경비 교육 이수증
+                     @RequestPart(value = "upload2", required = false)MultipartFile upload2,  // 아파트 대표 증명 사진
                      UpdateMem updateMem){
-        // 경비
-        if(updateMem.getMemberRole().equals("guard")){
-            System.out.println("경비 : " + updateMem + "    파일 : " + upload.getOriginalFilename());
+        System.out.println("updateMem : " + updateMem.toString());
+        if(updateMem.getMemberRole()==null){
+            memService.updateNormal(updateMem);
+            return 3;
+        }else {
+            // 경비
+            if(updateMem.getMemberRole().equals("guard")){
+                System.out.println("경비 : " + updateMem + "    파일 : " + upload.getOriginalFilename());
 //            storageService.store(upload);
-            updateMem.setGuardLicence("/img/upload/"+upload.getOriginalFilename());
-            System.out.println("파일 저장 통과 후 : "  + updateMem.toString());
+                updateMem.setGuardLicence("/img/upload/"+upload.getOriginalFilename());
+                System.out.println("파일 저장 통과 후 : "  + updateMem.toString());
 //            myPageService.regGuard(updateMem);
 //            memService.updateGuard(updateMem);
-            return 1;
-        // 등록자
-        }else if(updateMem.getMemberRole().equals("register")){
-            System.out.println("등록자 : " + updateMem + "    파일 : " + upload.getOriginalFilename());
-            storageService.store(upload2);
-            updateMem.setRegisterLicence("/img/upload/"+upload2.getOriginalFilename());
-            myPageService.regRegister(updateMem);
-            memService.updateRegister(updateMem);
-            return 2;
-        // 둘 다 아닐 때
-        }else{
-            return 3;
+                return 1;
+                // 등록자
+            }else if(updateMem.getMemberRole().equals("register")){
+                System.out.println("등록자 : " + updateMem + "    파일 : " + upload.getOriginalFilename());
+                storageService.store(upload2);
+                updateMem.setRegisterLicence("/img/upload/"+upload2.getOriginalFilename());
+                myPageService.regRegister(updateMem);
+                memService.updateRegister(updateMem);
+                return 2;
+            }
         }
+
+        return 3;
     } // end of edit
 
     @PostMapping("/rest/checkResidence")
