@@ -49,4 +49,9 @@ public class OtherServiceController {
     public String QnAWrite() {
         return "/otherService/QnAWrite";
     }
+
+    @GetMapping("/graph")
+    public String graph() {
+        return "/otherService/graph";
+    }
 }
