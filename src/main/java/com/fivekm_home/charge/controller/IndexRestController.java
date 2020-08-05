@@ -1,9 +1,12 @@
 package com.fivekm_home.charge.controller;
 
 import com.fivekm_home.charge.config.auth.dto.SessionUser;
+import com.fivekm_home.charge.domain.OS.QBDelete;
+import com.fivekm_home.charge.domain.OS.QB_write;
 import com.fivekm_home.charge.domain.USER.*;
 import com.fivekm_home.charge.service.MailService;
 import com.fivekm_home.charge.service.MemService;
+import com.fivekm_home.charge.service.QBService;
 import com.fivekm_home.charge.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -20,12 +23,19 @@ public class IndexRestController {
     MailService mailService;
     @Autowired
     StorageService storageService;
+    @Autowired
+    QBService qbService;
 
     @PostMapping("/rest/checkId")
     public int checkId(LoginCheck loginCheck){
         System.out.println("아이디 중복체크: "+loginCheck.toString());
         return memService.checkId(loginCheck);
-    } 
+    }
+
+    @PostMapping("/rest/delete")
+    public void delete(QBDelete qbDelete) {
+        qbService.delete(qbDelete);
+    }
 
     @PostMapping("/rest/login")
     public Object login(Login login, HttpSession httpSession){
@@ -65,6 +75,12 @@ public class IndexRestController {
         join.setPicture("/img/upload/"+upload.getOriginalFilename());
         memService.join(join);
     }
+
+    @PostMapping("/rest/qbwrite")
+    public void qbwrite(QB_write qb_write,HttpSession httpSession, Model model){
+        qbService.qbwrite(qb_write);
+        System.out.println(qb_write.toString());
+            }
 
     @PostMapping("/service/mail/*")
     @ResponseBody

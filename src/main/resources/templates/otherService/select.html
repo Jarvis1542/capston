@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"/>
+<body>
+<header th:replace="layout/layout :: header"/>
+<!-- bradcam_area  -->
+<div class="bradcam_area bradcam_bg_3">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text">
+                    <h3>QnA Page</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="apply_form_area">
+    <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-9 apply_form">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="apply_info_text text-center">
+                                <div th:each="select : ${select}">
+                                    <input type="hidden" id="bno" th:value="${select.bno}">
+                                    제목 : <p th:text="${select.title}"/>
+                                    작성자 : <p th:text="${select.writer}"/>
+                                    내용 : <p th:text="${select.content}"/>
+                                    일반조회수 : <p th:text="${select.noCount}"/>
+                                    일반인조회수 : <p th:text="${select.noReco}"/>
+
+                                    <button id="reco">추천</button>
+                                    <button id="updateBtn">수정</button>
+                                    <button id="delete">삭제</button>
+                                    <button id="selectcancel">취소</button>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+</div>
+        </div>
+    </div>
+<footer th:replace="layout/layout :: footer"/>
+</body>
+<script th:replace="layout/layout :: script"/>
+</html>
