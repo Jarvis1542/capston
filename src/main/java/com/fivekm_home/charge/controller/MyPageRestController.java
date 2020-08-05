@@ -4,6 +4,7 @@ import com.fivekm_home.charge.domain.RES.Residence;
 import com.fivekm_home.charge.domain.USER.EditPassword;
 import com.fivekm_home.charge.domain.USER.MemberEdit;
 import com.fivekm_home.charge.domain.USER.UpdateMem;
+import com.fivekm_home.charge.domain.USER.UserHpBookmark;
 import com.fivekm_home.charge.service.MemService;
 import com.fivekm_home.charge.service.MyPageService;
 import com.fivekm_home.charge.service.StorageService;
@@ -100,4 +101,9 @@ public class MyPageRestController {
             myPageService.regResidence(residence);
         }
     }
+
+//    @PostMapping("/rest/userHpBookmark")
+//    public ArrayList<UserHpBookmark> userHpBookmark(@RequestParam String email){
+//        return myPageService.userHpBookmark(email);
+//    }
 } // end of MyPageRestController

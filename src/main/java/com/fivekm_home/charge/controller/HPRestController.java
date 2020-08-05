@@ -1,5 +1,6 @@
 package com.fivekm_home.charge.controller;
 
+import com.fivekm_home.charge.domain.HP.HP_bookmark;
 import com.fivekm_home.charge.domain.HP.HP_loadRes;
 import com.fivekm_home.charge.domain.HP.HP_reg;
 import com.fivekm_home.charge.domain.HP.HP_search;
@@ -47,5 +48,17 @@ public class HPRestController {
     public ArrayList<HP_search> hpSearchDataList(){
         System.out.println("return : " + hpService.hpSearchDataList());
         return hpService.hpSearchDataList();
+    }
+
+    // 주차장 즐겨찾기 추가
+    @PostMapping("/rest/hpBookmark")
+    public void addBookmark(HP_bookmark hp_bookmark) {
+        System.out.println("data : " + hp_bookmark.toString());
+        if(hp_bookmark.getImgSrc().equals("/img/bookmark.png")){
+            hpService.addBookmark(hp_bookmark);
+        }
+        if(hp_bookmark.getImgSrc().equals("/img/bookmark2.png")){
+            hpService.deleteBookmark(hp_bookmark);
+        }
     }
 }

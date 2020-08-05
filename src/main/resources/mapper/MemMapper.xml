@@ -18,11 +18,9 @@
     </insert>
 
     <insert id="kakaoJoin">
-        insert into member_view(mem_seq, created_date, modified_date, email, name, picture, role) values(
-            member_seq.nextval,
-            sysdate,
-            null,
+        insert into member_view(email, created_date, name, picture, role) values(
             #{email},
+            sysdate,
             #{name},
             #{picture},
             '일반'
@@ -44,6 +42,10 @@
         and password = #{password}
     </select>
 
+    <select id="kakaoLogin" resultType="com.fivekm_home.charge.domain.USER.Kakao">
+        select * from member_view
+        where email = #{email}
+    </select>
     <select id="searchId" resultType="com.fivekm_home.charge.domain.USER.SearchId">
         select email from member_view
         where name = #{name}

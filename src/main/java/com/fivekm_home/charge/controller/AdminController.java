@@ -69,6 +69,4 @@ public class AdminController {
     public String csRequest(Model model){
         return "/admin/csRequest";
     }
-
-
 }

@@ -29,8 +29,8 @@ public class MemService {
     }
 
     // 카카오 로그인 체크
-    public ArrayList<KakaoLogin> kakaoLoginCheck(KakaoLogin kakaoLogin) throws Exception{
-        return memMapper.kakaoLoginCheck(kakaoLogin);
+    public ArrayList<KakaoLogin> kakaoLoginCheck(String email) throws Exception{
+        return memMapper.kakaoLoginCheck(email);
     }
 
     //아이디찾기
@@ -53,6 +53,11 @@ public class MemService {
     // 로그인
     public Login login(Login login){
         return memMapper.login(login);
+    }
+
+    // 카카오 로그인
+    public Kakao kakaoLogin(String email){
+         return memMapper.kakaoLogin(email);
     }
 
     // 경비 회원으로 바꾸기

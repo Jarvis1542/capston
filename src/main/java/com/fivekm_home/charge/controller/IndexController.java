@@ -15,8 +15,7 @@ import javax.servlet.http.HttpSession;
 import static com.fivekm_home.charge.domain.USER.user.Role.일반;
 
 @Controller
-public class
-IndexController {
+public class IndexController {
     @Autowired
     MemService memService;
     @Autowired
@@ -78,7 +77,7 @@ IndexController {
 
     @GetMapping("/MS/kakaologin")
     public String kakaoLogina(@RequestParam("code") String code, RedirectAttributes ra,
-                              Kakao kakao, HttpSession httpSession, KakaoLogin kakaoLogin) throws Exception{
+                              Kakao kakao, HttpSession httpSession) throws Exception{
         JsonNode accessToken;
         org.codehaus.jackson.JsonNode jsonToken = KakaoAccessToken.getKakaoAccessToken(code);
         accessToken = jsonToken.get("access_token");
@@ -100,50 +99,46 @@ IndexController {
         email = kakao_account.path("email").asText();
         picture = properties.path("thumbnail_image").asText();
 
-        kakao.setName(name);
-        kakao.setEmail(email);
-        kakao.setPicture(picture);
-        kakao.setRole(일반);
-
-        kakaoLogin.setEmail(email);
-        String asdf = memService.kakaoLoginCheck(kakaoLogin).toString();
-
+        String asdf = memService.kakaoLoginCheck(email).toString();
+        System.out.println("asdf : " + asdf);
+        // 이미 회원가입 했을 경우
         if( asdf.indexOf("null")>0 ){
-            KakaoJoin kakaoJoin = new KakaoJoin();
-            kakaoJoin.setEmail(email+"_kakao");
-            kakaoJoin.setName(name);
-            kakaoJoin.setPicture(picture);
-
-
+            email = email+"_kakao";
+            System.out.println("email 값 : " +email);
+            System.out.println("email로 검색 : " +memService.kakaoLogin(email));
             KakaoLogin kakaoLogin1 = new KakaoLogin();
-            kakaoLogin1.setEmail(email);
-            kakaoLogin1.setName(name);
-            kakaoLogin1.setPicture(picture);
-            kakaoLogin1.setRole(일반);
+            kakaoLogin1.setRole(memService.kakaoLogin(email).getRole());
+            kakaoLogin1.setPicture(memService.kakaoLogin(email).getPicture());
+            kakaoLogin1.setName(memService.kakaoLogin(email).getName());
+            kakaoLogin1.setEmail(memService.kakaoLogin(email).getEmail());
+            kakaoLogin1.setPhone(memService.kakaoLogin(email).getPhone());
             SessionUser user = new SessionUser(kakaoLogin1);
             httpSession.setAttribute("user", user);
             httpSession.setAttribute("role", user.getRole());
-            System.out.println("롤 : " + user.getRole());
+            System.out.println("카카오 로그인");
             return "/index/index";
 
+         // 회원가입 해야하는 경우
         }else{
+            email = email+"_kakao";
             System.out.println("asdf.indexof() : " + asdf.indexOf("null"));
             KakaoJoin kakaoJoin = new KakaoJoin();
-            kakaoJoin.setEmail(email+"_kakao");
+            kakaoJoin.setEmail(email);
             kakaoJoin.setName(name);
             kakaoJoin.setPicture(picture);
 
             memService.kakaoJoin(kakaoJoin); // 카카오 계정으로 회원가입
-
+            System.out.println("카카오 계정 회원가입 후 : " + memService.kakaoLogin(email).toString());
             KakaoLogin kakaoLogin1 = new KakaoLogin();
-            kakaoLogin1.setEmail(email);
-            kakaoLogin1.setName(name);
-            kakaoLogin1.setPicture(picture);
-            kakaoLogin1.setRole(일반);
+            kakaoLogin1.setRole(memService.kakaoLogin(email).getRole());
+            kakaoLogin1.setPicture(memService.kakaoLogin(email).getPicture());
+            kakaoLogin1.setName(memService.kakaoLogin(email).getName());
+            kakaoLogin1.setEmail(memService.kakaoLogin(email).getEmail());
+            kakaoLogin1.setPhone(memService.kakaoLogin(email).getPhone());
             SessionUser user = new SessionUser(kakaoLogin1);
             httpSession.setAttribute("user", user);
             httpSession.setAttribute("role", user.getRole());
-            System.out.println("롤 : " + user.getRole());
+            System.out.println("카카오로 회원가입 후 로그인");
             return "/index/index";
         }
     }

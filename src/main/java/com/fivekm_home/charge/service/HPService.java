@@ -32,8 +32,8 @@ public class HPService {
     }
 
     // 주차장 예약
-    public HP_book hpBook(){
-        return hpMapper.hpBook();
+    public HP_book hpBook(String parkingName){
+        return hpMapper.hpBook(parkingName);
     }
 
     // 주차장 승인
@@ -44,5 +44,20 @@ public class HPService {
     // 지도에 마크를 찍을 데이터 불러오기
     public ArrayList<HP_search> hpSearchDataList(){
         return hpMapper.hpSearchDataList();
+    }
+
+    // 주차장 즐겨찾기 추가
+    public void addBookmark(HP_bookmark hp_bookmark){
+        hpMapper.addBookmark(hp_bookmark);
+    }
+
+    // 주차장 즐겨찾기 삭제
+    public void deleteBookmark(HP_bookmark hp_bookmark){
+        hpMapper.deleteBookmark(hp_bookmark);
+    }
+
+    // 주차장 예약 페이지에서 사용자가 즐겨찾기를 판단
+    public int checkBookmark(HP_chkBookmark hp_chkBookmark){
+        return hpMapper.checkBookmark(hp_chkBookmark);
     }
 }

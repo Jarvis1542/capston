@@ -46,4 +46,18 @@
             #{email}
         )
     </insert>
+
+    <select id="userHpBookmark" resultType="com.fivekm_home.charge.domain.USER.UserHpBookmark">
+        select parkingPic, parkingName, place, min30Fee, addmin10Fee, aptMap,
+        roadAddress, extraAddress, name, phone, manageTime, m.email
+        from member_view m, parking_view p, residence_view r
+        where m.email = r.email
+        and p.resName = r.resName
+        and m.email = #{email}
+        and parkingChk = (select parkingChk
+                            from parking_view
+                            where parkingChk = 'Y')
+        and parkingName = (select parkingName
+                            from parkingBookmark_view)
+    </select>
 </mapper>

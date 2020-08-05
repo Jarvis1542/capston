@@ -14,8 +14,8 @@ public class MemberEdit {
 
     public MemberEdit(SessionUser sessionUser){
         this.email = sessionUser.getEmail();
-        this.name = sessionUser.getEmail();
-        this.phone = sessionUser.getEmail();
+        this.name = sessionUser.getName();
+        this.picture = sessionUser.getPicture();
         this.role = sessionUser.getRole();
         this.phone = sessionUser.getPhone();
     }

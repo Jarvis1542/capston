@@ -1,9 +1,9 @@
-package com.fivekm_home.charge.domain.HP;
+package com.fivekm_home.charge.domain.USER;
 
 import lombok.Data;
 
 @Data
-public class HP_book {
+public class UserHpBookmark {
     private String parkingPic;
     private String parkingName;
     private String manageTime;
