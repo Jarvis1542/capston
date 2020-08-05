@@ -36,6 +36,7 @@ public class AdminController {
     // 해당 주차장 자세히 보기
     @GetMapping("/requestHappyParking/{parkingName}")
     public String hpRequest(@PathVariable String parkingName, Model model){
+        System.out.println("parkingName : " + parkingName);
         System.out.println("return : " + hpService.hpRequest(parkingName));
         HP_requestEtc hp_requestEtc = new HP_requestEtc();
         if(hpService.hpRequest(parkingName).getParkingType().substring(0,2).equals("기타")){

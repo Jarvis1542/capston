@@ -23,7 +23,8 @@ public class HPService {
 
     // 관리자에게 주차장 요청
     public HP_request hpRequest(String parkingName){
-        return hpMapper.hpRequest( parkingName);
+        System.out.println("서비스 쪽 parkingName : " + parkingName);
+        return hpMapper.hpRequest(parkingName);
     }
 
     // 주차장 요청 리스트

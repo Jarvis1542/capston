@@ -110,40 +110,6 @@
         </div>
     </div>
 </section>
-<!--<section class="contact-section section_padding">-->
-<!--    <div class="container">-->
-<!--        <div class="row">-->
-<!--            <div class="col-lg-12">-->
-<!--                <div class="section_title text-center mb-90">-->
-<!--                    <table class="table table-horizontal" table-border>-->
-<!--                        <thead class="thead-strong">-->
-<!--                        <tr>-->
-<!--                            <th>순번</th>-->
-<!--                            <th>주차장 이름</th>-->
-<!--                            <th>주소</th>-->
-<!--                            <th>운영 시간</th>-->
-<!--                            <th>기본요금(30분)</th>-->
-<!--                            <th>추가요금(10분)</th>-->
-<!--                            <th>예약</th>-->
-<!--                        </tr>-->
-<!--                        </thead>-->
-<!--                        <tbody id="tbody">-->
-<!--                        <tr th:each ="searchList, index : ${searchList}">-->
-<!--                            <td><span th:value="${index.count}" th:text="${index.count}"/></td>-->
-<!--                            <td><span id="parkingName" th:value="${searchList.parkingName}" th:text="${searchList.parkingName}"/></td>-->
-<!--                            <td><span id="roadAddress" th:value="${searchList.roadAddress}"th:text="${searchList.roadAddress}"/></td>-->
-<!--                            <td><span id="manageTime" th:value="${searchList.manageTime}"th:text="${searchList.manageTime}"/></td>-->
-<!--                            <td><span id="min30Fee" th:value="${searchList.min30Fee}"th:text="${searchList.min30Fee}"/></td>-->
-<!--                            <td><span id="addMin10Fee" th:value="${searchList.addMin10Fee}"th:text="${searchList.addMin10Fee}"/></td>-->
-<!--                            <td><button onclick="reserve(); false;" class="genric-btn primary circle">예약</button></td>-->
-<!--                        </tr>-->
-<!--                        </tbody>-->
-<!--                    </table>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</section>-->
 <footer th:replace="layout/layout :: footer"/>
 </body>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=31e2bf5613ce6e27d859ca41bb71d46e&libraries=services"></script>
@@ -241,16 +207,10 @@
         }); //ajax 끝
     function mapBook(parkingName){
         var parkingName = parkingName;
-        alert('takeTotal[] parkingName : ' + parkingName);
         var email = $('#email').val();
         window.location.href = '/happyParking/happyParkingBook/' + parkingName + '+' + email;
-
     }
 
-
-    // function reserve() {
-    //     window.location.href = "/happyParking/happyParkingBook/" + $('#parkingName').text();
-    // }
 </script>
 
 <script th:replace="layout/layout :: script"/>

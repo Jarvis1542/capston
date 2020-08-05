@@ -31,7 +31,7 @@
         and m.email = r.email
     </select>
 
-    <select id="hpRequest" parameterType="com.fivekm_home.charge.domain.HP.HP_request" resultType="com.fivekm_home.charge.domain.HP.HP_request">
+    <select id="hpRequest"  resultType="com.fivekm_home.charge.domain.HP.HP_request">
         select m.name, parkingName, parkingType, place, min30Fee, addMin10Fee, manageTime,
                 r.postcode, r.roadAddress, r.jibunAddress, r.detailAddress, r.extraAddress,
                 p.aptMap, p.parkingPic, r.lat, r.lng

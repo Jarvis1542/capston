@@ -19,6 +19,7 @@ $('#firstBookmark').on('click', function () {
             success : function () {
                 alert('즐겨찾기 추가 되었습니다!');
                 $('#bookmark').attr('src', src);
+                window.location.href = '/happyParking/' + data.parkingName + '+' + data.email;
             },
             error : function (error) {
                 alert(JSON.stringify(error));
