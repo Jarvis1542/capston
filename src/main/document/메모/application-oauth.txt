@@ -48,3 +48,18 @@ spring.security.oauth2.client.provider.kakao.authorization-uri=https://kauth.kak
 spring.security.oauth2.client.provider.kakao.token-uri=https://kauth.kakao.com/oauth/token
 spring.security.oauth2.client.provider.kakao.user-info-uri=https://kapi.kakao.com/v1/user/me
 spring.security.oauth2.client.provider.kakao.user-name-attribute=response
+
+#application-mail.properties
+
+# email
+mail.smtp.auth=true
+mail.smtp.starttls.required=true
+mail.smtp.starttls.enable=true
+mail.smtp.socketFactory.class=javax.net.ssl.SSLSocketFactory
+mail.smtp.socketFactory.fallback=false
+mail.smtp.port=465
+mail.smtp.socketFactory.port=465
+
+#admin 구글 아이디 계정 id,password
+AdminMail.id=capston1542@gmail.com
+AdminMail.password=Capston12!

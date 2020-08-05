@@ -1,13 +1,15 @@
+-- # 테이블 생성 쿼리(쿼리 순서대로 실행 권장) --------------------------------------------------------------
+
 create table member(
-  email varchar2(100),
-  created_date timestamp,
-  modified_date timestamp,
-  name varchar2(30),
-  password varchar2(100),
-  phone varchar2(20),
-  picture varchar2(1000),
-  role varchar2(10) not null,
-  primary key (email)
+    email varchar2(100),
+    created_date timestamp,
+    modified_date timestamp,
+    name varchar2(30),
+    password varchar2(100),
+    phone varchar2(20),
+    picture varchar2(1000),
+    role varchar2(10) not null,
+    primary key (email)
 );
 
 create table register(
@@ -93,7 +95,21 @@ create table CS
     chargeType    varchar2(50)  NULL
 );
 
-/* 뷰 생성 */
+/* QnA 게시판 테이블 작성 */
+create table q_board(
+        bno number not null,
+        title varchar2(100) not null,
+        content varchar2(1000) not null,
+        writer varchar2(50) not null,
+        regDate date,
+        noCount number,
+        noReco number,
+        mbo number,
+        constraint q_board_bno_pk primary key (bno)
+);
+
+-- # 뷰 생성 쿼리 --------------------------------------------------------------
+
 /* 멤버 */
 create view member_view
 as select * from member;
@@ -115,3 +131,13 @@ as select * from parkingBookmark;
 /* 충전소 */
 create view CS_view
 as select * from CS;
+/* QnA 게시판 뷰 작성*/
+create view q_board_view
+as select * from q_board;
+
+-- # 시퀀스 생성 쿼리 --------------------------------------------------------------
+
+/* QnA 게시판 시퀀스 작성*/
+CREATE SEQUENCE  q_board_seq
+    INCREMENT BY 1
+    START WITH 1;
