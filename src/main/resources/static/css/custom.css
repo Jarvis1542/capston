@@ -172,6 +172,20 @@
     border-radius: 8px;
 }
 
+.form_box_center {
+    margin-top:30px;
+    text-align:center;
+}
+.form_box_center div {
+    display:inline-block;
+}
+.form_box_center button {
+    border:0 none;
+    vertical-align:top;
+}
+
+
+
 /* -- //content -- */
 
 /* -- footer -- */

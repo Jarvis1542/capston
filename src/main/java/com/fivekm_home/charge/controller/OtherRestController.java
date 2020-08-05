@@ -1,7 +1,7 @@
 package com.fivekm_home.charge.controller;
 
 import com.fivekm_home.charge.domain.DATE.*;
-import com.fivekm_home.charge.domain.OTHER.MembersMonths;
+import com.fivekm_home.charge.domain.OTHER.MembersDate;
 import com.fivekm_home.charge.service.DateService;
 import com.fivekm_home.charge.service.OtherService;
 import oracle.ucp.proxy.annotation.Post;
@@ -20,14 +20,9 @@ public class OtherRestController {
     @Autowired
     DateService dateService;
 
-    @PostMapping("/rest/MembersYears")
-    public int membersYears(){
-        return otherService.membersYears();
-    }
-
-    @PostMapping("/rest/MembersMonths")
-    public ArrayList<MembersMonths> memebersMonths() {
-        return otherService.membersMonths();
+    @PostMapping("/rest/MembersDate")
+    public ArrayList<MembersDate> memebersMonths() {
+        return otherService.MembersDate();
     }
 
 

@@ -4,15 +4,24 @@
 
     <!-- 월의 1~31일자 조회 -->
     <select id="DateMonthXML" resultType="com.fivekm_home.charge.domain.DATE.DateMonthDAO">
+
         SELECT
+            -- 밑 서브 쿼리에서 "MONTHS" 에서 넣은 값을 토대로 LEVEL -1 를 반복적으로 더한다.
+            -- LEVEL 은 1부터인데 -1 이라서 0부터 시작한다.
             MONTHS + LEVEL -1 "DAYS"
         FROM (
+            -- 받아온 DATE_SEND 의 값 ex ) 20200101 을 TO_DATE 로 yyyymmdd 로 변형 한 다음
+            -- as "MONTHS" 에 넣는다.
             SELECT TO_DATE(#{DATE_SEND}, 'yyyymmdd') "MONTHS"
             FROM DUAL
         )
+        -- MONTHS 의 20200101에서 + LEVEL -1 을 반복함
+        -- 조건은 <![CDATA[<=]]> LAST_DAY(MONTHS) 1월의 마지막날 31일까지 반복 시킨다.
+        -- LEVEL 은 1부터인데 -1 이라서 0부터 시작한다.
         CONNECT BY MONTHS + LEVEL -1 <![CDATA[<=]]> LAST_DAY(MONTHS)
     </select>
 
+    <!--  해당 월의 주간 주차를 모두 구해준다. -->
     <select id="DateWeekXML" resultType="com.fivekm_home.charge.domain.DATE.DateWeekDAO">
         -- set_mon 은 dt의 최소값을 가져오고 월만 구한다.
         SELECT TO_CHAR(MIN(dt), 'mm') set_mon
@@ -55,9 +64,21 @@
 
     </select>
 
+    <!-- 특정한 주차의 한개의 주를 구해준다. -->
     <select id="DateOneWeekXML" resultType="com.fivekm_home.charge.domain.DATE.DateOneWeekDAO">
-        select to_char(#{DATE_SEND} - to_number(to_char(#{DATE_SEND}, 'd')),'yyyy-mm-dd') as ONE_WEEK
+        -- 마지막으로 timestamp 형식의 yyyy-mm-dd hh:mm:ss 로 변경하여 DateOneWeekDAO로 보내준다.
+        select to_char(
+                -- DATE_SEND 의 값 ex ) 문자열 20200105를 받아와 yyyymmdd to_date 형식으로 변경
+                to_date(#{DATE_SEND},'yyyymmdd') -
+                -- DATE_SEND 의 값 ex ) 문자열 20200105를 받아와 yyyymmdd to_date 형식으로 변경
+                -- to_char 에서 'd' 를 하여 해당하는 주간을 구한 다음
+                -- to_number로 숫자로 변경하여 위의 값과 마이너스 시킨 다음
+                -- + level 을 하여 반복한다.
+                to_number(to_char(to_date(#{DATE_SEND}, 'yyyymmdd'), 'd'))+level,
+                'yyyy-mm-dd hh:mm:ss') as ONE_WEEK
         from dual
+        -- level 1부터 <![CDATA[<=]]> 7 까지 돌리겠다는 의미
+        connect by level <![CDATA[<=]]> 7
     </select>
 
 </mapper>
