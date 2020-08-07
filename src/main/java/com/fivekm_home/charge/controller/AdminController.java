@@ -66,8 +66,11 @@ public class AdminController {
         return "/admin/hpRequest";
     }
 
-    @GetMapping("/chargingRequest")
-    public String csRequest(Model model){
+    /* CS - 충전소 영역 */
+
+    // CS 충전소 요청 목록
+    @GetMapping("/csRequestList")
+    public String csRequestList(Model model){
         return "/admin/csRequest";
     }
 }

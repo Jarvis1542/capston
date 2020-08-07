@@ -98,17 +98,15 @@ create table guard(
 );
 /* QnA 게시판 테이블 작성*/
 create table q_board(
-                        bno number not null,
-                        title varchar2(100) not null,
-                        content varchar2(1000) not null,
-                        writer varchar2(50) not null,
-                        regDate date,
-                        noCount number,
-                        noReco number,
-                        mbo number,
-                        constraint q_board_bno_pk primary key (bno)
-
-
+    bno number not null,
+    title varchar2(100) not null,
+    content varchar2(1000) not null,
+    writer varchar2(50) not null,
+    regDate date,
+    noCount number,
+    noReco number,
+    mbo number,
+    constraint q_board_bno_pk primary key (bno)
 );
 
 /* 시퀀스 생성 */
