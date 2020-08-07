@@ -1,8 +1,6 @@
 package com.fivekm_home.charge.controller;
 
-import com.fivekm_home.charge.domain.HP.HP_loadRes;
-import com.fivekm_home.charge.domain.HP.HP_reg;
-import com.fivekm_home.charge.domain.HP.HP_search;
+import com.fivekm_home.charge.domain.HP.*;
 import com.fivekm_home.charge.service.HPService;
 import com.fivekm_home.charge.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +45,31 @@ public class HPRestController {
     public ArrayList<HP_search> hpSearchDataList(){
         System.out.println("return : " + hpService.hpSearchDataList());
         return hpService.hpSearchDataList();
+    }
+
+    // 주차장 즐겨찾기 추가
+    @PostMapping("/rest/hpBookmark")
+    public void addBookmark(HP_bookmark hp_bookmark) {
+        System.out.println("data : " + hp_bookmark.toString());
+        if(hp_bookmark.getImgSrc().equals("/img/bookmark.png")){
+            hpService.addBookmark(hp_bookmark);
+        }
+        if(hp_bookmark.getImgSrc().equals("/img/bookmark2.png")){
+            hpService.deleteBookmark(hp_bookmark);
+        }
+    }
+
+    // 주차장 예약
+    @PostMapping("/rest/book")
+    public void hpBook(HP_book hp_book){
+        System.out.println("hp_book.toString : " + hp_book.toString());
+        hpService.hpBook(hp_book);
+    }
+
+    // 주차장 결제
+    @PostMapping("/rest/pay")
+    public void hpPay(HP_pay hp_pay){
+        System.out.println("HP_PAY " + hp_pay   );
+        hpService.hpPay(hp_pay);
     }
 }

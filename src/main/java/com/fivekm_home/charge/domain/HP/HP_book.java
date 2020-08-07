@@ -2,12 +2,14 @@ package com.fivekm_home.charge.domain.HP;
 
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class HP_book {
-    private String parkingPic;
     private String parkingName;
-    private String dayTime;
-    private String weeTime;
-    private String holTime;
-    private String place;
+    private String email;
+    private Date startDate;
+    private Date endDate;
+    private Date startUseTime;
+    private Date endUseTime;
 }

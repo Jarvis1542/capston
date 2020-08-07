@@ -1,0 +1,35 @@
+/* 최초 프로젝트 설치 후 정상 작동까지 셋팅하는 방법(DB구축 포함) */
+
+1. 기존에 서버가 실행되어있다면 Terminate(종료)해주세요.
+
+2. 기존에 생성된 유저가 있다면 테이블, 뷰, 시퀀스를 모두 삭제해주세요. (document\SQL\5KmHC_삭제 쿼리 실행)
+    유저가 없다면 유저를 생성합니다. (document\SQL\Oracle_USER.sql 생성부분 참조)
+
+3. application.properties : line 7~9
+    생성된 Oracle 유저 ID, Password, SID 값 셋팅
+
+4. document\메모\application-oauth.txt 모든 내용을
+    application.properties가 있는 위치에 application-oauth.properties 파일 생성 후 내용 그대로 작성
+
+5. application.properties : line 38
+    file.location= 경로값을 프로젝트의 static\img\upload\ 경로로 지정(절대경로 표기)
+    /resources/static/img/upload 디렉토리를 우클릭 - Find in Path 클릭시 scope 값에 경로를 받아올 수 있음.
+    경로 표시할때 반드시 \을 \\로 표시하여 작성, upload 마지막에 \\ 표기!, 디렉토리 이름에 띄워쓰기 비허용
+    ex : C:\\Users\\user\\IdeaProjects\\capston\\src\\main\\resources\\static\\img\\upload\\
+
+6. ChargeApplication.java : line 21~27 주석 해제
+    //    @Bean
+    //    CommandLineRunner init(StorageService storageService) {
+    //        return (args) -> {
+    //            storageService.deleteAll();
+    //            storageService.init();
+    //        };
+    //    }
+
+7. document\SQL\5KmHC_생성.sql 오픈 후
+    테이블, 뷰, 시퀀스 등 모든 쿼리 순차 실행
+
+8. 서버 실행
+
+9. ChargeApplication.java : line 21~27 다시 주석 처리(7번 내용 참고)
+

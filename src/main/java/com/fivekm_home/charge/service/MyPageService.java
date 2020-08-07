@@ -1,10 +1,7 @@
 package com.fivekm_home.charge.service;
 
 import com.fivekm_home.charge.domain.RES.Residence;
-import com.fivekm_home.charge.domain.USER.EditPassword;
-import com.fivekm_home.charge.domain.USER.MemberEdit;
-import com.fivekm_home.charge.domain.USER.MemberEdit2;
-import com.fivekm_home.charge.domain.USER.UpdateMem;
+import com.fivekm_home.charge.domain.USER.*;
 import com.fivekm_home.charge.mapper.MemMapper;
 import com.fivekm_home.charge.mapper.MyPageMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +44,10 @@ public class MyPageService {
     // 거주지 등록
     public void regResidence(Residence residence){
         myPageMapper.regResidence(residence);
+    }
+
+    // 회원이 즐겨찾기한 주차장 목록 불러오기
+    public ArrayList<UserHpBookmark> userHpBookmark(String email){
+        return myPageMapper.userHpBookmark(email);
     }
 }

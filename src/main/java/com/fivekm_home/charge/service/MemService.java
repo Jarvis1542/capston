@@ -29,8 +29,8 @@ public class MemService {
     }
 
     // 카카오 로그인 체크
-    public ArrayList<KakaoLogin> kakaoLoginCheck(KakaoLogin kakaoLogin) throws Exception{
-        return memMapper.kakaoLoginCheck(kakaoLogin);
+    public ArrayList<KakaoLogin> kakaoLoginCheck(String email) throws Exception{
+        return memMapper.kakaoLoginCheck(email);
     }
 
     //아이디찾기
@@ -55,6 +55,11 @@ public class MemService {
         return memMapper.login(login);
     }
 
+    // 카카오 로그인
+    public Kakao kakaoLogin(String email){
+         return memMapper.kakaoLogin(email);
+    }
+
     // 경비 회원으로 바꾸기
     public void updateGuard(UpdateMem updateMem){
         memMapper.updateGuard(updateMem);
@@ -63,5 +68,11 @@ public class MemService {
     // 등록자 회원으로 바꾸기
     public void updateRegister(UpdateMem updateMem){
         memMapper.updateRegister(updateMem);
+    }
+
+    // 일반 회원 정보 업데이트
+    public void updateNormal(UpdateMem updateMem){
+        System.out.println("UpdateMem Service : " + updateMem.toString());
+        memMapper.updateNormal(updateMem);
     }
 }

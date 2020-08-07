@@ -1,18 +1,18 @@
 package com.fivekm_home.charge.controller;
 
 import com.fivekm_home.charge.config.auth.dto.SessionUser;
-import com.fivekm_home.charge.domain.USER.EditPassword;
 import com.fivekm_home.charge.domain.USER.MemberEdit;
-import com.fivekm_home.charge.domain.USER.MemberEdit2;
+import com.fivekm_home.charge.domain.USER.UserSearchBookmark;
 import com.fivekm_home.charge.service.MyPageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/myPage")
@@ -24,14 +24,25 @@ public class MyPageController {
     public String memberEdit(Model model, HttpSession httpSession){
         SessionUser sessionUser = (SessionUser) httpSession.getAttribute("user");
         MemberEdit memberEdit = new MemberEdit(sessionUser);
+        System.out.println("memberEdit.toString() : " + memberEdit.toString());
+        System.out.println("memberEdit return : "+ myPageService.memberEdit(memberEdit));
         model.addAttribute("memberEdit", myPageService.memberEdit(memberEdit));
         return "/myPage/memberEdit";
     }
 
-    @GetMapping("/bookmark")
-    public String bookmark(){
+//    @GetMapping("/bookmark")
+//    public String bookmark(){
+//
+//        return "/myPage/hpBookmark";
+//    }
 
-        return "/myPage/bookmark";
+    // 회원이 즐겨찾기한 주차장 목록 불러오기
+    @GetMapping("/hpBookmark/{email}")
+    public String hpBookmark(@PathVariable String email, Model model){
+        System.out.println("email : " + email);
+        System.out.println("hpBookmark return : " + myPageService.userHpBookmark(email));
+        model.addAttribute("usersHp", myPageService.userHpBookmark(email));
+        return "/myPage/hpBookmark";
     }
 
     @GetMapping("/history")

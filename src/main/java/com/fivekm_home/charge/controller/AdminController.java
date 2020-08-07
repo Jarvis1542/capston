@@ -4,7 +4,6 @@ import com.fivekm_home.charge.domain.HP.HP_requestEtc;
 import com.fivekm_home.charge.service.HPService;
 import com.fivekm_home.charge.service.MemService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +36,7 @@ public class AdminController {
     // 해당 주차장 자세히 보기
     @GetMapping("/requestHappyParking/{parkingName}")
     public String hpRequest(@PathVariable String parkingName, Model model){
+        System.out.println("parkingName : " + parkingName);
         System.out.println("return : " + hpService.hpRequest(parkingName));
         HP_requestEtc hp_requestEtc = new HP_requestEtc();
         if(hpService.hpRequest(parkingName).getParkingType().substring(0,2).equals("기타")){
@@ -70,6 +70,4 @@ public class AdminController {
     public String csRequest(Model model){
         return "/admin/csRequest";
     }
-
-
 }

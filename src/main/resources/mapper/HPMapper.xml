@@ -4,6 +4,7 @@
     <select id="loadResidence" resultType="com.fivekm_home.charge.domain.HP.HP_loadRes">
         select resName, postcode, roadAddress, jibunAddress, extraAddress, detailAddress, email
         from residence_view
+        where email = #{email}
     </select>
 
     <insert id="hpReg">
@@ -30,7 +31,7 @@
         and m.email = r.email
     </select>
 
-    <select id="hpRequest" parameterType="com.fivekm_home.charge.domain.HP.HP_request" resultType="com.fivekm_home.charge.domain.HP.HP_request">
+    <select id="hpRequest"  resultType="com.fivekm_home.charge.domain.HP.HP_request">
         select m.name, parkingName, parkingType, place, min30Fee, addMin10Fee, manageTime,
                 r.postcode, r.roadAddress, r.jibunAddress, r.detailAddress, r.extraAddress,
                 p.aptMap, p.parkingPic, r.lat, r.lng
@@ -40,9 +41,13 @@
           and parkingName = #{parkingName}
     </select>
 
-    <select id="hpBook" resultType="com.fivekm_home.charge.domain.HP.HP_book">
-        select PARKINGPIC, PARKINGNAME, DAYTIME, WEETIME, HOLTIME, place
-        from PARKING
+    <select id="hpBookPage" resultType="com.fivekm_home.charge.domain.HP.HP_bookPage">
+        select parkingPic, parkingName, place, min30Fee, addmin10Fee, aptMap,
+                roadAddress, extraAddress, name, phone, manageTime, m.email
+        from member_view m, parking_view p, residence_view r
+        where m.email = r.email
+        and p.resName = r.resName
+        and parkingName = #{parkingName}
     </select>
 
     <update id="updateParkingChk">
@@ -53,9 +58,44 @@
     
     <select id="hpSearchDataList" resultType="com.fivekm_home.charge.domain.HP.HP_search">
         select parkingName, parkingType, min30Fee, addMin10Fee, roadAddress, extraAddress,
-        manageTime, place, parkingPic, lat, lng
+        manageTime, place, parkingPic, lat, lng, parkingChk
         from parking_view p, residence_view r
         where p.resName = r.resName
         and parkingChk = 'Y'
     </select>
+
+    <insert id="addBookmark">
+        insert into parkingBookmark_view values(
+            #{email},
+            #{parkingName}
+        )
+    </insert>
+
+    <delete id="deleteBookmark">
+        delete from parkingBookmark_view
+        where email = #{email}
+        and parkingName = #{parkingName}
+    </delete>
+
+    <select id="checkBookmark" resultType="int">
+        select count(*)
+        from parkingBookmark_view
+        where email = #{email}
+        and parkingName = #{parkingName}
+    </select>
+
+    <insert id="hpBook">
+        insert into parkingBook_view values (
+            concat(concat(to_char(sysdate,'YYYY/MM/DD'),#{parkingName}),#{email}), #{startDate},
+            #{endDate}, 'N', #{email}, #{parkingName}, sysdate
+        )
+    </insert>
+
+    <insert id="hpPay">
+        insert into parkingPay_view values (
+            concat(to_char(sysdate,'YYYY/MM/DD'),#{email}), 'card', #{userName}, #{price},
+            #{email}, #{parkingName}, #{phone}, concat(concat(to_char(sysdate,'YYYY/MM/DD'),#{parkingName}),#{email}),
+            sysdate
+        )
+    </insert>
 </mapper>

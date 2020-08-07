@@ -3,9 +3,10 @@ package com.fivekm_home.charge.mapper;
 import com.fivekm_home.charge.domain.RES.Residence;
 import com.fivekm_home.charge.domain.USER.EditPassword;
 import com.fivekm_home.charge.domain.USER.UpdateMem;
+import com.fivekm_home.charge.domain.USER.UserHpBookmark;
+import com.fivekm_home.charge.domain.USER.UserSearchBookmark;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public interface MyPageMapper {
     int updatePassword(EditPassword editPassword);
@@ -13,4 +14,5 @@ public interface MyPageMapper {
     void regRegister(UpdateMem updateMem);
     int checkResidence(String resName);
     void regResidence(Residence residence);
+    ArrayList<UserHpBookmark> userHpBookmark(String email); // 회원이 즐겨찾기한 주차장 목록 불러오기
 }

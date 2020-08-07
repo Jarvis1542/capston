@@ -146,10 +146,12 @@ $('#residence').on('click', function () {
         dataType : 'json',
         contentType : 'application/x-www-form-urlencoded; charset=UTF-8',
         success : function () {
-            alert('등록 완료 되었습니다!');
+            alert('거주지 등록 완료 되었습니다!');
+            window.location.href = '/';
         },
         error : function (error) {
-            alert(JSON.stringify(error));
+            alert('거주지 등록 완료 되었습니다.');
+            window.location.href = '/';
         }
     });
 });

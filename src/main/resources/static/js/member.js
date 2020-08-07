@@ -1,6 +1,26 @@
 'use strict';
     // 아이디 중복 체크
-    $('#checkId').click(function () {
+    $('#checkId').click(function (event) {
+        event.preventDefault();
+        var html = '';
+        if($('#email').val()=='' || $('#email').val()==null){
+            html += '<p style="font-size: 80%; ' +
+                'color: red; text-indent: 3em;">' +
+                '<strong>이메일을 입력해주세요.</strong></p>';
+            $('#errEmail').empty();
+            $('#errEmail').append(html);
+            $('#email').focus();
+            return;
+        }
+        if($('#email').val().indexOf('@')==-1){
+            html += '<p style="font-size: 80%; ' +
+                'color: red; text-indent: 3em;">' +
+                '<strong>올바른 이메일 형식이 아닙니다. 다시 확인해주세요.</strong></p>';
+            $('#errEmail').empty();
+            $('#errEmail').append(html);
+            $('#email').focus();
+            return;
+        }
         var data = {
             email : $('#email').val()
         };
@@ -20,13 +40,15 @@
                     'color: green; text-indent: 3em;">' +
                     '<strong>사용 가능한 이메일입니다.</strong></p>';
                 $('#errEmail').empty();
-                return $('#errEmail').append(html);
+                $('#errEmail').append(html);
+                return;
             }else{
                 html += '<p style="font-size: 80%; ' +
                     'color: red; text-indent: 3em;">' +
                     '<strong>이미 사용중인 아이디입니다.</strong></p>';
                 $('#errEmail').empty();
-                return $('#errEmail').append(html);
+                $('#errEmail').append(html);
+                return;
             }
 
         }
@@ -81,6 +103,7 @@
             $('#email').focus();
             $('#errEmail').empty();
             $('#errEmail').append(html);
+            return;
         }
         function errPassword() {
             var html = "";
@@ -89,6 +112,7 @@
             $('#password').focus();
             $('#errPassword').empty();
             $('#errPassword').append(html);
+            return;
         }
         function errName() {
             var html = "";
@@ -97,6 +121,7 @@
             $('#name').focus();
             $('#errName').empty();
             $('#errName').append(html);
+            return;
         }
         function errMemEditId() {
             var html = "";
@@ -105,6 +130,7 @@
             $('#errEmailAuth').focus();
             $('#errEmailAuth').empty();
             $('#errEmailAuth').append(html);
+            return;
         }
         function errPhone() {
             var html = "";
@@ -113,6 +139,7 @@
             $('#phone').focus();
             $('#errPhone').empty();
             $('#errPhone').append(html);
+            return;
         }
         function errEmailAuthBtn() {
             var html = "";
@@ -121,6 +148,7 @@
             $('#EmailAuthBtn').focus();
             $('#errEmailAuthBtn').empty();
             $('#errEmailAuthBtn').append(html);
+            return;
         }
         function valid(val) {
             if(val === null) return true;
@@ -166,6 +194,7 @@
             $('#Name').empty();
             $('#errName').empty();
             $('#errName').append(html);
+            return;
         }
         function errPhone() {
             var html = "";
@@ -174,6 +203,7 @@
             $('#phone').empty();
             $('#errPhone').empty();
             $('#errPhone').append(html);
+            return;
         }
 
         function valid(val) {
@@ -219,6 +249,7 @@
                 'text-indent: 3em;"><strong>이메일을 입력하세요.</strong></p>';
             $('#errEmail').empty();
             $('#errEmail').append(html);
+            return;
         }
 
         function errPhone() {
@@ -227,6 +258,7 @@
                 'text-indent: 3em;"><strong>폰번호 입력하세요.</strong></p>';
             $('#errPhone').empty();
             $('#errPhone').append(html);
+            return;
         }
 
         function valid(val) {
@@ -276,6 +308,7 @@
                 'text-indent: 3em;"><strong>아이디를 다시 확인해주세요.</strong></p>';
             $('#errEmail').empty();
             $('#errEmail').append(html);
+            return;
         }
         function errPassword() {
             var html = "";
@@ -283,17 +316,20 @@
                 'text-indent: 3em;"><strong>비밀번호를 다시 확인해주세요.</strong></p>';
             $('#errPassword').empty();
             $('#errPassword').append(html);
+            return;
         }
     });
 
 // 이메일 인증 전송 버튼
-    $('#emailAuth').click(function () {
+    $('#emailAuth').click(function (event) {
+        event.preventDefault();
         if(valid($('#memEditId').val())){
             var html = "";
             html += '<p style="font-size: 80%; color: red; ' +
                 'text-indent: 3em;"><strong>이메일을 입력해주세요.</strong></p>';
             $('#errEmailAuth').empty();
             $('#errEmailAuth').append(html);
+            return;
         }
 
         var userId =  $('#memEditId').val();
@@ -325,7 +361,8 @@
     });
 
 // 이메일 인증 버튼
-    $('#EmailAuthBtn').click(function () {
+    $('#EmailAuthBtn').click(function (event) {
+        event.preventDefault();
         var data = {
             emailAuthText : $('#emailAuthText').val()
         }
@@ -380,20 +417,16 @@
     // 회원 정보 수정 버튼
     $('#normalEdit').on('click', function (event) {
         event.preventDefault();
-
-        var formData = new FormData();
-        formData.append(`email`, $('#editEmail').val());
-        formData.append(`name`, $('#name').val());
-        formData.append(`phone`, $('#phone').val());
+        var data = {
+            name : $('#name').val(),
+            phone : $('#phone').val(),
+            email : $('#email').text()
+        }
         
         $.ajax({
             type : 'POST',
             url : '/rest/edit',
-            enctype: 'multipart/form-data',
-            processData: false,
-            contentType: false,
-            cache: false,
-            data : formData,
+            data : data,
             success : function (data) {
                 if(data==3){
                     alert('회원 정보 수정 완료했습니다.');

@@ -86,6 +86,11 @@
         </div>
     </div>
 </div>
+<div th:if="${session.user==null}"></div>
+<div th:unless="${session.user==null}">
+    <input type="hidden" id="email" th:value="${session.user.email}">
+</div>
+
 
 <section class="contact-section section_padding">
     <div class="container">
@@ -101,11 +106,6 @@
         <div class="row justify-content-center">
             <div class="map_wrap">
                 <div id="map" style="width:100%;height:600px;position:relative;overflow:hidden;"></div>
-                <!-- 지도타입 컨트롤 div 입니다 -->
-                <div class="custom_typecontrol radius_border">
-                    <span id="btnRoadmap" class="selected_btn" onclick="setMapType('roadmap')">지도</span>
-                    <span id="btnSkyview" class="btn" onclick="setMapType('skyview')">스카이뷰</span>
-                </div>
             </div>
         </div>
     </div>
@@ -114,10 +114,11 @@
 </body>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=31e2bf5613ce6e27d859ca41bb71d46e&libraries=services"></script>
 <script>
+    var takeTotal = [];
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
-            center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-            level: 12 // 지도의 확대 레벨
+            center: new kakao.maps.LatLng(36.66061813442013, 127.86026006535788), // 지도의 중심좌표
+            level: 13 // 지도의 확대 레벨
         };
 
     var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -139,7 +140,19 @@
             cache : false,
             success : function(data) {
                 for (let i = 0; i < data.length; i++) {
-                    console.log('데이타 : ' + data[i].parkingPic);
+                    takeTotal[i] = data[i];
+                    console.log('parkingName : ' + takeTotal[i].parkingName);
+                    console.log('parkingType : ' + takeTotal[i].parkingType);
+                    console.log('min30Fee : ' + takeTotal[i].min30Fee);
+                    console.log('addMin10Fee : ' + takeTotal[i].addMin10Fee);
+                    console.log('roadAddress : ' + takeTotal[i].roadAddress);
+                    console.log('extraAddress : ' + takeTotal[i].extraAddress);
+                    console.log('manageTime : ' + takeTotal[i].manageTime);
+                    console.log('place : ' + takeTotal[i].place);
+                    console.log('parkingChk : ' + takeTotal[i].parkingChk);
+                    console.log('parkingPic : ' + takeTotal[i].parkingPic);
+                    console.log('==========================================');
+
                     // 마커를 생성합니다
                     var marker = new kakao.maps.Marker({
                         map: map, // 마커를 표시할 지도
@@ -152,10 +165,10 @@
 
                     var $wrap = $('<div class="dataLayerOnMap" />');
                     var $title = $('<div class="dataTitle" id="parkingName"/>').text(data[i].parkingName);
-                    var $close = $('<div class="close" title="닫기" />').click(closeOverlay);
+                    var $close = $('<div class="close" title="닫기" style="width: 15px; height: 15px; font-size: 25px; margin-right: 15px">X</div>').click(closeOverlay);
                     var $body = $('<div class="body"/>');
                     var $img = $('<div class="dataPicture"><img src="'+data[i].parkingPic+'" style="height: 110px; width: 100px;"></div>');
-                    var $desc = $('<div class="dataInfo">' +
+                    var $desc = $('<div class="dataInfo" id="desc'+i+'">' +
                                     '<div class="dataAddress">'+data[i].roadAddress+'</div>' +
                                     '<ul>' +
                                         '<li><span class="dataSubTitle">운영 시간</span>' +
@@ -168,7 +181,8 @@
                                             '</span>'+
                                         '</li>'+
                                     '</ul>'+
-                        '<p><button style="width: 100px" id="book" class="genric-btn primary small">예약</button></p>'+
+                        '<p><button style="width: 100px" onClick="mapBook(\'' + data[i].parkingName + '\')" class="genric-btn primary small">예약</button></p>'+
+
                                  '</div>');
 
                     $wrap.append($title).append($body);
@@ -187,9 +201,15 @@
                         overlay.setMap(map);
                     });
                 } // for문 끝
+
             } // success 끝
 
         }); //ajax 끝
+    function mapBook(parkingName){
+        var parkingName = parkingName;
+        var email = $('#email').val();
+        window.location.href = '/happyParking/happyParkingBook/' + parkingName + '+' + email;
+    }
 
 </script>
 

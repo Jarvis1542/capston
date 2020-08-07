@@ -13,9 +13,11 @@ public interface MemMapper {
     SearchPassword searchPassword(SearchPassword searchPassword);
     SearchId searchId(SearchId searchId);
     Login login(Login login);
+    Kakao kakaoLogin(String email);
     MemberEdit2 MemberEdit(MemberEdit memberEdit);
     void kakaoJoin(KakaoJoin kakaoJoin);
-    ArrayList<KakaoLogin> kakaoLoginCheck(KakaoLogin kakaoLogin) throws Exception;
+    ArrayList<KakaoLogin> kakaoLoginCheck(String email) throws Exception;
     void updateGuard(UpdateMem updateMem);
     void updateRegister(UpdateMem updateMem);
+    void updateNormal(UpdateMem updateMem);
 }
