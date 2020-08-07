@@ -1,17 +1,18 @@
 /*  SQL CommandLine 기준
-    아래 sysdba 로그인의 1234는 최초 Oracle 설치 비밀번호를 의미함. */
+    아래 생성 쿼리의 최초 1234는 최초 Oracle 설치 비밀번호를 의미함.
+    생성할 ID를 cap, 비밀번호를 1234라 가정하고 작성한 쿼리 예시*/
 
 /* 유저 생성(sysdab 권한) */
-conn sys as sysdba; -- sysdba 로그인
+conn sys as sysdba;
 1234
-create user cap identified by 1234; -- cap = username / 1234 = password
+create user cap identified by 1234;
 grant connect, resource, dba to cap;
-commit; -- 커밋
-conn cap/1234;  -- 로그인 테스트
+commit;
+conn cap/1234;
 
 
 /* 유저 삭제 */
-conn sys as sysdba; -- sysdba 로그인
+conn sys as sysdba;
 1234
-drop user cap cascade; -- cap = username
-commit; -- 커밋
+drop user cap cascade;
+commit;
