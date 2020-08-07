@@ -157,27 +157,27 @@
                             <br><h4>충전 타입</h4>
                             <label class="interval">
                                 <p style="font-size: 18px">
-                                    <input type="checkbox" name="csType" value="dcChademo" class="d-inline-block">&ensp;DC 차데모
+                                    <input type="checkbox" name="chargeType" value="dcChademo" class="d-inline-block">&ensp;DC 차데모
                                 </p>
                             </label>
                             <label class="interval">
                                 <p style="font-size: 18px">
-                                    <input type="checkbox" name="csType" value="dcCombo" class="d-inline-block">&ensp;DC 콤보
+                                    <input type="checkbox" name="chargeType" value="dcCombo" class="d-inline-block">&ensp;DC 콤보
                                 </p>
                             </label>
                             <label class="interval">
                                 <p style="font-size: 18px">
-                                    <input type="checkbox" name="csType" value="super" class="d-inline-block">&ensp;슈퍼 차져
+                                    <input type="checkbox" name="chargeType" value="super" class="d-inline-block">&ensp;슈퍼 차져
                                 </p>
                             </label>
                             <label class="interval">
                                 <p style="font-size: 18px">
-                                    <input type="checkbox" name="csType" value="ac5pin" class="d-inline-block">&ensp;AC 3상 5핀
+                                    <input type="checkbox" name="chargeType" value="ac5pin" class="d-inline-block">&ensp;AC 3상 5핀
                                 </p>
                             </label>
                             <label class="interval">
                                 <p style="font-size: 18px">
-                                    <input type="checkbox" name="csType" value="ac7pin" class="d-inline-block">&ensp;AC 3상 7핀
+                                    <input type="checkbox" name="chargeType" value="ac7pin" class="d-inline-block">&ensp;AC 3상 7핀
                                 </p>
                             </label>
                         </div>
@@ -202,34 +202,39 @@
                             <br><h4>케이블</h4>
                             <label class="interval">
                                 <p style="font-size: 18px">
-                                    <input type="checkbox" name="csType" value="dcChademo" class="d-inline-block">&ensp;장착된 케이블
+                                    <input type="checkbox" name="cable" value="dcChademo" class="d-inline-block">&ensp;장착된 케이블
                                 </p>
                             </label>
                             <label class="interval">
                                 <p style="font-size: 18px">
-                                    <input type="checkbox" name="csType" value="dcCombo" class="d-inline-block">&ensp;차주 케이블
+                                    <input type="checkbox" name="cable" value="dcCombo" class="d-inline-block">&ensp;차주 케이블
                                 </p>
                             </label>
                             <label class="interval">
                                 <p style="font-size: 18px">
-                                    <input type="checkbox" name="csType" value="super" class="d-inline-block">&ensp;둘 다
+                                    <input type="checkbox" name="cable" value="super" class="d-inline-block">&ensp;둘 다
                                 </p>
                             </label>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="single_field col-md-12">
+                                <br>충전기 수&ensp;&ensp;&ensp;<input type="text" name="chargeAmount" class="single_field col-md-10" placeholder="ex)&ensp;100&ensp;&ensp;충전기 개수(Ex:50대)">
+                            </div>
                         </div>
 
                         <div class="col-md-12">
                             <div class="single_field col-md-12">
-                                <br>충전 속도&ensp;&ensp;&ensp;<input type="text" class="single_field col-md-10" placeholder="ex)&ensp;100&ensp;&ensp;충전 속도(단위:Kw)">
+                                <br>충전 속도&ensp;&ensp;&ensp;<input type="text" name="chargeSpeed" class="single_field col-md-10" placeholder="ex)&ensp;100&ensp;&ensp;충전 속도(단위:Kw)">
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="single_field col-md-12">
-                                기본 요금&ensp;&ensp;&ensp;<input type="text" class="single_field col-md-10" placeholder="ex)&ensp;30분당 500원">
+                                기본 요금&ensp;&ensp;&ensp;<input type="text" name="min30Fee" class="single_field col-md-10" placeholder="ex)&ensp;30분당 500원">
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="single_field col-md-12">
-                                추가 요금&ensp;&ensp;&ensp;<input type="text" class="single_field col-md-10" placeholder="ex)&ensp;10분당 500원">
+                                추가 요금&ensp;&ensp;&ensp;<input type="text" name="addMin10Fee" class="single_field col-md-10" placeholder="ex)&ensp;10분당 500원">
                             </div>
                         </div>
                         <div class="col-md-12">
