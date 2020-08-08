@@ -1,7 +1,6 @@
 // 맴버 그래프
 $(document).ready(function () {
 
-
     // 1~31일 저장 배열
     var date_days_arr = [];
 
