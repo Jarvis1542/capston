@@ -78,6 +78,7 @@ $(document).ready(function () {
 
     });
 
+    //
     $(".search_button").click(function() {
         year = $("#year").val();
         month = $("#month").val();
