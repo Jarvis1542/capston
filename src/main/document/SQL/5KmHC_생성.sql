@@ -1,4 +1,5 @@
----------------- 생성 ----------------
+-- # 시퀀스 생성 쿼리 --------------------------------------------------------------
+
 /* QnA 게시판 시퀀스 작성*/
 CREATE SEQUENCE  q_board_seq
     INCREMENT BY 1
@@ -178,4 +179,4 @@ as select * from parkingBook;
 
 create view parkingPay_view
 as select * from parkingPay;
--- # 시퀀스 생성 쿼리 --------------------------------------------------------------
+
