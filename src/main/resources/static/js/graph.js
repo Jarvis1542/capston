@@ -79,7 +79,6 @@ $(document).ready(function () {
 
     // 조회 버튼을 눌렀을 때
     $(".search_button").click(function() {
-        console.log($("#week").val());
         if($("#year").val() != '년' && $("#month").val() != '월' && $("#week").val() != '주간') {
             week = $("#week").val();
             Date_One_Week(date_all_week_arr, week);
@@ -168,6 +167,7 @@ $(document).ready(function () {
             type: 'post',
             url: '/rest/MembersDate'
         }).done(function(msg){
+            console.log("msg : ", msg);
             for(var i = 0; i < msg.length; i++) {
                 date_new4 = new Date(msg[i].created_DATE);
                 created_date_arr[i] = date_new4;
@@ -200,6 +200,7 @@ $(document).ready(function () {
         for(var i = 0; i < month_12_arr.length; i++) {
             month_arr[i] = 0 ;
         }
+        console.log("created_date_arr : ", created_date_arr);
         for(var i = 0; i < month_12_arr.length; i++) {
             for(var j = 0; j < created_date_arr.length; j++) {
                 // DB에서 가져온 값과 배열로 선언한 1~12 중에 일치하면 카운트 시킨다.
@@ -214,6 +215,7 @@ $(document).ready(function () {
 
     // 1~31일 비교 함수
     function Month2Statistics(month) {
+
         // 31개의 배열로 초기화
         for(var i = 0; i < date_days_arr.length; i++) {
             month2_arr[i] = 0;
