@@ -78,7 +78,6 @@ $(document).ready(function () {
 
     });
 
-    // 조회 버튼을 눌렀을 때
     $(".search_button").click(function() {
         year = $("#year").val();
         month = $("#month").val();
