@@ -1,6 +1,7 @@
 package com.fivekm_home.charge.controller;
 
 import com.fivekm_home.charge.domain.HP.HP_requestEtc;
+import com.fivekm_home.charge.service.CSService;
 import com.fivekm_home.charge.service.HPService;
 import com.fivekm_home.charge.service.MemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminController {
     @Autowired(required = false)
     private MemService memService;
-
     @Autowired
     private HPService hpService;
+    @Autowired
+    private CSService csService;
 
     // 사용자 목록
     @GetMapping("/memberList")
@@ -71,6 +73,7 @@ public class AdminController {
     // CS 충전소 요청 목록
     @GetMapping("/csRequestList")
     public String csRequestList(Model model){
-        return "/admin/csRequest";
+        model.addAttribute("CSrequestList", csService.csRequestList());
+        return "/admin/csRequestList";
     }
 }
