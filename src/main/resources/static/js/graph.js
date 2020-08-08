@@ -36,7 +36,7 @@ $(document).ready(function () {
         DATE_SEND: year + month + "01"
     };
 
-    // Date_One_Week 함수에서 사용하는 data2 객체
+    // Date_One_Week 함수에서 사용하는 data2
     var data2 = {
         DATE_SEND: ""
     };
