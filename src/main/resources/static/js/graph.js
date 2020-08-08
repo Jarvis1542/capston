@@ -44,6 +44,7 @@ $(document).ready(function () {
     // 년도, 월별, 주간 통계 배열
     // year_arr 은 2020, 2019, 218 이라 0이 3개다
     var year_arr = [ 0, 0, 0 ];
+    var year_check_arr = [2020, 2019, 2018];
     // month_arr 은 1~12 비교 카운트 배열
     var month_arr = [];
     // month2_arr 은 1~31 비교 카운트 배열
@@ -79,6 +80,8 @@ $(document).ready(function () {
 
     // 조회 버튼을 눌렀을 때
     $(".search_button").click(function() {
+        year = $("#year").val();
+        month = $("#month").val();
         if($("#year").val() != '년' && $("#month").val() != '월' && $("#week").val() != '주간') {
             week = $("#week").val();
             Date_One_Week(date_all_week_arr, week);
@@ -87,7 +90,7 @@ $(document).ready(function () {
             Month2Statistics(month);
         } else if($("#year").val() != '년'){
             // 1~12월 비교 함수
-            MonthStatistics();
+            MonthStatistics(year);
         } else {
             // 2020, 2019, 2018 비교 함수
             YearStatistics();
@@ -195,7 +198,7 @@ $(document).ready(function () {
     }
 
     // 1~12월 비교 함수
-    function MonthStatistics() {
+    function MonthStatistics(year) {
         // 1~12월이기 때문에 카운트 할 배열을 0으로 12개 초기화 시킨다.
         for(var i = 0; i < month_12_arr.length; i++) {
             month_arr[i] = 0 ;
@@ -204,7 +207,7 @@ $(document).ready(function () {
         for(var i = 0; i < month_12_arr.length; i++) {
             for(var j = 0; j < created_date_arr.length; j++) {
                 // DB에서 가져온 값과 배열로 선언한 1~12 중에 일치하면 카운트 시킨다.
-                if (month_12_arr[i] == created_date_arr[j].getMonth()+1) {
+                if (month_12_arr[i] == created_date_arr[j].getMonth()+1 && created_date_arr[j].getFullYear() == year) {
                     month_arr[i] += 1;
                 }
             }
