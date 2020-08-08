@@ -20,10 +20,8 @@
         )
     </insert>
     <select id="csRequestList" resultType="com.fivekm_home.charge.domain.CS.CS_requestList">
-        select parkingName as csName, parkingType as csType, place, p.resName, r.roadAddress, r.jibunAddress,
-               r.detailAddress, p.regDate, m.name, parkingChk as csChk
-        from parking_view p, residence_view r, member_view m
-        where p.resName = r.resName
-        and m.email = r.email
+        SELECT CHARGENAME, OPERATION, CHARGESPEED, CHARGEAMOUNT, POSTCODE, ROADADDRESS,
+        DETAILADDRESS, EXTRAADDRESS, MIN30FEE, ADDMIN10FEE, CABLE, CHARGETYPE
+        FROM CS
     </select>
 </mapper>

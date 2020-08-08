@@ -2,18 +2,18 @@ package com.fivekm_home.charge.domain.CS;
 
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
 public class CS_requestList {
-    private String csName;
-    private String csType;
-    private String place;
-    private String resName;
-    private String roadAddress;
-    private String jibunAddress;
-    private String detailAddress;
-    private Date regDate;
-    private String name;
-    private String csChk;
+    private String CHARGENAME;
+    private String OPERATION;
+    private String CHARGESPEED;
+    private String CHARGEAMOUNT;
+    private String POSTCODE;
+    private String ROADADDRESS;
+    private String DETAILADDRESS;
+    private String EXTRAADDRESS;
+    private String MIN30FEE;
+    private String ADDMIN10FEE;
+    private String CABLE;
+    private String CHARGETYPE;
 }

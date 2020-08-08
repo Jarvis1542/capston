@@ -34,31 +34,35 @@
                         <thead class="thead-strong">
                         <tr>
                             <th>순번</th>
-                            <th>주차장 이름</th>
-                            <th>주차장 타입</th>
-                            <th>주차장 칸 수</th>
-                            <th>아파트 이름</th>
-                            <th>도로명 주소</th>
-                            <th>지번 주소</th>
-                            <th>상세 주소</th>
-                            <th>등록일</th>
-                            <th>등록자</th>
-                            <th>관리자 승인</th>
+                            <th>충전소 명</th>
+                            <th>운영기관</th>
+                            <th>충전 속도</th>
+                            <th>충전기 수</th>
+                            <th>우편번호</th>
+                            <th>도로명주소</th>
+                            <th>상세주소</th>
+                            <th>참고항목</th>
+                            <th>기본요금</th>
+                            <th>추가요금</th>
+                            <th>케이블</th>
+                            <th>충전타입</th>
                         </tr>
                         </thead>
                         <tbody id="tbody">
                         <tr th:each ="CSrequestList, num : ${CSrequestList}">
                             <td><span th:text="${num.count}"></span></td>
-                            <td><a th:href="@{'/admin/requestHappyParking/' + ${CSrequestList.csName}}"><span th:text="${CSrequestList.csName}"/></a></td>
-                            <td><span th:text="${CSrequestList.csType}"/></td>
-                            <td><span th:text="${CSrequestList.place}"/></td>
-                            <td><span th:text="${CSrequestList.resName}"/></td>
-                            <td><span th:text="${CSrequestList.roadAddress}"/></td>
-                            <td><span th:text="${CSrequestList.jibunAddress}"/></td>
-                            <td><span th:text="${CSrequestList.detailAddress}"/></td>
-                            <td><span th:text="${#dates.format(CSrequestList.regDate, 'YYYY-MM-dd HH:mm:ss')}"/></td>
-                            <td><span th:text="${CSrequestList.name}"/></td>
-                            <td><span th:text="${CSrequestList.csChk}"/></td>
+                            <td><a th:href="@{'/admin/CSrequest/' + ${CSrequestList.CHARGENAME}}"><span th:text="${CSrequestList.CHARGENAME}"/></a></td>
+                            <td><span th:text="${CSrequestList.OPERATION}"/></td>
+                            <td><span th:text="${CSrequestList.CHARGESPEED}"/></td>
+                            <td><span th:text="${CSrequestList.CHARGEAMOUNT}"/></td>
+                            <td><span th:text="${CSrequestList.POSTCODE}"/></td>
+                            <td><span th:text="${CSrequestList.ROADADDRESS}"/></td>
+                            <td><span th:text="${CSrequestList.DETAILADDRESS}"/></td>
+                            <td><span th:text="${CSrequestList.EXTRAADDRESS}"/></td>
+                            <td><span th:text="${CSrequestList.MIN30FEE}"/></td>
+                            <td><span th:text="${CSrequestList.ADDMIN10FEE}"/></td>
+                            <td><span th:text="${CSrequestList.CABLE}"/></td>
+                            <td><span th:text="${CSrequestList.CHARGETYPE}"/></td>
 
                         </tr>
                         </tbody>

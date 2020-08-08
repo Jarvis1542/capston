@@ -1,6 +1,7 @@
 package com.fivekm_home.charge.service;
 
 import com.fivekm_home.charge.domain.CS.*;
+import com.fivekm_home.charge.domain.HP.HP_request;
 import com.fivekm_home.charge.mapper.CSMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ public class CSService {
         csMapper.csReg(cs_register);
     }
 
-    // 주차장 요청 리스트
+    // 충전소 요청 리스트
     public ArrayList<CS_requestList> csRequestList(){
         return csMapper.csRequestList();
     }
