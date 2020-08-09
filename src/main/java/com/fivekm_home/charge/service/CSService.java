@@ -21,4 +21,9 @@ public class CSService {
     public ArrayList<CS_requestList> csRequestList(){
         return csMapper.csRequestList();
     }
+
+    // 주차장 승인
+    public void updateChargingChk(String chargeName){
+        csMapper.updateChargingChk(chargeName);
+    }
 }

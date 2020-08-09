@@ -19,6 +19,7 @@ public class CS_Session implements Serializable { // 이 클래스는 인증된 
     private String ADDMIN10FEE;
     private String CABLE;
     private String CHARGETYPE;
+    private String CHARGINGCHK;
 
     // 소셜 로그인
     public CS_Session(ArrayList<CS_requestList> csRequestList){
@@ -34,5 +35,6 @@ public class CS_Session implements Serializable { // 이 클래스는 인증된 
         this.ADDMIN10FEE = csRequestList.get(0).getADDMIN10FEE();
         this.CABLE = csRequestList.get(0).getCABLE();
         this.CHARGETYPE = csRequestList.get(0).getCHARGETYPE();
+        this.CHARGINGCHK = csRequestList.get(0).getCHARGINGCHK();
     }
 }

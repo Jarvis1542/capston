@@ -16,4 +16,5 @@ public class CS_requestList {
     private String ADDMIN10FEE;     /* 추가 요금 */
     private String CABLE;           /* 케이블 */
     private String CHARGETYPE;      /* 충전 타입 */
+    private String CHARGINGCHK;
 }

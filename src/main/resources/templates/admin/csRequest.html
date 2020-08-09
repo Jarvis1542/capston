@@ -30,22 +30,22 @@
                     <div class="col-md-12">
                         <div th:unless="${session.csSessionRequest==null}" class="single_field col-md-12">
                             충전소 이름&ensp;<input type="text" class="single_field col-md-10"
-                                                name="csName" readonly id="csName"
+                                                name="CHARGENAME" readonly id="CHARGENAME"
                                                 th:value="${session.csSessionRequest[0].CHARGENAME}">
                         </div>
                         <div th:unless="${session.csSessionRequest==null}" class="single_field col-md-12">
                             운영 기관&ensp;<input type="text" class="single_field col-md-10"
-                                               name="operation" readonly id="operation"
+                                               name="OPERATION" readonly id="OPERATION"
                                                th:value="${session.csSessionRequest[0].OPERATION}">
                         </div>
                         <div th:unless="${session.csSessionRequest==null}" class="single_field col-md-12">
                             충전 속도&ensp;<input type="text" class="single_field col-md-10"
-                                               name="chargespeed" readonly id="chargespeed"
+                                               name="CHARGESPEED" readonly id="CHARGESPEED"
                                                th:value="${session.csSessionRequest[0].CHARGESPEED}">
                         </div>
                         <div th:unless="${session.csSessionRequest==null}" class="single_field col-md-12">
                             충전기 수&ensp;<input type="text" class="single_field col-md-10"
-                                               name="chargeAmount" readonly id="chargeAmount"
+                                               name="CHARGEAMOUNT" readonly id="CHARGEAMOUNT"
                                                th:value="${session.csSessionRequest[0].CHARGEAMOUNT}">
                         </div>
                         <div th:unless="${session.csSessionRequest==null}" class="single_field col-md-12">
@@ -87,6 +87,17 @@
                             충전 타입&ensp;<input type="text" class="single_field col-md-10"
                                                name="CHARGETYPE" readonly id="CHARGETYPE"
                                                th:value="${session.csSessionRequest[0].CHARGETYPE}">
+                        </div>
+                        <div th:unless="${session.csSessionRequest==null}" class="single_field col-md-12">
+                            체크&ensp;<input type="text" class="single_field col-md-10"
+                                              name="CHARGINGCHK" readonly id="CHARGINGCHK"
+                                              th:value="${session.csSessionRequest[0].CHARGINGCHK}">
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="submit_btn">
+                                <button id="requestbtn" class="genric-btn success radius">승인</button>
+                            </div>
                         </div>
 
 

@@ -101,7 +101,9 @@ create table CS
     image1 varchar2(300),               /* 충전소 사진 */
     image2 varchar2(300),               /* 아파트 내부단지 지도 */
     cable varchar2(50) NULL,            /* 케이블 */
-    chargeType varchar2(50) NULL        /* 충전 타입 */
+    chargeType varchar2(50) NULL,        /* 충전 타입 */
+    chargingChk  varchar2(1) default 'N',
+    constraint CS_chargingChk_ck check (chargingChk in('Y', 'N'))
 );
 
 /* QnA 게시판 테이블 작성 */
