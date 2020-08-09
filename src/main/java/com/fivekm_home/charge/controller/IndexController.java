@@ -53,6 +53,7 @@ IndexController {
         return "/index/login";
     }
 
+
     @GetMapping("/logout")
     public String logout(HttpSession httpSession){
         httpSession.invalidate();

@@ -2,6 +2,7 @@ package com.fivekm_home.charge.controller;
 
 import com.fivekm_home.charge.config.auth.dto.SessionUser;
 import com.fivekm_home.charge.domain.OS.QBDelete;
+import com.fivekm_home.charge.domain.OS.QBUpdate;
 import com.fivekm_home.charge.domain.OS.QB_write;
 import com.fivekm_home.charge.domain.USER.*;
 import com.fivekm_home.charge.service.MailService;
@@ -80,7 +81,14 @@ public class IndexRestController {
     public void qbwrite(QB_write qb_write,HttpSession httpSession, Model model){
         qbService.qbwrite(qb_write);
         System.out.println(qb_write.toString());
-            }
+    }
+
+    @PostMapping("/rest/update")
+    public void update(QBUpdate qbUpdate) {
+        System.out.println("Update restController : " + qbUpdate.toString());
+        qbService.update(qbUpdate);
+    }
+
 
     @PostMapping("/service/mail/*")
     @ResponseBody

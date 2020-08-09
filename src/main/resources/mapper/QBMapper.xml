@@ -36,4 +36,10 @@
         where bno = #{bno}
         </delete>
 
+    <update id="update">
+            update q_board_view
+            set title = #{title} , writer = #{writer} , content = #{content}
+            where bno = #{bno}
+        </update>
+
 </mapper>

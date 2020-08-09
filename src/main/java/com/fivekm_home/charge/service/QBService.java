@@ -28,6 +28,9 @@ public class QBService {
     //게시글삭제
     public void delete(QBDelete qbdelete) {qbMapper.delete(qbdelete);}
 
+    //게시글수정
+    public void update(QBUpdate qbUpdate) {qbMapper.update(qbUpdate);}
+
     //게시판 리스트 뽑는곳
     public ArrayList<QBoardList> qboardlist() { return qbMapper.qboardList();}
 }

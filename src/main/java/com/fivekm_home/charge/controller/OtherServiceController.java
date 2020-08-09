@@ -31,6 +31,10 @@ public class OtherServiceController {
         return "/otherService/QnA";
     }
 
+    @GetMapping("/update/{bno}")
+    public String update(@PathVariable long bno, Model model, HttpSession httpSession) {
+        return "/otherService/update";
+    }
 
     @GetMapping("/select/{bno}")
     public String select(@PathVariable long bno, Model model, HttpSession httpSession){

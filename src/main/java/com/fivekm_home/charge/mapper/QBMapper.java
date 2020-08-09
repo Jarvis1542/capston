@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public interface QBMapper {
     void qbwrite(QB_write qb_write);
+    void update(QBUpdate qbUpdate);
     QBSelect select(long bno);
     ArrayList<QBoardList> qboardList();
     void noCount(long bno);
