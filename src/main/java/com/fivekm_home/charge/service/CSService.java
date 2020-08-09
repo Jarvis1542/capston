@@ -22,7 +22,7 @@ public class CSService {
         return csMapper.csRequestList();
     }
 
-    // 주차장 승인
+    // 충전소 승인
     public void updateChargingChk(String chargeName){
         csMapper.updateChargingChk(chargeName);
     }

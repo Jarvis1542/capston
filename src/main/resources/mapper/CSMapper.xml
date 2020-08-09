@@ -27,7 +27,7 @@
     </select>
 
     <update id="updateChargingChk">
-        update charging_view
+        update cs_view
         set chargingChk = 'Y'
         where chargeName = #{chargeName}
     </update>

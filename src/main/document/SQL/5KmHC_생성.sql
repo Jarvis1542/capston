@@ -103,6 +103,7 @@ create table CS
     cable varchar2(50) NULL,            /* 케이블 */
     chargeType varchar2(50) NULL,        /* 충전 타입 */
     chargingChk  varchar2(1) default 'N',
+    constraint CS_chargeName_pk primary key (chargeName),
     constraint CS_chargingChk_ck check (chargingChk in('Y', 'N'))
 );
 
