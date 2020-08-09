@@ -1,8 +1,6 @@
 package com.fivekm_home.charge.controller;
 
-import com.fivekm_home.charge.config.auth.dto.SessionUser;
-import com.fivekm_home.charge.domain.CS.CS_Session;
-import com.fivekm_home.charge.domain.CS.CS_requestList;
+
 import com.fivekm_home.charge.domain.HP.HP_requestEtc;
 import com.fivekm_home.charge.service.CSService;
 import com.fivekm_home.charge.service.HPService;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/admin/*")
@@ -42,15 +39,17 @@ public class AdminController {
         return "/admin/hpRequestList";
     }
 
-    /* CS - 충전소 영역 */
+    /* CS - 충전소 영역 ---------------------------------------------- */
 
     // CS 충전소 요청 목록
     @GetMapping("/csRequestList")
     public String csRequestList(Model model, HttpServletRequest request){
-
         model.addAttribute("CSrequestList", csService.csRequestList());
         return "/admin/csRequestList";
     }
+
+    /* HP - 주차장 영역 ---------------------------------------------- */
+
     // 해당 주차장 자세히 보기
     @GetMapping("/CSrequest/{csName}")
     public String hpRequest(HttpServletRequest request){

@@ -88,20 +88,20 @@ create table parkingBookmark(
 
 create table CS
 (
-    chargeName varchar2(50) NULL,
-    operation varchar2(100) NULL,
-    chargeSpeed varchar2(50) NULL,
-    chargeAmount varchar2(50) NULL,
-    postcode varchar2(100) NULL,
-    roadAddress varchar2(100) NULL,
-    detailAddress varchar2(100) NULL,
-    extraAddress varchar2(100) NULL,
-    min30Fee varchar2(100) NULL,
-    addMin10Fee varchar2(100) NULL,
-    image1 varchar2(300),
-    image2 varchar2(300),
-    cable varchar2(50) NULL,
-    chargeType varchar2(50) NULL
+    chargeName varchar2(50) NULL,       /* 충전소 이름 */
+    operation varchar2(100) NULL,       /* 운영 기관 */
+    chargeSpeed varchar2(50) NULL,      /* 충전 속도 */
+    chargeAmount varchar2(50) NULL,     /* 충전기 수 */
+    postcode varchar2(100) NULL,        /* 우편 번호 */
+    roadAddress varchar2(100) NULL,     /* 도로명 주소 */
+    detailAddress varchar2(100) NULL,   /* 상세 주소 */
+    extraAddress varchar2(100) NULL,    /* 도로명 주소2 */
+    min30Fee varchar2(100) NULL,        /* 기본 요금 */
+    addMin10Fee varchar2(100) NULL,     /* 추가 요금 */
+    image1 varchar2(300),               /* 충전소 사진 */
+    image2 varchar2(300),               /* 아파트 내부단지 지도 */
+    cable varchar2(50) NULL,            /* 케이블 */
+    chargeType varchar2(50) NULL        /* 충전 타입 */
 );
 
 /* QnA 게시판 테이블 작성 */
