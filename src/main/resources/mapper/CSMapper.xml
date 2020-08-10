@@ -25,6 +25,11 @@
         DETAILADDRESS, EXTRAADDRESS, MIN30FEE, ADDMIN10FEE, CABLE, CHARGETYPE, CHARGINGCHK
         FROM CS
     </select>
+    <select id="csRequestPick" resultType="com.fivekm_home.charge.domain.CS.CS_requestPick">
+        SELECT CHARGENAME, OPERATION, CHARGESPEED, CHARGEAMOUNT, POSTCODE, ROADADDRESS,
+        DETAILADDRESS, EXTRAADDRESS, MIN30FEE, ADDMIN10FEE, CABLE, CHARGETYPE, CHARGINGCHK
+        FROM CS WHERE CHARGENAME = #{csName}
+    </select>
 
     <update id="updateChargingChk">
         update cs_view

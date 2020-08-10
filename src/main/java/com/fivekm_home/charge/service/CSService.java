@@ -22,6 +22,10 @@ public class CSService {
         return csMapper.csRequestList();
     }
 
+    public ArrayList<CS_requestPick> csRequestPick(String csName) {
+        return csMapper.csRequestPick(csName);
+    }
+
     // 충전소 승인
     public void updateChargingChk(String chargeName){
         csMapper.updateChargingChk(chargeName);

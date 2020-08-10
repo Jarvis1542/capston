@@ -48,15 +48,16 @@ public class AdminController {
         return "/admin/csRequestList";
     }
 
-    /* HP - 주차장 영역 ---------------------------------------------- */
-
-    // 해당 주차장 자세히 보기
+    // 해당 충전소 자세히 보기
     @GetMapping("/CSrequest/{csName}")
-    public String hpRequest(HttpServletRequest request){
+    public String hpRequest(HttpServletRequest request, @PathVariable String csName){
         HttpSession session = request.getSession();
-        session.setAttribute("csSessionRequest", csService.csRequestList());
+        session.setAttribute("csSessionRequest", csService.csRequestPick(csName));
         return "/admin/csRequest";
     }
+
+    /* HP - 주차장 영역 ---------------------------------------------- */
+
     // 해당 주차장 자세히 보기
     @GetMapping("/requestHappyParking/{parkingName}")
     public String hpRequest(@PathVariable String parkingName, Model model){
