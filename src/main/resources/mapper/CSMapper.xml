@@ -2,32 +2,29 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fivekm_home.charge.mapper.CSMapper">
     <insert id="csReg">
-        insert into CS(chargeName, operation, chargeSpeed, chargeAmount, postcode, roadAddress, detailAddress, extraAddress, min30Fee, addMin10Fee, image1 ,image2, cable, chargeType, CHARGINGCHK) values(
-        #{chargeName,jdbcType=VARCHAR},
-        #{operation,jdbcType=VARCHAR},
-        #{chargeSpeed,jdbcType=VARCHAR},
-        #{chargeAmount,jdbcType=VARCHAR},
-        #{postcode,jdbcType=VARCHAR},
-        #{roadAddress,jdbcType=VARCHAR},
-        #{detailAddress,jdbcType=VARCHAR},
-        #{extraAddress,jdbcType=VARCHAR},
-        #{min30Fee,jdbcType=VARCHAR},
-        #{addMin10Fee,jdbcType=VARCHAR},
-        #{image1,jdbcType=VARCHAR},
-        #{image2,jdbcType=VARCHAR},
-        #{cable,jdbcType=VARCHAR},
-        #{chargeType,jdbcType=VARCHAR},
-        'N'
+        insert into CS values(
+        #{chargeName},
+        #{operation},
+        #{chargeSpeed},
+        #{chargeAmount},
+        #{min30Fee},
+        #{addMin10Fee},
+        #{manageTime},
+        #{chargePic},
+        #{aptMap},
+        #{cable},
+        #{chargeType},
+        sysdate,
+        'N',
+        #{resName}
         )
     </insert>
     <select id="csRequestList" resultType="com.fivekm_home.charge.domain.CS.CS_requestList">
-        SELECT CHARGENAME, OPERATION, CHARGESPEED, CHARGEAMOUNT, POSTCODE, ROADADDRESS,
-        DETAILADDRESS, EXTRAADDRESS, MIN30FEE, ADDMIN10FEE, CABLE, CHARGETYPE, CHARGINGCHK
+        SELECT CHARGENAME, OPERATION, CHARGESPEED, CHARGEAMOUNT, MIN30FEE, ADDMIN10FEE, CABLE, CHARGETYPE, CHARGINGCHK
         FROM CS
     </select>
     <select id="csRequestPick" resultType="com.fivekm_home.charge.domain.CS.CS_requestPick">
-        SELECT CHARGENAME, OPERATION, CHARGESPEED, CHARGEAMOUNT, POSTCODE, ROADADDRESS,
-        DETAILADDRESS, EXTRAADDRESS, MIN30FEE, ADDMIN10FEE, CABLE, CHARGETYPE, CHARGINGCHK
+        SELECT CHARGENAME, OPERATION, CHARGESPEED, CHARGEAMOUNT,MIN30FEE, ADDMIN10FEE, CABLE, CHARGETYPE, CHARGINGCHK
         FROM CS WHERE CHARGENAME = #{csName}
     </select>
 

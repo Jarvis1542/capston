@@ -13,6 +13,7 @@ public class CSService {
     @Autowired(required = false)
     private CSMapper csMapper;
 
+    //충전소 등록
     public void csReg(CS_register cs_register) {
         csMapper.csReg(cs_register);
     }

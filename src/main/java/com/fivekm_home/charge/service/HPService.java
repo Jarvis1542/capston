@@ -16,6 +16,7 @@ public class HPService {
     public ArrayList<HP_loadRes> loadResidence(String email){
         return hpMapper.loadResidence(email);
     }
+
     // 주차장 등록
     public void hpReg(HP_reg hp_reg){
         hpMapper.hpReg(hp_reg);
