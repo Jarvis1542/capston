@@ -188,7 +188,7 @@ $(document).ready(function () {
     });
 
 // 주차장 요청 승인하여 check를 n -> y 로 바꿈
-    $('#request').on('click', function () {
+    $('#hpRequestBtn').on('click', function () {
         let data = {
             parkingName : $('#parkingName'). val()
         }
