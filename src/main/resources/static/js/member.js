@@ -159,6 +159,8 @@
         }
     });
 
+
+
 //아이디 찾기
     $('#searchId').click(function () {
         if(valid($('#name').val())){
@@ -268,6 +270,18 @@
 
             return false;
         }
+    });
+
+    // 로그인 엔터
+    $("#login_frm input").keypress(function( event ) {
+        if ( event.which == 13 ) {
+            event.preventDefault();
+            if($("#login_frm input").eq(0).val() == '' && $("#login_frm input").eq(1).val() == '') {
+                return false;
+            }
+            $("#login").first().trigger("click");
+        }
+
     });
 
 // 로그인
