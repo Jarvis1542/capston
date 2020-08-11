@@ -1,437 +1,440 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-    <head th:fragment="head">
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>5Km HC</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="shortcut icon" type="image/x-icon" th:href="@{img/favicon.png}">
-        <!-- Place favicon.ico in the root directory -->
+<head th:fragment="head">
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>5Km HC</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script th:async src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <!-- <link rel="manifest" href="site.webmanifest"> -->
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{img/favicon.png}">
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-        <!-- JS는 푸터 script 영역에 선언해주세요! -->
-        <!-- CSS only -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
-        <!-- select 태그 부트스트랩 -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
-        <!-- CSS here -->
-        <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap-4.5.0.min.css}">
-        <link rel="stylesheet" th:href="@{/css/bootstrap/owl.carousel.min.css}">
-        <link rel="stylesheet" th:href="@{/css/bootstrap/magnific-popup.css}">
-        <link rel="stylesheet" th:href="@{/css/bootstrap/font-awesome.min.css}">
-        <link rel="stylesheet" th:href="@{/css/bootstrap/themify-icons.css}">
-        <link rel="stylesheet" th:href="@{/css/bootstrap/nice-select.css}">
-        <link rel="stylesheet" th:href="@{/css/bootstrap/flaticon.css}">
-        <link rel="stylesheet" th:href="@{/css/bootstrap/gijgo.css}">
-        <link rel="stylesheet" th:href="@{/css/bootstrap/animate.min.css}">
-        <link rel="stylesheet" th:href="@{/css/bootstrap/slick.css}">
-        <link rel="stylesheet" th:href="@{/css/bootstrap/slicknav.css}">
-        <link rel="stylesheet" th:href="@{/css/bootstrap/style.css}">
+    <!-- select 태그 부트스트랩 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    <!-- CSS here -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap-4.5.0.min.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap/magnific-popup.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap/themify-icons.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap/nice-select.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap/flaticon.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap/gijgo.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap/animate.min.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap/slick.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap/slicknav.css}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap/style.css}">
 
-        <!-- 우리가 추가한 custom CSS -->
-        <link rel="stylesheet" th:href="@{/css/kakaomap.css}">  <!-- 카카오 지도 API CSS -->
-        <link rel="stylesheet" th:href="@{/css/custom.css}">  <!-- 반응형 및 기타 CSS -->
-        <link rel="stylesheet" th:href="@{/css/background.css}">  <!-- 배경 이미지 링크 CSS -->
-        <!-- <link rel="stylesheet" href="css/responsive.css"> -->
-    </head>
-    <body>
+    <!-- 우리가 추가한 CSS -->
+    <link rel="stylesheet" th:href="@{/css/kakaomap.css}">  <!-- 카카오 지도 API CSS -->
+    <link rel="stylesheet" th:href="@{/css/custom.css}">  <!-- 반응형 및 기타 CSS -->
+    <link rel="stylesheet" th:href="@{/css/background.css}">  <!-- 배경 이미지 링크 CSS -->
+    <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+</head>
+<body>
 
-        <!--[if lte IE 9]>
-        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-        <![endif]-->
+<!--[if lte IE 9]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+<![endif]-->
 
-            <!-- header-start -->
-        <header th:fragment="header">
-            <!-- 챗봇 Ai -->
-            <script th:async type="application/javascript">
-                window.lattePluginSetting = {
-                    "master_uid": "a84d7323f1ea44d4923629e0eb846c4e",
-                    "chatbot_uid": "7bc08bd095a0416fb78ff0552b8287f2",
-                    "origin_uid": "7bc08bd095a0416fb78ff0552b8287f2"
-                };
-                function a() {
-                    if (window.LatteAI) {
-                        return (window.console.error || window.console.log);
-                    }
-                    var LatteAI = function() {
-                        LatteAI.c(arguments);
-                    };
-                    LatteAI.q = [];
-                    LatteAI.c = function(args) {
-                        LatteAI.q.push(args);
-                    };
-                    window.LatteAI = LatteAI;
+<!-- header-start -->
+<header th:fragment="header">
+    <!-- 챗봇 Ai -->
+    <script th:async type="application/javascript">
+        window.lattePluginSetting = {
+            "master_uid": "a84d7323f1ea44d4923629e0eb846c4e",
+            "chatbot_uid": "7bc08bd095a0416fb78ff0552b8287f2",
+            "origin_uid": "7bc08bd095a0416fb78ff0552b8287f2"
+        };
+        function a() {
+            if (window.LatteAI) {
+                return (window.console.error || window.console.log);
+            }
+            var LatteAI = function() {
+                LatteAI.c(arguments);
+            };
+            LatteAI.q = [];
+            LatteAI.c = function(args) {
+                LatteAI.q.push(args);
+            };
+            window.LatteAI = LatteAI;
 
-                    var loadScript = function() {
-                        if (window.latteInitialized) {
-                            return;
-                        }
-                        window.latteInitialized = true;
-                        var scriptTag = document.createElement("script");
-                        scriptTag.type = "text/javascript";
-                        scriptTag.async = true;
-                        scriptTag.src = "https://widget.latte.ai/main.js";
-                        scriptTag.charset = "UTF-8";
-                        var firstScriptTag = document.getElementsByTagName('script')[0];
-                        firstScriptTag.parentNode.insertBefore(scriptTag, firstScriptTag);
-                    }
-                    if (document.readyState === 'complete') {
-                        loadScript();
-                    } else if (window.attachEvent) {
-                        window.attachEvent('onload', loadScript);
-                    } else {
-                        window.addEventListener('DOMContentLoaded', loadScript, false);
-                        window.addEventListener('load', loadScript, false);
-                    }
+            var loadScript = function() {
+                if (window.latteInitialized) {
+                    return;
                 }
-                a();
-            </script>
-            <div class="header-area">
-                <div id="sticky-header" class="main-header-area">
-                    <div class="container-fluid">
-                        <div class="header_bottom_border">
-                            <div class="row align-items-center">
-                                <div class="col-lg-2">
-                                    <div class="logo">
-                                        <a th:href="@{/}">
-                                            <img src="/img/logo.png" alt="">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-xl-8 col-lg-12">
-                                    <div class="main-menu  d-none d-lg-block">
-                                        <nav>
-                                            <ul id="navigation">
-                                                <!-- 메뉴 : SCS -->
-                                                <li><a href="#" style="color: white; font-size: 19px;">SCS</a>
-                                                    <ul class="submenu">
-                                                        <div th:if="${session.user==null}">
-                                                            <li><a th:href="@{/chargingStation/chargingSearch}">충전소 찾기</a></li>
-                                                            <li><a th:href="@{/chargingStation/chargingHistory}">이용 내역</a></li>
-                                                        </div>
-                                                        <div th:unless="${session.user==null}">
-                                                            <div th:if="${session.user.role.getTitle()=='관리자'}">
-                                                                <li><a th:href="@{/admin/csRequestList}">충전소 요청 목록</a></li>
-                                                                <li><a th:href="@{/chargingStation/chargingRegister}">충전소 등록</a></li>
-                                                                <li><a th:href="@{#}">충전소 매출 현황</a></li>
-                                                                <li><a th:href="@{/chargingStation/chargingSearch}">충전소 찾기</a></li>
-                                                                <li><a th:href="@{/chargingStation/chargingHistory}">이용 내역</a></li>
-                                                            </div>
-                                                            <div th:if="${session.user.role.getTitle()=='등록자'}">
-                                                                <li><a th:href="@{/chargingStation/chargingRegister}">충전소 등록</a></li>
-                                                                <li><a th:href="@{/chargingStation/chargingSearch}">충전소 찾기</a></li>
-                                                                <li><a th:href="@{/chargingStation/chargingHistory}">이용 내역</a></li>
-                                                            </div>
-                                                            <div th:if="${session.user.role.getTitle()=='경비'}">
-                                                                <li><a th:href="@{#}">충전소 관리</a></li>
-                                                                <li><a th:href="@{/chargingStation/chargingSearch}">충전소 찾기</a></li>
-                                                                <li><a th:href="@{/chargingStation/chargingHistory}">이용 내역</a></li>
-                                                            </div>
-                                                            <div th:if="${session.user.role.getTitle()=='일반'}">
-                                                                <li><a th:href="@{/chargingStation/chargingSearch}">충전소 찾기</a></li>
-                                                                <li><a th:href="@{/chargingStation/chargingHistory}">이용 내역</a></li>
-                                                            </div>
-                                                        </div>
-                                                    </ul>
-                                                </li>
-
-                                                <!-- 메뉴 : 해피 파킹 -->
-                                                <li><a href="#" style="color: white; font-size: 19px;">Happy Parking</a>
-                                                    <ul class="submenu">
-                                                        <div th:if="${session.user==null}">
-                                                            <li><a th:href="@{/happyParking/happyParkingSearch}">주차장 찾기</a></li>
-                                                            <li><a th:href="@{/happyParking/happyParkingHistory}">이용 내역</a></li>
-                                                        </div>
-                                                        <div th:unless="${session.user==null}">
-                                                            <div th:if="${session.user.role.getTitle()=='관리자'}">
-                                                                <li><a th:href="@{/admin/happyParkingRequestList}">주차장 요청 목록</a></li>
-                                                                <li><a th:href="@{/happyParking/happyParkingRegister}">주차장 등록</a></li>
-                                                                <li><a th:href="@{#}">주차장 매출 현황</a></li>
-                                                                <li><a th:href="@{/happyParking/happyParkingSearch}">주차장 찾기</a></li>
-                                                                <li><a th:href="@{/happyParking/happyParkingHistory}">주차장 이용 내역</a></li>
-                                                            </div>
-                                                            <div th:if="${session.user.role.getTitle()=='등록자'}">
-                                                                <li><a th:href="@{/happyParking/happyParkingRegister}">주차장 등록</a></li>
-                                                                <li><a th:href="@{/happyParking/happyParkingSearch}">주차장 찾기</a></li>
-                                                                <li><a th:href="@{/happyParking/happyParkingHistory}">이용 내역</a></li>
-                                                            </div>
-                                                            <div th:if="${session.user.role.getTitle()=='경비'}">
-                                                                <li><a th:href="@{#}">주차장 관리</a></li>
-                                                                <li><a th:href="@{/happyParking/happyParkingSearch}">주차장 찾기</a></li>
-                                                                <li><a th:href="@{/happyParking/happyParkingHistory}">이용 내역</a></li>
-                                                            </div>
-                                                            <div th:if="${session.user.role.getTitle()=='일반'}">
-                                                                <li><a th:href="@{/happyParking/happyParkingSearch}">주차장 찾기</a></li>
-                                                                <li><a th:href="@{/happyParking/happyParkingHistory}">이용 내역</a></li>
-                                                            </div>
-                                                        </div>
-                                                    </ul>
-                                                </li>
-
-                                                <!-- 메뉴 : 와치 비히클 -->
-                                                <li><a th:href="@{/watchVehicle}" style="color: white; font-size: 19px;">Watch Vehicle</a></li>
-
-                                                <!-- 메뉴 : 부가 서비스 -->
-                                                <li><a href="#" style="color: white; font-size: 19px;">부가서비스</a>
-                                                    <ul class="submenu">
-                                                        <li><a th:href="@{/otherService/parkingMap}">Parking Map</a></li>
-                                                        <li><a th:href="@{/otherService/EZCharging}">Ez Charging</a></li>
-                                                        <li><a th:href="@{/otherService/QnA}">QnA</a></li>
-                                                        <li><a th:href="@{/otherService/FAQ}">FAQ</a></li>
-                                                    </ul>
-                                                </li>
-
-                                                <!-- 메뉴 : 마이 페이지 -->
-                                                <li><a href="#" style="color: white; font-size: 19px;">마이페이지</a>
-                                                    <ul class="submenu login_none">
-                                                        <div th:if="${session.user==null}">
-                                                            <li class="login_none"><a th:href="@{/myPage/memberEdit}">정보 수정</a></li>
-                                                            <li class="login_none"><a th:href="@{#}">즐겨 찾기</a></li>
-                                                        </div>
-                                                        <div th:unless="${session.user==null}">
-                                                            <div th:if="${session.user.role.getTitle()=='관리자'}">
-                                                                <li><a th:href="@{/admin/memberList}">회원 목록</a></li>
-                                                                <li><a th:href="@{/admin/csRequestList}">충전소 요청 목록</a></li>
-                                                                <li><a th:href="@{/admin/happyParkingRequestList}">주차장 요청 목록</a></li>
-                                                                <li><a th:href="@{#}">충전소 매출 현황</a></li>
-                                                                <li><a th:href="@{#}">주차장 매출 현황</a></li>
-                                                                <li><a th:href="@{/myPage/residence}">거주지 등록</a></li>
-                                                                <li><a th:href="@{/chargingStation/chargingRegister}">충전소 등록</a></li>
-                                                                <li><a th:href="@{/happyParking/happyParkingRegister}">주차장 등록</a></li>
-                                                                <li><a th:href="@{/myPage/history}">이용 내역</a></li>
-                                                            </div>
-                                                            <div th:if="${session.user.role.getTitle()=='등록자'}">
-                                                                <li><a th:href="@{/myPage/memberEdit}">정보 수정</a></li>
-                                                                <li><a th:href="@{'/myPage/hpBookmark/' + ${session.user.email}}">즐겨 찾기</a></li>
-                                                                <li><a th:href="@{/myPage/residence}">거주지 등록</a></li>
-                                                                <li><a th:href="@{/chargingStation/chargingRegister}">충전소 등록</a></li>
-                                                                <li><a th:href="@{/happyParking/happyParkingRegister}">주차장 등록</a></li>
-                                                                <li><a th:href="@{/myPage/history}">이용 내역</a></li>
-                                                            </div>
-                                                            <div th:if="${session.user.role.getTitle()=='경비'}">
-                                                                <li><a th:href="@{/myPage/memberEdit}">정보 수정</a></li>
-                                                                <li><a th:href="@{'/myPage/hpBookmark/' + ${session.user.email}}">즐겨 찾기</a></li>
-                                                                <li><a th:href="@{/myPage/bookmark}">관리 아파트</a></li>
-                                                                <li><a th:href="@{/myPage/history}">이용 내역</a></li>
-                                                            </div>
-                                                            <div th:if="${session.user.role.getTitle()=='일반'}">
-                                                                <li class="login_none"><a th:href="@{/myPage/memberEdit}">정보 수정</a></li>
-                                                                <li class="login_none"><a th:href="@{'/myPage/hpBookmark/' + ${session.user.email}}">즐겨 찾기</a></li>
-                                                                <li class="login_none"><a th:href="@{/myPage/history}">이용 내역</a></li>
-                                                            </div>
-                                                        </div>
-                                                    </ul>
-                                                </li>
-
-                                                <!--모바일 메뉴에서 로그인 및 가입 버튼, custom.css에서 login_none 참조-->
+                window.latteInitialized = true;
+                var scriptTag = document.createElement("script");
+                scriptTag.type = "text/javascript";
+                scriptTag.async = true;
+                scriptTag.src = "https://widget.latte.ai/main.js";
+                scriptTag.charset = "UTF-8";
+                var firstScriptTag = document.getElementsByTagName('script')[0];
+                firstScriptTag.parentNode.insertBefore(scriptTag, firstScriptTag);
+            }
+            if (document.readyState === 'complete') {
+                loadScript();
+            } else if (window.attachEvent) {
+                window.attachEvent('onload', loadScript);
+            } else {
+                window.addEventListener('DOMContentLoaded', loadScript, false);
+                window.addEventListener('load', loadScript, false);
+            }
+        }
+        a();
+    </script>
+    <div class="header-area">
+        <div id="sticky-header" class="main-header-area">
+            <div class="container-fluid">
+                <div class="header_bottom_border">
+                    <div class="row align-items-center">
+                        <div class="col-lg-2">
+                            <div class="logo">
+                                <a th:href="@{/}">
+                                    <img src="/img/logo.png" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-8 col-lg-12">
+                            <div class="main-menu  d-none d-lg-block">
+                                <nav>
+                                    <ul id="navigation">
+                                        <!-- 메뉴 : SCS -->
+                                        <li><a href="#" style="color: white; font-size: 19px;">SCS</a>
+                                            <ul class="submenu">
                                                 <div th:if="${session.user==null}">
-                                                    <li class="login_none"><a th:href="@{/index/join}">회원가입</a></li>
-                                                    <li class="login_none"><a th:href="@{/index/login}">로그인</i></a></li>
+                                                    <li><a th:href="@{/chargingStation/chargingSearch}">충전소 찾기</a></li>
+                                                    <li><a th:href="@{/chargingStation/chargingHistory}">이용 내역</a></li>
                                                 </div>
                                                 <div th:unless="${session.user==null}">
-                                                    <li class="login_none"><a class="boxed-btn4" th:href="@{/myPage/memberEdit}">정보수정</a></li>
-                                                    <li class="login_none"><a class="boxed-btn4" th:href="@{/logout}">로그아웃</a></li>
+                                                    <div th:if="${session.user.role.getTitle()=='관리자'}">
+                                                        <li><a th:href="@{/admin/chargingRequest}">충전소 요청</a></li>
+                                                        <li><a th:href="@{/chargingStation/chargingRegister}">충전소 등록</a></li>
+                                                        <li><a th:href="@{#}">충전소 매출 현황</a></li>
+                                                        <li><a th:href="@{/chargingStation/chargingSearch}">충전소 찾기</a></li>
+                                                        <li><a th:href="@{/chargingStation/chargingHistory}">이용 내역</a></li>
+                                                    </div>
+                                                    <div th:if="${session.user.role.getTitle()=='등록자'}">
+                                                        <li><a th:href="@{/chargingStation/chargingRegister}">충전소 등록</a></li>
+                                                        <li><a th:href="@{/chargingStation/chargingSearch}">충전소 찾기</a></li>
+                                                        <li><a th:href="@{/chargingStation/chargingHistory}">이용 내역</a></li>
+                                                    </div>
+                                                    <div th:if="${session.user.role.getTitle()=='경비'}">
+                                                        <li><a th:href="@{#}">충전소 관리</a></li>
+                                                        <li><a th:href="@{/chargingStation/chargingSearch}">충전소 찾기</a></li>
+                                                        <li><a th:href="@{/chargingStation/chargingHistory}">이용 내역</a></li>
+                                                    </div>
+                                                    <div th:if="${session.user.role.getTitle()=='일반'}">
+                                                        <li><a th:href="@{/chargingStation/chargingSearch}">충전소 찾기</a></li>
+                                                        <li><a th:href="@{/chargingStation/chargingHistory}">이용 내역</a></li>
+                                                    </div>
                                                 </div>
-
                                             </ul>
-                                        </nav>
-                                    </div>
-                                </div>
-                                <div class="col-xl-2 col-lg-2 d-none d-lg-block">
-                                    <div class="Appointment">
-                                        <!-- 가입 버튼 -->
-                                        <span th:if="${session.user==null}">
+                                        </li>
+
+                                        <!-- 메뉴 : 해피 파킹 -->
+                                        <li><a href="#" style="color: white; font-size: 19px;">Happy Parking</a>
+                                            <ul class="submenu">
+                                                <div th:if="${session.user==null}">
+                                                    <li><a th:href="@{/happyParking/happyParkingSearch}">주차장 찾기</a></li>
+                                                    <li><a th:href="@{/happyParking/happyParkingHistory}">이용 내역</a></li>
+                                                </div>
+                                                <div th:unless="${session.user==null}">
+                                                    <div th:if="${session.user.role.getTitle()=='관리자'}">
+                                                        <li><a th:href="@{/admin/happyParkingRequestList}">주차장 요청</a></li>
+                                                        <li><a th:href="@{/happyParking/happyParkingRegister}">주차장 등록</a></li>
+                                                        <li><a th:href="@{#}">주차장 매출 현황</a></li>
+                                                        <li><a th:href="@{/happyParking/happyParkingSearch}">주차장 찾기</a></li>
+                                                        <li><a th:href="@{/happyParking/happyParkingHistory}">주차장 이용 내역</a></li>
+                                                    </div>
+                                                    <div th:if="${session.user.role.getTitle()=='등록자'}">
+                                                        <li><a th:href="@{/happyParking/happyParkingRegister}">주차장 등록</a></li>
+                                                        <li><a th:href="@{/happyParking/happyParkingSearch}">주차장 찾기</a></li>
+                                                        <li><a th:href="@{/happyParking/happyParkingHistory}">이용 내역</a></li>
+                                                    </div>
+                                                    <div th:if="${session.user.role.getTitle()=='경비'}">
+                                                        <li><a th:href="@{#}">주차장 관리</a></li>
+                                                        <li><a th:href="@{/happyParking/happyParkingSearch}">주차장 찾기</a></li>
+                                                        <li><a th:href="@{/happyParking/happyParkingHistory}">이용 내역</a></li>
+                                                    </div>
+                                                    <div th:if="${session.user.role.getTitle()=='일반'}">
+                                                        <li><a th:href="@{/happyParking/happyParkingSearch}">주차장 찾기</a></li>
+                                                        <li><a th:href="@{/happyParking/happyParkingHistory}">이용 내역</a></li>
+                                                    </div>
+                                                </div>
+                                            </ul>
+                                        </li>
+
+                                        <!-- 메뉴 : 와치 비히클 -->
+                                        <li><a th:href="@{/watchVehicle}" style="color: white; font-size: 19px;">Watch Vehicle</a></li>
+
+                                        <!-- 메뉴 : 부가 서비스 -->
+                                        <li><a href="#" style="color: white; font-size: 19px;">부가서비스</a>
+                                            <ul class="submenu">
+                                                <li><a th:href="@{/otherService/parkingMap}">Parking Map</a></li>
+                                                <li><a th:href="@{/otherService/EZCharging}">Ez Charging</a></li>
+                                                <li><a th:href="@{/otherService/QnA}">QnA</a></li>
+                                                <li><a th:href="@{/otherService/FAQ}">FAQ</a></li>
+                                            </ul>
+                                        </li>
+
+                                        <!-- 메뉴 : 마이 페이지 -->
+                                        <li><a href="#" style="color: white; font-size: 19px;">마이페이지</a>
+                                            <ul class="submenu login_none">
+                                                <div th:if="${session.user==null}">
+                                                    <li class="login_none"><a th:href="@{/myPage/memberEdit}">정보 수정</a></li>
+                                                    <li class="login_none"><a th:href="@{#}">즐겨 찾기</a></li>
+                                                </div>
+                                                <div th:unless="${session.user==null}">
+                                                    <div th:if="${session.user.role.getTitle()=='관리자'}">
+                                                        <li><a th:href="@{/admin/memberList}">회원 목록</a></li>
+                                                        <li><a th:href="@{#}">충전소 요청</a></li>
+                                                        <li><a th:href="@{/admin/happyParkingRequestList}">주차장 요청</a></li>
+                                                        <li><a th:href="@{#}">충전소 매출 현황</a></li>
+                                                        <li><a th:href="@{#}">주차장 매출 현황</a></li>
+                                                        <li><a th:href="@{/myPage/residence}">거주지 등록</a></li>
+                                                        <li><a th:href="@{/chargingStation/chargingRegister}">충전소 등록</a></li>
+                                                        <li><a th:href="@{/happyParking/happyParkingRegister}">주차장 등록</a></li>
+                                                        <li><a th:href="@{/myPage/history}">이용 내역</a></li>
+                                                    </div>
+                                                    <div th:if="${session.user.role.getTitle()=='등록자'}">
+                                                        <li><a th:href="@{/myPage/memberEdit}">정보 수정</a></li>
+                                                        <li><a th:href="@{'/myPage/hpBookmark/' + ${session.user.email}}">즐겨 찾기</a></li>
+                                                        <li><a th:href="@{/myPage/residence}">거주지 등록</a></li>
+                                                        <li><a th:href="@{/chargingStation/chargingRegister}">충전소 등록</a></li>
+                                                        <li><a th:href="@{/happyParking/happyParkingRegister}">주차장 등록</a></li>
+                                                        <li><a th:href="@{/myPage/history}">이용 내역</a></li>
+                                                    </div>
+                                                    <div th:if="${session.user.role.getTitle()=='경비'}">
+                                                        <li><a th:href="@{/myPage/memberEdit}">정보 수정</a></li>
+                                                        <li><a th:href="@{'/myPage/hpBookmark/' + ${session.user.email}}">즐겨 찾기</a></li>
+                                                        <li><a th:href="@{/myPage/bookmark}">관리 아파트</a></li>
+                                                        <li><a th:href="@{/myPage/history}">이용 내역</a></li>
+                                                    </div>
+                                                    <div th:if="${session.user.role.getTitle()=='일반'}">
+                                                        <li class="login_none"><a th:href="@{/myPage/memberEdit}">정보 수정</a></li>
+                                                        <li class="login_none"><a th:href="@{'/myPage/hpBookmark/' + ${session.user.email}}">즐겨 찾기</a></li>
+                                                        <li class="login_none"><a th:href="@{/myPage/history}">이용 내역</a></li>
+                                                    </div>
+                                                </div>
+                                            </ul>
+                                        </li>
+
+                                        <!--모바일 메뉴에서 로그인 및 가입 버튼, custom.css에서 login_none 참조-->
+                                        <div th:if="${session.user==null}">
+                                            <li class="login_none"><a th:href="@{/index/join}">회원가입</a></li>
+                                            <li class="login_none"><a th:href="@{/index/login}">로그인</i></a></li>
+                                        </div>
+                                        <div th:unless="${session.user==null}">
+                                            <li class="login_none"><a class="boxed-btn4" th:href="@{/myPage/memberEdit}">정보수정</a></li>
+                                            <li class="login_none"><a class="boxed-btn4" th:href="@{/logout}">로그아웃</a></li>
+                                        </div>
+
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-2 d-none d-lg-block">
+                            <div class="Appointment">
+                                <!-- 가입 버튼 -->
+                                <span th:if="${session.user==null}">
                                             <div class="d-none d-lg-block">
                                                 <a th:href="@{/index/join}" style="color: white; font-size: 15px;">회원 가입</a>&emsp14;&emsp14;
                                             </div>
                                                 <a th:href="@{/index/login}" style="color: white; font-size: 15px;">로그인</a>
                                         </span>
 
-                                        <span th:unless="${session.user==null}">
+                                <span th:unless="${session.user==null}">
                                             <div class="button-group-area mt-40">
                                                 <img th:src="${session.user.picture}" style="width: 60px; height: 60px"/>&emsp14;
                                                     <span th:text="${session.user.name + '님'}" style="color: white; font-size: 15px;"/>&emsp14;
                                                     <a th:href="@{/logout}" style="color: white; font-size: 15px;">로그아웃</a>
                                             </div>
                                         </span>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="mobile_menu d-block d-lg-none"></div>
-                                </div>
                             </div>
                         </div>
-
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </header>
 
-        <footer class="footer" th:fragment="footer">
-            <div class="footer_top">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-4 col-md-6 col-lg-3">
-                            <div class="footer_widget wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">
-                                <div class="footer_logo">
-                                    <a href="#">
-                                        <img src="/img/footer_logo.png" alt="">
+            </div>
+        </div>
+    </div>
+</header>
+
+<footer class="footer" th:fragment="footer">
+    <div class="footer_top">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-4 col-md-6 col-lg-3">
+                    <div class="footer_widget wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">
+                        <div class="footer_logo">
+                            <a href="#">
+                                <img src="/img/footer_logo.png" alt="">
+                            </a>
+                        </div>
+                        <p>
+                            5kmhc@yju.ac.kr <br>
+                            Tel.053 940 5290 <br>
+                            대구광역시 북구 복현동 영진전문대(본관, 300호)
+                        </p>
+                        <div class="socail_links">
+                            <ul>
+                                <li>
+                                    <a href="https://www.facebook.com/">
+                                        <i class="ti-facebook"></i>
                                     </a>
-                                </div>
-                                <p>
-                                    5kmhc@yju.ac.kr <br>
-                                    Tel.053 940 5290 <br>
-                                    대구광역시 북구 복현동 영진전문대(본관, 300호)
-                                </p>
-                                <div class="socail_links">
-                                    <ul>
-                                        <li>
-                                            <a href="https://www.facebook.com/">
-                                                <i class="ti-facebook"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="https://www.google.com/">
-                                                <i class="fa fa-google-plus"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="https://www.twitter.com/">
-                                                <i class="fa fa-twitter"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="https://www.instagram.com/">
-                                                <i class="fa fa-instagram"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-md-6 col-lg-3">
-                            <div class="footer_widget wow fadeInUp" data-wow-duration="1.1s" data-wow-delay=".4s">
-                                <h3 class="footer_title">
-                                    Service
-                                </h3>
-                                <ul>
-                                    <li><a href="#">SCS </a></li>
-                                    <li><a href="#">Happy Parking </a></li>
-                                    <li><a href="#">Which Vehicle</a></li>
-                                    <li><a href="#">Other Service</a></li>
-                                </ul>
-
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-md-6 col-lg-2">
-                            <div class="footer_widget wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".5s">
-                                <h3 class="footer_title">
-                                    About
-                                </h3>
-                                <ul>
-                                    <li><a href="#">회사소개</a></li>
-                                    <li><a href="#">회원이용약관</a></li>
-                                    <li><a href="#">개인정보취급방침</a></li>
-                                    <li><a href="#">위치기반서비스 이용약관</a></li>
-                                </ul>
-                            </div>
+                                </li>
+                                <li>
+                                    <a href="https://www.google.com/">
+                                        <i class="fa fa-google-plus"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.twitter.com/">
+                                        <i class="fa fa-twitter"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.instagram.com/">
+                                        <i class="fa fa-instagram"></i>
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
 
-                        <div class="col-xl-4 col-md-6 col-lg-4">
-                            <div class="footer_widget wow fadeInUp" data-wow-duration="1.3s" data-wow-delay=".6s">
-                                <h3 class="footer_title">
-                                    Source
-                                </h3>
-                                <!--
-                                <form action="#" class="newsletter_form">
-                                    <input type="text" placeholder="Enter your mail">
-                                    <button type="submit">Subscribe</button>
-                                </form>
-                                -->
-                                <!-- 하단 사용기술 이미지 -->
-                                <div>
-                                    <img th:src="@{/img/source/springBoot.png}" class="icon64 margin5">
-                                    <img th:src="@{/img/source/raspberryPiLogo.png}" class="icon64 margin5">
-                                    <img th:src="@{/img/source/oracle.png}" class="icon64 margin5">
-                                    <br>
-                                    <img th:src="@{/img/source/bootStrap.png}" class="icon64 margin5">
-                                    <img th:src="@{/img/source/kakaoMap.png}" class="icon64 margin5 circleIcon">
-                                    <img th:src="@{/img/source/latte.ai.png}" class="icon64 margin5 circleIcon">
-                                    <br>
-                                    <img th:src="@{/img/source/aws.png}" class="icon64 margin5">
-                                    <img th:src="@{/img/source/naverLogin.png}" class="icon48 margin2">
-                                    <img th:src="@{/img/source/googleLogin.png}" class="icon48 margin2">
-                                    <img th:src="@{/img/source/kakaoLogin.png}" class="icon48 margin2">
-                                </div>
-                            </div>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-md-6 col-lg-3">
+                    <div class="footer_widget wow fadeInUp" data-wow-duration="1.1s" data-wow-delay=".4s">
+                        <h3 class="footer_title">
+                            Service
+                        </h3>
+                        <ul>
+                            <li><a href="#">SCS </a></li>
+                            <li><a href="#">Happy Parking </a></li>
+                            <li><a href="#">Which Vehicle</a></li>
+                            <li><a href="#">Other Service</a></li>
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="col-xl-2 col-md-6 col-lg-2">
+                    <div class="footer_widget wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".5s">
+                        <h3 class="footer_title">
+                            About
+                        </h3>
+                        <ul>
+                            <li><a href="#">회사소개</a></li>
+                            <li><a href="#">회원이용약관</a></li>
+                            <li><a href="#">개인정보취급방침</a></li>
+                            <li><a href="#">위치기반서비스 이용약관</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-xl-4 col-md-6 col-lg-4">
+                    <div class="footer_widget wow fadeInUp" data-wow-duration="1.3s" data-wow-delay=".6s">
+                        <h3 class="footer_title">
+                            Source
+                        </h3>
+                        <!--
+                        <form action="#" class="newsletter_form">
+                            <input type="text" placeholder="Enter your mail">
+                            <button type="submit">Subscribe</button>
+                        </form>
+                        -->
+                        <!-- 하단 사용기술 이미지 -->
+                        <div>
+                            <img th:src="@{/img/source/springBoot.png}" class="icon64 margin5">
+                            <img th:src="@{/img/source/raspberryPiLogo.png}" class="icon64 margin5">
+                            <img th:src="@{/img/source/oracle.png}" class="icon64 margin5">
+                            <br>
+                            <img th:src="@{/img/source/bootStrap.png}" class="icon64 margin5">
+                            <img th:src="@{/img/source/kakaoMap.png}" class="icon64 margin5 circleIcon">
+                            <img th:src="@{/img/source/latte.ai.png}" class="icon64 margin5 circleIcon">
+                            <br>
+                            <img th:src="@{/img/source/aws.png}" class="icon64 margin5">
+                            <img th:src="@{/img/source/naverLogin.png}" class="icon48 margin2">
+                            <img th:src="@{/img/source/googleLogin.png}" class="icon48 margin2">
+                            <img th:src="@{/img/source/kakaoLogin.png}" class="icon48 margin2">
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="copy-right_text wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".3s">
-                <div class="container">
-                    <div class="footer_border"></div>
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <p class="copy_right text-center">
-                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | 5km Home Charge<br>
-                                <a href="https://docs.google.com/spreadsheets/d/1oWpydB7w_FYMm5ip3N_IpEycHxbP6HQ4hIGnonL9O0E/edit#gid=1115838130">개발 현황</a>
-                                <span> | </span>
-                                <a href="https://www.erdcloud.com/d/ZF8Ebc8af6mo5tr6d">ERD</a>
-                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            </p>
-                        </div>
-                    </div>
+        </div>
+    </div>
+    <div class="copy-right_text wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".3s">
+        <div class="container">
+            <div class="footer_border"></div>
+            <div class="row">
+                <div class="col-xl-12">
+                    <p class="copy_right text-center">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | 5km Home Charge<br>
+                        <a href="https://docs.google.com/spreadsheets/d/1oWpydB7w_FYMm5ip3N_IpEycHxbP6HQ4hIGnonL9O0E/edit#gid=1115838130">개발 현황</a>
+                        <span> | </span>
+                        <a href="https://www.erdcloud.com/d/ZF8Ebc8af6mo5tr6d">ERD</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
                 </div>
             </div>
-        </footer>
+        </div>
+    </div>
+</footer>
 
-        <!-- link that opens popup -->
-        <!-- JS here -->
-        <section th:fragment="script">
-            <!-- 핵심 JS는 항상 제일 상단에 선언해주세요! (ex: jquery, bootstrap 등...) -->
-            <script th:src="@{/js/vendor/jquery-3.5.1.min.js}"></script>
-            <script th:src="@{/js/vendor/popper-1.16.0.min.js}"></script>
-            <script th:src="@{/js/vendor/modernizr-3.5.0.min.js}"></script>
-            <script th:src="@{/js/vendor/bootstrap-4.5.0.min.js}"></script>
-            <!-- select 태그 부트스트랩 -->
-            <script th:async src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+<!-- link that opens popup -->
+<!-- JS here -->
+<section th:fragment="script">
+    <!-- 모달 -->
+    <script th:async src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script th:async src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script th:async src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
-            <script th:async th:src="@{/js/bootstrap/owl.carousel.min.js}"></script>
-            <script th:async th:src="@{/js/bootstrap/isotope.pkgd.min.js}"></script>
-            <script th:async th:src="@{/js/bootstrap/ajax-form.js}"></script>
-            <script th:async th:src="@{/js/bootstrap/waypoints.min.js}"></script>
-            <script th:async th:src="@{/js/bootstrap/jquery.counterup.min.js}"></script>
-            <script th:async th:src="@{/js/bootstrap/imagesloaded.pkgd.min.js}"></script>
-            <script th:async th:src="@{/js/bootstrap/scrollIt.js}"></script>
-            <script th:async th:src="@{/js/bootstrap/jquery.scrollUp.min.js}"></script>
-            <script th:async th:src="@{/js/bootstrap/wow.min.js}"></script>
-            <script th:async th:src="@{/js/bootstrap/nice-select.min.js}"></script>
-            <script th:async th:src="@{/js/bootstrap/jquery.slicknav.min.js}"></script>
-            <script th:async th:src="@{/js/bootstrap/jquery.magnific-popup.min.js}"></script>
-            <script th:async th:src="@{/js/bootstrap/plugins.js}"></script>
-            <script th:async th:src="@{/js/bootstrap/gijgo.min.js}"></script>
-            <script th:async th:src="@{/js/bootstrap/slick.min.js}"></script>
+    <script th:async th:src="@{/js/vendor/modernizr-3.5.0.min.js}"></script>
+    <script th:async src="/js/bootstrap/popper.min.js"></script>   <!-- 템플릿 지도 관련으로 사용 않함 -->
+    <!-- select 태그 부트스트랩 -->
+    <script th:async src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 
-            <!--contact js-->d
-            <script th:async th:src="@{/js/bootstrap/contact.js}"></script>
-            <script th:async th:src="@{/js/bootstrap/jquery.ajaxchimp.min.js}"></script>
-            <script th:async th:src="@{/js/bootstrap/jquery.form.js}"></script>
-            <script th:async th:src="@{/js/bootstrap/jquery.validate.min.js}"></script>
-            <script th:async th:src="@{/js/bootstrap/mail-script.js}"></script>
-            <script th:async th:src="@{/js/bootstrap/main.js}"></script>
+    <script th:async th:src="@{/js/bootstrap/owl.carousel.min.js}"></script>
+    <script th:async th:src="@{/js/bootstrap/isotope.pkgd.min.js}"></script>
+    <script th:async th:src="@{/js/bootstrap/ajax-form.js}"></script>
+    <script th:async th:src="@{/js/bootstrap/waypoints.min.js}"></script>
+    <script th:async th:src="@{/js/bootstrap/jquery.counterup.min.js}"></script>
+    <script th:async th:src="@{/js/bootstrap/imagesloaded.pkgd.min.js}"></script>
+    <script th:async th:src="@{/js/bootstrap/scrollIt.js}"></script>
+    <script th:async th:src="@{/js/bootstrap/jquery.scrollUp.min.js}"></script>
+    <script th:async th:src="@{/js/bootstrap/wow.min.js}"></script>
+    <script th:async th:src="@{/js/bootstrap/nice-select.min.js}"></script>
+    <script th:async th:src="@{/js/bootstrap/jquery.slicknav.min.js}"></script>
+    <script th:async th:src="@{/js/bootstrap/jquery.magnific-popup.min.js}"></script>
+    <script th:async th:src="@{/js/bootstrap/plugins.js}"></script>
+    <script th:async th:src="@{/js/bootstrap/gijgo.min.js}"></script>
+    <script th:async th:src="@{/js/bootstrap/slick.min.js}"></script>
 
-            <!--우리가 추가한 custom JS-->
-            <script th:async th:src="@{/js/cs.js}"></script>
-            <script th:async th:src="@{/js/member.js}"></script>
-            <script th:async th:src="@{/js/custom.js}"></script>
-            <script th:async th:src="@{/js/index.js}"></script>
-            <script th:async th:src="@{/js/residence.js}"></script>
-            <script th:async th:src="@{/js/hp.js}"></script>
-        </section>
-    </body>
+    <!--contact js-->
+    <script th:async th:src="@{/js/bootstrap/contact.js}"></script>
+    <script th:async th:src="@{/js/bootstrap/jquery.ajaxchimp.min.js}"></script>
+    <script th:async th:src="@{/js/bootstrap/jquery.form.js}"></script>
+    <script th:async th:src="@{/js/bootstrap/jquery.validate.min.js}"></script>
+    <script th:async th:src="@{/js/bootstrap/mail-script.js}"></script>
+    <script th:async th:src="@{/js/bootstrap/main.js}"></script>
+
+    <!--우리가 추가한 JS-->
+    <script th:async th:src="@{/js/member.js}"></script>
+    <script th:async th:src="@{/js/custom.js}"></script>
+    <script th:async th:src="@{/js/index.js}"></script>
+    <script th:async th:src="@{/js/residence.js}"></script>
+    <script th:async th:src="@{/js/hp.js}"></script>
+    <script th:async src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+</section>
+</body>
 </html>
