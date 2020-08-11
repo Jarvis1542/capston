@@ -281,7 +281,6 @@
             }
             $("#login").first().trigger("click");
         }
-
     });
 
 // 로그인
@@ -306,7 +305,7 @@
         }).done(function(){
             window.location.href="/";
         }).fail(function (error) {
-            alert(error);
+            alert("아이디 또는 비밀번호가 일치하지 않습니다.");
         });
 
         function valid(val) {
