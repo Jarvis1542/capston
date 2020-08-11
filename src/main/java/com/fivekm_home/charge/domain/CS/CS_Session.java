@@ -14,7 +14,7 @@ public class CS_Session implements Serializable { // 이 클래스는 인증된 
     private String POSTCODE;
     private String ROADADDRESS;
     private String DETAILADDRESS;
-    private String EXTRAADDRESS;
+    private String JIBUNADDRESS;
     private String MIN30FEE;
     private String ADDMIN10FEE;
     private String CABLE;
@@ -30,7 +30,7 @@ public class CS_Session implements Serializable { // 이 클래스는 인증된 
         this.POSTCODE = csRequestList.get(0).getPOSTCODE();
         this.ROADADDRESS = csRequestList.get(0).getROADADDRESS();
         this.DETAILADDRESS = csRequestList.get(0).getDETAILADDRESS();
-        this.EXTRAADDRESS = csRequestList.get(0).getEXTRAADDRESS();
+        this.JIBUNADDRESS = csRequestList.get(0).getJIBUNADDRESS();
         this.MIN30FEE = csRequestList.get(0).getMIN30FEE();
         this.ADDMIN10FEE = csRequestList.get(0).getADDMIN10FEE();
         this.CABLE = csRequestList.get(0).getCABLE();

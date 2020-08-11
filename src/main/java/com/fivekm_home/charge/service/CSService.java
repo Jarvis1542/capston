@@ -1,8 +1,10 @@
 package com.fivekm_home.charge.service;
 
 import com.fivekm_home.charge.domain.CS.*;
+import com.fivekm_home.charge.domain.HP.HP_loadRes;
 import com.fivekm_home.charge.domain.HP.HP_request;
 import com.fivekm_home.charge.mapper.CSMapper;
+import com.fivekm_home.charge.mapper.HPMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,8 @@ import java.util.ArrayList;
 public class CSService {
     @Autowired(required = false)
     private CSMapper csMapper;
+    @Autowired(required = false)
+    private HPMapper hpMapper;
 
     //충전소 등록
     public void csReg(CS_register cs_register) {
@@ -25,6 +29,11 @@ public class CSService {
 
     public ArrayList<CS_requestPick> csRequestPick(String csName) {
         return csMapper.csRequestPick(csName);
+    }
+
+    // 거주지 불러오기
+    public ArrayList<HP_loadRes> loadResidence(String email){
+        return hpMapper.loadResidence(email);
     }
 
     // 충전소 승인

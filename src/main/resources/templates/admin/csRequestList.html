@@ -37,7 +37,6 @@
                             <th>운영기관</th>
                             <th>충전 속도</th>
                             <th>충전기 수</th>
-                            <th>우편번호</th>
                             <th>도로명주소</th>
                             <th>상세주소</th>
                             <th>참고항목</th>
@@ -56,21 +55,20 @@
                             <td><span th:text="${CSrequestList.OPERATION}"/></td>
                             <td><span th:text="${CSrequestList.CHARGESPEED}"/></td>
                             <td><span th:text="${CSrequestList.CHARGEAMOUNT}"/></td>
-                            <td><span th:text="${CSrequestList.POSTCODE}"/></td>
                             <td><span th:text="${CSrequestList.ROADADDRESS}"/></td>
                             <td><span th:text="${CSrequestList.DETAILADDRESS}"/></td>
-                            <td><span th:text="${CSrequestList.EXTRAADDRESS}"/></td>
+                            <td><span th:text="${CSrequestList.JIBUNADDRESS}"/></td>
                             <td><span th:text="${CSrequestList.MIN30FEE}"/></td>
                             <td><span th:text="${CSrequestList.ADDMIN10FEE}"/></td>
                             <td><span th:text="${CSrequestList.CABLE}"/></td>
                             <td><span th:text="${CSrequestList.CHARGETYPE}"/></td>
                             <td><span th:text="${CSrequestList.CHARGINGCHK}"/></td>
-
                         </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
+        </div>
         </div>
 </section>
 <footer th:replace="layout/layout :: footer"/>

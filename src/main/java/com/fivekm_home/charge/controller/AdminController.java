@@ -50,7 +50,7 @@ public class AdminController {
 
     // 해당 충전소 자세히 보기
     @GetMapping("/CSrequest/{csName}")
-    public String hpRequest(HttpServletRequest request, @PathVariable String csName){
+    public String csRequest(Model model, HttpServletRequest request, @PathVariable String csName){
         HttpSession session = request.getSession();
         session.setAttribute("csSessionRequest", csService.csRequestPick(csName));
         return "/admin/csRequest";

@@ -1,20 +1,96 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout/layout :: head"/>
+<style>
+    .dataLayerOnMap{
+        width: 385px;
+        height: 170px;
+        position: relative;
+        border: solid 1px #555f64;
+        background: #ffffff;
+        padding-bottom: 10px;
+        border-radius: 8px;
+        -o-border-radius: 8px;
+        -moz-border-radius: 8px;
+        -webkit-border-radius: 8px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    }
+    .dataTitle {
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 38px;
+        height: 36px;
+        padding-left: 14px;
+        border-bottom: solid 1px #d3d6da;
+        background: #ecf1f4;
+        text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.5);
+        border-radius: 7px 7px 0px 0px;
+        -o-border-radius: 7px 7px 0px 0px;
+        -moz-border-radius: 7px 7px 0px 0px;
+        -webkit-border-radius: 7px 7px 0px 0px;
+        margin-bottom: 10px;
+    }
+    .dataPicture{
+        width: 70px;
+        height: 110px;
+        border: solid 1px #cccccc;
+        margin-left: 10px;
+        float: left;
+        display: inline-block;
+        background-size: 50px, 50px;
+    }
+    .dataInfo{
+        padding-top: 0px;
+        margin-left: 15px;
+        width: 240px;
+    }
+    .dataAddress{
+        margin-left: 110px;
+        margin-bottom: 10px;
+    }
+    .dataInfo ul{
+        list-style:none;
+        margin-left: 110px;
+    }
+    .dataInfo ul li{
+        display: inline-grid;
+        margin-bottom: 7px;
+        margin-left: 15px;
+    }
+    .dataInfo p{
+
+        margin-left: 170px;
+    }
+    .dataSubTitle{
+        border: none;
+        background: none;
+        font-size: 12px;
+        font-family: "NanumBold";
+        padding-left: 0px;
+        line-height: 18px;
+        height: 18px;
+    }
+</style>
 <body>
 <header th:replace="layout/layout :: header"/>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=31e2bf5613ce6e27d859ca41bb71d46e&libraries=services"></script>
 <!-- bradcam_area  -->
-<div class="bradcam_area scs_bg_13">
+<div class="bradcam_area hp_bg_05">
     <div class="container">
         <div class="row">
             <div class="col-xl-12">
                 <div class="bradcam_text">
-                    <h3>SCS 서비스</h3>
+                    <h3>충전소 찾기</h3>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<div th:if="${session.user==null}"></div>
+<div th:unless="${session.user==null}">
+    <input type="hidden" id="email" th:value="${session.user.email}">
+</div>
+
 
 <section class="contact-section section_padding">
     <div class="container">
@@ -28,29 +104,114 @@
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-lg-12">
-                <div class="map_wrap">
-                    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-
-                    <div id="menu_wrap" class="bg_white">
-                        <div class="option">
-                            <div>
-                                <form onsubmit="searchPlaces(); return false;">
-                                    키워드 : <input type="text" value="이태원 맛집" id="keyword" size="15">
-                                    <button type="submit">검색하기</button>
-                                </form>
-                            </div>
-                        </div>
-                        <hr>
-                        <ul id="placesList"></ul>
-                        <div id="pagination"></div>
-                    </div>
-                </div>
+            <div class="map_wrap">
+                <div id="map" style="width:100%;height:600px;position:relative;overflow:hidden;"></div>
             </div>
         </div>
     </div>
 </section>
 <footer th:replace="layout/layout :: footer"/>
 </body>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=31e2bf5613ce6e27d859ca41bb71d46e&libraries=services"></script>
+<script>
+    var takeTotal = [];
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+        mapOption = {
+            center: new kakao.maps.LatLng(36.66061813442013, 127.86026006535788), // 지도의 중심좌표
+            level: 13 // 지도의 확대 레벨
+        };
+
+    var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+    // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+    var mapTypeControl = new kakao.maps.MapTypeControl();
+
+    // 지도에 컨트롤을 추가해야 지도위에 표시됩니다
+    // kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
+    map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+
+    // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+    var zoomControl = new kakao.maps.ZoomControl();
+    map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+
+    $.ajax({
+        url : '/rest/hpSearchData',
+        type : 'GET',
+        cache : false,
+        success : function(data) {
+            for (let i = 0; i < data.length; i++) {
+                takeTotal[i] = data[i];
+                console.log('parkingName : ' + takeTotal[i].parkingName);
+                console.log('parkingType : ' + takeTotal[i].parkingType);
+                console.log('min30Fee : ' + takeTotal[i].min30Fee);
+                console.log('addMin10Fee : ' + takeTotal[i].addMin10Fee);
+                console.log('roadAddress : ' + takeTotal[i].roadAddress);
+                console.log('extraAddress : ' + takeTotal[i].extraAddress);
+                console.log('manageTime : ' + takeTotal[i].manageTime);
+                console.log('place : ' + takeTotal[i].place);
+                console.log('parkingChk : ' + takeTotal[i].parkingChk);
+                console.log('parkingPic : ' + takeTotal[i].parkingPic);
+                console.log('==========================================');
+
+                // 마커를 생성합니다
+                var marker = new kakao.maps.Marker({
+                    map: map, // 마커를 표시할 지도
+                    position: new kakao.maps.LatLng(data[i].lat, data[i].lng), // 마커의 위치
+                });
+
+                var closeOverlay = function() {
+                    overlay.setMap(null);
+                };
+
+                var $wrap = $('<div class="dataLayerOnMap" />');
+                var $title = $('<div class="dataTitle" id="parkingName"/>').text(data[i].parkingName);
+                var $close = $('<div class="close" title="닫기" style="width: 15px; height: 15px; font-size: 25px; margin-right: 15px">X</div>').click(closeOverlay);
+                var $body = $('<div class="body"/>');
+                var $img = $('<div class="dataPicture"><img src="'+data[i].parkingPic+'" style="height: 110px; width: 100px;"></div>');
+                var $desc = $('<div class="dataInfo" id="desc'+i+'">' +
+                    '<div class="dataAddress">'+data[i].roadAddress+'</div>' +
+                    '<ul>' +
+                    '<li><span class="dataSubTitle">운영 시간</span>' +
+                    '<span>'+data[i].manageTime+'</span><br>'+
+                    '</li>' +
+                    '<li><span class="dataSubTitle">주차 요금</span>' +
+                    '<span>' +
+                    '30분당 요금 : '+data[i].min30Fee+'<br>'+
+                    '10분당 추가요금 : '+data[i].addMin10Fee+'<br>'+
+                    '</span>'+
+                    '</li>'+
+                    '</ul>'+
+                    '<p><button style="width: 100px" onClick="mapBook(\'' + data[i].parkingName + '\')" class="genric-btn primary small">예약</button></p>'+
+
+                    '</div>');
+
+                $wrap.append($title).append($body);
+                $body.append($img).append($desc);
+                $title.append($close);
+
+                var content = $wrap[0];
+                var overlay = new kakao.maps.CustomOverlay({
+                    content: content,
+                    map: map,
+                    position: marker.getPosition()
+                });
+
+                // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+                kakao.maps.event.addListener(marker, 'click', function() {
+                    overlay.setMap(map);
+                });
+            } // for문 끝
+
+        } // success 끝
+
+    }); //ajax 끝
+    function mapBook(parkingName){
+        var parkingName = parkingName;
+        var email = $('#email').val();
+        window.location.href = '/happyParking/happyParkingBook/' + parkingName + '+' + email;
+    }
+
+</script>
+
 <script th:replace="layout/layout :: script"/>
 </html>

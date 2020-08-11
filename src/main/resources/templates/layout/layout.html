@@ -114,7 +114,7 @@
                                                 </div>
                                                 <div th:unless="${session.user==null}">
                                                     <div th:if="${session.user.role.getTitle()=='관리자'}">
-                                                        <li><a th:href="@{/admin/chargingRequest}">충전소 요청</a></li>
+                                                        <li><a th:href="@{/admin/csRequestList}">충전소 요청 목록</a></li>
                                                         <li><a th:href="@{/chargingStation/chargingRegister}">충전소 등록</a></li>
                                                         <li><a th:href="@{#}">충전소 매출 현황</a></li>
                                                         <li><a th:href="@{/chargingStation/chargingSearch}">충전소 찾기</a></li>
@@ -194,7 +194,7 @@
                                                 <div th:unless="${session.user==null}">
                                                     <div th:if="${session.user.role.getTitle()=='관리자'}">
                                                         <li><a th:href="@{/admin/memberList}">회원 목록</a></li>
-                                                        <li><a th:href="@{#}">충전소 요청</a></li>
+                                                        <li><a th:href="@{/admin/csRequestList}">충전소 요청 목록</a></li>
                                                         <li><a th:href="@{/admin/happyParkingRequestList}">주차장 요청</a></li>
                                                         <li><a th:href="@{#}">충전소 매출 현황</a></li>
                                                         <li><a th:href="@{#}">주차장 매출 현황</a></li>

@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?> <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fivekm_home.charge.mapper.CSMapper">
+    <select id="loadResidence" resultType="com.fivekm_home.charge.domain.HP.HP_loadRes">
+        select resName, postcode, roadAddress, jibunAddress, extraAddress, detailAddress, email
+        from residence_view
+        where email = #{email}
+    </select>
+
     <insert id="csReg">
         insert into CS values(
         #{chargeName},
@@ -19,10 +25,15 @@
         #{resName}
         )
     </insert>
+
     <select id="csRequestList" resultType="com.fivekm_home.charge.domain.CS.CS_requestList">
-        SELECT CHARGENAME, OPERATION, CHARGESPEED, CHARGEAMOUNT, MIN30FEE, ADDMIN10FEE, CABLE, CHARGETYPE, CHARGINGCHK
-        FROM CS
+        SELECT CHARGENAME, OPERATION, CHARGESPEED, CHARGEAMOUNT, MIN30FEE, ADDMIN10FEE, CABLE, CHARGETYPE, CHARGINGCHK, c.resName, r.roadAddress, r.jibunAddress,
+            r.detailAddress, c.regDate, m.name
+        FROM cs_view c, residence_view r, member_view m
+        where c.resName = r.resName
+        and m.email = r.email
     </select>
+
     <select id="csRequestPick" resultType="com.fivekm_home.charge.domain.CS.CS_requestPick">
         SELECT CHARGENAME, OPERATION, CHARGESPEED, CHARGEAMOUNT,MIN30FEE, ADDMIN10FEE, CABLE, CHARGETYPE, CHARGINGCHK
         FROM CS WHERE CHARGENAME = #{csName}

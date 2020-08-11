@@ -11,7 +11,7 @@ public class CS_requestList {
     private String POSTCODE;        /* 우편 번호 */
     private String ROADADDRESS;     /* 도로명 주소 */
     private String DETAILADDRESS;   /* 상세 주소 */
-    private String EXTRAADDRESS;    /* 도로명 주소2 */
+    private String JIBUNADDRESS;    /* 지번 주소 */
     private String MIN30FEE;        /* 기본 요금 */
     private String ADDMIN10FEE;     /* 추가 요금 */
     private String CABLE;           /* 케이블 */
