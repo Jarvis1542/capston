@@ -101,12 +101,12 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="col-xl-8 col-lg-12">
+                        <div class="col-xl-8 col-lg-8">
                             <div class="main-menu  d-none d-lg-block">
                                 <nav>
                                     <ul id="navigation">
                                         <!-- 메뉴 : SCS -->
-                                        <li><a href="#" style="color: white; font-size: 19px;">SCS</a>
+                                        <li><a href="#">SCS</a>
                                             <ul class="submenu">
                                                 <div th:if="${session.user==null}">
                                                     <li><a th:href="@{/chargingStation/chargingSearch}">충전소 찾기</a></li>
@@ -139,7 +139,7 @@
                                         </li>
 
                                         <!-- 메뉴 : 해피 파킹 -->
-                                        <li><a href="#" style="color: white; font-size: 19px;">Happy Parking</a>
+                                        <li><a href="#">Happy Parking</a>
                                             <ul class="submenu">
                                                 <div th:if="${session.user==null}">
                                                     <li><a th:href="@{/happyParking/happyParkingSearch}">주차장 찾기</a></li>
@@ -172,10 +172,10 @@
                                         </li>
 
                                         <!-- 메뉴 : 와치 비히클 -->
-                                        <li><a th:href="@{/watchVehicle}" style="color: white; font-size: 19px;">Watch Vehicle</a></li>
+                                        <li><a th:href="@{/watchVehicle}">Watch Vehicle</a></li>
 
                                         <!-- 메뉴 : 부가 서비스 -->
-                                        <li><a href="#" style="color: white; font-size: 19px;">부가서비스</a>
+                                        <li><a href="#">부가서비스</a>
                                             <ul class="submenu">
                                                 <li><a th:href="@{/otherService/parkingMap}">Parking Map</a></li>
                                                 <li><a th:href="@{/otherService/EZCharging}">Ez Charging</a></li>
@@ -185,7 +185,7 @@
                                         </li>
 
                                         <!-- 메뉴 : 마이 페이지 -->
-                                        <li><a href="#" style="color: white; font-size: 19px;">마이페이지</a>
+                                        <li><a href="#">마이페이지</a>
                                             <ul class="submenu login_none">
                                                 <div th:if="${session.user==null}">
                                                     <li class="login_none"><a th:href="@{/myPage/memberEdit}">정보 수정</a></li>
@@ -245,16 +245,16 @@
                                 <!-- 가입 버튼 -->
                                 <span th:if="${session.user==null}">
                                             <div class="d-none d-lg-block">
-                                                <a th:href="@{/index/join}" style="color: white; font-size: 15px;">회원 가입</a>&emsp14;&emsp14;
+                                                <a th:href="@{/index/join}" style="color:white; font-size: 15px;">회원 가입</a>&emsp14;&emsp14;
                                             </div>
-                                                <a th:href="@{/index/login}" style="color: white; font-size: 15px;">로그인</a>
+                                                <a th:href="@{/index/login}" style="color:white; font-size: 15px;">로그인</a>
                                         </span>
 
                                 <span th:unless="${session.user==null}">
                                             <div class="button-group-area mt-40">
                                                 <img th:src="${session.user.picture}" style="width: 60px; height: 60px"/>&emsp14;
-                                                    <span th:text="${session.user.name + '님'}" style="color: white; font-size: 15px;"/>&emsp14;
-                                                    <a th:href="@{/logout}" style="color: white; font-size: 15px;">로그아웃</a>
+                                                    <span th:text="${session.user.name + '님'}" style="font-size: 15px;"/>&emsp14;
+                                                    <a th:href="@{/logout}" style="font-size: 15px;">로그아웃</a>
                                             </div>
                                         </span>
                             </div>
