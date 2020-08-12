@@ -27,8 +27,9 @@ public class CSService {
         return csMapper.csRequestList();
     }
 
-    public ArrayList<CS_requestPick> csRequestPick(String csName) {
-        return csMapper.csRequestPick(csName);
+    public CS_requestPick csRequestPick(String chargeName) {
+        System.out.println("충전소 명 : " + chargeName);
+        return csMapper.csRequestPick(chargeName);
     }
 
     // 거주지 불러오기

@@ -31,74 +31,74 @@
                         <div th:unless="${session.csSessionRequest==null}" class="single_field col-md-12">
                             충전소 이름&ensp;<input type="text" class="single_field col-md-10"
                                                 name="CHARGENAME" readonly id="CHARGENAME"
-                                                th:value="${session.csSessionRequest[0].CHARGENAME}">
+                                                th:value="${session.csSessionRequest.getCHARGENAME()}">
                         </div>
                         <div th:unless="${session.csSessionRequest==null}" class="single_field col-md-12">
                             운영 기관&ensp;<input type="text" class="single_field col-md-10"
                                                name="OPERATION" readonly id="OPERATION"
-                                               th:value="${session.csSessionRequest[0].OPERATION}">
+                                               th:value="${session.csSessionRequest.getOPERATION()}">
                         </div>
                         <div th:unless="${session.csSessionRequest==null}" class="single_field col-md-12">
                             충전 속도&ensp;<input type="text" class="single_field col-md-10"
                                                name="CHARGESPEED" readonly id="CHARGESPEED"
-                                               th:value="${session.csSessionRequest[0].CHARGESPEED}">
+                                               th:value="${session.csSessionRequest.getCHARGESPEED()}">
                         </div>
                         <div th:unless="${session.csSessionRequest==null}" class="single_field col-md-12">
                             충전기 수&ensp;<input type="text" class="single_field col-md-10"
                                                name="CHARGEAMOUNT" readonly id="CHARGEAMOUNT"
-                                               th:value="${session.csSessionRequest[0].CHARGEAMOUNT}">
+                                               th:value="${session.csSessionRequest.getCHARGEAMOUNT()}">
                         </div>
                         <div th:unless="${session.csSessionRequest==null}" class="single_field col-md-12">
                             우편 번호&ensp;<input type="text" class="single_field col-md-10"
                                                name="POSTCODE" readonly id="POSTCODE"
-                                               th:value="${session.csSessionRequest[0].POSTCODE}">
+                                               th:value="${session.csSessionRequest.getPOSTCODE()}">
                         </div>
                         <div th:unless="${session.csSessionRequest==null}" class="single_field col-md-12">
                             도로명 주소&ensp;<input type="text" class="single_field col-md-10"
                                                name="ROADADDRESS" readonly id="ROADADDRESS"
-                                               th:value="${session.csSessionRequest[0].ROADADDRESS}">
+                                               th:value="${session.csSessionRequest.getROADADDRESS()}">
                         </div>
                         <div th:unless="${session.csSessionRequest==null}" class="single_field col-md-12">
                             도로명 주소 2&ensp;<input type="text" class="single_field col-md-10"
                                                  name="EXTRAADDRESS" readonly id="EXTRAADDRESS"
-                                                 th:value="${session.csSessionRequest[0].EXTRAADDRESS}">
+                                                 th:value="${session.csSessionRequest.getEXTRAADDRESS()}">
                         </div>
                         <div th:unless="${session.csSessionRequest==null}" class="single_field col-md-12">
                             상세 주소&ensp;<input type="text" class="single_field col-md-10"
                                                name="DETAILADDRESS" readonly id="DETAILADDRESS"
-                                               th:value="${session.csSessionRequest[0].DETAILADDRESS}">
+                                               th:value="${session.csSessionRequest.getDETAILADDRESS()}">
                         </div>
                         <div th:unless="${session.csSessionRequest==null}" class="single_field col-md-12">
                             기본 요금&ensp;<input type="text" class="single_field col-md-10"
                                               name="MIN30FEE" readonly id="MIN30FEE"
-                                              th:value="${session.csSessionRequest[0].MIN30FEE}">
+                                              th:value="${session.csSessionRequest.getMIN30FEE()}">
                         </div>
                         <div th:unless="${session.csSessionRequest==null}" class="single_field col-md-12">
                             추가 요금&ensp;<input type="text" class="single_field col-md-10"
                                                name="ADDMIN10FEE" readonly id="ADDMIN10FEE"
-                                               th:value="${session.csSessionRequest[0].ADDMIN10FEE}">
+                                               th:value="${session.csSessionRequest.getADDMIN10FEE()}">
                         </div>
                         <div th:unless="${session.csSessionRequest==null}" class="single_field col-md-12">
                             케이블&ensp;<input type="text" class="single_field col-md-10"
                                                name="CABLE" readonly id="CABLE"
-                                               th:value="${session.csSessionRequest[0].CABLE}">
+                                               th:value="${session.csSessionRequest.getCABLE()}">
                         </div>
                         <div th:unless="${session.csSessionRequest==null}" class="single_field col-md-12">
                             충전 타입&ensp;<input type="text" class="single_field col-md-10"
                                                name="CHARGETYPE" readonly id="CHARGETYPE"
-                                               th:value="${session.csSessionRequest[0].CHARGETYPE}">
+                                               th:value="${session.csSessionRequest.getCHARGETYPE()}">
                         </div>
                         <div th:unless="${session.csSessionRequest==null}" class="single_field col-md-12">
                             체크&ensp;<input type="text" class="single_field col-md-10"
                                               name="CHARGINGCHK" readonly id="CHARGINGCHK"
-                                              th:value="${session.csSessionRequest[0].CHARGINGCHK}">
+                                              th:value="${session.csSessionRequest.getCHARGINGCHK()}">
                         </div>
 
                         <div class="col-xl-6 col-md-6 col-lg-4 field_col_margin">
                             <br><h4>충전소 사진</h4>
-                            <img th:src="${session.csSessionRequest[0].CHARGEPIC}" width="100%" height="90%">
+                            <img th:src="${session.csSessionRequest.getCHARGEPIC()}" width="100%" height="90%">
                             <h4>아파트 사진</h4>
-                            <img th:src="${session.csSessionRequest[0].APTMAP}" width="100%" height="90%">
+                            <img th:src="${session.csSessionRequest.getAPTMAP()}" width="100%" height="90%">
                             <div class="col-md-12">
 
                         <div class="col-md-12">
@@ -232,6 +232,8 @@
             </div>
         </div>
     </div>
+            </div>
+            </div>
 </div>
 <footer th:replace="layout/layout :: footer"/>
 </body>

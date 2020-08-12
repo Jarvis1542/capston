@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class CS_requestPick {
+    private String NAME;
     private String CHARGENAME;      /* 충전소 이름 */
     private String OPERATION;       /* 운영 기관 */
     private String CHARGESPEED;     /* 충전 속도 */
@@ -19,4 +20,6 @@ public class CS_requestPick {
     private String CHARGINGCHK;
     private String APTMAP; /*아파트 사진*/
     private String CHARGEPIC; /*충전소 사진*/
+    private String lat;
+    private String lng;
 }

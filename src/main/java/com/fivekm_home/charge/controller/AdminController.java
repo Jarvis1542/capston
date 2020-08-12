@@ -39,14 +39,15 @@ public class AdminController {
         return "/admin/hpRequestList";
     }
 
-    /* CS - 충전소 영역 ---------------------------------------------- */
-
     // CS 충전소 요청 목록
     @GetMapping("/csRequestList")
     public String csRequestList(Model model, HttpServletRequest request){
         model.addAttribute("CSrequestList", csService.csRequestList());
         return "/admin/csRequestList";
     }
+
+
+    /* CS - 충전소 영역 ---------------------------------------------- */
 
     // 해당 충전소 자세히 보기
     @GetMapping("/CSrequest/{csName}")

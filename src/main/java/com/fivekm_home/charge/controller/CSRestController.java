@@ -23,7 +23,7 @@ public class CSRestController {
 
     // 충전소 등록
     @PostMapping("/rest/csReg")
-    public void hpReg(@RequestPart("upload") MultipartFile upload, // 주차장 사진
+    public void csReg(@RequestPart("upload") MultipartFile upload, // 주차장 사진
                       @RequestPart("upload2") MultipartFile upload2, // 아파트 내부 단지 지도(사진)
                       CS_register cs_register){
         storageService.store(upload);

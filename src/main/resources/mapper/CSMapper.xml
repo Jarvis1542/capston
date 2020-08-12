@@ -35,8 +35,12 @@
     </select>
 
     <select id="csRequestPick" resultType="com.fivekm_home.charge.domain.CS.CS_requestPick">
-        SELECT CHARGENAME, OPERATION, CHARGESPEED, CHARGEAMOUNT,MIN30FEE, ADDMIN10FEE, CABLE, CHARGETYPE, CHARGINGCHK, CHARGEPIC, APTMAP
-        FROM CS WHERE CHARGENAME = #{csName}
+        SELECT m.name, CHARGENAME, OPERATION, CHARGESPEED, CHARGEAMOUNT,MIN30FEE, ADDMIN10FEE, CABLE, CHARGETYPE, CHARGINGCHK, c.CHARGEPIC, c.APTMAP,
+        r.lat, r.lng, r.postcode, r.roadAddress, r.jibunAddress, r.detailAddress, r.extraAddress
+        from cs_view c, residence_view r, member_view m
+        where c.resName = r.resName
+        and m.email = r.email
+        and chargeName = #{chargeName}
     </select>
 
     <update id="updateChargingChk">
