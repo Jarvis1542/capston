@@ -22,6 +22,7 @@ public class CSController {
 
     @GetMapping("/chargingSearch")
     public String chargingSearch(Model model, HttpSession httpSession){
+        model.addAttribute("searchList", csService.csSearchDataList());
         return "/CS/csSearch";
     }
 

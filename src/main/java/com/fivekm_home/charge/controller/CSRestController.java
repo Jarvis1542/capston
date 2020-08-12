@@ -1,10 +1,13 @@
 package com.fivekm_home.charge.controller;
 
 import com.fivekm_home.charge.domain.CS.CS_register;
+import com.fivekm_home.charge.domain.CS.CS_search;
 import com.fivekm_home.charge.domain.HP.HP_reg;
+import com.fivekm_home.charge.domain.HP.HP_search;
 import com.fivekm_home.charge.service.CSService;
 import com.fivekm_home.charge.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @RestController
 public class CSRestController {
@@ -32,5 +36,12 @@ public class CSRestController {
         cs_register.setAptMap("/img/upload/"+upload2.getOriginalFilename());
         System.out.println("data : "+ cs_register.toString());
         csService.csReg(cs_register);
+    }
+
+    // 지도에 마크를 찍을 데이터 불러오기
+    @GetMapping("/rest/csSearchData")
+    public ArrayList<CS_search> csSearchDataList(){
+        System.out.println("return : " + csService.csSearchDataList());
+        return csService.csSearchDataList();
     }
 }

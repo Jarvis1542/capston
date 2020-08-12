@@ -3,6 +3,7 @@ package com.fivekm_home.charge.service;
 import com.fivekm_home.charge.domain.CS.*;
 import com.fivekm_home.charge.domain.HP.HP_loadRes;
 import com.fivekm_home.charge.domain.HP.HP_request;
+import com.fivekm_home.charge.domain.HP.HP_search;
 import com.fivekm_home.charge.mapper.CSMapper;
 import com.fivekm_home.charge.mapper.HPMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,4 +42,10 @@ public class CSService {
     public void updateChargingChk(String chargeName){
         csMapper.updateChargingChk(chargeName);
     }
+
+    // 지도에 마크를 찍을 데이터 불러오기
+    public ArrayList<CS_search> csSearchDataList(){
+        return csMapper.csSearchDataList();
+    }
+
 }

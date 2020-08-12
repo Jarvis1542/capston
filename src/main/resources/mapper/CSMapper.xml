@@ -43,6 +43,14 @@
         and chargeName = #{chargeName}
     </select>
 
+    <select id="csSearchDataList" resultType="com.fivekm_home.charge.domain.CS.CS_search">
+        select CHARGENAME, OPERATION, min30Fee, addMin10Fee, roadAddress, extraAddress,
+        manageTime, chargePic, lat, lng, chargingChk
+        from cs_view c, residence_view r
+        where c.resName = r.resName
+        and chargingChk = 'Y'
+    </select>
+
     <update id="updateChargingChk">
         update cs_view
         set chargingChk = 'Y'

@@ -135,22 +135,21 @@
     map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
     $.ajax({
-        url : '/rest/hpSearchData',
+        url : '/rest/csSearchData',
         type : 'GET',
         cache : false,
         success : function(data) {
             for (let i = 0; i < data.length; i++) {
                 takeTotal[i] = data[i];
-                console.log('parkingName : ' + takeTotal[i].parkingName);
+                console.log('chargeName : ' + takeTotal[i].chargeName);
                 console.log('parkingType : ' + takeTotal[i].parkingType);
                 console.log('min30Fee : ' + takeTotal[i].min30Fee);
                 console.log('addMin10Fee : ' + takeTotal[i].addMin10Fee);
                 console.log('roadAddress : ' + takeTotal[i].roadAddress);
                 console.log('extraAddress : ' + takeTotal[i].extraAddress);
                 console.log('manageTime : ' + takeTotal[i].manageTime);
-                console.log('place : ' + takeTotal[i].place);
-                console.log('parkingChk : ' + takeTotal[i].parkingChk);
-                console.log('parkingPic : ' + takeTotal[i].parkingPic);
+                console.log('chargingChk : ' + takeTotal[i].chargingChk);
+                console.log('chargePic : ' + takeTotal[i].chargePic);
                 console.log('==========================================');
 
                 // 마커를 생성합니다
@@ -164,10 +163,10 @@
                 };
 
                 var $wrap = $('<div class="dataLayerOnMap" />');
-                var $title = $('<div class="dataTitle" id="parkingName"/>').text(data[i].parkingName);
+                var $title = $('<div class="dataTitle" id="chargeName"/>').text(data[i].chargeName);
                 var $close = $('<div class="close" title="닫기" style="width: 15px; height: 15px; font-size: 25px; margin-right: 15px">X</div>').click(closeOverlay);
                 var $body = $('<div class="body"/>');
-                var $img = $('<div class="dataPicture"><img src="'+data[i].parkingPic+'" style="height: 110px; width: 100px;"></div>');
+                var $img = $('<div class="dataPicture"><img src="'+data[i].chargePic+'" style="height: 110px; width: 100px;"></div>');
                 var $desc = $('<div class="dataInfo" id="desc'+i+'">' +
                     '<div class="dataAddress">'+data[i].roadAddress+'</div>' +
                     '<ul>' +
@@ -181,7 +180,7 @@
                     '</span>'+
                     '</li>'+
                     '</ul>'+
-                    '<p><button style="width: 100px" onClick="mapBook(\'' + data[i].parkingName + '\')" class="genric-btn primary small">예약</button></p>'+
+                    '<p><button style="width: 100px" onClick="mapBook(\'' + data[i].chargeName + '\')" class="genric-btn primary small">예약</button></p>'+
 
                     '</div>');
 
