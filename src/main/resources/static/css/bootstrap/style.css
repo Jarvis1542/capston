@@ -1106,7 +1106,7 @@ label {
 /* line 167, ../../Arafath/CL/December/234. Finance/HTML/scss/_header.scss */
 .header-area .main-header-area .main-menu ul li a {
   color: #fff;
-  font-size: 15px;
+  font-size: 18px;
   text-transform: capitalize;
   font-weight: 500;
   display: inline-block;
@@ -1126,7 +1126,7 @@ label {
 @media (min-width: 1200px) and (max-width: 1500px) {
   /* line 167, ../../Arafath/CL/December/234. Finance/HTML/scss/_header.scss */
   .header-area .main-header-area .main-menu ul li a {
-    font-size: 13px;
+    font-size: 16px;
   }
 }
 

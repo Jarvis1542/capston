@@ -159,6 +159,8 @@
         }
     });
 
+
+
 //아이디 찾기
     $('#searchId').click(function () {
         if(valid($('#name').val())){
@@ -270,6 +272,17 @@
         }
     });
 
+    // 로그인 엔터
+    $("#login_frm input").keypress(function( event ) {
+        if ( event.which == 13 ) {
+            event.preventDefault();
+            if($("#login_frm input").eq(0).val() == '' && $("#login_frm input").eq(1).val() == '') {
+                return false;
+            }
+            $("#login").first().trigger("click");
+        }
+    });
+
 // 로그인
     $('#login').click(function () {
         if(valid($('#email').val())){
@@ -292,7 +305,7 @@
         }).done(function(){
             window.location.href="/";
         }).fail(function (error) {
-            alert(error);
+            alert("아이디 또는 비밀번호가 일치하지 않습니다.");
         });
 
         function valid(val) {
