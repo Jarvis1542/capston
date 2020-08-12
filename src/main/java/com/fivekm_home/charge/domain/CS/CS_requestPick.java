@@ -17,4 +17,6 @@ public class CS_requestPick {
     private String CABLE;           /* 케이블 */
     private String CHARGETYPE;      /* 충전 타입 */
     private String CHARGINGCHK;
+    private String APTMAP; /*아파트 사진*/
+    private String CHARGEPIC; /*충전소 사진*/
 }
