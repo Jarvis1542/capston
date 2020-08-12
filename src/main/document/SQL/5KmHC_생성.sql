@@ -59,6 +59,29 @@ create table guard
         on delete cascade
 );
 
+create table CS
+(
+    chargeName varchar2(50) NULL,       /* 충전소 이름 */
+    operation varchar2(100) NULL,       /* 운영 기관 */
+    chargeSpeed varchar2(50) NULL,      /* 충전 속도 */
+    chargeAmount varchar2(50) NULL,     /* 충전기 수 */
+    min30Fee varchar2(100) NULL,        /* 기본 요금 */
+    addMin10Fee varchar2(100) NULL,     /* 추가 요금 */
+    manageTime  varchar2(30),           /* 운영 시간 */
+    chargePic varchar2(2000),           /* 충전소 사진 */
+    aptMap varchar2(2000),              /* 아파트 내부단지 지도 */
+    cable varchar2(50) NULL,            /* 케이블 */
+    chargeType varchar2(50) NULL,       /* 충전 타입 */
+    regDate timestamp,                  /* 충전소 등록 날짜 */
+    chargingChk  varchar2(1) default 'N',/* 승인 여부 */
+    resName     varchar2(300),          /* 거주지 등록자 이름 */
+    constraint CS_chargeName_pk primary key (chargeName),
+    constraint CS_chargingChk_ck check (chargingChk in('Y', 'N')),
+    constraint CS_resName_fk foreign key (resName) references residence (resName)
+        on delete cascade
+);
+
+
 create table parking(
     parkingName varchar2(300), /* 주차장 이름 */
     parkingType varchar2(30), /* 주차장 타입 */
@@ -75,51 +98,6 @@ create table parking(
     constraint parking_parkingChk_ck check (parkingChk in('Y', 'N')),
     constraint parking_resName_fk foreign key (resName) references residence (resName)
         on delete cascade
-);
-
-create table parkingBookmark(
-    email varchar2(100),
-    parkingName varchar2(300),
-    constraint pBookmark_email_parkingName_pk primary key (email, parkingName),
-    constraint pBookmark_email_fk foreign key (email) references member(email),
-    constraint pBookmark_parkingName_fk foreign key (parkingName) references parking(parkingName)
-        on delete cascade
-);
-
-create table CS
-(
-    chargeName varchar2(50) NULL,       /* 충전소 이름 */
-    operation varchar2(100) NULL,       /* 운영 기관 */
-    chargeSpeed varchar2(50) NULL,      /* 충전 속도 */
-    chargeAmount varchar2(50) NULL,     /* 충전기 수 */
-    min30Fee varchar2(100) NULL,        /* 기본 요금 */
-    addMin10Fee varchar2(100) NULL,     /* 추가 요금 */
-    manageTime  varchar2(30), /* 운영 시간 */
-    chargePic varchar2(2000),           /* 충전소 사진 */
-    aptMap varchar2(2000),               /* 아파트 내부단지 지도 */
-    cable varchar2(50) NULL,            /* 케이블 */
-    chargeType varchar2(50) NULL,        /* 충전 타입 */
-    regDate timestamp, /* 주차장 등록 날짜 */
-    chargingChk  varchar2(1) default 'N',
-    resName     varchar2(300),
-    constraint CS_chargeName_pk primary key (chargeName),
-    constraint CS_chargingChk_ck check (chargingChk in('Y', 'N')),
-    constraint CS_resName_fk foreign key (resName) references residence (resName)
-        on delete cascade
-);
-
-/* QnA 게시판 테이블 작성 */
-create table q_board
-(
-    bno     number         not null,
-    title   varchar2(100)  not null,
-    content varchar2(1000) not null,
-    writer  varchar2(50)   not null,
-    regDate date,
-    noCount number,
-    noReco  number,
-    mbo     number,
-    constraint q_board_bno_pk primary key (bno)
 );
 
 create table parkingBook
@@ -151,6 +129,30 @@ create table parkingPay(
    constraint parkingPay_bookId_fk foreign key (bookId) references parkingBook(bookId)
        on delete cascade
 );
+
+create table parkingBookmark(
+    email varchar2(100),
+    parkingName varchar2(300),
+    constraint pBookmark_email_parkingName_pk primary key (email, parkingName),
+    constraint pBookmark_email_fk foreign key (email) references member(email),
+    constraint pBookmark_parkingName_fk foreign key (parkingName) references parking(parkingName)
+        on delete cascade
+);
+
+/* QnA 게시판 테이블 작성 */
+create table q_board
+(
+    bno     number         not null,
+    title   varchar2(100)  not null,
+    content varchar2(1000) not null,
+    writer  varchar2(50)   not null,
+    regDate date,
+    noCount number,
+    noReco  number,
+    mbo     number,
+    constraint q_board_bno_pk primary key (bno)
+);
+
 -- # 뷰 생성 쿼리 --------------------------------------------------------------
 drop table parkingPay;
 /* 멤버 */
