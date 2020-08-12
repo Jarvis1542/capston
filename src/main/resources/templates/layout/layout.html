@@ -101,7 +101,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="col-xl-8 col-lg-8">
+                        <div class="col-xl-8 col-lg-7">
                             <div class="main-menu  d-none d-lg-block">
                                 <nav>
                                     <ul id="navigation">
@@ -240,7 +240,7 @@
                                 </nav>
                             </div>
                         </div>
-                        <div class="col-xl-2 col-lg-2 d-none d-lg-block">
+                        <div class="col-xl-2 col-lg-3 d-none d-lg-block">
                             <div class="Appointment">
                                 <!-- 가입 버튼 -->
                                 <span th:if="${session.user==null}">
@@ -251,10 +251,14 @@
                                         </span>
 
                                 <span th:unless="${session.user==null}">
-                                            <div class="button-group-area mt-40">
-                                                <img th:src="${session.user.picture}" style="width: 60px; height: 60px"/>&emsp14;
-                                                    <span th:text="${session.user.name + '님'}" style="font-size: 15px;"/>&emsp14;
-                                                    <a th:href="@{/logout}" style="font-size: 15px;">로그아웃</a>
+                                            <div class="button-group-area mt-40" style="display: inline-block;">
+                                                <div style="display: inline-block;">
+                                                    <img th:src="${session.user.picture}" style="width: 60px; height: 60px"/>&emsp14;
+                                                </div>
+                                                <div style="display: inline-block;">
+                                                    <span th:text="${session.user.name + '님'}" style="font-size: 15px; color:white;"/>&emsp14;<br>
+                                                    <a th:href="@{/logout}" style="font-size: 15px; color:white;">로그아웃</a>
+                                                </div>
                                             </div>
                                         </span>
                             </div>
