@@ -1,6 +1,7 @@
 package com.fivekm_home.charge.service;
 
 import com.fivekm_home.charge.domain.CS.*;
+import com.fivekm_home.charge.domain.HP.HP_bookPage;
 import com.fivekm_home.charge.domain.HP.HP_loadRes;
 import com.fivekm_home.charge.domain.HP.HP_request;
 import com.fivekm_home.charge.domain.HP.HP_search;
@@ -31,6 +32,11 @@ public class CSService {
     public CS_requestPick csRequestPick(String chargeName) {
         System.out.println("충전소 명 : " + chargeName);
         return csMapper.csRequestPick(chargeName);
+    }
+
+    // 주차장 예약 페이지
+    public CS_bookPage csBookPage(String chargeName){
+        return csMapper.csBookPage(chargeName);
     }
 
     // 거주지 불러오기

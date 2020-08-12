@@ -26,6 +26,15 @@
         )
     </insert>
 
+    <select id="csBookPage" resultType="com.fivekm_home.charge.domain.CS.CS_bookPage">
+        select chargePic, chargeName, min30Fee, addmin10Fee, aptMap,
+                roadAddress, extraAddress, name, phone, manageTime, m.email
+        from member_view m, cs_view c, residence_view r
+        where m.email = r.email
+        and c.resName = r.resName
+        and chargeName = #{chargeName}
+    </select>
+
     <select id="csRequestList" resultType="com.fivekm_home.charge.domain.CS.CS_requestList">
         SELECT CHARGENAME, OPERATION, CHARGESPEED, CHARGEAMOUNT, MIN30FEE, ADDMIN10FEE, CABLE, CHARGETYPE, CHARGINGCHK, c.resName, r.roadAddress, r.jibunAddress,
             r.detailAddress, c.regDate, m.name
