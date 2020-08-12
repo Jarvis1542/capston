@@ -28,20 +28,23 @@
                                     제목 : <p th:text="${select.title}"/>
                                     작성자 : <p th:text="${select.writer}"/>
                                     내용 : <p th:text="${select.content}"/>
-                                    일반조회수 : <p th:text="${select.noCount}"/>
-                                    일반인조회수 : <p th:text="${select.noReco}"/>
-
-                                    <button id="reco">추천</button>
-                                    <button id="updateBtn">수정</button>
-                                    <button id="delete">삭제</button>
-                                    <button id="selectcancel">취소</button>
+                                    조회수 : <p th:text="${select.noCount}"/>
+                                    추천수 : <p th:text="${select.noReco}"/>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="button-group-area mt-10 center">
+                                <button id="reco"class="genric-btn info-border e-large">추천</button>
+                                <button id="updateBtn"class="genric-btn info-border e-large">수정</button>
+                                <button id="delete"class="genric-btn info-border e-large">삭제</button>
+                                <button id="selectcancel"class="genric-btn info-border e-large">취소</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
     </div>
-</div>
 </div>
         </div>
     </div>

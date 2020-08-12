@@ -42,7 +42,12 @@ $('#updateBtn').click(function () {
     window.location.href='/otherService/update/'+ bno;
 })
 
-//수전하기 버튼
+//Select에서 QnA로 넘어가는 버튼(취소버튼)
+$('#selectcancel').click(function () {
+    window.location.href='/otherService/QnA';
+})
+
+//수정하기 버튼
 $('#update').click(function () {
     var data = {
         title : $('#title').val(),
@@ -57,6 +62,24 @@ $('#update').click(function () {
     }).done(function () {
         alert('수정 완료');
         window.location.href='/';
+    }).fail(function (error) {
+        alert(error);
+    });
+});
+
+//추천하기 버튼
+$('#reco').click(function () {
+    var data = {
+        bno : $('#bno').val()
+    };
+
+    $.ajax({
+        type : 'post',
+        url : '/rest/reco',
+        data : data
+    }).done(function () {
+        alert('추천 완료');
+        window.location.href='/otherService/QnA';
     }).fail(function (error) {
         alert(error);
     });

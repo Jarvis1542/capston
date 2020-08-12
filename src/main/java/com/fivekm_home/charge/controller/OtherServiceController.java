@@ -1,6 +1,7 @@
 package com.fivekm_home.charge.controller;
 
 import com.fivekm_home.charge.domain.OS.QBDelete;
+import com.fivekm_home.charge.domain.OS.QBreco;
 import com.fivekm_home.charge.service.QBService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
