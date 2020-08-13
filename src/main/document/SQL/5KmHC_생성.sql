@@ -5,6 +5,16 @@ CREATE SEQUENCE  q_board_seq
     INCREMENT BY 1
     START WITH 1;
 
+-- CS_PAY(PAYID) 시퀀스
+CREATE SEQUENCE CS_PAY_SEQ
+    start with 1
+    INCREMENT by 1;
+
+-- CS_BOOK(BOOKID) 시퀀스
+CREATE SEQUENCE CS_BOOK_SEQ
+    START WITH 1
+    INCREMENT BY 1;
+
 -- # 테이블 생성 쿼리(쿼리 순서대로 실행 권장) --------------------------------------------------------------
 create table member(
     email varchar2(100),
@@ -59,6 +69,70 @@ create table guard
         on delete cascade
 );
 
+-- 충전소
+create table CS
+(
+    chargeName varchar2(50) NULL,       /* 충전소 이름 */
+    operation varchar2(100) NULL,       /* 운영 기관 */
+    chargeSpeed varchar2(50) NULL,      /* 충전 속도 */
+    chargeAmount varchar2(50) NULL,     /* 충전기 수 */
+    min30Fee varchar2(100) NULL,        /* 기본 요금 */
+    addMin10Fee varchar2(100) NULL,     /* 추가 요금 */
+    manageTime  varchar2(30),           /* 운영 시간 */
+    chargePic varchar2(2000),           /* 충전소 사진 */
+    aptMap varchar2(2000),              /* 아파트 내부단지 지도 */
+    cable varchar2(50) NULL,            /* 케이블 */
+    chargeType varchar2(50) NULL,       /* 충전 타입 */
+    regDate timestamp,                  /* 충전소 등록 날짜 */
+    chargingChk  varchar2(1) default 'N',/* 승인 여부 */
+    resName     varchar2(300),          /* 거주지 등록자 이름 */
+    constraint CS_chargeName_pk primary key (chargeName),
+    constraint CS_chargingChk_ck check (chargingChk in('Y', 'N')),
+    constraint CS_resName_fk foreign key (resName) references residence (resName)
+        on delete cascade
+);
+
+-- 충전소 예약
+CREATE TABLE CS_BOOK (
+    BOOKID      varchar2(100),          /* 예약 ID - SEQ, PK */
+    BOOK_DATE    timestamp,             /* 예약 날짜 */
+    START_TIME   timestamp,             /* 예약 시작 시간 */
+    END_TIME     timestamp,             /* 예약 종료 시간 */
+    STATE    varchar2(1) default 'N',   /* 예약 상태 */
+    EMAIL       varchar2(100),          /* 사용자 이메일 - FK(MEMBER) */
+    CHARGENAME varchar2(300),           /* 충전소 이름 - FK(CS) */
+    constraint CS_BOOK_ID_PK primary key (BOOKID),
+    constraint CS_BOOK_EMAIL_FK foreign key (EMAIL) references MEMBER (EMAIL),
+    constraint CS_BOOK_CHARGENAME_FK foreign key (CHARGENAME) references CS (CHARGENAME)
+        on delete cascade
+);
+
+-- 충전소 결제
+CREATE TABLE CS_PAY (
+    PAYID varchar2(100),        /* 결제 ID - SEQ, PK */
+    PAYMETHOD varchar2(20),     /* 결제 수단 */
+    CHARGENAME varchar2(10),    /* 충전소 이름 */
+    PRICE number,               /* 가격 */
+    EMAIL varchar2(30),         /* 사용자 이메일 - FK(MEMBER) */
+    PHONE varchar2(15),         /* 휴대폰 번호 */
+    BOOKID varchar2(100),       /* 예약 ID - FK */
+    PAY_DATE timestamp,         /* 결제 날짜 */
+    constraint CS_PAY_ID_PK primary key (PAYID),
+    constraint CS_PAY_BOOKID_FK foreign key (BOOKID) references CS_BOOK(BOOKID)
+       on delete cascade
+);
+
+-- 충전소 즐겨찾기
+CREATE TABLE CS_BOOKMARK (
+    EMAIL varchar2(100),        /* 이메일 - PK/FK(MEMBER) */
+    CHARGENAME varchar2(300),   /* 충전소 이름 - PK/FK(CS) */
+    constraint CS_BOOKMARK_PK primary key (EMAIL, CHARGENAME), /* EMAIL+CHARGENAME = PK */
+    constraint CS_BOOKMARK_EMAIL_FK foreign key (EMAIL) references MEMBER(EMAIL),
+    constraint CS_BOOKMARK_CHARGENAME_FK foreign key (CHARGENAME) references CS(CHARGENAME)
+        on delete cascade
+);
+
+
 create table parking(
     parkingName varchar2(300), /* 주차장 이름 */
     parkingType varchar2(30), /* 주차장 타입 */
@@ -75,51 +149,6 @@ create table parking(
     constraint parking_parkingChk_ck check (parkingChk in('Y', 'N')),
     constraint parking_resName_fk foreign key (resName) references residence (resName)
         on delete cascade
-);
-
-create table parkingBookmark(
-    email varchar2(100),
-    parkingName varchar2(300),
-    constraint pBookmark_email_parkingName_pk primary key (email, parkingName),
-    constraint pBookmark_email_fk foreign key (email) references member(email),
-    constraint pBookmark_parkingName_fk foreign key (parkingName) references parking(parkingName)
-        on delete cascade
-);
-
-create table CS
-(
-    chargeName varchar2(50) NULL,       /* 충전소 이름 */
-    operation varchar2(100) NULL,       /* 운영 기관 */
-    chargeSpeed varchar2(50) NULL,      /* 충전 속도 */
-    chargeAmount varchar2(50) NULL,     /* 충전기 수 */
-    min30Fee varchar2(100) NULL,        /* 기본 요금 */
-    addMin10Fee varchar2(100) NULL,     /* 추가 요금 */
-    manageTime  varchar2(30), /* 운영 시간 */
-    chargePic varchar2(2000),           /* 충전소 사진 */
-    aptMap varchar2(2000),               /* 아파트 내부단지 지도 */
-    cable varchar2(50) NULL,            /* 케이블 */
-    chargeType varchar2(50) NULL,        /* 충전 타입 */
-    regDate timestamp, /* 주차장 등록 날짜 */
-    chargingChk  varchar2(1) default 'N',
-    resName     varchar2(300),
-    constraint CS_chargeName_pk primary key (chargeName),
-    constraint CS_chargingChk_ck check (chargingChk in('Y', 'N')),
-    constraint CS_resName_fk foreign key (resName) references residence (resName)
-        on delete cascade
-);
-
-/* QnA 게시판 테이블 작성 */
-create table q_board
-(
-    bno     number         not null,
-    title   varchar2(100)  not null,
-    content varchar2(1000) not null,
-    writer  varchar2(50)   not null,
-    regDate date,
-    noCount number,
-    noReco  number,
-    mbo     number,
-    constraint q_board_bno_pk primary key (bno)
 );
 
 create table parkingBook
@@ -151,6 +180,30 @@ create table parkingPay(
    constraint parkingPay_bookId_fk foreign key (bookId) references parkingBook(bookId)
        on delete cascade
 );
+
+create table parkingBookmark(
+    email varchar2(100),
+    parkingName varchar2(300),
+    constraint pBookmark_email_parkingName_pk primary key (email, parkingName),
+    constraint pBookmark_email_fk foreign key (email) references member(email),
+    constraint pBookmark_parkingName_fk foreign key (parkingName) references parking(parkingName)
+        on delete cascade
+);
+
+/* QnA 게시판 테이블 작성 */
+create table q_board
+(
+    bno     number         not null,
+    title   varchar2(100)  not null,
+    content varchar2(1000) not null,
+    writer  varchar2(50)   not null,
+    regDate date,
+    noCount number,
+    noReco  number,
+    mbo     number,
+    constraint q_board_bno_pk primary key (bno)
+);
+
 -- # 뷰 생성 쿼리 --------------------------------------------------------------
 drop table parkingPay;
 /* 멤버 */
