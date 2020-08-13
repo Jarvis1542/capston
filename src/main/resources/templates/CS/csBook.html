@@ -52,7 +52,7 @@
                     </div>
                     <p class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".4s">
                         <span th:text="${charge.roadAddress}"></span><br>
-                        <span th:text="${charge.extraAddress + 'asdfasdf'}"></span>
+                        <span th:text="${charge.extraAddress}"></span>
                     </p>
                     <div class="about_list">
                         <ul>
@@ -65,7 +65,7 @@
                             </li>
                         </ul>
                         <br><p>예약</p>
-                        <input type="date" id="startDate">&emsp14;&emsp14;~&emsp14;&emsp14;<input type="date" id="endDate">
+                        <input type="datetime-local" id="startDate">&emsp14;&emsp14;~&emsp14;&emsp14;<input type="datetime-local" id="endDate">
 <!--                        <br><br><p>사용 시간</p>-->
 <!--                        <input type="time" id="startUseTime">&emsp14;&emsp14;~&emsp14;&emsp14;<input type="time" id="endUseTime">--><br><br>
                         <button style="float: right; color: #FFFFFF" class="genric-btn success radius" id="book">예약</button>
