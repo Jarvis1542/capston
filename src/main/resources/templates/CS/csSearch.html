@@ -142,7 +142,8 @@
             for (let i = 0; i < data.length; i++) {
                 takeTotal[i] = data[i];
                 console.log('chargeName : ' + takeTotal[i].chargeName);
-                console.log('parkingType : ' + takeTotal[i].parkingType);
+                console.log('operation : ' + takeTotal[i].operation);
+                console.log('chargeAmount' + takeTotal[i].chargeAmount);
                 console.log('min30Fee : ' + takeTotal[i].min30Fee);
                 console.log('addMin10Fee : ' + takeTotal[i].addMin10Fee);
                 console.log('roadAddress : ' + takeTotal[i].roadAddress);
@@ -170,8 +171,11 @@
                 var $desc = $('<div class="dataInfo" id="desc'+i+'">' +
                     '<div class="dataAddress">'+data[i].roadAddress+'</div>' +
                     '<ul>' +
-                    '<li><span class="dataSubTitle">운영 시간</span>' +
-                    '<span>'+data[i].manageTime+'</span><br>'+
+                    '<li><span class="dataSubTitle">운영 정보</span>' +
+                    '<span>' +
+                    '운영시간 :'+data[i].manageTime+'<br>' +
+                    '잔여 충전기 수'+data[i].chargeAmount+'<br>'+
+                    '</span>'+
                     '</li>' +
                     '<li><span class="dataSubTitle">주차 요금</span>' +
                     '<span>' +
