@@ -5,6 +5,16 @@ CREATE SEQUENCE  q_board_seq
     INCREMENT BY 1
     START WITH 1;
 
+-- CS_PAY(PAYID) 시퀀스
+CREATE SEQUENCE CS_PAY_SEQ
+    start with 1
+    INCREMENT by 1;
+
+-- CS_BOOK(BOOKID) 시퀀스
+CREATE SEQUENCE CS_BOOK_SEQ
+    START WITH 1
+    INCREMENT BY 1;
+
 -- # 테이블 생성 쿼리(쿼리 순서대로 실행 권장) --------------------------------------------------------------
 create table member(
     email varchar2(100),
@@ -59,6 +69,7 @@ create table guard
         on delete cascade
 );
 
+-- 충전소
 create table CS
 (
     chargeName varchar2(50) NULL,       /* 충전소 이름 */
@@ -78,6 +89,46 @@ create table CS
     constraint CS_chargeName_pk primary key (chargeName),
     constraint CS_chargingChk_ck check (chargingChk in('Y', 'N')),
     constraint CS_resName_fk foreign key (resName) references residence (resName)
+        on delete cascade
+);
+
+-- 충전소 예약
+CREATE TABLE CS_BOOK (
+    BOOKID      varchar2(100),          /* 예약 ID - SEQ, PK */
+    BOOK_DATE    timestamp,             /* 예약 날짜 */
+    START_TIME   timestamp,             /* 예약 시작 시간 */
+    END_TIME     timestamp,             /* 예약 종료 시간 */
+    STATE    varchar2(1) default 'N',   /* 예약 상태 */
+    EMAIL       varchar2(100),          /* 사용자 이메일 - FK(MEMBER) */
+    CHARGENAME varchar2(300),           /* 충전소 이름 - FK(CS) */
+    constraint CS_BOOK_ID_PK primary key (BOOKID),
+    constraint CS_BOOK_EMAIL_FK foreign key (EMAIL) references MEMBER (EMAIL),
+    constraint CS_BOOK_CHARGENAME_FK foreign key (CHARGENAME) references CS (CHARGENAME)
+        on delete cascade
+);
+
+-- 충전소 결제
+CREATE TABLE CS_PAY (
+    PAYID varchar2(100),        /* 결제 ID - SEQ, PK */
+    PAYMETHOD varchar2(20),     /* 결제 수단 */
+    CHARGENAME varchar2(10),    /* 충전소 이름 */
+    PRICE number,               /* 가격 */
+    EMAIL varchar2(30),         /* 사용자 이메일 - FK(MEMBER) */
+    PHONE varchar2(15),         /* 휴대폰 번호 */
+    BOOKID varchar2(100),       /* 예약 ID - FK */
+    PAY_DATE timestamp,         /* 결제 날짜 */
+    constraint CS_PAY_ID_PK primary key (PAYID),
+    constraint CS_PAY_BOOKID_FK foreign key (BOOKID) references CS_BOOK(BOOKID)
+       on delete cascade
+);
+
+-- 충전소 즐겨찾기
+CREATE TABLE CS_BOOKMARK (
+    EMAIL varchar2(100),        /* 이메일 - PK/FK(MEMBER) */
+    CHARGENAME varchar2(300),   /* 충전소 이름 - PK/FK(CS) */
+    constraint CS_BOOKMARK_PK primary key (EMAIL, CHARGENAME), /* EMAIL+CHARGENAME = PK */
+    constraint CS_BOOKMARK_EMAIL_FK foreign key (EMAIL) references MEMBER(EMAIL),
+    constraint CS_BOOKMARK_CHARGENAME_FK foreign key (CHARGENAME) references CS(CHARGENAME)
         on delete cascade
 );
 
