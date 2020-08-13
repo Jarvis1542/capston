@@ -1,10 +1,7 @@
 package com.fivekm_home.charge.service;
 
 import com.fivekm_home.charge.domain.CS.*;
-import com.fivekm_home.charge.domain.HP.HP_bookPage;
-import com.fivekm_home.charge.domain.HP.HP_loadRes;
-import com.fivekm_home.charge.domain.HP.HP_request;
-import com.fivekm_home.charge.domain.HP.HP_search;
+import com.fivekm_home.charge.domain.HP.*;
 import com.fivekm_home.charge.mapper.CSMapper;
 import com.fivekm_home.charge.mapper.HPMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +49,17 @@ public class CSService {
     // 지도에 마크를 찍을 데이터 불러오기
     public ArrayList<CS_search> csSearchDataList(){
         return csMapper.csSearchDataList();
+    }
+
+    // 충전소 예약
+    public void csBook(CS_book cs_book){
+        csMapper.csBook(cs_book);
+    }
+
+    // 충전소 결제
+    public void csPay(CS_pay cs_pay){
+        System.out.println("CS_PAY : " + cs_pay.toString());
+        csMapper.csPay(cs_pay);
     }
 
 }

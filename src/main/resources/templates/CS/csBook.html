@@ -65,15 +65,15 @@
                             </li>
                         </ul>
                         <br><p>예약</p>
-                        <input type="datetime-local" id="startDate">&emsp14;&emsp14;~&emsp14;&emsp14;<input type="datetime-local" id="endDate">
+                        <input type="date" id="startDate">&emsp14;&emsp14;~&emsp14;&emsp14;<input type="date" id="endDate">
 <!--                        <br><br><p>사용 시간</p>-->
 <!--                        <input type="time" id="startUseTime">&emsp14;&emsp14;~&emsp14;&emsp14;<input type="time" id="endUseTime">--><br><br>
-                        <button style="float: right; color: #FFFFFF" class="genric-btn success radius" id="book">예약</button>
+                        <button style="float: right; color: #FFFFFF" class="genric-btn success radius" id="csbook">예약</button>
                         가격 : <span id="price"></span>원
                     </div>
                     <div class="about_btn wow fadeInRight" data-wow-duration="1.0s" data-wow-delay=".5s">
                         <a style="float: right; color: #FFFFFF" class="genric-btn success radius" id="bookBack">뒤로</a>&emsp14;&emsp14;&emsp14;
-                        <a style="float: right; color: #FFFFFF" class="genric-btn primary radius" id="pay">결제</a>
+                        <a style="float: right; color: #FFFFFF" class="genric-btn primary radius" id="cspay">결제</a>
                     </div>
                 </div>
             </div>
@@ -92,7 +92,7 @@
 
 <footer th:replace="layout/layout :: footer"/>
 </body>
-<script th:async src="/js/hpbook.js"></script>
+<script th:async src="/js/csbook.js"></script>
 <script th:async th:replace="layout/layout :: script"/>
 <script th:async type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/moment.min.js"></script>

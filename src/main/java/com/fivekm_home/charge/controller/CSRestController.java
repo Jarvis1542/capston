@@ -1,7 +1,10 @@
 package com.fivekm_home.charge.controller;
 
+import com.fivekm_home.charge.domain.CS.CS_book;
+import com.fivekm_home.charge.domain.CS.CS_pay;
 import com.fivekm_home.charge.domain.CS.CS_register;
 import com.fivekm_home.charge.domain.CS.CS_search;
+import com.fivekm_home.charge.domain.HP.HP_book;
 import com.fivekm_home.charge.domain.HP.HP_reg;
 import com.fivekm_home.charge.domain.HP.HP_search;
 import com.fivekm_home.charge.service.CSService;
@@ -43,5 +46,19 @@ public class CSRestController {
     public ArrayList<CS_search> csSearchDataList(){
         System.out.println("return : " + csService.csSearchDataList());
         return csService.csSearchDataList();
+    }
+
+    // 충전소 결제
+    @PostMapping("/rest/cspay")
+    public void csPay(CS_pay cs_pay){
+        System.out.println("CS_PAY " + cs_pay   );
+        csService.csPay(cs_pay);
+    }
+
+    // 주차장 예약
+    @PostMapping("/rest/csbook")
+    public void csBook(CS_book cs_book){
+        System.out.println("cs_book.toString : " + cs_book.toString());
+        csService.csBook(cs_book);
     }
 }

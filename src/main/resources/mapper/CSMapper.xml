@@ -65,4 +65,19 @@
         set chargingChk = 'Y'
         where chargeName = #{chargeName}
     </update>
+
+    <insert id="csBook">
+        insert into CS_Book_view values (
+            concat(concat(to_char(sysdate,'YYYY/MM/DD'),#{chargeName}),#{email}), #{startDate},
+            #{endDate}, 'N', #{email}, #{chargeName}, sysdate
+        )
+    </insert>
+
+    <insert id="csPay">
+        insert into CS_PAY_view values (
+            concat(to_char(sysdate,'YYYY/MM/DD'),#{email}), 'card', #{userName}, #{price},
+            #{email}, #{chargeName}, #{phone}, concat(concat(to_char(sysdate,'YYYY/MM/DD'),#{chargeName}),#{email}),
+            sysdate
+        )
+    </insert>
 </mapper>
