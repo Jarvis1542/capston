@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class QBReply {
-    private long rno;
+    private long bno;
     private long mbo;
     private String rwriter;
     private String rcontent;

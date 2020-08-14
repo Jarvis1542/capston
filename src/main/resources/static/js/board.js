@@ -68,7 +68,7 @@ $('#reply').click(function () {
         data : data
     }).done(function () {
         alert('댓글달기 완료');
-        window.location.href='/select/'+bno;
+        window.location.href='/';
     }).fail(function (error) {
         alert(error);
     });

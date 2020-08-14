@@ -40,7 +40,7 @@ public class OtherServiceController {
     @GetMapping("/select/{bno}")
     public String select(@PathVariable long bno, Model model, HttpSession httpSession){
         model.addAttribute("select", qbService.select(bno));
-        model.addAttribute("qbreplylist", qbService.qbreplylist(bno));
+//        model.addAttribute("qbreplylist", qbService.qbreplylist(bno));
         qbService.noCount(bno);
         return "/otherService/select";
     }
