@@ -12,7 +12,7 @@ $('#csbook').on('click', function () {
     console.log("시작일" + startDate);
     console.log("종료일" + endDate);
 
-    var betweenDate = ((endDate.getTime() - startDate.getTime()) / 60000 / 10 );
+    var betweenDate = Math.ceil((endDate.getTime() - startDate.getTime()) / 60000 / 10 );
     console.log("결과값" + (betweenDate));
 
     var hours = Math.floor((betweenDate % (1000*60*60*24))/(1000*60*60));
