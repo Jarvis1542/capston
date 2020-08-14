@@ -39,17 +39,17 @@ public class CSController {
     // 주차장 예약 페이지
     @GetMapping("/csBook/{chargeName}+{email}")
     public String csBookPage(@PathVariable String chargeName,
-                             @PathVariable String email, Model model){
-        System.out.println("주차장 이름 : " + chargeName + "    사용자 이메일 : " + email);
-        model.addAttribute("charge", csService.csBookPage(chargeName));
+                             @PathVariable String email, Model model, HttpSession httpSession){
+        // 로그인 되어있는지 검사부터 할께용
+        if(httpSession.getAttribute("user") != null){
+            System.out.println("주차장 이름 : " + chargeName + "    사용자 이메일 : " + email);
+            model.addAttribute("charge", csService.csBookPage(chargeName));
 
-//        // 북마크 검사
-//        HP_chkBookmark hp_chkBookmark = new HP_chkBookmark();
-//        hp_chkBookmark.setEmail(email);
-//        hp_chkBookmark.setParkingName(parkingName);
-//        System.out.println("checkBookmark return : " + hpService.checkBookmark(hp_chkBookmark));
-//        model.addAttribute("checkBookmark", hpService.checkBookmark(hp_chkBookmark));
-        return "/CS/csBook";
+            return "/CS/csBook";
+        } else {
+            return "/index/login";
+        }
+
     }
 
 }

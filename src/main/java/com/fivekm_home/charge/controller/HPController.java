@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/happyParking")
 public class HPController {
@@ -36,17 +38,25 @@ public class HPController {
     // 주차장 예약 페이지
     @GetMapping("/happyParkingBook/{parkingName}+{email}")
     public String hpBookPage(@PathVariable String parkingName,
-            @PathVariable String email, Model model){
-        System.out.println("주차장 이름 : " + parkingName + "    사용자 이메일 : " + email);
-        model.addAttribute("parking", hpService.hpBookPage(parkingName));
+            @PathVariable String email, Model model, HttpSession httpSession){
 
-        // 북마크 검사
-        HP_chkBookmark hp_chkBookmark = new HP_chkBookmark();
-        hp_chkBookmark.setEmail(email);
-        hp_chkBookmark.setParkingName(parkingName);
-        System.out.println("checkBookmark return : " + hpService.checkBookmark(hp_chkBookmark));
-        model.addAttribute("checkBookmark", hpService.checkBookmark(hp_chkBookmark));
-        return "/HP/hpBook";
+        // 로그인 되어있는지 검사부터 할께용
+        if(httpSession.getAttribute("user") != null){
+            System.out.println("주차장 이름 : " + parkingName + "    사용자 이메일 : " + email);
+            model.addAttribute("parking", hpService.hpBookPage(parkingName));
+
+            // 북마크 검사
+            HP_chkBookmark hp_chkBookmark = new HP_chkBookmark();
+            hp_chkBookmark.setEmail(email);
+            hp_chkBookmark.setParkingName(parkingName);
+            System.out.println("checkBookmark return : " + hpService.checkBookmark(hp_chkBookmark));
+            model.addAttribute("checkBookmark", hpService.checkBookmark(hp_chkBookmark));
+
+            return "/HP/hpBook";
+        } else {
+            return "/index/login";
+        }
+
     }
 
 
