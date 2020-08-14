@@ -47,6 +47,33 @@ $('#selectcancel').click(function () {
     window.location.href='/otherService/QnA';
 })
 
+//Select에서 댓글 달기 취소)
+$('#cancel').click(function () {
+    window.location.href='/otherService/QnA';
+})
+
+//댓글 달기
+$('#reply').click(function () {
+    var bno = $('#bno').val();
+
+    var data = {
+        bno : $('#bno').val(),
+        rwriter : $('#rwriter').val(),
+        rcontent : $('#rcontent').val(),
+        mbo : $('#mno').val()
+    };
+    $.ajax({
+        type : 'post',
+        url : '/rest/reply',
+        data : data
+    }).done(function () {
+        alert('댓글달기 완료');
+        window.location.href='/select/'+bno;
+    }).fail(function (error) {
+        alert(error);
+    });
+});
+
 //수정하기 버튼
 $('#update').click(function () {
     var data = {

@@ -1,10 +1,7 @@
 package com.fivekm_home.charge.controller;
 
 import com.fivekm_home.charge.config.auth.dto.SessionUser;
-import com.fivekm_home.charge.domain.OS.QBDelete;
-import com.fivekm_home.charge.domain.OS.QBUpdate;
-import com.fivekm_home.charge.domain.OS.QB_write;
-import com.fivekm_home.charge.domain.OS.QBreco;
+import com.fivekm_home.charge.domain.OS.*;
 import com.fivekm_home.charge.domain.USER.*;
 import com.fivekm_home.charge.service.MailService;
 import com.fivekm_home.charge.service.MemService;
@@ -96,6 +93,11 @@ public class IndexRestController {
         qbService.reco(qbreco);
     }
 
+    @PostMapping("/rest/reply")
+    public void reply(QBReply qbReply){
+        System.out.println("write restController : " + qbReply.toString());
+        qbService.reply(qbReply);
+    }
 
     @PostMapping("/service/mail/*")
     @ResponseBody

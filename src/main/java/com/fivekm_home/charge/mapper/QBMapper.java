@@ -9,7 +9,9 @@ public interface QBMapper {
     void update(QBUpdate qbUpdate);
     QBSelect select(long bno);
     ArrayList<QBoardList> qboardList();
+    ArrayList<QBReplyList> qbreplyList(long bno);
     void noCount(long bno);
     void noReco(QBreco qbreco);
     void delete(QBDelete qbdelete);
+    void reply(QBReply qbReply);
 }

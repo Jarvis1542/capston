@@ -4,7 +4,7 @@ conn sys as sysdba;
 1234
 
 create user cap identified by 1234;
-grant connect, resource, dba to cap;
+grant connect, resource, dba to pre;
 
 conn cap/1234;
 

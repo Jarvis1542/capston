@@ -34,8 +34,14 @@ public class QBService {
     //추천기능
     public void reco(QBreco qbreco) {qbMapper.noReco(qbreco);}
 
+    //댓글 기능
+    public void reply(QBReply qbReply) {qbMapper.reply(qbReply);}
+
+    //회원 리스트 뽑는 곳
+    public ArrayList<QBReplyList> qbreplylist(long bno){return qbMapper.qbreplyList(bno);}
+
     //게시판 리스트 뽑는곳
-    public ArrayList<QBoardList> qboardlist() { return qbMapper.qboardList();}
+    public ArrayList<QBoardList> qboardlist(){return qbMapper.qboardList();}
 }
 
 

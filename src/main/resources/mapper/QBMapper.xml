@@ -49,4 +49,21 @@
             where bno = #{bno}
         </update>
 
+    <insert id="reply">
+            insert into p_reply_view values(
+                p_reply_seq.nextval,
+                #{rcontent},
+                #{rwriter},
+                sysdate,
+                #{bno},
+                #{mbo}
+            )
+        </insert>
+
+    <select id="replyList" resultType="com.a.aa.domain.ReplyListDTO">
+            select rno, rcontent, rwriter, rregDate, mbo
+            from p_reply_view
+            where bno = #{bno}
+        </select>
+
 </mapper>
