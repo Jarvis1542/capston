@@ -4,18 +4,22 @@
 $('#csbook').on('click', function () {
     let today = new Date();
 
-    let startDate = $('#startDate').val();
-    let startDateArray = startDate.split("-");
-    let startDateObj = new Date(startDateArray[0], Number(startDateArray[1])-1, startDateArray[2]);
-    let result1 = new Date(startDate);
+    var startDate = new Date($('#startDate').val());
+    var endDate = new Date($('#endDate').val());
 
+     // var startDate = new Date(2020,8,14,12,48,20);
+     // var endDate = new Date(2020,8,14,13,48,20);
+    console.log("시작일" + startDate);
+    console.log("종료일" + endDate);
 
-    let endDate = $('#endDate').val();
-    let endDateArray = endDate.split("-");
-    let endDateObj = new Date(endDateArray[0], Number(endDateArray[1])-1, endDateArray[2]);
-    let result2 = new Date(endDate);
+    var betweenDate = ((endDate.getTime() - startDate.getTime()) / 60000 / 10 );
+    console.log("결과값" + (betweenDate));
 
-    let betweenDate = Math.floor((endDateObj.getTime() - startDateObj.getTime())/1000/60/60/24);
+    var hours = Math.floor((betweenDate % (1000*60*60*24))/(1000*60*60));
+    var minutes = Math.floor((betweenDate % (1000*60*60))/(1000*60));
+    var second = Math.floor((betweenDate % (1000*60))/(1000));
+
+    console.log(hours + "시간" + minutes + "분" + second + "초");
     ///////////////////////////////////////////////////////////////////////
 
     // let startUseTime = $('#startUseTime').val();
@@ -29,9 +33,12 @@ $('#csbook').on('click', function () {
 
     // let betweenTime = Math.floor((endUseTimeObj.getTime() - startUseTimeObj.getTime())/1000/60/60);
 
+    let addmin10Fee = $('#addmin10Fee').text();
     let min30Fee = $('#min30Fee').text();
-
-    $('#price').text(betweenDate*min30Fee);
+    if(3<betweenDate)
+        $('#price').text(betweenDate*addmin10Fee-min30Fee-min30Fee);
+    else
+        $('#price').text(min30Fee);
 
 
     // alert(betweenTime);
@@ -44,7 +51,7 @@ $('#csbook').on('click', function () {
         startUseTime : $('#startUseTime').val(),
         endUseTime : $('#endUseTime').val(),
         email : $('#email').val(),
-        parkingName : $('#chargeName').val()
+        chargeName : $('#chargeName').val()
     }
     $.ajax({
         data : data,
@@ -62,7 +69,7 @@ $('#csbook').on('click', function () {
 // 결제
 $('#cspay').on('click', function () {
     var data = {
-        parkingName : $('#chargeName').text(),
+        chargeName : $('#chargeName').text(),
         price : $('#price').text(),
         email : $('#email').val(),
         phone : $('#phone').val(),
@@ -83,7 +90,7 @@ $('#cspay').on('click', function () {
         pg : 'kakao', // version 1.1.0부터 지원.
         pay_method : 'card',
         merchant_uid : 'merchant_' + new Date().getTime(),
-        name : data.parkingName,
+        name : data.chargeName,
         amount : data.price,
         buyer_email : data.email,
         buyer_name : data.userName,
