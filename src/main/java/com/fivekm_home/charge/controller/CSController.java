@@ -47,6 +47,7 @@ public class CSController {
 
             return "/CS/csBook";
         } else {
+            System.out.println("CSController : 로그인되어 있지 않아 로그인 페이지로 요청했습니다.");
             return "/index/login";
         }
 

@@ -22,12 +22,20 @@ public class MyPageController {
 
     @GetMapping("/memberEdit")
     public String memberEdit(Model model, HttpSession httpSession){
-        SessionUser sessionUser = (SessionUser) httpSession.getAttribute("user");
-        MemberEdit memberEdit = new MemberEdit(sessionUser);
-        System.out.println("memberEdit.toString() : " + memberEdit.toString());
-        System.out.println("memberEdit return : "+ myPageService.memberEdit(memberEdit));
-        model.addAttribute("memberEdit", myPageService.memberEdit(memberEdit));
-        return "/myPage/memberEdit";
+        // 로그인 되어있는지 검사부터 할께용
+        if(httpSession.getAttribute("user") != null){
+            SessionUser sessionUser = (SessionUser) httpSession.getAttribute("user");
+            MemberEdit memberEdit = new MemberEdit(sessionUser);
+            System.out.println("memberEdit.toString() : " + memberEdit.toString());
+            System.out.println("memberEdit return : "+ myPageService.memberEdit(memberEdit));
+            model.addAttribute("memberEdit", myPageService.memberEdit(memberEdit));
+
+            return "/myPage/memberEdit";
+        } else {
+            System.out.println("MyPageController : 로그인되어 있지 않아 로그인 페이지로 요청했습니다.");
+            return "/index/login";
+        }
+
     }
 
 //    @GetMapping("/bookmark")
