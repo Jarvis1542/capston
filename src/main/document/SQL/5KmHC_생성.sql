@@ -204,6 +204,16 @@ create table q_board
     constraint q_board_bno_pk primary key (bno)
 );
 
+/* 차량 */
+create table CAR(
+    CARID varchar2(255),    /* EMAIL + SEQ.NUM = PK*/
+    CARNAME varchar2(100),  /* 차량 이름(별칭) */
+    CARMODEL varchar2(255), /* 차량 모델 */
+    CSTYPE varchar2(100),   /* 충전 방식 */
+    EMAIL varchar2(100),    /* 사용자 이메일 - FK(MEMBER) */
+    constraint CAR_ID_PK primary key (CARID)
+);
+
 -- # 뷰 생성 쿼리 --------------------------------------------------------------
 drop table parkingPay;
 /* 멤버 */
@@ -218,15 +228,22 @@ as select * from register;
 /* 거주지 */
 create view residence_view
 as select * from residence;
+/* 충전소 */
+create view CS_view
+as select * from CS;
+/* 충전소 즐겨찾기 */
+create view CSBookmark_view
+as select * from CS_BOOKMARK;
 /* 주차장 */
 create view parking_view
 as select * from parking;
 /* 주차장 즐겨찾기 */
 create view parkingBookmark_view
 as select * from parkingBookmark;
-/* 충전소 */
-create view CS_view
-as select * from CS;
+/* 차량 */
+create view CAR_VIEW
+as select * from CAR;
+
 /* QnA 게시판 뷰 작성*/
 create view q_board_view
 as select * from q_board;
