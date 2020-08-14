@@ -6,32 +6,14 @@ $('#csbook').on('click', function () {
 
     var startDate = new Date($('#startDate').val());
     var endDate = new Date($('#endDate').val());
+    var result1 = new Date(startDate);
+    var result2 = new Date(endDate);
 
-     // var startDate = new Date(2020,8,14,12,48,20);
-     // var endDate = new Date(2020,8,14,13,48,20);
     console.log("시작일" + startDate);
     console.log("종료일" + endDate);
 
     var betweenDate = Math.ceil((endDate.getTime() - startDate.getTime()) / 60000 / 10 );
     console.log("결과값" + (betweenDate));
-
-    var hours = Math.floor((betweenDate % (1000*60*60*24))/(1000*60*60));
-    var minutes = Math.floor((betweenDate % (1000*60*60))/(1000*60));
-    var second = Math.floor((betweenDate % (1000*60))/(1000));
-
-    console.log(hours + "시간" + minutes + "분" + second + "초");
-    ///////////////////////////////////////////////////////////////////////
-
-    // let startUseTime = $('#startUseTime').val();
-    // let startUseTimeArray = startUseTime.split(":");
-    // let startUseTimeObj = new Date(startUseTimeArray[0], startDateArray[1]);
-    //
-    // let endUseTime = $('#endUseTime').val();
-    // let endUseTimeArray = endUseTime.split(":");
-    // let endUseTimeObj = new Date(endUseTimeArray[0], endUseTimeArray[1]);
-
-
-    // let betweenTime = Math.floor((endUseTimeObj.getTime() - startUseTimeObj.getTime())/1000/60/60);
 
     let addmin10Fee = $('#addmin10Fee').text();
     let min30Fee = $('#min30Fee').text();
@@ -40,16 +22,11 @@ $('#csbook').on('click', function () {
     else
         $('#price').text(min30Fee);
 
-
-    // alert(betweenTime);
-
-
+    alert(typeof(startDate));
 
     var data = {
-        startDate : result1,
-        endDate : result2,
-        startUseTime : $('#startUseTime').val(),
-        endUseTime : $('#endUseTime').val(),
+        start_time : result1,
+        end_time : result2,
         email : $('#email').val(),
         chargeName : $('#chargeName').val()
     }

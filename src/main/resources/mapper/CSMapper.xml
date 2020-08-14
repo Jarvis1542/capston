@@ -68,8 +68,15 @@
 
     <insert id="csBook">
         insert into CS_Book_view values (
-            concat(concat(to_char(sysdate,'YYYY/MM/DD'),#{chargeName}),#{email}), #{startDate},
-            #{endDate}, 'N', #{email}, #{chargeName}, sysdate
+            concat(concat(to_char(sysdate,'YYYY/MM/DD'),#{chargeName}),#{email}), sysdate, #{start_time},
+            #{end_time}, 'N', #{email}, #{chargeName}
+        )
+    </insert>
+
+    <insert id="hpBook">
+        insert into parkingBook_view values (
+            concat(concat(to_char(sysdate,'YYYY/MM/DD'),#{parkingName}),#{email}), #{startDate},
+            #{endDate}, 'N', #{email}, #{parkingName}, sysdate
         )
     </insert>
 

@@ -8,8 +8,8 @@ import java.util.Date;
 public class CS_book {
     private String chargeName;
     private String email;
-    private Date startDate;
-    private Date endDate;
+    private Date start_time;
+    private Date end_time;
     private Date startUseTime;
     private Date endUseTime;
 }

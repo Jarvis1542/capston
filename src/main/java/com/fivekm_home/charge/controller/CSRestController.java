@@ -51,11 +51,11 @@ public class CSRestController {
     // 충전소 결제
     @PostMapping("/rest/cspay")
     public void csPay(CS_pay cs_pay){
-        System.out.println("CS_PAY " + cs_pay   );
+        System.out.println("CS_PAY " + cs_pay);
         csService.csPay(cs_pay);
     }
 
-    // 주차장 예약
+    // 충전소 예약
     @PostMapping("/rest/csbook")
     public void csBook(CS_book cs_book){
         System.out.println("cs_book.toString : " + cs_book.toString());

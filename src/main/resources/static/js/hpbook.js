@@ -59,6 +59,7 @@ $('#book').on('click', function () {
     let startDateArray = startDate.split("-");
     let startDateObj = new Date(startDateArray[0], Number(startDateArray[1])-1, startDateArray[2]);
     let result1 = new Date(startDate);
+    console.log(result1);
 
 
     let endDate = $('#endDate').val();
