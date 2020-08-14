@@ -106,12 +106,8 @@
                                 <nav>
                                     <ul id="navigation">
                                         <!-- 메뉴 : SCS -->
-                                        <li><a href="#">SCS</a>
+                                        <li><a href="/chargingStation/chargingSearch">SCS</a>
                                             <ul class="submenu">
-                                                <div th:if="${session.user==null}">
-                                                    <li><a th:href="@{/chargingStation/chargingSearch}">충전소 찾기</a></li>
-                                                    <li><a th:href="@{/chargingStation/chargingHistory}">이용 내역</a></li>
-                                                </div>
                                                 <div th:unless="${session.user==null}">
                                                     <div th:if="${session.user.role.getTitle()=='관리자'}">
                                                         <li><a th:href="@{/admin/csRequestList}">충전소 요청 목록</a></li>
@@ -139,12 +135,8 @@
                                         </li>
 
                                         <!-- 메뉴 : 해피 파킹 -->
-                                        <li><a href="#">Happy Parking</a>
+                                        <li><a href="/happyParking/happyParkingSearch">Happy Parking</a>
                                             <ul class="submenu">
-                                                <div th:if="${session.user==null}">
-                                                    <li><a th:href="@{/happyParking/happyParkingSearch}">주차장 찾기</a></li>
-                                                    <li><a th:href="@{/happyParking/happyParkingHistory}">이용 내역</a></li>
-                                                </div>
                                                 <div th:unless="${session.user==null}">
                                                     <div th:if="${session.user.role.getTitle()=='관리자'}">
                                                         <li><a th:href="@{/admin/happyParkingRequestList}">주차장 요청</a></li>
