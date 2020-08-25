@@ -23,9 +23,8 @@ public class HPService {
     }
 
     // 관리자에게 주차장 요청
-    public HP_request hpRequest(String parkingName){
-        System.out.println("서비스 쪽 parkingName : " + parkingName);
-        return hpMapper.hpRequest(parkingName);
+    public HP_request hpRequest(String hp_name){
+        return hpMapper.hpRequest(hp_name);
     }
 
     // 주차장 요청 리스트
@@ -34,18 +33,29 @@ public class HPService {
     }
 
     // 주차장 예약 페이지
-    public HP_bookPage hpBookPage(String parkingName){
-        return hpMapper.hpBookPage(parkingName);
+    public HP_bookPage hpBookPage(String hp_name){
+        return hpMapper.hpBookPage(hp_name);
     }
 
     // 주차장 승인
-    public void updateParkingChk(String parkingName){
-        hpMapper.updateParkingChk(parkingName);
+    public void updateParkingChk(String hp_name){
+        hpMapper.updateParkingChk(hp_name);
     }
 
     // 지도에 마크를 찍을 데이터 불러오기
     public ArrayList<HP_search> hpSearchDataList(){
         return hpMapper.hpSearchDataList();
+    }
+
+    // 주차장 예약
+    public void hpBook(HP_book hp_book){
+        hpMapper.hpBook(hp_book);
+    }
+
+    // 주차장 결제
+    public void hpPay(HP_pay hp_pay){
+        System.out.println("HP_PAY : " + hp_pay.toString());
+        hpMapper.hpPay(hp_pay);
     }
 
     // 주차장 즐겨찾기 추가
@@ -63,14 +73,4 @@ public class HPService {
         return hpMapper.checkBookmark(hp_chkBookmark);
     }
 
-    // 주차장 예약
-    public void hpBook(HP_book hp_book){
-        hpMapper.hpBook(hp_book);
-    }
-
-    // 주차장 결제
-    public void hpPay(HP_pay hp_pay){
-        System.out.println("HP_PAY : " + hp_pay.toString());
-        hpMapper.hpPay(hp_pay);
-    }
 }

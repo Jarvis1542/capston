@@ -31,11 +31,8 @@ public class HPRestController {
                       HP_reg hp_reg){
         storageService.store(upload);
         storageService.store(upload2);
-        hp_reg.setParkingPic("/img/upload/"+upload.getOriginalFilename());
-        hp_reg.setAptMap("/img/upload/"+upload2.getOriginalFilename());
-        if(hp_reg.getParkingType().equals("기타")){
-            hp_reg.setParkingType("기타 : " + hp_reg.getEtc());
-        }
+        hp_reg.setHp_pic("/img/upload/"+upload.getOriginalFilename());
+        hp_reg.setApt_map("/img/upload/"+upload2.getOriginalFilename());
         System.out.println("data : "+ hp_reg.toString());
         hpService.hpReg(hp_reg);
     }
@@ -51,10 +48,10 @@ public class HPRestController {
     @PostMapping("/rest/hpBookmark")
     public void addBookmark(HP_bookmark hp_bookmark) {
         System.out.println("data : " + hp_bookmark.toString());
-        if(hp_bookmark.getImgSrc().equals("/img/bookmark.png")){
+        if(hp_bookmark.getImg_src().equals("/img/bookmark.png")){
             hpService.addBookmark(hp_bookmark);
         }
-        if(hp_bookmark.getImgSrc().equals("/img/bookmark2.png")){
+        if(hp_bookmark.getImg_src().equals("/img/bookmark2.png")){
             hpService.deleteBookmark(hp_bookmark);
         }
     }

@@ -1,12 +1,8 @@
 package com.fivekm_home.charge.controller;
 
-import com.fivekm_home.charge.domain.HP.HP_requestEtc;
-import com.fivekm_home.charge.service.CSService;
 import com.fivekm_home.charge.service.HPService;
-import com.fivekm_home.charge.service.MemService;
+import com.fivekm_home.charge.service.SCSService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,18 +12,18 @@ public class AdminRestController {
     private HPService hpService;
 
     @Autowired
-    private CSService csService;
+    private SCSService scsService;
 
 
     @PutMapping("/updateParkingChk")
-    public void updateParkingChk(@RequestParam String parkingName){
-        System.out.println("parkingName : " + parkingName);
-        hpService.updateParkingChk(parkingName);
+    public void updateParkingChk(@RequestParam String hp_name){
+        System.out.println("parkingName : " + hp_name);
+        hpService.updateParkingChk(hp_name);
     }
 
     @PutMapping("/updateChargingChk")
-    public void updateChargingChk(@RequestParam String chargeName){
-        System.out.println("csName : " + chargeName);
-        csService.updateChargingChk(chargeName);
+    public void updateChargingChk(@RequestParam String scs_name){
+        System.out.println("csName : " + scs_name);
+        scsService.updateChargingChk(scs_name);
     }
 }

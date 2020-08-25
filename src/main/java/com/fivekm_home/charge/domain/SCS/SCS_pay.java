@@ -1,12 +1,10 @@
-package com.fivekm_home.charge.domain.HP;
+package com.fivekm_home.charge.domain.SCS;
 
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
-public class HP_pay {
-    private String hp_name;
+public class SCS_pay {
+    private String scs_name;
     private String price;
     private String email;
     private String user_name;

@@ -80,7 +80,7 @@
 <div class="apply_form_area">
     <div class="container">
         <div class="row justify-content-center">
-            <form id="csForm" class="col-lg-9 apply_form">
+            <form id="cs_form" class="col-lg-9 apply_form">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="apply_info_text text-center">
@@ -91,7 +91,7 @@
                     </div>
                     <div class="col-md-12">
                         <div class="single_field col-md-12">
-                            충전소 명 <input type="text" class="single_field col-md-10" name="chargeName" id="chargeName" placeholder="충전소 명">
+                            충전소 명 <input type="text" class="single_field col-md-10" name="scs_name" id="scs_name" placeholder="충전소 명">
                         </div>
                         <div id="errChargeName"></div>
                         </div>
@@ -100,27 +100,27 @@
                             <br><h4>충전 타입</h4>
                             <label class="interval">
                                 <p style="font-size: 17px">
-                                    <input type="checkbox" name="chargeType" value="dcChademo" class="d-inline-block">&ensp;DC 차데모
+                                    <input type="checkbox" name="scs_type" value="dcChaDemo" class="d-inline-block">&ensp;DC 차데모
                                 </p>
                             </label>
                             <label class="interval">
                                 <p style="font-size: 18px">
-                                    <input type="checkbox" name="chargeType" value="dcCombo" class="d-inline-block">&ensp;DC 콤보
+                                    <input type="checkbox" name="scs_type" value="dcCombo" class="d-inline-block">&ensp;DC 콤보
                                 </p>
                             </label>
                             <label class="interval">
                                 <p style="font-size: 18px">
-                                    <input type="checkbox" name="chargeType" value="super" class="d-inline-block">&ensp;슈퍼 차져
+                                    <input type="checkbox" name="scs_type" value="super" class="d-inline-block">&ensp;슈퍼 차져
                                 </p>
                             </label>
                             <label class="interval">
                                 <p style="font-size: 18px">
-                                    <input type="checkbox" name="chargeType" value="ac5pin" class="d-inline-block">&ensp;AC 3상 5핀
+                                    <input type="checkbox" name="scs_type" value="ac5pin" class="d-inline-block">&ensp;AC 3상 5핀
                                 </p>
                             </label>
                             <label class="interval">
                                 <p style="font-size: 18px">
-                                    <input type="checkbox" name="chargeType" value="ac7pin" class="d-inline-block">&ensp;AC 3상 7핀
+                                    <input type="checkbox" name="scs_type" value="ac7pin" class="d-inline-block">&ensp;AC 3상 7핀
                                 </p>
                             </label>
                         </div>
@@ -128,7 +128,7 @@
                         <div class="col-md-12">
                             <br><span style="line-height: 2.5; margin-left: 0.7em">운영 기관</span>
                             <div class="single_field col-md-10" style="position: relative; float: right">
-                                <select class="selectpicker show-menu-arrow" data-live-search="true" data-size="5" data-width="100%" name="operation" id="operation">
+                                <select class="selectpicker show-menu-arrow" data-live-search="true" data-size="5" data-width="100%" name="oper_ins" id="oper_ins">
                                     <option data-display="운영기관을 선택해주세요" selected>운영기관을 선택해주세요</option>
                                     <option value="환경부(한국자동차환경협회)">환경부(한국자동차환경협회))</option>
                                     <option value="한국 전력">한국 전력</option>
@@ -145,64 +145,64 @@
                             <br><h4>케이블</h4>
                             <label class="interval">
                                 <p style="font-size: 18px">
-                                    <input type="radio" name="cable" value="dcChademo" class="d-inline-block">&ensp;장착된 케이블
+                                    <input type="radio" name="cable" value="장착된 케이블" class="d-inline-block">&ensp;장착된 케이블
                                 </p>
                             </label>
                             <label class="interval">
                                 <p style="font-size: 18px">
-                                    <input type="radio" name="cable" value="dcCombo" class="d-inline-block">&ensp;차주 케이블
+                                    <input type="radio" name="cable" value="차주 케이블" class="d-inline-block">&ensp;차주 케이블
                                 </p>
                             </label>
                             <label class="interval">
                                 <p style="font-size: 18px">
-                                    <input type="radio" name="cable" value="super" class="d-inline-block">&ensp;둘 다
+                                    <input type="radio" name="cable" value="둘 다" class="d-inline-block">&ensp;둘 다
                                 </p>
                             </label>
                         </div>
                         <div class="col-md-12">
                             <div class="single_field col-md-12">
-                                <br>충전기 수&ensp;&ensp;&ensp;<input type="text" name="chargeAmount" class="single_field col-md-10" placeholder="ex)&ensp;100&ensp;&ensp;충전기 개수(Ex:50대)">
+                                <br>충전기 수&ensp;&ensp;&ensp;<input type="text" name="scs_amount" id="scs_amount" class="single_field col-md-10" placeholder="ex)&ensp;100&ensp;&ensp;충전기 개수(Ex:5)">
                             </div>
                         </div>
 
                         <div class="col-md-12">
                             <div class="single_field col-md-12">
-                                <br>충전 속도&ensp;&ensp;&ensp;<input type="text" name="chargeSpeed" class="single_field col-md-10" placeholder="ex)&ensp;100&ensp;&ensp;충전 속도(단위:Kw)">
+                                <br>충전 속도&ensp;&ensp;&ensp;<input type="text" name="scs_speed" id="scs_speed" class="single_field col-md-10" placeholder="ex)&ensp;100&ensp;&ensp;충전 속도(단위:Kw)">
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="single_field col-md-12">
-                                기본 요금&ensp;&ensp;&ensp;<input type="text" name="min30Fee" class="single_field col-md-10" placeholder="ex)&ensp;30분당 500원">
+                                기본 요금&ensp;&ensp;&ensp;<input type="text" name="min30_fee" id="min30_fee" class="single_field col-md-10" placeholder="ex)&ensp;30분당 500원">
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="single_field col-md-12">
-                                추가 요금&ensp;&ensp;&ensp;<input type="text" name="addMin10Fee" class="single_field col-md-10" placeholder="ex)&ensp;10분당 500원">
+                                추가 요금&ensp;&ensp;&ensp;<input type="text" name="addMin10_fee" id="addMin10_fee" class="single_field col-md-10" placeholder="ex)&ensp;10분당 500원">
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="single_field col-md-12">
-                                운영 시작 시간&ensp;&ensp;&ensp;&ensp;<input type="text" id="manageTime" name="manageTime" class="single_field col-md-9" placeholder="ex)&ensp;09:00">
+                                운영 시작 시간&ensp;&ensp;&ensp;&ensp;<input type="text" id="manage_time" name="manage_time" class="single_field col-md-9" placeholder="ex)&ensp;09:00">
                             </div>
                         </div>
 
                         <div class="col-xl-6 col-md-6 col-lg-4 field_col_margin">
                             <br><h4>주소</h4>
                             <p class="newsletter_text">주소를 검색하여 주소를 등록해주세요.</p>
-                            <input type="hidden" id="resName" name="resName" value="">
+                            <input type="hidden" id="res_name" name="res_name">
                             <div class="newsletter_form">
                                 <button type="button" id="loadResidence" data-toggle="modal" data-target="#myModal"
                                         class="btn btn-outline-primary">주소 불러오기
                                 </button>
-                                <input type="text" name="postcode" id="postcode" placeholder="우편번호" value=""
+                                <input type="text" name="post_code" id="post_code" placeholder="우편번호" value=""
                                        class="single-input"/>
-                                <input type="text" name="roadAddress" id="roadAddress" placeholder="도로명주소" value=""
+                                <input type="text" name="road_addr" id="road_addr" placeholder="도로명주소" value=""
                                        class="single-input"/>
-                                <input type="text" name="jibunAddress" id="jibunAddress" placeholder="지번주소" value=""
+                                <input type="text" name="jibun_addr" id="jibun_addr" placeholder="지번주소" value=""
                                        class="single-input"/>
-                                <input type="text" name="extraAddress" id="extraAddress" placeholder="참고항목" value=""
+                                <input type="text" name="extra_addr" id="extra_addr" placeholder="참고항목" value=""
                                        class="single-input"/>
-                                <input type="text" name="detailAddress" id="detailAddress" placeholder="상세주소" value=""
+                                <input type="text" name="detail_addr" id="detail_addr" placeholder="상세주소" value=""
                                        class="single-input"/>
                             </div>
                             <div class="image-area mt-1">
@@ -245,7 +245,6 @@
                         <div class="col-md-12">
                             <div class="submit_btn">
                                 <button class="boxed-btn3" id="csReg" name="csReg" type="submit">등록</button>
-                                <a href="/" role="button" value="다음에 할게요"></a>
                             </div>
                         </div>
 

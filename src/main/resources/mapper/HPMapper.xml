@@ -64,6 +64,21 @@
         and hp_chk = 'Y'
     </select>
 
+    <insert id="hpBook">
+        insert into hp_book_view values (
+            hp_book_seq.nextval, #{start_date},
+            #{end_date}, 'N', #{email}, #{hp_name}, sysdate
+        )
+    </insert>
+
+    <insert id="hpPay">
+        insert into hp_pay_view values (
+            hp_pay_seq.nextval, 'card', #{user_name}, #{price},
+            #{email}, #{hp_name}, #{phone}, hp_book_seq.currval,
+            sysdate
+        )
+    </insert>
+
     <insert id="addBookmark">
         insert into hp_bookmark_view values(
             #{email},
@@ -83,19 +98,4 @@
         where email = #{email}
         and hp_name = #{hp_name}
     </select>
-
-    <insert id="hpBook">
-        insert into hp_book_view values (
-            hp_book_seq.nextval, #{start_date},
-            #{end_date}, 'N', #{email}, #{hp_name}, sysdate
-        )
-    </insert>
-
-    <insert id="hpPay">
-        insert into hp_pay_view values (
-            hp_pay_seq.nextval, 'card', #{user_name}, #{price},
-            #{email}, #{hp_name}, #{phone}, hp_book_seq.currval,
-            sysdate
-        )
-    </insert>
 </mapper>

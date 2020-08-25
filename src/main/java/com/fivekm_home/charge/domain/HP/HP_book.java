@@ -6,10 +6,8 @@ import java.util.Date;
 
 @Data
 public class HP_book {
-    private String parkingName;
+    private String hp_name;
     private String email;
-    private Date startDate;
-    private Date endDate;
-    private Date startUseTime;
-    private Date endUseTime;
+    private Date start_date;
+    private Date end_date;
 }

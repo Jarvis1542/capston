@@ -41,18 +41,18 @@
                     </tr>
                     </thead>
                     <tbody id="tbody">
-                    <tr th:each ="requestList, num : ${requestList}">
+                    <tr th:each ="hpRequestList, num : ${hpRequestList}">
                         <td><span th:text="${num.count}"></span></td>
-                        <td><a th:href="@{'/admin/requestHappyParking/' + ${requestList.parkingName}}"><span th:text="${requestList.parkingName}"/></a></td>
-                        <td><span th:text="${requestList.parkingType}"/></td>
-                        <td><span th:text="${requestList.place}"/></td>
-                        <td><span th:text="${requestList.resName}"/></td>
-                        <td><span th:text="${requestList.roadAddress}"/></td>
-                        <td><span th:text="${requestList.jibunAddress}"/></td>
-                        <td><span th:text="${requestList.detailAddress}"/></td>
-                        <td><span th:text="${#dates.format(requestList.regDate, 'YYYY-MM-dd HH:mm:ss')}"/></td>
-                        <td><span th:text="${requestList.name}"/></td>
-                        <td><span th:text="${requestList.parkingChk}"/></td>
+                        <td><a th:href="@{'/admin/hpRequest/' + ${hpRequestList.hp_name}}"><span th:text="${hpRequestList.hp_name}"/></a></td>
+                        <td><span th:text="${hpRequestList.hp_type}"/></td>
+                        <td><span th:text="${hpRequestList.place}"/></td>
+                        <td><span th:text="${hpRequestList.res_name}"/></td>
+                        <td><span th:text="${hpRequestList.road_addr}"/></td>
+                        <td><span th:text="${hpRequestList.jibun_addr}"/></td>
+                        <td><span th:text="${hpRequestList.detail_addr}"/></td>
+                        <td><span th:text="${#dates.format(hpRequestList.reg_date, 'YYYY-MM-dd HH:mm:ss')}"/></td>
+                        <td><span th:text="${hpRequestList.name}"/></td>
+                        <td><span th:text="${hpRequestList.hp_chk}"/></td>
 
                     </tr>
                     </tbody>

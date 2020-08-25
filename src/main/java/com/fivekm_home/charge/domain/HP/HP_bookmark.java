@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class HP_bookmark {
-    private String parkingName;
+    private String hp_name;
     private String email;
-    private String imgSrc;
+    private String img_src;
 }

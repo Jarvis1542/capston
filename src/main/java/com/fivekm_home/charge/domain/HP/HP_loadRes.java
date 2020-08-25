@@ -4,11 +4,11 @@ import lombok.Data;
 
 @Data
 public class HP_loadRes {
-    private String resName;
-    private String postcode;
-    private String roadAddress;
-    private String jibunAddress;
-    private String extraAddress;
-    private String detailAddress;
+    private String res_name;
+    private String post_code;
+    private String road_addr;
+    private String jibun_addr;
+    private String extra_addr;
+    private String detail_addr;
     private String email;
 }

@@ -6,14 +6,13 @@ import java.util.Date;
 
 @Data
 public class HP_reg {
-    private String parkingName;
-    private String parkingType;
-    private String etc;
+    private String hp_name;
+    private String hp_type;
     private int place;
-    private int min30Fee;
-    private int addMin10Fee;
-    private String manageTime;
-    private String parkingPic;
-    private String aptMap;
-    private String resName;
+    private int min30_fee;
+    private int addMin10_fee;
+    private String manage_time;
+    private String hp_pic;
+    private String apt_map;
+    private String res_name;
 }

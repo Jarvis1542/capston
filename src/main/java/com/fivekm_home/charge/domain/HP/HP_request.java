@@ -5,20 +5,19 @@ import lombok.Data;
 @Data
 public class HP_request {
     private String name;
-    private String parkingName;
-    private String parkingType;
-    private String etc;
+    private String hp_name;
+    private String hp_type;
     private String place;
-    private String min30Fee;
-    private String addMin10Fee;
-    private String manageTime;
-    private String postcode;
-    private String roadAddress;
-    private String jibunAddress;
-    private String detailAddress;
-    private String extraAddress;
-    private String aptMap;
-    private String parkingPic;
+    private String min30_fee;
+    private String addMin10_fee;
+    private String manage_time;
+    private String post_code;
+    private String road_addr;
+    private String jibun_addr;
+    private String detail_addr;
+    private String extra_addr;
+    private String apt_map;
+    private String hp_pic;
     private String lat;
     private String lng;
 }

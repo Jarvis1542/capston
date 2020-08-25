@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class HP_chkBookmark {
-    private String parkingName;
+    private String hp_name;
     private String email;
 }
