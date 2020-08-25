@@ -9,7 +9,6 @@ import com.fivekm_home.charge.service.MemService;
 import com.fivekm_home.charge.service.QBService;
 import com.fivekm_home.charge.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -49,25 +48,6 @@ public class IndexRestController {
         }
     }
 
-//    @PostMapping("/rest/join")
-//    public void join(Join join, @RequestPart("file") MultipartFile file) throws Exception {
-//        if(!file.isEmpty()){
-//            String fileName = file.getOriginalFilename();
-//            String dir2 = "D:\\Backup\\F\\Java_Workspace\\charge\\src\\main\\resources\\static\\img\\upload\\";
-//            System.out.println("dir2 : " + dir2);
-//            String path = Paths.get(dir2, fileName).toString();
-//            System.out.println("path  : " + path);
-//
-//            BufferedOutputStream steam = new BufferedOutputStream(new FileOutputStream(new File(path)));
-//            steam.write(file.getBytes());
-//            steam.close();
-//
-//            join.setPicture("/img/upload/"+fileName);
-//        }
-//
-//        memService.join(join);
-//    }
-
     @PostMapping("/rest/join")
     public void join(Join join, @RequestPart("upload") MultipartFile upload){
         System.out.println("내용 : " + join.toString() + "   파일 :"+ upload);
@@ -77,7 +57,7 @@ public class IndexRestController {
     }
 
     @PostMapping("/rest/qbwrite")
-    public void qbwrite(QB_write qb_write,HttpSession httpSession, Model model){
+    public void qbwrite(QB_write qb_write){
         qbService.qbwrite(qb_write);
         System.out.println(qb_write.toString());
             }
@@ -90,7 +70,7 @@ public class IndexRestController {
     @PostMapping("/verifyCode")
     @ResponseBody
     public int verifyCode(Email email) {
-        int result = 0;
+        int result;
         if(MailService.ePw.equals(email.getEmailAuthText())) {
             result = 1;
             ver(result);
@@ -102,7 +82,6 @@ public class IndexRestController {
         }
     }
     public static int ver(int ver){
-        int result = 0;
         if(ver==1){
             return 1;
         }else{

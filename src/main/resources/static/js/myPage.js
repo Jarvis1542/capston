@@ -25,34 +25,113 @@ $('#parking').on('click', function () {
     alert(text);
 });
 
-// select에서 충전소가 클릭되었을 때
-// $('.selectpicker').selectpicker('val', '충전소').on('click', function () {
-//
-// });
-//
-// // select에서 주차장이 클릭되었을 때
-// $('.selectpicker').selectpicker('val', '주차장').on('click', function () {
-//     var email = $('#email').val();
-//     window.location.href = '/myPage/hpBookmark/'+email;
-//     let userHp = [];
-//     let data = {
-//         email : $('#email').val()
-//     }
-//     $.ajax({
-//         data : data,
-//         type : 'post',
-//         url : '/rest/userHpBookmark',
-//         success : function (data) {
-//             for(let i=0; i<data.length; i++){
-//                 userHp[i] = data[i];
-//             }
-//             userHp.
-//         },
-//         error : function (error) {
-//             alert(JSON.stringify(error));
-//         }
-//     });
-// });
+// 회원정보 수정 - 회원 구분에 따라 추가 양식 제공(memberEdit)
+$('input[type=radio][name=mem_role]').on('click', function() {
+    var chkValue = $('input[type=radio][name=mem_role]:checked').val();
+
+    if (chkValue == 'no') {
+        $('#mp_form').css('display', 'none');
+        $('#reg_form').css('display', 'none');
+        $('#no_edit').show();
+        // return false;
+    } else if (chkValue == 'mp') {
+        $('#mp_form').css('display', 'block');
+        $('#reg_form').css('display', 'none');
+        $('#no_edit').hide();
+        // return false;
+    } else if (chkValue == 'reg') {
+        $('#mp_form').css('display', 'none');
+        $('#reg_form').css('display', 'block');
+        $('#no_edit').hide();
+        // return false;
+    }
+});
+
+// 회원 정보 수정 버튼
+$('#no_edit').on('click', function (event) {
+    event.preventDefault();
+    var data = {
+        name : $('#name').val(),
+        phone : $('#phone').val(),
+        email : $('#email').val()
+    }
+
+    $.ajax({
+        type : 'POST',
+        url : '/rest/edit',
+        data : data,
+        success : function (data) {
+            if(data==3){
+                alert('회원 정보 수정 완료했습니다.');
+                window.location.href = "/";
+            }else{
+                event.preventDefault();
+                alert('다시 입력');
+            }
+        },
+        error : function (error) {
+            alert(JSON.stringify(error));
+        }
+    });
+});
+
+// 회원 정보 경비 요청 버튼
+$('#mp_edit').on('click', function (event) {
+    event.preventDefault();
+    var form = $('#edit_form')[0];
+    var formData = new FormData(form);
+
+    $.ajax({
+        type : 'POST',
+        url : '/rest/edit',
+        enctype: 'multipart/form-data',
+        processData: false,
+        contentType: false,
+        cache: false,
+        data : formData,
+        success : function (data) {
+            if(data==1){
+                alert('경비 요청 완료했습니다.');
+                window.location.href = "/";
+            }else{
+                event.preventDefault();
+                alert('다시 입력');
+            }
+        },
+        error : function (error) {
+            alert(JSON.stringify(error));
+        }
+    });
+});
+
+// 회원 정보 등록자 요청 버튼
+$('#reg_edit').on('click', function (event) {
+    event.preventDefault();
+    var form = $('#edit_form')[0];
+    var formData = new FormData(form);
+
+    $.ajax({
+        type : 'POST',
+        url : '/rest/edit',
+        enctype: 'multipart/form-data',
+        processData: false,
+        contentType: false,
+        cache: false,
+        data : formData,
+        success : function (data) {
+            if(data==2){
+                alert('등록자 요청 완료했습니다.');
+                window.location.href = "/";
+            }else{
+                event.preventDefault();
+                alert('다시 입력');
+            }
+        },
+        error : function (error) {
+            alert(JSON.stringify(error));
+        }
+    });
+});
 
 // 즐겨찾기의 예약 버튼
 $('#moveHpBook').on('click', function () {

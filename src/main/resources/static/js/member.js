@@ -304,7 +304,7 @@
             data: data
         }).done(function(){
             window.location.href="/";
-        }).fail(function (error) {
+        }).fail(function () {
             alert("아이디 또는 비밀번호가 일치하지 않습니다.");
         });
 
@@ -407,8 +407,8 @@
     $('#updatePassword').on('click', function (event) {
         event.preventDefault();
         var data = {
-            email : $('#editEmail').val(),
-            password : $('#editPassword').val()
+            email : $('#email').val(),
+            password : $('#password').val()
         }
         $.ajax({
            data : data,
@@ -426,90 +426,3 @@
            }
         });
     });
-
-    // 회원 정보 수정 버튼
-    $('#normalEdit').on('click', function (event) {
-        event.preventDefault();
-        var data = {
-            name : $('#name').val(),
-            phone : $('#phone').val(),
-            email : $('#email').text()
-        }
-        
-        $.ajax({
-            type : 'POST',
-            url : '/rest/edit',
-            data : data,
-            success : function (data) {
-                if(data==3){
-                    alert('회원 정보 수정 완료했습니다.');
-                    window.location.href = "/";
-                }else{
-                    event.preventDefault();
-                    alert('다시 입력');
-                }
-            },
-            error : function (error) {
-                alert(JSON.stringify(error));
-            }
-        });
-    });
-
-    // 회원 정보 경비 요청 버튼
-    $('#guardEdit').on('click', function (event) {
-        event.preventDefault();
-        var form = $('#editForm')[0];
-        var formData = new FormData(form);
-        
-        $.ajax({
-            type : 'POST',
-            url : '/rest/edit',
-            enctype: 'multipart/form-data',
-            processData: false,
-            contentType: false,
-            cache: false,
-            data : formData,
-            success : function (data) {
-                if(data==1){
-                    alert('경비 요청 완료했습니다.');
-                    window.location.href = "/";
-                }else{
-                    event.preventDefault();
-                    alert('다시 입력');
-                }
-            },
-            error : function (error) {
-                alert(JSON.stringify(error));
-            }
-        });
-    });
-
-    // 회원 정보 등록자 요청 버튼
-    $('#registerEdit').on('click', function (event) {
-        event.preventDefault();
-        var form = $('#editForm')[0];
-        var formData = new FormData(form);
-
-        $.ajax({
-            type : 'POST',
-            url : '/rest/edit',
-            enctype: 'multipart/form-data',
-            processData: false,
-            contentType: false,
-            cache: false,
-            data : formData,
-            success : function (data) {
-                if(data==2){
-                    alert('등록자 요청 완료했습니다.');
-                    window.location.href = "/";
-                }else{
-                    event.preventDefault();
-                    alert('다시 입력');
-                }
-            },
-            error : function (error) {
-                alert(JSON.stringify(error));
-            }
-        });
-    });
-

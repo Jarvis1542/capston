@@ -39,8 +39,8 @@
                 <!-- 컨텐츠 부분 -->
                 <div class="comments-area">
                     <input type="hidden" id="email" th:value="${session.user.email}">
-                    <p>주차장 이름을 등록해주세요.</p>
-                    이름&emsp14;&emsp14;:&emsp14;&emsp14;<input type="text" id="resName" name="resName" class="col-md-8">
+                    <p>아파트 이름을 등록해주세요.</p>
+                    이름&emsp14;&emsp14;:&emsp14;&emsp14;<input type="text" id="res_name" name="res_name" class="col-md-8">
                     &emsp14;&emsp14;<button id="checkResidence" class="genric-btn info">중복검사</button><br>
                     <div id="resultChk"></div>
                     <br>
@@ -49,11 +49,11 @@
                         <div style="float: right">
                             <p>주소를 검색하여 주소를 등록해주세요.</p>
                         </div>
-                        <input type="text" name="postcode" id="postcode" placeholder="우편번호" value="" class="single-input" />
-                        <input type="text" name="roadAddress" id="roadAddress" placeholder="도로명주소" value="" class="single-input" />
-                        <input type="text" name="jibunAddress" id="jibunAddress" placeholder="지번주소" value="" class="single-input" />
-                        <input type="text" name="extraAddress" id="extraAddress" placeholder="참고항목" value="" class="single-input" />
-                        <input type="text" name="detailAddress" id="detailAddress" placeholder="ex) 102동 앞 주차장 20칸" value="" class="single-input"/>
+                        <input type="text" name="post_code" id="post_code" placeholder="우편번호" value="" class="single-input" />
+                        <input type="text" name="road_addr" id="road_addr" placeholder="도로명주소" value="" class="single-input" />
+                        <input type="text" name="jibun_addr" id="jibun_addr" placeholder="지번주소" value="" class="single-input" />
+                        <input type="text" name="extra_addr" id="extra_addr" placeholder="참고항목" value="" class="single-input" />
+                        <input type="text" name="detail_addr" id="detail_addr" placeholder="ex) 102동 앞 주차장 20칸" value="" class="single-input"/>
                     </div>
                 </div>
                 <h1>지도 등록</h1><br><hr><br>
@@ -161,16 +161,16 @@
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('postcode').value = data.zonecode;
-                document.getElementById("roadAddress").value = roadAddr;
+                document.getElementById('post_code').value = data.zonecode;
+                document.getElementById("road_addr").value = roadAddr;
                 document.getElementById("keyword").value = roadAddr;
-                document.getElementById("jibunAddress").value = data.jibunAddress;
+                document.getElementById("jibun_addr").value = data.jibunAddress;
 
                 // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
                 if(roadAddr !== ''){
-                    document.getElementById("extraAddress").value = extraRoadAddr;
+                    document.getElementById("extra_addr").value = extraRoadAddr;
                 } else {
-                    document.getElementById("extraAddress").value = '';
+                    document.getElementById("extra_addr").value = '';
                 }
 
                 var guideTextBox = document.getElementById("guide");

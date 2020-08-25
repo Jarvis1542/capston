@@ -75,8 +75,7 @@ public class IndexController {
     }
 
     @GetMapping("/MS/kakaologin")
-    public String kakaoLogina(@RequestParam("code") String code, RedirectAttributes ra,
-                              Kakao kakao, HttpSession httpSession) throws Exception{
+    public String kakaoLogina(@RequestParam("code") String code, Kakao kakao, HttpSession httpSession) throws Exception{
         JsonNode accessToken;
         org.codehaus.jackson.JsonNode jsonToken = KakaoAccessToken.getKakaoAccessToken(code);
         accessToken = jsonToken.get("access_token");
@@ -86,32 +85,25 @@ public class IndexController {
 
         // get id
         String id = userInfo.path("id").asText();
-        String name = null;
-        String email = null;
-        String picture = null;
 
         // 유저정보 카카오에서 가져오기 Get properties
         JsonNode properties = userInfo.path("properties");
         JsonNode kakao_account = userInfo.path("kakao_account");
 
-        name = properties.path("nickname").asText();
-        email = kakao_account.path("email").asText();
-        picture = properties.path("thumbnail_image").asText();
-
-        String asdf = memService.kakaoLoginCheck(email).toString();
-        System.out.println("asdf : " + asdf);
+        String name = properties.path("nickname").asText();
+        String email = kakao_account.path("email").asText();
+        String picture = properties.path("thumbnail_image").asText();
+        String asdf = memService.kakaoLoginChk(email).toString();
+        email = email+"_kakao";
         // 이미 회원가입 했을 경우
         if( asdf.indexOf("null")>0 ){
-            email = email+"_kakao";
-            System.out.println("email 값 : " +email);
             System.out.println("email로 검색 : " +memService.kakaoLogin(email));
-            KakaoLogin kakaoLogin1 = new KakaoLogin();
-            kakaoLogin1.setRole(memService.kakaoLogin(email).getRole());
-            kakaoLogin1.setPicture(memService.kakaoLogin(email).getPicture());
-            kakaoLogin1.setName(memService.kakaoLogin(email).getName());
-            kakaoLogin1.setEmail(memService.kakaoLogin(email).getEmail());
-            kakaoLogin1.setPhone(memService.kakaoLogin(email).getPhone());
-            SessionUser user = new SessionUser(kakaoLogin1);
+            kakao.setRole(memService.kakaoLogin(email).getRole());
+            kakao.setPicture(memService.kakaoLogin(email).getPicture());
+            kakao.setName(memService.kakaoLogin(email).getName());
+            kakao.setEmail(memService.kakaoLogin(email).getEmail());
+            kakao.setPhone(memService.kakaoLogin(email).getPhone());
+            SessionUser user = new SessionUser(kakao);
             httpSession.setAttribute("user", user);
             httpSession.setAttribute("role", user.getRole());
             System.out.println("카카오 로그인");
@@ -119,22 +111,18 @@ public class IndexController {
 
          // 회원가입 해야하는 경우
         }else{
-            email = email+"_kakao";
-            System.out.println("asdf.indexof() : " + asdf.indexOf("null"));
-            KakaoJoin kakaoJoin = new KakaoJoin();
-            kakaoJoin.setEmail(email);
-            kakaoJoin.setName(name);
-            kakaoJoin.setPicture(picture);
+            kakao.setEmail(email);
+            kakao.setName(name);
+            kakao.setPicture(picture);
+            memService.kakaoJoin(kakao); // 카카오 계정으로 회원가입
 
-            memService.kakaoJoin(kakaoJoin); // 카카오 계정으로 회원가입
             System.out.println("카카오 계정 회원가입 후 : " + memService.kakaoLogin(email).toString());
-            KakaoLogin kakaoLogin1 = new KakaoLogin();
-            kakaoLogin1.setRole(memService.kakaoLogin(email).getRole());
-            kakaoLogin1.setPicture(memService.kakaoLogin(email).getPicture());
-            kakaoLogin1.setName(memService.kakaoLogin(email).getName());
-            kakaoLogin1.setEmail(memService.kakaoLogin(email).getEmail());
-            kakaoLogin1.setPhone(memService.kakaoLogin(email).getPhone());
-            SessionUser user = new SessionUser(kakaoLogin1);
+            kakao.setRole(memService.kakaoLogin(email).getRole());
+            kakao.setPicture(memService.kakaoLogin(email).getPicture());
+            kakao.setName(memService.kakaoLogin(email).getName());
+            kakao.setEmail(memService.kakaoLogin(email).getEmail());
+            kakao.setPhone(memService.kakaoLogin(email).getPhone());
+            SessionUser user = new SessionUser(kakao);
             httpSession.setAttribute("user", user);
             httpSession.setAttribute("role", user.getRole());
             System.out.println("카카오로 회원가입 후 로그인");

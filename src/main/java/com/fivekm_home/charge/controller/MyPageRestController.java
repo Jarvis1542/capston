@@ -37,69 +37,71 @@ public class MyPageRestController {
                      @RequestPart(value = "upload2", required = false)MultipartFile upload2,  // 아파트 대표 증명 사진
                      UpdateMem updateMem){
         System.out.println("updateMem : " + updateMem.toString());
-        if(updateMem.getMemberRole()==null){
+
+        // 일반
+        if(updateMem.getMem_role()==null){
             memService.updateNormal(updateMem);
             return 3;
         }else {
             // 경비
-            if(updateMem.getMemberRole().equals("guard")){
+            if(updateMem.getMem_role().equals("mp")){
                 System.out.println("경비 : " + updateMem + "    파일 : " + upload.getOriginalFilename());
-//            storageService.store(upload);
-                updateMem.setGuardLicence("/img/upload/"+upload.getOriginalFilename());
+                storageService.store(upload);
+                updateMem.setMp_lic("/img/upload/"+upload.getOriginalFilename());
                 System.out.println("파일 저장 통과 후 : "  + updateMem.toString());
-//            myPageService.regGuard(updateMem);
-//            memService.updateGuard(updateMem);
+                myPageService.regGuard(updateMem);
+                memService.updateGuard(updateMem);
                 return 1;
+
                 // 등록자
-            }else if(updateMem.getMemberRole().equals("register")){
+            }else if(updateMem.getMem_role().equals("reg")){
                 System.out.println("등록자 : " + updateMem + "    파일 : " + upload.getOriginalFilename());
                 storageService.store(upload2);
-                updateMem.setRegisterLicence("/img/upload/"+upload2.getOriginalFilename());
+                updateMem.setReg_lic("/img/upload/"+upload2.getOriginalFilename());
                 myPageService.regRegister(updateMem);
                 memService.updateRegister(updateMem);
                 return 2;
             }
         }
-
-        return 3;
+        return 0;
     } // end of edit
 
     @PostMapping("/rest/checkResidence")
-    public int checkResidence(@RequestParam("resName") String resName){
-        System.out.println("이름 : " + resName);
-        return myPageService.checkResidence(resName);
+    public int checkResidence(@RequestParam("res_name") String res_name){
+        System.out.println("이름 : " + res_name);
+        return myPageService.checkResidence(res_name);
     }
 
     @PostMapping("/rest/residence")
     public void regResidence(@RequestParam("totalData[]") List<String> str, Residence residence){
         if(str.size()<10){
-            residence.setResName(str.get(0));
-            residence.setPostcode(str.get(1));
-            residence.setRoadAddress(str.get(2));
-            residence.setJibunAddress(str.get(3));
-            residence.setExtraAddress(str.get(4));
-            residence.setDetailAddress(str.get(5));
+            residence.setRes_name(str.get(0));
+            residence.setPost_code(str.get(1));
+            residence.setRoad_addr(str.get(2));
+            residence.setJibun_addr(str.get(3));
+            residence.setExtra_addr(str.get(4));
+            residence.setDetail_addr(str.get(5));
             residence.setLat(str.get(6));
             residence.setLng(str.get(7));
             residence.setEmail(str.get(8));
             myPageService.regResidence(residence);
         }else if(str.size()<19){
-            residence.setResName(str.get(0));
-            residence.setPostcode(str.get(1));
-            residence.setRoadAddress(str.get(2));
-            residence.setJibunAddress(str.get(3));
-            residence.setExtraAddress(str.get(4));
-            residence.setDetailAddress(str.get(5));
+            residence.setRes_name(str.get(0));
+            residence.setPost_code(str.get(1));
+            residence.setRoad_addr(str.get(2));
+            residence.setJibun_addr(str.get(3));
+            residence.setExtra_addr(str.get(4));
+            residence.setDetail_addr(str.get(5));
             residence.setLat(str.get(6));
             residence.setLng(str.get(7));
             residence.setEmail(str.get(8));
             myPageService.regResidence(residence);
-            residence.setResName(str.get(9));
-            residence.setPostcode(str.get(10));
-            residence.setRoadAddress(str.get(11));
-            residence.setJibunAddress(str.get(12));
-            residence.setExtraAddress(str.get(13));
-            residence.setDetailAddress(str.get(14));
+            residence.setRes_name(str.get(9));
+            residence.setPost_code(str.get(10));
+            residence.setRoad_addr(str.get(11));
+            residence.setJibun_addr(str.get(12));
+            residence.setExtra_addr(str.get(13));
+            residence.setDetail_addr(str.get(14));
             residence.setLat(str.get(15));
             residence.setLng(str.get(16));
             residence.setEmail(str.get(17));

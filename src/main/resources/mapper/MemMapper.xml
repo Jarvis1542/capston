@@ -27,7 +27,7 @@
         )
     </insert>
 
-    <select id="kakaoLoginCheck" resultType="com.fivekm_home.charge.domain.USER.KakaoLogin">
+    <select id="kakaoLoginChk" resultType="com.fivekm_home.charge.domain.USER.Kakao">
         select email from member_view
         where email = concat(#{email},'_kakao')
     </select>

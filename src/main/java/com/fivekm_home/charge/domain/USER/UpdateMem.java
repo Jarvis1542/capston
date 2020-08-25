@@ -8,12 +8,12 @@ public class UpdateMem {
     private String email;
     private String name;
     private String phone;
-    private String memberRole;
-    private String guardCo;
-    private String guardCoNum;
-    private String guardLicence;
-    private String bankName;
-    private String accountNum;
-    private String registerLicence;
+    private String mem_role;
+    private String mp_co;
+    private String mp_co_num;
+    private String mp_lic;
+    private String bank_name;
+    private String acc_num;
+    private String reg_lic;
     private Role role;
 }

@@ -2,99 +2,99 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fivekm_home.charge.mapper.HPMapper">
     <select id="loadResidence" resultType="com.fivekm_home.charge.domain.HP.HP_loadRes">
-        select resName, postcode, roadAddress, jibunAddress, extraAddress, detailAddress, email
-        from residence_view
+        select res_name, post_code, road_addr, jibun_addr, extra_addr, detail_addr, email
+        from res_view
         where email = #{email}
     </select>
 
     <insert id="hpReg">
-        insert into parking_view values(
-            #{parkingName},
-            #{parkingType},
+        insert into hp_view values(
+            #{hp_name},
+            #{hp_type},
             #{place},
-            #{min30Fee},
-            #{addMin10Fee},
-            #{manageTime},
-            #{parkingPic},
-            #{aptMap},
+            #{min30_fee},
+            #{addMin10_fee},
+            #{manage_time},
+            #{hp_pic},
+            #{apt_map},
             sysdate,
             'N',
-            #{resName}
+            #{res_name}
         )
     </insert>
 
     <select id="hpRequestList" resultType="com.fivekm_home.charge.domain.HP.HP_requestList">
-        select parkingName, parkingType, place, p.resName, r.roadAddress, r.jibunAddress,
-               r.detailAddress, p.regDate, m.name, parkingChk
-        from parking_view p, residence_view r, member_view m
-        where p.resName = r.resName
+        select hp_name, hp_type, place, p.res_name, r.road_addr, r.jibun_addr,
+               r.detail_addr, p.reg_date, m.name, hp_chk
+        from hp_view p, res_view r, member_view m
+        where p.res_name = r.res_name
         and m.email = r.email
     </select>
 
     <select id="hpRequest"  resultType="com.fivekm_home.charge.domain.HP.HP_request">
-        select m.name, parkingName, parkingType, place, min30Fee, addMin10Fee, manageTime,
-                r.postcode, r.roadAddress, r.jibunAddress, r.detailAddress, r.extraAddress,
-                p.aptMap, p.parkingPic, r.lat, r.lng
-        from parking_view p, residence_view r, member_view m
-        where p.resName = r.resName
+        select m.name, hp_name, hp_type, place, min30_fee, addMin10_fee, manage_time,
+                r.post_code, r.road_addr, r.jibun_addr, r.detail_addr, r.extra_addr,
+                p.apt_map, p.hp_pic, r.lat, r.lng
+        from hp_view p, res_view r, member_view m
+        where p.res_name = r.res_name
           and m.email = r.email
-          and parkingName = #{parkingName}
+          and hp_name = #{hp_name}
     </select>
 
     <select id="hpBookPage" resultType="com.fivekm_home.charge.domain.HP.HP_bookPage">
-        select parkingPic, parkingName, place, min30Fee, addmin10Fee, aptMap,
-                roadAddress, extraAddress, name, phone, manageTime, m.email
-        from member_view m, parking_view p, residence_view r
+        select hp_pic, hp_name, place, min30_fee, addMin10_fee, apt_map,
+                road_addr, extra_addr, name, phone, manage_time, m.email
+        from member_view m, hp_view p, res_view r
         where m.email = r.email
-        and p.resName = r.resName
-        and parkingName = #{parkingName}
+        and p.res_name = r.res_name
+        and hp_name = #{hp_name}
     </select>
 
     <update id="updateParkingChk">
-        update parking_view
-        set parkingChk = 'Y'
-        where parkingName = #{parkingName}
+        update hp_view
+        set hp_chk = 'Y'
+        where hp_name = #{hp_name}
     </update>
     
     <select id="hpSearchDataList" resultType="com.fivekm_home.charge.domain.HP.HP_search">
-        select parkingName, parkingType, min30Fee, addMin10Fee, roadAddress, extraAddress,
-        manageTime, place, parkingPic, lat, lng, parkingChk
-        from parking_view p, residence_view r
-        where p.resName = r.resName
-        and parkingChk = 'Y'
+        select hp_name, hp_type, min30_fee, addMin10_fee, road_addr, extra_addr,
+        manage_time, place, hp_pic, lat, lng, hp_chk
+        from hp_view p, res_view r
+        where p.res_name = r.res_name
+        and hp_chk = 'Y'
     </select>
 
     <insert id="addBookmark">
-        insert into parkingBookmark_view values(
+        insert into hp_bookmark_view values(
             #{email},
-            #{parkingName}
+            #{hp_name}
         )
     </insert>
 
     <delete id="deleteBookmark">
-        delete from parkingBookmark_view
+        delete from hp_bookmark_view
         where email = #{email}
-        and parkingName = #{parkingName}
+        and hp_name = #{hp_name}
     </delete>
 
     <select id="checkBookmark" resultType="int">
         select count(*)
-        from parkingBookmark_view
+        from hp_bookmark_view
         where email = #{email}
-        and parkingName = #{parkingName}
+        and hp_name = #{hp_name}
     </select>
 
     <insert id="hpBook">
-        insert into parkingBook_view values (
-            concat(concat(to_char(sysdate,'YYYY/MM/DD'),#{parkingName}),#{email}), #{startDate},
-            #{endDate}, 'N', #{email}, #{parkingName}, sysdate
+        insert into hp_book_view values (
+            hp_book_seq.nextval, #{start_date},
+            #{end_date}, 'N', #{email}, #{hp_name}, sysdate
         )
     </insert>
 
     <insert id="hpPay">
-        insert into parkingPay_view values (
-            concat(to_char(sysdate,'YYYY/MM/DD'),#{email}), 'card', #{userName}, #{price},
-            #{email}, #{parkingName}, #{phone}, concat(concat(to_char(sysdate,'YYYY/MM/DD'),#{parkingName}),#{email}),
+        insert into hp_pay_view values (
+            hp_pay_seq.nextval, 'card', #{user_name}, #{price},
+            #{email}, #{hp_name}, #{phone}, hp_book_seq.currval,
             sysdate
         )
     </insert>

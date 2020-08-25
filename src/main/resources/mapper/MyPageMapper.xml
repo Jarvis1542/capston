@@ -7,39 +7,39 @@
     </update>
 
     <insert id="regGuard">
-        insert into guard_view values (
+        insert into mp_view values (
             #{email},
-            #{guardLicence},
-            #{guardCo},
-            #{guardCoNum},
+            #{mp_lic},
+            #{mp_co},
+            #{mp_co_num},
             sysdate,
             null
         )
     </insert>
 
     <insert id="regRegister">
-        insert into register_view values (
+        insert into reg_view values (
             #{email},
-            #{registerLicence},
-            #{accountNum},
-            #{bankName},
+            #{reg_lic},
+            #{acc_num},
+            #{bank_name},
             sysdate
         )
     </insert>
 
     <select id="checkResidence" resultType="int">
-        select count(*) from residence
-        where resName = #{resName}
+        select count(*) from res
+        where res_name = #{res_name}
     </select>
 
     <insert id="regResidence">
-        insert into residence_view values (
-            #{resName},
-            #{postcode},
-            #{roadAddress},
-            #{jibunAddress},
-            #{detailAddress},
-            #{extraAddress},
+        insert into res_view values (
+            #{res_name},
+            #{post_code},
+            #{road_addr},
+            #{jibun_addr},
+            #{detail_addr},
+            #{extra_addr},
             #{lat},
             #{lng},
             sysdate,
@@ -48,15 +48,15 @@
     </insert>
 
     <select id="userHpBookmark" resultType="com.fivekm_home.charge.domain.USER.UserHpBookmark">
-        select parkingPic, parkingName, place, min30Fee, addmin10Fee, aptMap,
-        roadAddress, extraAddress, name, phone, manageTime, m.email
-        from member_view m, parking_view p, residence_view r
+        select hp_pic, hp_name, place, min30_fee, addmin10_fee, apt_map,
+        road_addr, extra_addr, name, phone, manage_time, m.email
+        from member_view m, hp_view p, res_view r
         where m.email = r.email
-        and p.resName = r.resName
+        and p.res_name = r.res_name
         and m.email = #{email}
-        and parkingChk = (select parkingChk
-                            from parking_view
-                            where parkingChk = 'Y')
-        and parkingName =
+        and hp_chk = (select hp_chk
+                            from hp_view
+                            where hp_chk = 'Y')
+        and hp_name = #{hp_name}
     </select>
 </mapper>

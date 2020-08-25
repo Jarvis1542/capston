@@ -187,7 +187,7 @@
                                                     <div th:if="${session.user.role.getTitle()=='관리자'}">
                                                         <li><a th:href="@{/admin/memberList}">회원 목록</a></li>
                                                         <li><a th:href="@{/admin/csRequestList}">충전소 요청 목록</a></li>
-                                                        <li><a th:href="@{/admin/happyParkingRequestList}">주차장 요청</a></li>
+                                                        <li><a th:href="@{/admin/happyParkingRequestList}">주차장 요청 목록</a></li>
                                                         <li><a th:href="@{#}">충전소 매출 현황</a></li>
                                                         <li><a th:href="@{#}">주차장 매출 현황</a></li>
                                                         <li><a th:href="@{/myPage/residence}">거주지 등록</a></li>
@@ -430,6 +430,7 @@
     <script th:async th:src="@{/js/residence.js}"></script>
     <script th:async th:src="@{/js/cs.js}"></script>
     <script th:async th:src="@{/js/hp.js}"></script>
+    <script th:async th:src="@{/js/myPage.js}"></script>
 
     <script th:async src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 </section>

@@ -24,13 +24,13 @@ public class MemService {
     }
 
     // 카카오 회원가입
-    public void kakaoJoin(KakaoJoin kakaoJoin){
-        memMapper.kakaoJoin(kakaoJoin);
+    public void kakaoJoin(Kakao kakao){
+        memMapper.kakaoJoin(kakao);
     }
 
     // 카카오 로그인 체크
-    public ArrayList<KakaoLogin> kakaoLoginCheck(String email) throws Exception{
-        return memMapper.kakaoLoginCheck(email);
+    public ArrayList<Kakao> kakaoLoginChk(String email){
+        return memMapper.kakaoLoginChk(email);
     }
 
     //아이디찾기

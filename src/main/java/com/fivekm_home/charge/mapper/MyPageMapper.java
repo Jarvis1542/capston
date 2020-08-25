@@ -12,7 +12,7 @@ public interface MyPageMapper {
     int updatePassword(EditPassword editPassword);
     void regGuard(UpdateMem updateMem);
     void regRegister(UpdateMem updateMem);
-    int checkResidence(String resName);
+    int checkResidence(String res_name);
     void regResidence(Residence residence);
     ArrayList<UserHpBookmark> userHpBookmark(String email); // 회원이 즐겨찾기한 주차장 목록 불러오기
 }

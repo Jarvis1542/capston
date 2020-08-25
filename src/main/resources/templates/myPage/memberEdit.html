@@ -73,7 +73,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <form id="editForm" class="apply_form">
+                <form id="edit_form" class="apply_form">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="apply_info_text text-center">
@@ -83,12 +83,12 @@
                         </div>
                         <div class="col-md-12">
                             <div class="single_field">
-                                <p>이메일&emsp14;&emsp14;&emsp14;:&emsp14;&emsp14;&emsp14;<input type="text" id="editEmail" name="email" th:value="${memberEdit.email}" class="col-md-10" readonly></p>
+                                <p>이메일&emsp14;&emsp14;&emsp14;:&emsp14;&emsp14;&emsp14;<input type="text" id="email" name="email" th:value="${memberEdit.email}" class="col-md-10" readonly></p>
                             </div>
                         </div>
                         <div class="col-md-9">
                             <div class="single_field">
-                                <p>비밀번호&emsp14;:&emsp14;<input id="editPassword" type="password" placeholder="수정할 비밀번호를 입력하세요." class="col-md-9"></p>
+                                <p>비밀번호&emsp14;:&emsp14;<input id="password" type="password" placeholder="수정할 비밀번호를 입력하세요." class="col-md-9"></p>
                             </div>
                             <div id="comUpdatePass"></div>
                         </div>
@@ -109,35 +109,35 @@
                         <!-- 회원구분 선택 -->
                         <div class="col-md-12 center">
                             <label class="interval">
-                                <input type="radio" name="memberRole" value="normal" checked>
+                                <input type="radio" name="mem_role" value="no" checked>
                                 일반 회원
                             </label>
                             <label class="interval">
-                                <input type="radio" name="memberRole" value="guard">
+                                <input type="radio" name="mem_role" value="mp">
                                 경비 회원
                             </label>
                             <label class="interval">
-                                <input type="radio" name="memberRole" value="register">
+                                <input type="radio" name="mem_role" value="reg">
                                 등록자 회원
                             </label>
                         </div>
 
                         <div class="col-md-12">
                             <div class="submit_btn">
-                                <button id="normalEdit" class="boxed-btn3">수정</button>
+                                <button id="no_edit" class="boxed-btn3">수정</button>
                             </div>
                         </div>
 
                         <!-- 경비부분 -->
-                        <div id="guardForm" style="display: none;" class="container"><br>
+                        <div id="mp_form" style="display: none;" class="container"><br>
                             <div class="col-md-12">
                                 <div class="single_field">
-                                    <input type="text" id="guardCo" name="guardCo" placeholder="관리업체 이름">
+                                    <input type="text" id="mp_co" name="mp_co" placeholder="관리업체 이름">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="single_field">
-                                    <input type="text" id="guardCoNum" name="guardCoNum" placeholder="관리업체 번호">
+                                    <input type="text" id="mp_co_num" name="mp_co_num" placeholder="관리업체 번호">
                                 </div>
                             </div><br>
                             <div class="col-lg-12">
@@ -158,21 +158,21 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="submit_btn">
-                                    <button id="guardEdit" class="boxed-btn3">경비 요청</button>
+                                    <button id="mp_edit" class="boxed-btn3">경비 요청</button>
                                 </div>
                             </div>
                         </div>
 
                         <!-- 등록자부분 -->
-                        <div id="registerForm" style="display: none;" class="container"><br>
+                        <div id="reg_form" style="display: none;" class="container"><br>
                             <div class="col-md-12">
                                 <div class="single_field">
-                                    <input type="text" id="bankName" name="bankName" placeholder="은행이름">
+                                    <input type="text" id="bank_name" name="bank_name" placeholder="은행이름">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="single_field">
-                                    <input type="text" id="accountNum" name="accountNum" placeholder="계좌번호">
+                                    <input type="text" id="acc_num" name="acc_num" placeholder="계좌번호">
                                 </div>
                             </div><br>
                             <div class="col-lg-12">
@@ -193,7 +193,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="submit_btn">
-                                    <button id="registerEdit" class="boxed-btn3">등록자 요청</button>
+                                    <button id="reg_edit" class="boxed-btn3">등록자 요청</button>
                                 </div>
                             </div>
                         </div>
@@ -205,7 +205,7 @@
 </div>
 <script>
     $(document).load(function () {
-        $('editForm')[0].reset();
+        $('edit_form')[0].reset();
     });
     //경비
     function readURL(input) {

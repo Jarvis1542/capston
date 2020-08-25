@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/*")
-public class WatchVehicleController {
+public class WVController {
 
     @GetMapping("/watchVehicle")
-    public String watchVehicle(Model model){
+    public String watchVehicle(){
         return "/watchVehicle/WV";
     }
 

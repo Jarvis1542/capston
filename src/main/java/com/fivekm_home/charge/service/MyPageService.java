@@ -37,8 +37,8 @@ public class MyPageService {
     }
 
     // 아파트 이름 중복검사
-    public int checkResidence(String resName){
-        return myPageMapper.checkResidence(resName);
+    public int checkResidence(String res_name){
+        return myPageMapper.checkResidence(res_name);
     }
 
     // 거주지 등록

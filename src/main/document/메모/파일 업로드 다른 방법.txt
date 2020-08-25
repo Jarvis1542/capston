@@ -1,0 +1,18 @@
+    @PostMapping("/rest/join")
+    public void join(Join join, @RequestPart("file") MultipartFile file) throws Exception {
+        if(!file.isEmpty()){
+            String fileName = file.getOriginalFilename();
+            String dir2 = "D:\\Backup\\F\\Java_Workspace\\charge\\src\\main\\resources\\static\\img\\upload\\";
+            System.out.println("dir2 : " + dir2);
+            String path = Paths.get(dir2, fileName).toString();
+            System.out.println("path  : " + path);
+
+            BufferedOutputStream steam = new BufferedOutputStream(new FileOutputStream(new File(path)));
+            steam.write(file.getBytes());
+            steam.close();
+
+            join.setPicture("/img/upload/"+fileName);
+        }
+
+        memService.join(join);
+    }
