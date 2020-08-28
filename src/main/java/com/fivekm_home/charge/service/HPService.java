@@ -54,7 +54,6 @@ public class HPService {
 
     // 주차장 결제
     public void hpPay(HP_pay hp_pay){
-        System.out.println("HP_PAY : " + hp_pay.toString());
         hpMapper.hpPay(hp_pay);
     }
 

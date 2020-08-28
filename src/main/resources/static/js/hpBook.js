@@ -1,6 +1,7 @@
 'use strict';
-$('#bookBack').on('click', function () {
-    window.location.href = '/happyParking/happyParkingSearch';
+// 지도로 뒤로가기
+$('#hpBookBack').on('click', function () {
+    window.location.href = '/chargingStation/scsSearch';
 });
 
 // 즐겨찾기 등록
@@ -8,9 +9,9 @@ $('#firstBookmark').on('click', function () {
     let src = ($(this).attr('src') === '/img/bookmark.png') ? '/img/bookmark2.png' : '/img/bookmark.png';
     if(src === '/img/bookmark.png'){
         var data = {
-            parkingName : $('#parkingName').text(),
+            hp_name : $('#hp_name').text(),
             email : $('#email').val(),
-            imgSrc : src.toString()
+            img_src : src.toString()
         }
         $.ajax({
             data : data,
@@ -19,7 +20,7 @@ $('#firstBookmark').on('click', function () {
             success : function () {
                 alert('즐겨찾기 추가 되었습니다!');
                 $('#bookmark').attr('src', src);
-                window.location.href = '/happyParking/' + data.parkingName + '+' + data.email;
+                window.location.href = '/happyParking/' + data.hp_name + '+' + data.email;
             },
             error : function (error) {
                 alert(JSON.stringify(error));
@@ -33,9 +34,9 @@ $('#secondBookmark').on('click', function () {
     let src = ($(this).attr('src') === '/img/bookmark.png') ? '/img/bookmark2.png' : '/img/bookmark.png';
     if (src === '/img/bookmark2.png') {
         var data = {
-            parkingName: $('#parkingName').val(),
+            hp_name: $('#hp_name').val(),
             email: $('#email').val(),
-            imgSrc: src
+            img_src: src
         }
         $.ajax({
             data: data,
@@ -51,57 +52,39 @@ $('#secondBookmark').on('click', function () {
         });
     }
 });
+
 // 예약
-$('#book').on('click', function () {
-    let today = new Date();
+$('#hpBook').on('click', function () {
+    let start_date = new Date($('#start_date').val());
+    let end_date = new Date($('#end_date').val());
+    let result1 = new Date(start_date);
+    let result2 = new Date(end_date);
+    alert('start_date : ' + start_date);
+    alert('end_date : ' + end_date);
+    console.log("시작일" + start_date);
+    console.log("종료일" + end_date);
 
-    let startDate = $('#startDate').val();
-    let startDateArray = startDate.split("-");
-    let startDateObj = new Date(startDateArray[0], Number(startDateArray[1])-1, startDateArray[2]);
-    let result1 = new Date(startDate);
-    console.log(result1);
+    let betweenDate = Math.ceil((end_date.getTime() - start_date.getTime()) / 60000 / 10 );
+    console.log("결과값" + (betweenDate));
 
+    let addmin10_fee = $('#addmin10_fee').text();
+    let min30_fee = $('#min30_fee').text();
 
-    let endDate = $('#endDate').val();
-    let endDateArray = endDate.split("-");
-    let endDateObj = new Date(endDateArray[0], Number(endDateArray[1])-1, endDateArray[2]);
-    let result2 = new Date(endDate);
-
-    let betweenDate = Math.floor((endDateObj.getTime() - startDateObj.getTime())/1000/60/60/24);
-    ///////////////////////////////////////////////////////////////////////
-
-    // let startUseTime = $('#startUseTime').val();
-    // let startUseTimeArray = startUseTime.split(":");
-    // let startUseTimeObj = new Date(startUseTimeArray[0], startDateArray[1]);
-    //
-    // let endUseTime = $('#endUseTime').val();
-    // let endUseTimeArray = endUseTime.split(":");
-    // let endUseTimeObj = new Date(endUseTimeArray[0], endUseTimeArray[1]);
-
-
-    // let betweenTime = Math.floor((endUseTimeObj.getTime() - startUseTimeObj.getTime())/1000/60/60);
-
-    let min30Fee = $('#min30Fee').text();
-
-    $('#price').text(betweenDate*min30Fee);
-
-
-    // alert(betweenTime);
-
-
+    if(3<betweenDate)
+        $('#price').text(betweenDate*addmin10_fee-min30_fee-min30_fee);
+    else
+        $('#price').text(min30_fee);
 
     var data = {
-        startDate : result1,
-        endDate : result2,
-        startUseTime : $('#startUseTime').val(),
-        endUseTime : $('#endUseTime').val(),
+        start_date : result1,
+        end_date : result2,
         email : $('#email').val(),
-        parkingName : $('#parkingName').val()
+        hp_name : $('#hp_name').val()
     }
     $.ajax({
        data : data,
        type : 'post',
-       url : '/rest/book',
+       url : '/rest/hpBook',
         success : function () {
             alert("예약 완료 되었습니다.");
         },
@@ -112,18 +95,18 @@ $('#book').on('click', function () {
 });
 
 // 결제
-$('#pay').on('click', function () {
+$('#hpPay').on('click', function () {
     var data = {
-        parkingName : $('#parkingName').text(),
+        hp_name : $('#hp_name').text(),
         price : $('#price').text(),
         email : $('#email').val(),
         phone : $('#phone').val(),
-        userName : $('#name').val()
+        user_name : $('#name').val()
     }
     $.ajax({
        data : data,
        type : 'post',
-       url : '/rest/pay',
+       url : '/rest/hpPay',
        success : function () {
 
        }
@@ -138,7 +121,7 @@ $('#pay').on('click', function () {
         name : data.parkingName,
         amount : data.price,
         buyer_email : data.email,
-        buyer_name : data.userName,
+        buyer_name : data.user_name,
         buyer_tel : data.phone,
         buyer_addr : '서울특별시 강남구 삼성동 구구로99',
         buyer_postcode : '123-456',

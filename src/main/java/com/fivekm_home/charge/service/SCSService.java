@@ -58,7 +58,6 @@ public class SCSService {
 
     // 충전소 결제
     public void scsPay(SCS_pay cs_pay){
-        System.out.println("CS_PAY : " + cs_pay.toString());
         scsMapper.scsPay(cs_pay);
     }
 

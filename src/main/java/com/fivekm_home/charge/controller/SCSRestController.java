@@ -43,17 +43,17 @@ public class SCSRestController {
         return scsService.scsSearchDataList();
     }
 
-    // 충전소 결제
-    @PostMapping("/rest/scsPay")
-    public void scsPay(SCS_pay scs_pay){
-        System.out.println("SCS_PAY " + scs_pay);
-        scsService.scsPay(scs_pay);
-    }
-
     // 충전소 예약
     @PostMapping("/rest/scsBook")
     public void scsBook(SCS_book scs_book){
         System.out.println("scs_book.toString : " + scs_book.toString());
         scsService.scsBook(scs_book);
+    }
+
+    // 충전소 결제
+    @PostMapping("/rest/scsPay")
+    public void scsPay(SCS_pay scs_pay){
+        System.out.println("SCS_PAY " + scs_pay);
+        scsService.scsPay(scs_pay);
     }
 }

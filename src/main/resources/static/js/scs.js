@@ -101,6 +101,11 @@ $(document).ready(function () {
 
 });
 
+// 충전소 요청 리스트로 뒤로가기
+$('#scsBack').on('click', function () {
+    window.location.href = '/admin/scsRequestList';
+});
+
 // 충전소 요청 승인하여 check를 n -> y 로 바꿈
 $('#csRequestBtn').on('click', function () {
     let data = {

@@ -29,7 +29,8 @@ public class MyPageController {
             System.out.println("memberEdit.toString() : " + memberEdit.toString());
             System.out.println("memberEdit return : "+ myPageService.memberEdit(memberEdit));
             model.addAttribute("memberEdit", myPageService.memberEdit(memberEdit));
-
+            System.out.println("memCarList : " + myPageService.memCarList(memberEdit.getEmail()));
+            model.addAttribute("memCarList", myPageService.memCarList(memberEdit.getEmail()));
             return "/myPage/memberEdit";
         } else {
             System.out.println("MyPageController : 로그인되어 있지 않아 로그인 페이지로 요청했습니다.");
@@ -37,12 +38,6 @@ public class MyPageController {
         }
 
     }
-
-//    @GetMapping("/bookmark")
-//    public String bookmark(){
-//
-//        return "/myPage/hpBookmark";
-//    }
 
     // 회원이 즐겨찾기한 주차장 목록 불러오기
     @GetMapping("/hpBookmark/{email}")
@@ -55,13 +50,11 @@ public class MyPageController {
 
     @GetMapping("/history")
     public String history(){
-
         return "/myPage/history";
     }
 
     @GetMapping("/residence")
     public String residence(){
-
         return "/myPage/residence";
     }
 }

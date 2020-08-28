@@ -1,39 +1,41 @@
 'use strict';
+// 지도로 뒤로가기
+$('#scsBookBack').on('click', function () {
+    window.location.href = '/happyParking/hpSearch';
+});
 
 // 예약
-$('#csbook').on('click', function () {
-    let today = new Date();
+$('#scsBook').on('click', function () {
+    let start_date = new Date($('#start_date').val());
+    let end_date = new Date($('#end_date').val());
+    let result1 = new Date(start_date);
+    let result2 = new Date(end_date);
+    alert('start_date : ' + start_date);
+    alert('end_date : ' + end_date);
+    console.log("시작일" + start_date);
+    console.log("종료일" + end_date);
 
-    var startDate = new Date($('#startDate').val());
-    var endDate = new Date($('#endDate').val());
-    var result1 = new Date(startDate);
-    var result2 = new Date(endDate);
-
-    console.log("시작일" + startDate);
-    console.log("종료일" + endDate);
-
-    var betweenDate = Math.ceil((endDate.getTime() - startDate.getTime()) / 60000 / 10 );
+    let betweenDate = Math.ceil((end_date.getTime() - start_date.getTime()) / 60000 / 10 );
     console.log("결과값" + (betweenDate));
 
-    let addmin10Fee = $('#addmin10Fee').text();
-    let min30Fee = $('#min30Fee').text();
-    if(3<betweenDate)
-        $('#price').text(betweenDate*addmin10Fee-min30Fee-min30Fee);
-    else
-        $('#price').text(min30Fee);
+    let addmin10_fee = $('#addmin10_fee').text();
+    let min30_fee = $('#min30_fee').text();
 
-    alert(typeof(startDate));
+    if(3<betweenDate)
+        $('#price').text(betweenDate*addmin10_fee-min30_fee-min30_fee);
+    else
+        $('#price').text(min30_fee);
 
     var data = {
-        start_time : result1,
-        end_time : result2,
+        start_date : result1,
+        end_date : result2,
         email : $('#email').val(),
-        chargeName : $('#chargeName').val()
+        scs_name : $('#scs_name').val()
     }
     $.ajax({
         data : data,
         type : 'post',
-        url : '/rest/csbook',
+        url : '/rest/scsBook',
         success : function () {
             alert("예약 완료 되었습니다.");
         },
@@ -44,18 +46,18 @@ $('#csbook').on('click', function () {
 });
 
 // 결제
-$('#cspay').on('click', function () {
+$('#scsPay').on('click', function () {
     var data = {
-        chargeName : $('#chargeName').text(),
+        scs_name : $('#scs_name').text(),
         price : $('#price').text(),
         email : $('#email').val(),
         phone : $('#phone').val(),
-        userName : $('#name').val()
+        user_name : $('#name').val()
     }
     $.ajax({
         data : data,
         type : 'post',
-        url : '/rest/cspay',
+        url : '/rest/scsPay',
         success : function () {
 
         }
@@ -67,10 +69,10 @@ $('#cspay').on('click', function () {
         pg : 'kakao', // version 1.1.0부터 지원.
         pay_method : 'card',
         merchant_uid : 'merchant_' + new Date().getTime(),
-        name : data.chargeName,
+        name : data.scs_name,
         amount : data.price,
         buyer_email : data.email,
-        buyer_name : data.userName,
+        buyer_name : data.user_name,
         buyer_tel : data.phone,
         buyer_addr : '서울특별시 강남구 삼성동 구구로99',
         buyer_postcode : '123-456',

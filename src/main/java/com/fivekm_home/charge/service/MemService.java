@@ -40,8 +40,7 @@ public class MemService {
     }
 
     //비밀번호찾기
-    public SearchPassword searchPassword(SearchPassword searchPassword)
-    {
+    public SearchPassword searchPassword(SearchPassword searchPassword){
         return memMapper.searchPassword(searchPassword);
     }
 
@@ -60,19 +59,18 @@ public class MemService {
          return memMapper.kakaoLogin(email);
     }
 
-    // 경비 회원으로 바꾸기
+    // 경비 회원으로 바꾸기 및 업데이트
     public void updateGuard(UpdateMem updateMem){
         memMapper.updateGuard(updateMem);
     }
 
-    // 등록자 회원으로 바꾸기
+    // 등록자 회원으로 바꾸기 및 업데이트
     public void updateRegister(UpdateMem updateMem){
         memMapper.updateRegister(updateMem);
     }
 
     // 일반 회원 정보 업데이트
     public void updateNormal(UpdateMem updateMem){
-        System.out.println("UpdateMem Service : " + updateMem.toString());
         memMapper.updateNormal(updateMem);
     }
 }

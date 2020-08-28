@@ -201,7 +201,7 @@
         function errPhone() {
             var html = "";
             html += '<p style="font-size: 80%; color: red; ' +
-                'text-indent: 3em;"><strong>폰번호 입력하세요..</strong></p>';
+                'text-indent: 3em;"><strong>폰번호 입력하세요.</strong></p>';
             $('#phone').empty();
             $('#errPhone').empty();
             $('#errPhone').append(html);

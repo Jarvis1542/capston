@@ -141,16 +141,16 @@
             success : function(data) {
                 for (let i = 0; i < data.length; i++) {
                     takeTotal[i] = data[i];
-                    console.log('parkingName : ' + takeTotal[i].parkingName);
-                    console.log('parkingType : ' + takeTotal[i].parkingType);
-                    console.log('min30Fee : ' + takeTotal[i].min30Fee);
-                    console.log('addMin10Fee : ' + takeTotal[i].addMin10Fee);
-                    console.log('roadAddress : ' + takeTotal[i].roadAddress);
-                    console.log('extraAddress : ' + takeTotal[i].extraAddress);
-                    console.log('manageTime : ' + takeTotal[i].manageTime);
+                    console.log('parkingName : ' + takeTotal[i].hp_name);
+                    console.log('parkingType : ' + takeTotal[i].hp_type);
+                    console.log('min30Fee : ' + takeTotal[i].min30_fee);
+                    console.log('addMin10Fee : ' + takeTotal[i].addMin10_fee);
+                    console.log('roadAddress : ' + takeTotal[i].road_addr);
+                    console.log('extraAddress : ' + takeTotal[i].extra_addr);
+                    console.log('manageTime : ' + takeTotal[i].manage_time);
                     console.log('place : ' + takeTotal[i].place);
-                    console.log('parkingChk : ' + takeTotal[i].parkingChk);
-                    console.log('parkingPic : ' + takeTotal[i].parkingPic);
+                    console.log('parkingChk : ' + takeTotal[i].hp_chk);
+                    console.log('parkingPic : ' + takeTotal[i].hp_pic);
                     console.log('==========================================');
 
                     // 마커를 생성합니다
@@ -164,24 +164,24 @@
                     };
 
                     var $wrap = $('<div class="dataLayerOnMap" />');
-                    var $title = $('<div class="dataTitle" id="parkingName"/>').text(data[i].parkingName);
+                    var $title = $('<div class="dataTitle" id="parkingName"/>').text(data[i].hp_name);
                     var $close = $('<div class="close" title="닫기" style="width: 15px; height: 15px; font-size: 25px; margin-right: 15px">X</div>').click(closeOverlay);
                     var $body = $('<div class="body"/>');
-                    var $img = $('<div class="dataPicture"><img src="'+data[i].parkingPic+'" style="height: 110px; width: 100px;"></div>');
+                    var $img = $('<div class="dataPicture"><img src="'+data[i].hp_pic+'" style="height: 110px; width: 100px;"></div>');
                     var $desc = $('<div class="dataInfo" id="desc'+i+'">' +
-                                    '<div class="dataAddress">'+data[i].roadAddress+'</div>' +
+                                    '<div class="dataAddress">'+data[i].road_addr+'</div>' +
                                     '<ul>' +
                                         '<li><span class="dataSubTitle">운영 시간</span>' +
-                                            '<span>'+data[i].manageTime+'</span><br>'+
+                                            '<span>'+data[i].manage_time+'</span><br>'+
                                         '</li>' +
                                         '<li><span class="dataSubTitle">주차 요금</span>' +
                                             '<span>' +
-                                                '30분당 요금 : '+data[i].min30Fee+'<br>'+
-                                                '10분당 추가요금 : '+data[i].addMin10Fee+'<br>'+
+                                                '30분당 요금 : '+data[i].min30_fee+'<br>'+
+                                                '10분당 추가요금 : '+data[i].addMin10_fee+'<br>'+
                                             '</span>'+
                                         '</li>'+
                                     '</ul>'+
-                        '<p><button style="width: 100px" onClick="mapBook(\'' + data[i].parkingName + '\')" class="genric-btn primary small">예약</button></p>'+
+                        '<p><button style="width: 100px" onClick="mapBook(\'' + data[i].hp_name + '\')" class="genric-btn primary small">예약</button></p>'+
 
                                  '</div>');
 
@@ -205,10 +205,10 @@
             } // success 끝
 
         }); //ajax 끝
-    function mapBook(parkingName){
-        var parkingName = parkingName;
+    function mapBook(hp_name){
+        var hp_name = hp_name;
         var email = $('#email').val();
-        window.location.href = '/happyParking/happyParkingBook/' + parkingName + '+' + email;
+        window.location.href = '/happyParking/hpBook/' + hp_name + '+' + email;
     }
 
 </script>

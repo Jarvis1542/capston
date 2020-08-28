@@ -57,16 +57,16 @@ public class HPRestController {
     }
 
     // 주차장 예약
-    @PostMapping("/rest/book")
+    @PostMapping("/rest/hpBook")
     public void hpBook(HP_book hp_book){
         System.out.println("hp_book.toString : " + hp_book.toString());
         hpService.hpBook(hp_book);
     }
 
     // 주차장 결제
-    @PostMapping("/rest/pay")
+    @PostMapping("/rest/hpPay")
     public void hpPay(HP_pay hp_pay){
-        System.out.println("HP_PAY " + hp_pay   );
+        System.out.println("HP_PAY " + hp_pay);
         hpService.hpPay(hp_pay);
     }
 }

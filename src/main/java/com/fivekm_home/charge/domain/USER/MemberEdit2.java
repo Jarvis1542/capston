@@ -10,4 +10,8 @@ public class MemberEdit2 {
     private String picture;
     private Role role;
     private String phone;
+    private String car_id;
+    private String car_name;
+    private String car_model;
+    private String car_scs_type;
 }

@@ -10,7 +10,8 @@ public class SCS_reg {
     private String scs_amount; //충전기 수
     private String min30_fee; //기본요금
     private String addMin10_fee; //10분당 추가요금
-    private String manage_time; //운영시간
+    private String start_manage_time; //시작운영시간
+    private String end_manage_time; //종료운영시간
     private String scs_pic; //사진1
     private String apt_map; //사진 2
     private String cable; //케이블유무

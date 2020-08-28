@@ -149,14 +149,14 @@ $(document).ready(function () {
     });
 
 // 주차장 요청 리스트로 뒤로가기
-    $('#back').on('click', function () {
-        window.location.href = '/admin/happyParkingRequestList';
+    $('#hpBack').on('click', function () {
+        window.location.href = '/admin/hpRequestList';
     });
 
 // 주차장 요청 승인하여 check를 n -> y 로 바꿈
     $('#hpRequestBtn').on('click', function () {
         let data = {
-            parkingName : $('#hp_name'). val()
+            hp_name : $('#hp_name'). val()
         }
 
         $.ajax({
@@ -165,7 +165,7 @@ $(document).ready(function () {
             url : '/admin/updateParkingChk',
             success : function () {
                 alert('승인 완료 되었습니다.');
-                window.location.href = '/admin/happyParkingRequestList';
+                window.location.href = '/admin/hpRequestList';
             },
             error : function (error) {
                 alert(JSON.stringify(error));

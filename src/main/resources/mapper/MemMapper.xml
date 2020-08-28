@@ -59,7 +59,7 @@
     </select>
 
     <select id="MemberEdit" resultType="com.fivekm_home.charge.domain.USER.MemberEdit2">
-        select *
+        select email, name, picture, role, phone
         from member_view
         where email = #{email}
     </select>

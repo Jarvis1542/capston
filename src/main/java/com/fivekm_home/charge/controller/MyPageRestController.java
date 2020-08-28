@@ -1,10 +1,7 @@
 package com.fivekm_home.charge.controller;
 
 import com.fivekm_home.charge.domain.RES.Residence;
-import com.fivekm_home.charge.domain.USER.EditPassword;
-import com.fivekm_home.charge.domain.USER.MemberEdit;
-import com.fivekm_home.charge.domain.USER.UpdateMem;
-import com.fivekm_home.charge.domain.USER.UserHpBookmark;
+import com.fivekm_home.charge.domain.USER.*;
 import com.fivekm_home.charge.service.MemService;
 import com.fivekm_home.charge.service.MyPageService;
 import com.fivekm_home.charge.service.StorageService;
@@ -66,6 +63,12 @@ public class MyPageRestController {
         return 0;
     } // end of edit
 
+    @PostMapping("/rest/regCar")
+    public void regCar(RegCar regCar){
+        System.out.println("regCar : " + regCar.toString());
+        myPageService.regCar(regCar);
+    }
+
     @PostMapping("/rest/checkResidence")
     public int checkResidence(@RequestParam("res_name") String res_name){
         System.out.println("이름 : " + res_name);
@@ -107,10 +110,5 @@ public class MyPageRestController {
             residence.setEmail(str.get(17));
             myPageService.regResidence(residence);
         }
-    }
-
-//    @PostMapping("/rest/userHpBookmark")
-//    public ArrayList<UserHpBookmark> userHpBookmark(@RequestParam String email){
-//        return myPageService.userHpBookmark(email);
-//    }
+    }// end of regResidence
 } // end of MyPageRestController

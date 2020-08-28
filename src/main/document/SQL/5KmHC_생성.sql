@@ -45,12 +45,13 @@ create table member(
 
 /* 차량 */
 create table car(
-    car_id varchar2(255),    /* EMAIL + SEQ.NUM = PK*/
-    car_name varchar2(100),  /* 차량 이름(별칭) */
-    car_model varchar2(255), /* 차량 모델 */
-    scs_type varchar2(25),   /* 충전 방식 */
-    email varchar2(100),    /* 사용자 이메일 - FK(MEMBER) */
-    constraint car_car_id primary key (car_id)
+    car_id varchar2(255) not null,    /* EMAIL + SEQ.NUM = PK*/
+    car_name varchar2(100) null ,  /* 차량 이름(별칭) */
+    car_model varchar2(255) null, /* 차량 모델 */
+    car_scs_type varchar2(25) null,   /* 충전 방식 */
+    email varchar2(100) not null,    /* 사용자 이메일 - FK(MEMBER) */
+    constraint car_car_id_pk primary key (car_id),
+    constraint car_email_fk foreign key (email) references member (email)
 );
 
 /* 등록자 */
@@ -119,7 +120,8 @@ create table scs
     scs_amount varchar2(50) NULL,     /* 충전기 수 */
     min30_fee varchar2(100) NULL,        /* 기본 요금 */
     addMin10_fee varchar2(100) NULL,     /* 추가 요금 */
-    manage_time  varchar2(30),           /* 운영 시간 */
+    start_manage_time  varchar2(30),           /* 시작 운영 시간 */
+    end_manage_time  varchar2(30),           /* 종료 운영 시간 */
     scs_pic varchar2(2000),           /* 충전소 사진 */
     apt_map varchar2(2000),              /* 아파트 내부단지 지도 */
     cable varchar2(50) NULL,            /* 케이블 */
@@ -136,12 +138,11 @@ create table scs
 /* 충전소 예약 */
 CREATE TABLE scs_book (
     book_id      varchar2(100),          /* 예약 ID - SEQ, PK */
-    book_date    timestamp,             /* 예약 날짜 */
     start_date   timestamp,             /* 예약 시작 시간 */
-    end_time     timestamp,             /* 예약 종료 시간 */
-    state    varchar2(1) default 'N',   /* 예약 상태 */
+    end_date     timestamp,             /* 예약 종료 시간 */
     email       varchar2(100),          /* 사용자 이메일 - FK(MEMBER) */
     scs_name varchar2(300),           /* 충전소 이름 - FK(CS) */
+    book_date    timestamp,             /* 예약 날짜 */
     constraint scs_book_id_pk primary key (book_id),
     constraint scs_book_email_fk foreign key (email) references member (email),
     constraint scs_book_scs_name_fk foreign key (scs_name) references scs (scs_name)
@@ -152,7 +153,7 @@ CREATE TABLE scs_book (
 CREATE TABLE scs_pay (
     pay_id varchar2(100),        /* 결제 ID - SEQ, PK */
     pay_way varchar2(20),     /* 결제 수단 */
-    scs_name varchar2(10),    /* 충전소 이름 */
+    scs_name varchar2(50),    /* 충전소 이름 */
     price number,               /* 가격 */
     email varchar2(30),         /* 사용자 이메일 - FK(MEMBER) */
     phone varchar2(15),         /* 휴대폰 번호 */
@@ -180,7 +181,8 @@ create table hp(
     place       number, /* 주차장 칸 수 */
     min30_fee    number, /* 기본요금(30분당) */
     addMin10_fee number, /* 추가요금(10분당) */
-    manage_time  varchar2(30), /* 운영 시간 */
+    start_manage_time  varchar2(30),           /* 시작 운영 시간 */
+    end_manage_time  varchar2(30),           /* 종료 운영 시간 */
     hp_pic  varchar2(2000), /* 주차장 사진 */
     apt_map      varchar2(2000), /* 아파트 단지 내부 지도(사진) */
     reg_date     timestamp, /* 주차장 등록 날짜 */
@@ -198,7 +200,6 @@ create table hp_book
     book_id      varchar2(100), /* YYYY/MM/dd + parkingName + email */
     start_date   timestamp,
     end_date     timestamp,
-    state    varchar2(1) default 'N',
     email       varchar2(100),
     hp_name varchar2(300),
     book_date    timestamp,

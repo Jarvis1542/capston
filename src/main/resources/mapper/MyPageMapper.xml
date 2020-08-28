@@ -59,4 +59,17 @@
                             where hp_chk = 'Y')
         and hp_name = #{hp_name}
     </select>
+
+    <insert id="regCar">
+        insert into car_view values (
+            #{car_id}, #{car_name,jdbcType=VARCHAR}, #{car_model,jdbcType=VARCHAR},
+            #{car_scs_type,jdbcType=VARCHAR}, #{email}
+        )
+    </insert>
+
+    <select id="memCarList" parameterType="com.fivekm_home.charge.domain.USER.MemCarList" resultType="com.fivekm_home.charge.domain.USER.MemCarList">
+        select * from car_view
+        where email = #{email}
+    </select>
+
 </mapper>

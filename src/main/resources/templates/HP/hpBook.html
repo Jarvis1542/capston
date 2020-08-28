@@ -1,14 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout/layout :: head"/>
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
-<style>
-    /*datepicer 버튼 롤오버 시 손가락 모양 표시*/
-    .ui-datepicker-trigger{cursor: pointer;}
-    /*datepicer input 롤오버 시 손가락 모양 표시*/
-    .hasDatepicker{cursor: pointer;}
-</style>
-
 <body>
 <header th:replace="layout/layout :: header"/>
 <!-- bradcam_area  -->
@@ -23,24 +15,21 @@
         </div>
     </div>
 </div>
-<!--/ bradcam_area  -->
-
 <input type="hidden" th:value="${session.user.email}" id="email">
 <input type="hidden" th:value="${session.user.name}" id="name">
 <input type="hidden" th:value="${session.user.phone}" id="phone">
-<!-- about_area_start  -->
 <div class="about_area plus_padding">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6 col-md-6">
                 <div class="about_img wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".3s">
-                    <img th:src="${parking.parkingPic}" alt="">
+                    <img th:src="${parking.hp_pic}" alt="">
                 </div>
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="about_info pl-68">
                     <div class="section_title wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".3s">
-                        <h3 th:text="${parking.parkingName}" th:value="${parking.parkingName}" id="parkingName"></h3>
+                        <h3 th:text="${parking.hp_name}" th:value="${parking.hp_name}" id="hp_name"></h3>
                         <div style="float: right">
                             <div th:if="${checkBookmark==0}">
                                 <img src="/img/bookmark2.png" id="firstBookmark" style="width: 30px; height: 30px">
@@ -51,92 +40,37 @@
                         </div>
                     </div>
                     <p class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".4s">
-                        <span th:text="${parking.roadAddress}"></span><br>
-                        <span th:text="${parking.extraAddress + 'asdfasdf'}"></span>
+                        <span th:text="${parking.road_addr}"></span><br>
+                        <span th:text="${parking.extra_addr}"></span>
                     </p>
                     <div class="about_list">
                         <ul>
-                            <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".3s">운영 시간 : <span th:text="${parking.manageTime}"/></li>
-                            <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".4s">기본 요금(30분당) : <span id="min30Fee" th:text="${parking.min30Fee}"/></li>
-                            <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">추가 요금(10분당) : <span id="addmin10Fee" th:text="${parking.addmin10Fee}"/></li>
+                            <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".3s">운영 시간 : <span th:text="${parking.manage_time}"/></li>
+                            <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".4s">기본 요금(30분당) : <span id="min30_fee" th:text="${parking.min30_fee}"/></li>
+                            <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">추가 요금(10분당) : <span id="addmin10_fee" th:text="${parking.addmin10_fee}"/></li>
                             <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".6s">이름 : <span th:text="${parking.name}"/></li>
                             <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".7s">폰번호 : <span th:text="${parking.phone}"/></li>
                             <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".8s">차종  : <span/></li>
                             </li>
                         </ul>
-                        <br><p>예약</p>
-                        <input type="date" id="startDate">&emsp14;&emsp14;~&emsp14;&emsp14;<input type="date" id="endDate">
-<!--                        <br><br><p>사용 시간</p>-->
-<!--                        <input type="time" id="startUseTime">&emsp14;&emsp14;~&emsp14;&emsp14;<input type="time" id="endUseTime">--><br><br>
-                        <button style="float: right; color: #FFFFFF" class="genric-btn success radius" id="book">예약</button>
+                        <br><h4>예약</h4><br>
+                        <p>시작시간 : <input type="datetime-local" id="start_date"></p>
+                        <p>종료시간 : <input type="datetime-local" id="end_date"></p><br>
+                        <button style="float: right; color: #FFFFFF" class="genric-btn success radius" id="hpBook">예약</button>
                         가격 : <span id="price"></span>원
                     </div>
                     <div class="about_btn wow fadeInRight" data-wow-duration="1.0s" data-wow-delay=".5s">
-                        <a style="float: right; color: #FFFFFF" class="genric-btn success radius" id="bookBack">뒤로</a>&emsp14;&emsp14;&emsp14;
-                        <a style="float: right; color: #FFFFFF" class="genric-btn primary radius" id="pay">결제</a>
+                        <a style="float: right; color: #FFFFFF" class="genric-btn success radius" id="hpBookBack">뒤로</a>&emsp14;&emsp14;&emsp14;
+                        <a style="float: right; color: #FFFFFF" class="genric-btn primary radius" id="hpPay">결제</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!--<p class="dateview1"></p>-->
-<!--<p class="dateview2"></p>-->
-<script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<!--<script>-->
-<!--    var date = new Date();-->
-<!--    $('.dateview1').html(moment('15:24:00').format('HH:mm:ss'));-->
-<!--    $('.dateview2').html(moment('2019-08-10 15:24:12').format('YYYY MM DD HH:mm:ss'));-->
-<!--</script>-->
-
 <footer th:replace="layout/layout :: footer"/>
 </body>
 <script th:async src="/js/hpBook.js"></script>
 <script th:async th:replace="layout/layout :: script"/>
 <script th:async type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/locale/ko.min.js" integrity="sha512-3kMAxw/DoCOkS6yQGfQsRY1FWknTEzdiz8DOwWoqf+eGRN45AmjS2Lggql50nCe9Q6m5su5dDZylflBY2YjABQ==" crossorigin="anonymous"></script>
-<!--<script>-->
-<!--    $(document).ready(function () {-->
-<!--        $.datepicker.regional['ko'] = {-->
-<!--            closeText: '닫기',-->
-<!--            prevText: '이전달',-->
-<!--            nextText: '다음달',-->
-<!--            currentText: '오늘',-->
-<!--            monthNames: ['1월(JAN)','2월(FEB)','3월(MAR)','4월(APR)','5월(MAY)','6월(JUN)',-->
-<!--                '7월(JUL)','8월(AUG)','9월(SEP)','10월(OCT)','11월(NOV)','12월(DEC)'],-->
-<!--            monthNamesShort: ['1월','2월','3월','4월','5월','6월',-->
-<!--                '7월','8월','9월','10월','11월','12월'],-->
-<!--            dayNames: ['일','월','화','수','목','금','토'],-->
-<!--            dayNamesShort: ['일','월','화','수','목','금','토'],-->
-<!--            dayNamesMin: ['일','월','화','수','목','금','토'],-->
-<!--            weekHeader: 'Wk',-->
-<!--            dateFormat: 'yy-mm-dd',-->
-<!--            firstDay: 0,-->
-<!--            isRTL: false,-->
-<!--            showMonthAfterYear: true,-->
-<!--            yearSuffix: '',-->
-<!--            showOn: 'both',-->
-<!--            buttonText: "달력",-->
-<!--            changeMonth: true,-->
-<!--            changeYear: true,-->
-<!--            showButtonPanel: true,-->
-<!--            yearRange: 'c-99:c+99',-->
-<!--        };-->
-<!--        $.datepicker.setDefaults($.datepicker.regional['ko']);-->
-
-<!--        $('#sdate').datepicker();-->
-<!--        $('#sdate').datepicker("option", "maxDate", $("#edate").val());-->
-<!--        $('#sdate').datepicker("option", "onClose", function ( selectedDate ) {-->
-<!--            $("#edate").datepicker( "option", "minDate", selectedDate );-->
-<!--        });-->
-
-<!--        $('#edate').datepicker();-->
-<!--        $('#edate').datepicker("option", "minDate", $("#sdate").val());-->
-<!--        $('#edate').datepicker("option", "onClose", function ( selectedDate ) {-->
-<!--            $("#sdate").datepicker( "option", "maxDate", selectedDate );-->
-<!--        });-->
-<!--    });-->
-<!--</script>-->
 </html>

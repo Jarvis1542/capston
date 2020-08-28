@@ -50,4 +50,14 @@ public class MyPageService {
     public ArrayList<UserHpBookmark> userHpBookmark(String email){
         return myPageMapper.userHpBookmark(email);
     }
+
+    // 차량 등록
+    public void regCar(RegCar regCar){
+        myPageMapper.regCar(regCar);
+    }
+
+    // 차량 불러오기
+    public ArrayList<MemCarList> memCarList(String email){
+        return myPageMapper.memCarList(email);
+    }
 }

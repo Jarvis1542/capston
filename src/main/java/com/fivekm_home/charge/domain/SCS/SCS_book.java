@@ -8,6 +8,6 @@ import java.util.Date;
 public class SCS_book {
     private String scs_name;
     private String email;
-    private Date start_time;
-    private Date end_time;
+    private Date start_date;
+    private Date end_date;
 }

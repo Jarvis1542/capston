@@ -15,7 +15,8 @@
         #{scs_amount},
         #{min30_fee},
         #{addMin10_fee},
-        #{manage_time},
+        #{start_manage_time},
+        #{end_manage_time},
         #{scs_pic},
         #{apt_map},
         #{cable},
@@ -68,16 +69,15 @@
 
     <insert id="scsBook">
         insert into scs_book_view values (
-            scs_book_seq.nextval, sysdate, #{start_time},
-            #{end_time}, 'N', #{email}, #{scs_name}
+            scs_book_seq.nextval, #{start_date}, #{end_date},
+            'N', #{email}, #{scs_name}, sysdate
         )
     </insert>
 
     <insert id="scsPay">
         insert into scs_pay_view values (
-            scs_pay_seq.nextval, 'card', #{user_name}, #{price},
-            #{email}, #{scs_name}, #{phone}, scs_book_seq.currval,
-            sysdate
+            scs_pay_seq.nextval, 'card', #{scs_name}, #{price},
+            #{email}, #{phone}, scs_book_seq.currval, sysdate
         )
     </insert>
 </mapper>
