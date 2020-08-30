@@ -65,12 +65,12 @@
     </select>
 
     <update id="updateGuard">
-        update member_view set role = '경비'
+        update member_view set role = '경비', phone = #{phone}
         where email = #{email}
     </update>
 
     <update id="updateRegister">
-        update member_view set role = '등록자'
+        update member_view set role = '등록자', phone = #{phone}
         where email = #{email}
     </update>
 

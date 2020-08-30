@@ -10,7 +10,8 @@ public class HP_request {
     private String place;
     private String min30_fee;
     private String addMin10_fee;
-    private String manage_time;
+    private String start_manage_time;
+    private String end_manage_time;
     private String post_code;
     private String road_addr;
     private String jibun_addr;

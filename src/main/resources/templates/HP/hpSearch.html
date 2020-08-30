@@ -169,23 +169,23 @@
                     var $body = $('<div class="body"/>');
                     var $img = $('<div class="dataPicture"><img src="'+data[i].hp_pic+'" style="height: 110px; width: 100px;"></div>');
                     var $desc = $('<div class="dataInfo" id="desc'+i+'">' +
-                                    '<div class="dataAddress">'+data[i].road_addr+'</div>' +
-                                    '<ul>' +
-                                        '<li><span class="dataSubTitle">운영 시간</span>' +
-                                            '<span>'+data[i].start_manage_time+'</span><br>'+
-                                            '<span>'+data[i].end_manage_time+'</span><br>'+
-                                        '</li>' +
-                                        '<li><span class="dataSubTitle">주차 요금</span>' +
-                                            '<span>' +
-                                                '30분당 요금 : '+data[i].min30_fee+'<br>'+
-                                                '10분당 추가요금 : '+data[i].addMin10_fee+'<br>'+
-                                            '</span>'+
-                                        '</li>'+
-                                        '<li>' +
-                                            '<button style="width: 100px; float:right;" onClick="mapBook(\'' + data[i].hp_name + '\')" class="genric-btn primary small">예약</button>'+
-                                        '</li>' +
-                                    '</ul>'+
-                                 '</div>');
+                        '<div class="dataAddress">'+data[i].road_addr+'</div>' +
+                        '<ul>' +
+                        '<li><span class="dataSubTitle">운영 정보</span>' +
+                        '<span>' +
+                        '시작운영시간 :'+data[i].start_manage_time+'<br>' +
+                        '종료운영시간 :'+data[i].end_manage_time+'<br>' +
+                        '</span>'+
+                        '</li>' +
+                        '<li><span class="dataSubTitle">주차 요금</span>' +
+                        '<span>' +
+                        '30분당 요금 : '+data[i].min30_fee+'<br>'+
+                        '10분당 추가요금 : '+data[i].addMin10_fee+'<br>'+
+                        '</span>'+
+                        '<button style="width: 100px; margin-left: 10px; margin-top: 5px" onClick="mapBook(\'' + data[i].hp_name + '\')" class="genric-btn primary small">예약</button>'+
+                        '</li>'+
+                        '</ul>'+
+                        '</div>');
 
                     $wrap.append($title).append($body);
                     $body.append($img).append($desc);

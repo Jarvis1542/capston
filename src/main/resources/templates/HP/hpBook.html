@@ -45,13 +45,16 @@
                     </p>
                     <div class="about_list">
                         <ul>
-                            <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".3s">운영 시간 : <span th:text="${parking.manage_time}"/></li>
+                            <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".3s">시작 운영 시간 : <span th:text="${parking.start_manage_time}"/></li>
+                            <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".3s">종료 운영 시간 : <span th:text="${parking.end_manage_time}"/></li>
                             <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".4s">기본 요금(30분당) : <span id="min30_fee" th:text="${parking.min30_fee}"/></li>
                             <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">추가 요금(10분당) : <span id="addmin10_fee" th:text="${parking.addmin10_fee}"/></li>
                             <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".6s">이름 : <span th:text="${parking.name}"/></li>
                             <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".7s">폰번호 : <span th:text="${parking.phone}"/></li>
-                            <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".8s">차종  : <span/></li>
+                            <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".8s">
+                                <button class="genric-btn info-border circle" data-toggle="modal" data-target="#loadMyCarModal" id="loadMyCarModalBtn">차량 선택</button>
                             </li>
+                            <div id="loadMyCar"/>
                         </ul>
                         <br><h4>예약</h4><br>
                         <p>시작시간 : <input type="datetime-local" id="start_date"></p>
@@ -64,6 +67,26 @@
                         <a style="float: right; color: #FFFFFF" class="genric-btn primary radius" id="hpPay">결제</a>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 모달 -->
+<div class="container">
+    <!-- The Modal -->
+    <div class="modal fade" id="loadMyCarModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">차량 등록</h4>
+                    <button type="button" class="close" aria-hidden="true" data-dismiss="modal">X</button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <ul id="loadMyCarList"></ul>
+                </div>
+                <button type="button" id="modalClose" class="btn btn-outline-danger" data-dismiss="modal" style="display: none">취소</button>
             </div>
         </div>
     </div>

@@ -1,7 +1,7 @@
 'use strict';
 // 지도로 뒤로가기
 $('#hpBookBack').on('click', function () {
-    window.location.href = '/chargingStation/scsSearch';
+    window.location.href = '/happyParking/hpSearch';
 });
 
 // 즐겨찾기 등록
@@ -55,6 +55,7 @@ $('#secondBookmark').on('click', function () {
 
 // 예약
 $('#hpBook').on('click', function () {
+    let carNum = "";
     let start_date = new Date($('#start_date').val());
     let end_date = new Date($('#end_date').val());
     let result1 = new Date(start_date);
@@ -75,11 +76,18 @@ $('#hpBook').on('click', function () {
     else
         $('#price').text(min30_fee);
 
+    for(let i=0; i<5; i++){
+        if($('#car'+i).length>0){
+            carNum = $('#car'+i).val();
+        }
+    }
+
     var data = {
         start_date : result1,
         end_date : result2,
         email : $('#email').val(),
-        hp_name : $('#hp_name').val()
+        hp_name : $('#hp_name').text(),
+        car_num : carNum
     }
     $.ajax({
        data : data,
@@ -118,7 +126,7 @@ $('#hpPay').on('click', function () {
         pg : 'kakao', // version 1.1.0부터 지원.
         pay_method : 'card',
         merchant_uid : 'merchant_' + new Date().getTime(),
-        name : data.parkingName,
+        name : data.hp_name,
         amount : data.price,
         buyer_email : data.email,
         buyer_name : data.user_name,

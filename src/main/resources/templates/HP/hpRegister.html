@@ -138,11 +138,18 @@
                         <div id="errAddMin10Fee"></div>
                     </div>
                     <div class="col-md-12">
-                        <div class="single_field col-md-12">
-                            운영 시간&ensp;&ensp;&ensp;<input type="text" id="manage_time" name="manage_time" class="single_field col-md-10"
-                                                          placeholder="ex)&ensp;09:00 ~ 16:00">
+                        <div class="single_field">
+                            운영 시작 시간&ensp;&ensp;&ensp;<input type="text" id="start_manage_time" name="start_manage_time"
+                                                             class="single_field col-md-9" placeholder="ex)&ensp;09:00">
                         </div>
-                        <div id="errManageTime"></div>
+                        <div id="errStartManageTime"></div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="single_field">
+                            운영 종료 시간&ensp;&ensp;&ensp;<input type="text" id="end_manage_time" name="end_manage_time"
+                                                             class="single_field col-md-9" placeholder="ex)&ensp;16:00">
+                        </div>
+                        <div id="errEndManageTime"></div>
                     </div>
                     <div class="col-xl-6 col-md-6 col-lg-4 field_col_margin">
                         <br><h4>주소</h4>
@@ -210,31 +217,6 @@
         </div>
     </div>
 </div>
-<!-- 배너 -->
-<div id="floatMenu" class="col-xl-10">
-    <div class="blog_right_sidebar">
-        <aside class="single_sidebar_widget post_category_widget">
-            <h4 class="widget_title">등록하기</h4>
-            <ul class="list cat-list">
-                <li style="display: inline-block">
-                    <a th:href="@{/myPage/residence}" class="d-flex">
-                        <p>주소 등록</p>
-                    </a>
-                </li>
-                <li style="display: inline-block">
-                    <a th:href="@{/happyParking/happyParkingRegister}" class="d-flex">
-                        <p>주차장 등록</p>
-                    </a>
-                </li>
-                <li style="display: inline-block">
-                    <a th:href="@{/chargingStation/chargingRegister}" class="d-flex">
-                        <p>충전소 등록</p>
-                    </a>
-                </li>
-            </ul>
-        </aside>
-    </div>
-</div>
 
 <!-- 모달 -->
 <div class="container">
@@ -252,9 +234,9 @@
                     <ul id="loadResidenceList">
                     </ul>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" id="addCarClose" class="btn btn-outline-primary" data-dismiss="modal">등록</button>
-                </div>
+                <button type="button" id="modalClose" style="display: none" class="btn btn-outline-primary"
+                        data-dismiss="modal">Close
+                </button>
             </div>
         </div>
     </div>
@@ -318,26 +300,6 @@
         var fileName2 = input2.files[0].name;
         infoArea2.textContent = '파일 이름 : ' + fileName2;
     }
-
-    //===========================================================================================
-    // 플로팅 배너
-    $(document).ready(function(){
-        var currentPosition = parseInt($("#floatMenu").css("top"));
-        $(window).scroll(function() {
-                var position = $(window).scrollTop();
-                $("#floatMenu").stop().animate({"top":position+currentPosition-70+"px"},700);
-        });
-    });
-
-    $(document).ready(function(){
-        $('#top1,#top2,#top3,#bottom1,#c_w1,#category1,#g_w1').click(function(){
-            var id = $(this).attr("href");
-            var offset = 60;
-            var target = $(id).offset().top - offset;
-            $('html,body').animate({scrollTop:target},1000);
-            event.preventDefault();
-        });
-    });
 </script>
 <footer th:replace="layout/layout :: footer"/>
 </body>

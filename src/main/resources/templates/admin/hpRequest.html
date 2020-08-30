@@ -83,10 +83,15 @@
                     </div>
                     <div class="col-md-12">
                         <div class="single_field col-md-12">
-                            운영 시간&ensp;&ensp;&ensp;<input type="text" id="manage_time" name="manage_time" class="single_field col-md-10"
-                                                          th:value="${request.manage_time}" readonly>
+                            시작 운영 시간&ensp;&ensp;&ensp;&ensp;<input type="text" id="start_manage_time" name="manage_time" class="single_field col-md-9"
+                                                          th:value="${request.start_manage_time}" readonly>
                         </div>
-                        <div id="errManageTime"></div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="single_field col-md-12">
+                            종료 운영 시간&ensp;&ensp;&ensp;&ensp;<input type="text" id="end_manage_time" name="manage_time" class="single_field col-md-9"
+                                                          th:value="${request.end_manage_time}" readonly>
+                        </div>
                     </div>
                     <div class="col-md-12">
                         <div class="single_field col-md-12">

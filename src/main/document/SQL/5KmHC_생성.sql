@@ -202,6 +202,7 @@ create table hp_book
     start_date   timestamp,
     end_date     timestamp,
     email       varchar2(100),
+    car_num     varchar2(10),           /* 차번호 */
     hp_name varchar2(300),
     book_date    timestamp,
     constraint hp_book_book_id_pk primary key (book_id),

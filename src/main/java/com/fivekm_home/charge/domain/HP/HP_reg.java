@@ -11,7 +11,8 @@ public class HP_reg {
     private int place;
     private int min30_fee;
     private int addMin10_fee;
-    private String manage_time;
+    private String start_manage_time;
+    private String end_manage_time;
     private String hp_pic;
     private String apt_map;
     private String res_name;

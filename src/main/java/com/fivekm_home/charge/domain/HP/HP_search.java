@@ -10,7 +10,8 @@ public class HP_search {
     private int addMin10_fee;
     private String road_addr;
     private String extra_addr;
-    private String manage_time;
+    private String start_manage_time;
+    private String end_manage_time;
     private int place;
     private String hp_chk;
     private String hp_pic;

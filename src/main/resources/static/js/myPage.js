@@ -85,6 +85,43 @@ $('#no_edit').on('click', function (event) {
 // 회원 정보 경비 요청 버튼
 $('#mp_edit').on('click', function (event) {
     event.preventDefault();
+    if($('#phone').val()==null || $('#phone').val()==''){
+        let html = "";
+        html += '<p style="font-size: 80%; color: red; margin-top: -25px;' +
+            'text-indent: 8em;"><strong>폰번호를 입력해주세요.</strong></p>';
+        $('#phone').focus();
+        $('#errPhone').empty();
+        $('#errPhone').append(html);
+        return;
+    }
+    if($('#mp_co').val()==null || $('#mp_co').val()==''){
+        let html = "";
+        html += '<p style="font-size: 80%; color: red; margin-top: -15px;' +
+            'text-indent: 3em;"><strong>관리업체 이름을 입력해주세요.</strong></p>';
+        $('#mp_co').focus();
+        $('#errMp_co').empty();
+        $('#errMp_co').append(html);
+        return;
+    }
+    if($('#mp_co_num').val()==null || $('#mp_co_num').val()==''){
+        let html = "";
+        html += '<p style="font-size: 80%; color: red; margin-top: -15px;' +
+            'text-indent: 3em;"><strong>관리업체 번호를 입력해주세요.</strong></p>';
+        $('#mp_co_num').focus();
+        $('#errMp_co_num').empty();
+        $('#errMp_co_num').append(html);
+        return;
+    }
+    if($('#upload').val()==null || $('#upload').val()==''){
+        let html = "";
+        html += '<p style="font-size: 80%; color: red; text-align: center">' +
+            '<strong>경비 교육 이수증을 업로드해주세요.</strong></p>';
+        $('#upload-label').focus();
+        $('#errImageResult').empty();
+        $('#errImageResult').append(html);
+        return;
+    }
+
     var form = $('#edit_form')[0];
     var formData = new FormData(form);
 
@@ -114,6 +151,43 @@ $('#mp_edit').on('click', function (event) {
 // 회원 정보 등록자 요청 버튼
 $('#reg_edit').on('click', function (event) {
     event.preventDefault();
+    if($('#phone').val()==null || $('#phone').val()==''){
+        let html = "";
+        html += '<p style="font-size: 80%; color: red; margin-top: -25px;' +
+            'text-indent: 8em;"><strong>폰번호를 입력해주세요.</strong></p>';
+        $('#phone').focus();
+        $('#errPhone').empty();
+        $('#errPhone').append(html);
+        return;
+    }
+    if($('#bank_name').val()==null || $('#bank_name').val()==''){
+        let html = "";
+        html += '<p style="font-size: 80%; color: red; margin-top: -15px;' +
+            'text-indent: 3em;"><strong>은행 이름을 입력해주세요.</strong></p>';
+        $('#bank_name').focus();
+        $('#errBank_name').empty();
+        $('#errBank_name').append(html);
+        return;
+    }
+    if($('#acc_num').val()==null || $('#acc_num').val()==''){
+        let html = "";
+        html += '<p style="font-size: 80%; color: red; margin-top: -15px;' +
+            'text-indent: 3em;"><strong>계좌 번호를 입력해주세요.</strong></p>';
+        $('#acc_num').focus();
+        $('#errAcc_num').empty();
+        $('#errAcc_num').append(html);
+        return;
+    }
+    if($('#upload2').val()==null || $('#upload2').val()==''){
+        let html = "";
+        html += '<p style="font-size: 80%; color: red; text-align: center">' +
+            '<strong>아파트 대표 인증 사진을 업로드해주세요.</strong></p>';
+        $('#upload-label').focus();
+        $('#errImageResult2').empty();
+        $('#errImageResult2').append(html);
+        return;
+    }
+
     var form = $('#edit_form')[0];
     var formData = new FormData(form);
 
@@ -200,8 +274,9 @@ $('#regCar').on('click', function (event) {
             success : function () {
                 alert('차량 등록이 완료되었습니다.');
                 let html = "";
-                html += '<button class="btn-primary" style="margin-right: 10px; margin-top: 10px;" disabled>'
-                    +$('#car_id').val()+'</button>';
+                html += '<button class="btn-primary" name="adCar" style="margin-right: 10px; margin-top: 10px;" disabled>'
+                    +$('#car_id').val()+'</button>'
+                +'<input type="hidden" value="'+$('#car_id').val()+'">';
                 $('#addedCar').focus();
                 $('#addedCar').append(html);
             }
@@ -213,8 +288,4 @@ $('#regCar').on('click', function (event) {
 $('#addCarModalBtn').on('click', function () {
     $('#carForm').resetForm();
     $('#errCar_id').empty();
-});
-
-$(document).ready(function () {
-
 });

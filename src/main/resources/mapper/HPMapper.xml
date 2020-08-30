@@ -14,7 +14,8 @@
             #{place},
             #{min30_fee},
             #{addMin10_fee},
-            #{manage_time},
+            #{start_manage_time},
+            #{end_manage_time},
             #{hp_pic},
             #{apt_map},
             sysdate,
@@ -32,7 +33,7 @@
     </select>
 
     <select id="hpRequest"  resultType="com.fivekm_home.charge.domain.HP.HP_request">
-        select m.name, hp_name, hp_type, place, min30_fee, addMin10_fee, manage_time,
+        select m.name, hp_name, hp_type, place, min30_fee, addMin10_fee, start_manage_time, end_manage_time,
                 r.post_code, r.road_addr, r.jibun_addr, r.detail_addr, r.extra_addr,
                 p.apt_map, p.hp_pic, r.lat, r.lng
         from hp_view p, res_view r, member_view m
@@ -43,7 +44,7 @@
 
     <select id="hpBookPage" resultType="com.fivekm_home.charge.domain.HP.HP_bookPage">
         select hp_pic, hp_name, place, min30_fee, addMin10_fee, apt_map,
-                road_addr, extra_addr, name, phone, manage_time, m.email
+                road_addr, extra_addr, name, phone, start_manage_time, end_manage_time, m.email
         from member_view m, hp_view p, res_view r
         where m.email = r.email
         and p.res_name = r.res_name
@@ -58,7 +59,7 @@
     
     <select id="hpSearchDataList" resultType="com.fivekm_home.charge.domain.HP.HP_search">
         select hp_name, hp_type, min30_fee, addMin10_fee, road_addr, extra_addr,
-        manage_time, place, hp_pic, lat, lng, hp_chk
+        start_manage_time, end_manage_time, place, hp_pic, lat, lng, hp_chk
         from hp_view p, res_view r
         where p.res_name = r.res_name
         and hp_chk = 'Y'
@@ -66,8 +67,8 @@
 
     <insert id="hpBook">
         insert into hp_book_view values (
-            hp_book_seq.nextval, #{start_date},
-            #{end_date}, 'N', #{email}, #{hp_name}, sysdate
+            hp_book_seq.nextval, #{start_date}, #{end_date},
+            #{email}, #{car_num}, #{hp_name}, sysdate
         )
     </insert>
 
