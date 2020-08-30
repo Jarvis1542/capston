@@ -46,7 +46,7 @@
 
     <select id="scsBookPage" resultType="com.fivekm_home.charge.domain.SCS.SCS_bookPage">
         select scs_pic, scs_name, min30_fee, addmin10_fee, apt_map,
-                road_addr, extra_addr, name, phone, manage_time, m.email
+                road_addr, extra_addr, name, phone, start_manage_time, end_manage_time, m.email
         from member_view m, scs_view c, res_view r
         where m.email = r.email
         and c.res_name = r.res_name
@@ -61,7 +61,7 @@
 
     <select id="scsSearchDataList" resultType="com.fivekm_home.charge.domain.SCS.SCS_search">
         select scs_name, scs_amount , oper_ins, min30_fee, addMin10_fee, road_addr, extra_addr,
-        manage_time, scs_pic, lat, lng, scs_chk
+        start_manage_time, end_manage_time, scs_pic, lat, lng, scs_chk
         from scs_view c, res_view r
         where c.res_name = r.res_name
         and scs_chk = 'Y'
@@ -70,7 +70,7 @@
     <insert id="scsBook">
         insert into scs_book_view values (
             scs_book_seq.nextval, #{start_date}, #{end_date},
-            'N', #{email}, #{scs_name}, sysdate
+            #{email}, #{car_num}, #{scs_name}, sysdate
         )
     </insert>
 
@@ -80,4 +80,8 @@
             #{email}, #{phone}, scs_book_seq.currval, sysdate
         )
     </insert>
+
+    <select id="loadMyCar" resultType="com.fivekm_home.charge.domain.USER.RegCar">
+        select car_id from car_view where email = #{email}
+    </select>
 </mapper>

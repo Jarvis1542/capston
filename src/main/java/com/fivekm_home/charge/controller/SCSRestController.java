@@ -4,13 +4,11 @@ import com.fivekm_home.charge.domain.SCS.SCS_book;
 import com.fivekm_home.charge.domain.SCS.SCS_pay;
 import com.fivekm_home.charge.domain.SCS.SCS_reg;
 import com.fivekm_home.charge.domain.SCS.SCS_search;
+import com.fivekm_home.charge.domain.USER.RegCar;
 import com.fivekm_home.charge.service.SCSService;
 import com.fivekm_home.charge.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
@@ -55,5 +53,13 @@ public class SCSRestController {
     public void scsPay(SCS_pay scs_pay){
         System.out.println("SCS_PAY " + scs_pay);
         scsService.scsPay(scs_pay);
+    }
+
+    // 차 불러오기
+    @PostMapping("/rest/loadMyCar")
+    public ArrayList<RegCar> loadMyCar(@RequestParam("email") String email){
+        System.out.println("email : " + email);
+        System.out.println("loadMyCarList : " + scsService.loadMyCar(email));
+        return scsService.loadMyCar(email);
     }
 }

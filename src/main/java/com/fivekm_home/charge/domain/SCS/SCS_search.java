@@ -11,7 +11,8 @@ public class SCS_search {
     private int addMin10_fee;
     private String road_addr;
     private String extra_addr;
-    private String manage_time;
+    private String start_manage_time;
+    private String end_manage_time;
     private String scs_pic;
     private double lat;
     private double lng;

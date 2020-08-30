@@ -172,7 +172,8 @@
                                     '<div class="dataAddress">'+data[i].road_addr+'</div>' +
                                     '<ul>' +
                                         '<li><span class="dataSubTitle">운영 시간</span>' +
-                                            '<span>'+data[i].manage_time+'</span><br>'+
+                                            '<span>'+data[i].start_manage_time+'</span><br>'+
+                                            '<span>'+data[i].end_manage_time+'</span><br>'+
                                         '</li>' +
                                         '<li><span class="dataSubTitle">주차 요금</span>' +
                                             '<span>' +
@@ -180,9 +181,10 @@
                                                 '10분당 추가요금 : '+data[i].addMin10_fee+'<br>'+
                                             '</span>'+
                                         '</li>'+
+                                        '<li>' +
+                                            '<button style="width: 100px; float:right;" onClick="mapBook(\'' + data[i].hp_name + '\')" class="genric-btn primary small">예약</button>'+
+                                        '</li>' +
                                     '</ul>'+
-                        '<p><button style="width: 100px" onClick="mapBook(\'' + data[i].hp_name + '\')" class="genric-btn primary small">예약</button></p>'+
-
                                  '</div>');
 
                     $wrap.append($title).append($body);

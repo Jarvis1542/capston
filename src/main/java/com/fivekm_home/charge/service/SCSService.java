@@ -2,6 +2,7 @@ package com.fivekm_home.charge.service;
 
 import com.fivekm_home.charge.domain.SCS.*;
 import com.fivekm_home.charge.domain.HP.HP_loadRes;
+import com.fivekm_home.charge.domain.USER.RegCar;
 import com.fivekm_home.charge.mapper.HPMapper;
 import com.fivekm_home.charge.mapper.SCSMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,4 +62,8 @@ public class SCSService {
         scsMapper.scsPay(cs_pay);
     }
 
+    // 차 불러오기
+    public ArrayList<RegCar> loadMyCar(String email){
+        return scsMapper.loadMyCar(email);
+    }
 }

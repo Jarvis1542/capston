@@ -173,7 +173,8 @@
                     '<ul>' +
                     '<li><span class="dataSubTitle">운영 정보</span>' +
                     '<span>' +
-                    '운영시간 :'+data[i].manage_time+'<br>' +
+                    '시작운영시간 :'+data[i].start_manage_time+'<br>' +
+                    '종료운영시간 :'+data[i].end_manage_time+'<br>' +
                     '잔여 충전기 수'+data[i].scs_amount+'<br>'+
                     '</span>'+
                     '</li>' +
@@ -182,10 +183,9 @@
                     '30분당 요금 : '+data[i].min30_fee+'<br>'+
                     '10분당 추가요금 : '+data[i].addMin10_fee+'<br>'+
                     '</span>'+
+                     '<button style="width: 100px; margin-left: 10px; margin-top: 5px" onClick="mapBook(\'' + data[i].scs_name + '\')" class="genric-btn primary small">예약</button>'+
                     '</li>'+
                     '</ul>'+
-                    '<p><button style="width: 100px" onClick="mapBook(\'' + data[i].scs_name + '\')" class="genric-btn primary small">예약</button></p>'+
-
                     '</div>');
 
                 $wrap.append($title).append($body);

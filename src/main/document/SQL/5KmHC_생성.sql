@@ -141,6 +141,7 @@ CREATE TABLE scs_book (
     start_date   timestamp,             /* 예약 시작 시간 */
     end_date     timestamp,             /* 예약 종료 시간 */
     email       varchar2(100),          /* 사용자 이메일 - FK(MEMBER) */
+    car_num     varchar2(10),           /* 차번호 */
     scs_name varchar2(300),           /* 충전소 이름 - FK(CS) */
     book_date    timestamp,             /* 예약 날짜 */
     constraint scs_book_id_pk primary key (book_id),
