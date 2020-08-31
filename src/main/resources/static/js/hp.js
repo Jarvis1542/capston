@@ -56,7 +56,7 @@ $('#hpReg').on('click', function (event) {
     if($('#start_manage_time').val()=='' || $('#start_manage_time').val()==null){
         let html = "";
         html += '<p style="font-size: 80%; color: red; ' +
-            'text-indent: 10em;"><strong>운영 시작 시간을 입력해주세요.</strong></p>';
+            'text-indent: 3em;"><strong>운영 시작 시간을 입력해주세요.</strong></p>';
         $('#start_manage_time').focus();
         $('#errStartManageTime').empty();
         $('#errStartManageTime').append(html);
@@ -65,7 +65,7 @@ $('#hpReg').on('click', function (event) {
     if($('#end_manage_time').val()=='' || $('#end_manage_time').val()==null){
         let html = "";
         html += '<p style="font-size: 80%; color: red; ' +
-            'text-indent: 10em;"><strong>운영 시작 시간을 입력해주세요.</strong></p>';
+            'text-indent: 3em;"><strong>운영 시작 시간을 입력해주세요.</strong></p>';
         $('#end_manage_time').focus();
         $('#errEndManageTime').empty();
         $('#errEndManageTime').append(html);

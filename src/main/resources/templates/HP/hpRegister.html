@@ -137,22 +137,13 @@
                         </div>
                         <div id="errAddMin10Fee"></div>
                     </div>
-                    <div class="col-md-12">
-                        <div class="single_field">
-                            운영 시작 시간&ensp;&ensp;&ensp;<input type="text" id="start_manage_time" name="start_manage_time"
-                                                             class="single_field col-md-9" placeholder="ex)&ensp;09:00">
-                        </div>
-                        <div id="errStartManageTime"></div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="single_field">
-                            운영 종료 시간&ensp;&ensp;&ensp;<input type="text" id="end_manage_time" name="end_manage_time"
-                                                             class="single_field col-md-9" placeholder="ex)&ensp;16:00">
-                        </div>
-                        <div id="errEndManageTime"></div>
-                    </div>
                     <div class="col-xl-6 col-md-6 col-lg-4 field_col_margin">
-                        <br><h4>주소</h4>
+                        <div class="single_field">
+                            &ensp;운영 시작 시간&ensp;&ensp;<input type="time" id="start_manage_time" name="start_manage_time"
+                                                       class="single_field col-md-6">
+                            <div id="errStartManageTime"></div>
+                        </div>
+                        <h4>주소</h4>
                         <p class="newsletter_text">주소를 검색하여 주소를 등록해주세요.</p>
                         <input type="hidden" id="res_name" name="res_name">
                         <div class="newsletter_form">
@@ -176,7 +167,12 @@
                     </div>
 
                     <div class="col-xl-6 col-md-6 col-lg-4 field_col_margin">
-                        <br><h4>사진</h4>
+                        <div class="single_field">
+                            &ensp;운영 종료 시간&ensp;&ensp;<input type="time" id="end_manage_time" name="end_manage_time"
+                                                       class="single_field col-md-6">
+                            <div id="errEndManageTime"></div>
+                        </div>
+                        <h4>사진</h4>
                         <p class="newsletter_text">주차장 사진과 아파트 내부 단지 지도를 <br>등록해주세요.</p>
                         <span style="font-size: 20px">주차장 사진</span>
                         <div class="input-group mb-0 px-2 py-2 bg-white shadow-sm">
