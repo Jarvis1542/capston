@@ -106,7 +106,7 @@
                                 <nav>
                                     <ul id="navigation">
                                         <!-- 메뉴 : SCS -->
-                                        <li><a href="/chargingStation/chargingSearch">SCS</a>
+                                        <li><a href="/chargingStation/scsSearch">SCS</a>
                                             <ul class="submenu">
                                                 <div th:unless="${session.user==null}">
                                                     <div th:if="${session.user.role.getTitle()=='관리자'}">
@@ -135,7 +135,7 @@
                                         </li>
 
                                         <!-- 메뉴 : 해피 파킹 -->
-                                        <li><a href="/happyParking/happyParkingSearch">Happy Parking</a>
+                                        <li><a href="/happyParking/hpSearch">Happy Parking</a>
                                             <ul class="submenu">
                                                 <div th:unless="${session.user==null}">
                                                     <div th:if="${session.user.role.getTitle()=='관리자'}">
