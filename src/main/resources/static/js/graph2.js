@@ -184,9 +184,9 @@ $(document).ready(function () {
             for(var i = 0; i < msg.length; i++) {
                 for(var j = 0; j < 2; j++) {
                     if(j == 0) {
-                        pay_arr[i][j] = new Date(msg[i].paydate);
+                        pay_arr[i][j] = new Date(msg[i].pay_DATE);
                     } else if(j == 1) {
-                        pay_arr[i][j] = msg[i].pay;
+                        pay_arr[i][j] = msg[i].price;
                     }
                 }
             }
@@ -209,9 +209,9 @@ $(document).ready(function () {
             for(var i = 0; i < msg.length; i++) {
                 for(var j = 0; j < 2; j++) {
                     if(j == 0) {
-                        pay_arr2[i][j] = new Date(msg[i].paydate);
+                        pay_arr2[i][j] = new Date(msg[i].pay_DATE);
                     } else if(j == 1) {
-                        pay_arr2[i][j] = msg[i].pay;
+                        pay_arr2[i][j] = msg[i].price;
                     }
                 }
             }
@@ -353,15 +353,15 @@ $(document).ready(function () {
             // The data for our dataset
             data: {
                 datasets: [{
-                    label: '주차장 매출현황',
-                    backgroundColor: 'rgba(0, 0, 0, 0.0)',
-                    "lineTension": 0.1,
-                    borderColor: 'rgb(77,142,255)'
-                },{
                     label: '충전소 매출현황',
                     backgroundColor: 'rgba(0, 0, 0, 0.0)',
                     "lineTension": 0.1,
                     borderColor: 'rgb(13,224,200)'
+                },{
+                    label: '주차장 매출현황',
+                    backgroundColor: 'rgba(0, 0, 0, 0.0)',
+                    "lineTension": 0.1,
+                    borderColor: 'rgb(77,142,255)'
                 }]
             },
 

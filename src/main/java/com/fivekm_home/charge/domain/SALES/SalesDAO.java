@@ -6,6 +6,6 @@ import java.util.Date;
 
 @Data
 public class SalesDAO {
-    private Date PAYDATE;
-    private String PAY;
+    private Date PAY_DATE;
+    private String PRICE;
 }

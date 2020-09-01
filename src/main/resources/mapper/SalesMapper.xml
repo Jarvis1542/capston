@@ -4,11 +4,11 @@
 
     <!-- 1월 ~ 12월 조회(String, number) -->
     <select id="SalesXML" resultType="com.fivekm_home.charge.domain.SALES.SalesDAO">
-        select * from CCC
+        select PAY_DATE, PRICE from SCS_PAY
     </select>
 
     <select id="Sales2XML" resultType="com.fivekm_home.charge.domain.SALES.SalesDAO">
-        select * from DDD
+        select PAY_DATE, PRICE from HP_PAY
     </select>
 
 </mapper>

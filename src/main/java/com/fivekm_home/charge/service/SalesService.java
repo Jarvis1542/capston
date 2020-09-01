@@ -14,13 +14,11 @@ public class SalesService {
     SalesIntfMapper salesIntfMapper;
 
     public ArrayList<SalesDAO> SalesService(){
-        System.out.println("서비스");
         System.out.println("서비스 :  " + salesIntfMapper.SalesXML());
         return salesIntfMapper.SalesXML();
     }
 
     public ArrayList<SalesDAO> Sales2Service(){
-        System.out.println("서비스");
         System.out.println("서비스 :  " + salesIntfMapper.Sales2XML());
         return salesIntfMapper.Sales2XML();
     }

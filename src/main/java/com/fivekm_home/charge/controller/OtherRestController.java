@@ -59,15 +59,13 @@ public class OtherRestController {
 
     @PostMapping("/rest/Sales")
     public ArrayList<SalesDAO> SalesController() {
-        System.out.println("컨트롤러4");
-        System.out.println("컨트롤러4 :  " + salesService.SalesService());
+        System.out.println("컨트롤러 CCC : " + salesService.SalesService());
         return salesService.SalesService();
     }
 
     @PostMapping("/rest/Sales2")
     public ArrayList<SalesDAO> Sales2Controller() {
-        System.out.println("컨트롤러5");
-        System.out.println("컨트롤러5 :  " + salesService.Sales2Service());
+        System.out.println("컨트롤러 DDD : " + salesService.Sales2Service());
         return salesService.Sales2Service();
     }
 
