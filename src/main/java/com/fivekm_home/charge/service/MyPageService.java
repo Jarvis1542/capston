@@ -60,4 +60,9 @@ public class MyPageService {
     public ArrayList<MemCarList> memCarList(String email){
         return myPageMapper.memCarList(email);
     }
+
+    // 차 불러오기
+    public ArrayList<RegCar> loadMyCar(String email){
+        return myPageMapper.loadMyCar(email);
+    }
 }

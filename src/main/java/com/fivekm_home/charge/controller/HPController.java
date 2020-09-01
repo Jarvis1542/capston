@@ -1,6 +1,6 @@
 package com.fivekm_home.charge.controller;
 
-import com.fivekm_home.charge.domain.HP.HP_chkBookmark;
+import com.fivekm_home.charge.domain.HP.HP_bookmark;
 import com.fivekm_home.charge.service.HPService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 
@@ -46,7 +45,7 @@ public class HPController {
             model.addAttribute("parking", hpService.hpBookPage(hp_name));
 
             // 북마크 검사
-            HP_chkBookmark hp_chkBookmark = new HP_chkBookmark();
+            HP_bookmark hp_chkBookmark = new HP_bookmark();
             hp_chkBookmark.setEmail(email);
             hp_chkBookmark.setHp_name(hp_name);
             System.out.println("checkBookmark return : " + hpService.checkBookmark(hp_chkBookmark));

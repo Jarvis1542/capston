@@ -1,5 +1,7 @@
 package com.fivekm_home.charge.controller;
 
+import com.fivekm_home.charge.domain.HP.HP_bookmark;
+import com.fivekm_home.charge.domain.SCS.SCS_bookmark;
 import com.fivekm_home.charge.service.SCSService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,6 +42,14 @@ public class SCSController {
         if(httpSession.getAttribute("user") != null){
             System.out.println("주차장 이름 : " + scs_name + "    사용자 이메일 : " + email);
             model.addAttribute("charge", scsService.scsBookPage(scs_name));
+
+            // 북마크 검사
+            SCS_bookmark scs_bookmark = new SCS_bookmark();
+            scs_bookmark.setEmail(email);
+            scs_bookmark.setScs_name(scs_name);
+            System.out.println("checkBookmark return : " + scsService.checkBookmark(scs_bookmark));
+            model.addAttribute("checkBookmark", scsService.checkBookmark(scs_bookmark));
+
             return "/SCS/scsBook";
         } else {
             System.out.println("CSController : 로그인되어 있지 않아 로그인 페이지로 요청했습니다.");

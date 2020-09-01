@@ -31,6 +31,11 @@
                 <div class="about_info pl-68">
                     <div class="section_title wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".3s">
                         <h3 th:text="${charge.scs_name}" th:value="${charge.scs_name}" id="scs_name"></h3>
+                        <div style="float: right">
+                            <input type="hidden" th:value="${checkBookmark}" id="change">
+                            <img src="/img/bookmark2.png" id="addSCSBookmark" style="width: 30px; height: 30px">
+                            <img src="/img/bookmark.png" id="deleteSCSBookmark" style="width: 30px; height: 30px">
+                        </div>
                     </div>
                     <p class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".4s">
                         <span th:text="${charge.road_addr}"></span><br>

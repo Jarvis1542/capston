@@ -2,14 +2,13 @@ package com.fivekm_home.charge.controller;
 
 import com.fivekm_home.charge.config.auth.dto.SessionUser;
 import com.fivekm_home.charge.domain.USER.MemberEdit;
+import com.fivekm_home.charge.domain.USER.RegCar;
 import com.fivekm_home.charge.domain.USER.UserSearchBookmark;
 import com.fivekm_home.charge.service.MyPageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -56,5 +55,13 @@ public class MyPageController {
     @GetMapping("/residence")
     public String residence(){
         return "/myPage/residence";
+    }
+
+    // 차 불러오기
+    @PostMapping("/rest/loadMyCar")
+    public ArrayList<RegCar> loadMyCar(@RequestParam("email") String email){
+        System.out.println("email : " + email);
+        System.out.println("loadMyCarList : " + myPageService.loadMyCar(email));
+        return myPageService.loadMyCar(email);
     }
 }

@@ -6,5 +6,4 @@ import lombok.Data;
 public class HP_bookmark {
     private String hp_name;
     private String email;
-    private String img_src;
 }

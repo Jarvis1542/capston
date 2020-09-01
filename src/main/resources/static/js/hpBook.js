@@ -4,55 +4,6 @@ $('#hpBookBack').on('click', function () {
     window.location.href = '/happyParking/hpSearch';
 });
 
-// 즐겨찾기 등록
-$('#firstBookmark').on('click', function () {
-    let src = ($(this).attr('src') === '/img/bookmark.png') ? '/img/bookmark2.png' : '/img/bookmark.png';
-    if(src === '/img/bookmark.png'){
-        var data = {
-            hp_name : $('#hp_name').text(),
-            email : $('#email').val(),
-            img_src : src.toString()
-        }
-        $.ajax({
-            data : data,
-            type : 'post',
-            url : '/rest/hpBookmark',
-            success : function () {
-                alert('즐겨찾기 추가 되었습니다!');
-                $('#bookmark').attr('src', src);
-                window.location.href = '/happyParking/' + data.hp_name + '+' + data.email;
-            },
-            error : function (error) {
-                alert(JSON.stringify(error));
-            }
-        });
-    }
-});
-
-// 즐겨찾기 취소
-$('#secondBookmark').on('click', function () {
-    let src = ($(this).attr('src') === '/img/bookmark.png') ? '/img/bookmark2.png' : '/img/bookmark.png';
-    if (src === '/img/bookmark2.png') {
-        var data = {
-            hp_name: $('#hp_name').val(),
-            email: $('#email').val(),
-            img_src: src
-        }
-        $.ajax({
-            data: data,
-            type: 'post',
-            url: '/rest/hpBookmark',
-            success: function () {
-                alert('즐겨찾기 해제 되었습니다.');
-                $('#bookmark').attr('src', src);
-            },
-            error: function (error) {
-                alert(JSON.stringify(error));
-            }
-        });
-    }
-});
-
 // 예약
 $('#hpBook').on('click', function () {
     let carNum = "";
@@ -149,3 +100,59 @@ $('#hpPay').on('click', function () {
     });
 });
 
+// 즐겨찾기 추가
+$('#addHpBookmark').on('click', function () {
+    $('#deleteHpBookmark').show();
+    $('#addHpBookmark').hide();
+    let hp_name = $('#hp_name').text();
+    let data = {
+        email : $('#email').val(),
+        hp_name : hp_name
+    }
+    $.ajax({
+        data : data,
+        url : '/rest/addHpBookmark',
+        type : 'post',
+        success : function () {
+            alert(hp_name+'을 즐겨찾기 추가했습니다.');
+
+        },
+        error : function (error) {
+            alert(JSON.stringify(error));
+        }
+    });
+});
+
+// 즐겨찾기 해제
+$('#deleteHpBookmark').on('click', function () {
+    $('#addHpBookmark').show();
+    $('#deleteBookmark').hide();
+    let hp_name = $('#hp_name').text();
+    let data = {
+        email : $('#email').val(),
+        hp_name : hp_name
+    }
+    $.ajax({
+        data : data,
+        url : '/rest/deleteHpBookmark',
+        type : 'post',
+        success : function () {
+            alert(hp_name+'을 즐겨찾기 해제했습니다.');
+
+        },
+        error : function (error) {
+            alert(JSON.stringify(error));
+        }
+    });
+});
+
+$(document).ready(function () {
+    if($('#change').val()==0){
+        $('#addHpBookmark').show();
+        $('#deleteHpBookmark').hide();
+    }
+    if($('#change').val()==1){
+        $('#addHpBookmark').hide();
+        $('#deleteHpBookmark').show();
+    }
+});

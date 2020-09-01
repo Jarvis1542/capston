@@ -14,4 +14,5 @@ public interface MyPageMapper {
     ArrayList<UserHpBookmark> userHpBookmark(String email); // 회원이 즐겨찾기한 주차장 목록 불러오기
     void regCar(RegCar regCar); // 차량 등록
     ArrayList<MemCarList> memCarList(String email); // 등록된 차량 불러오기
+    ArrayList<RegCar> loadMyCar(String email); // 차 불러오기
 }

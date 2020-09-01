@@ -97,3 +97,60 @@ $('#scsPay').on('click', function () {
         alert(msg);
     });
 });
+
+// 즐겨찾기 추가
+$('#addSCSBookmark').on('click', function () {
+    $('#deleteSCSBookmark').show();
+    $('#addSCSBookmark').hide();
+    let scs_name = $('#scs_name').text();
+    let data = {
+        email : $('#email').val(),
+        scs_name : scs_name
+    }
+    $.ajax({
+        data : data,
+        url : '/rest/addSCSBookmark',
+        type : 'post',
+        success : function () {
+            alert(scs_name+'을 즐겨찾기 추가했습니다.');
+
+        },
+        error : function (error) {
+            alert(JSON.stringify(error));
+        }
+    });
+});
+
+// 즐겨찾기 해제
+$('#deleteSCSBookmark').on('click', function () {
+    $('#addSCSBookmark').show();
+    $('#deleteSCSBookmark').hide();
+    let scs_name = $('#scs_name').text();
+    let data = {
+        email : $('#email').val(),
+        scs_name : scs_name
+    }
+    $.ajax({
+        data : data,
+        url : '/rest/deleteSCSBookmark',
+        type : 'post',
+        success : function () {
+            alert(scs_name+'을 즐겨찾기 해제했습니다.');
+
+        },
+        error : function (error) {
+            alert(JSON.stringify(error));
+        }
+    });
+});
+
+$(document).ready(function () {
+    if($('#change').val()==0){
+        $('#addSCSBookmark').show();
+        $('#deleteSCSBookmark').hide();
+    }
+    if($('#change').val()==1){
+        $('#addSCSBookmark').hide();
+        $('#deleteSCSBookmark').show();
+    }
+});

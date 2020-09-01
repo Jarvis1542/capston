@@ -57,19 +57,18 @@ public class HPService {
         hpMapper.hpPay(hp_pay);
     }
 
+    // 주차장 예약 페이지에서 사용자가 즐겨찾기를 판단
+    public int checkBookmark(HP_bookmark hp_bookmark){
+        return hpMapper.checkBookmark(hp_bookmark);
+    }
+
     // 주차장 즐겨찾기 추가
-    public void addBookmark(HP_bookmark hp_bookmark){
-        hpMapper.addBookmark(hp_bookmark);
+    public void addHpBookmark(HP_bookmark hp_bookmark){
+        hpMapper.addHpBookmark(hp_bookmark);
     }
 
     // 주차장 즐겨찾기 삭제
-    public void deleteBookmark(HP_bookmark hp_bookmark){
-        hpMapper.deleteBookmark(hp_bookmark);
+    public void deleteHpBookmark(HP_bookmark hp_bookmark){
+        hpMapper.deleteHpBookmark(hp_bookmark);
     }
-
-    // 주차장 예약 페이지에서 사용자가 즐겨찾기를 판단
-    public int checkBookmark(HP_chkBookmark hp_chkBookmark){
-        return hpMapper.checkBookmark(hp_chkBookmark);
-    }
-
 }

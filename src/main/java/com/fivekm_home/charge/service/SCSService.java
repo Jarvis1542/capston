@@ -2,7 +2,6 @@ package com.fivekm_home.charge.service;
 
 import com.fivekm_home.charge.domain.SCS.*;
 import com.fivekm_home.charge.domain.HP.HP_loadRes;
-import com.fivekm_home.charge.domain.USER.RegCar;
 import com.fivekm_home.charge.mapper.HPMapper;
 import com.fivekm_home.charge.mapper.SCSMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,8 +61,18 @@ public class SCSService {
         scsMapper.scsPay(cs_pay);
     }
 
-    // 차 불러오기
-    public ArrayList<RegCar> loadMyCar(String email){
-        return scsMapper.loadMyCar(email);
+    // 충전소 예약 페이지에서 사용자가 즐겨찾기를 판단
+    public int checkBookmark(SCS_bookmark scs_bookmark){
+        return scsMapper.checkBookmark(scs_bookmark);
+    }
+
+    // 충전소 즐겨찾기 추가
+    public void addSCSBookmark(SCS_bookmark scs_bookmark){
+        scsMapper.addSCSBookmark(scs_bookmark);
+    }
+
+    // 충전소 즐겨찾기 삭제
+    public void deleteSCSBookmark(SCS_bookmark scs_bookmark){
+        scsMapper.deleteSCSBookmark(scs_bookmark);
     }
 }

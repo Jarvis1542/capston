@@ -2,7 +2,6 @@ package com.fivekm_home.charge.mapper;
 
 import com.fivekm_home.charge.domain.HP.HP_loadRes;
 import com.fivekm_home.charge.domain.SCS.*;
-import com.fivekm_home.charge.domain.USER.RegCar;
 
 import java.util.ArrayList;
 
@@ -16,6 +15,8 @@ public interface SCSMapper {
     SCS_bookPage scsBookPage(String scs_name); // 해당 주차장 예약 페이지
     void scsPay(SCS_pay scs_pay);
     void scsBook(SCS_book scs_book); // 충전소 예약
-    ArrayList<RegCar> loadMyCar(String email); // 차 불러오기
+    int checkBookmark(SCS_bookmark scs_bookmark); // 충전소 예약 페이지에서 사용자가 즐겨찾기를 판단
+    void addSCSBookmark(SCS_bookmark scs_bookmark); // 충전소 즐겨찾기 추가
+    void deleteSCSBookmark(SCS_bookmark scs_bookmark); // 충전소 즐겨찾기 삭제
 }
 

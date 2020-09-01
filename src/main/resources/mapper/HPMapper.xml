@@ -80,23 +80,23 @@
         )
     </insert>
 
-    <insert id="addBookmark">
-        insert into hp_bookmark_view values(
-            #{email},
-            #{hp_name}
-        )
-    </insert>
-
-    <delete id="deleteBookmark">
-        delete from hp_bookmark_view
-        where email = #{email}
-        and hp_name = #{hp_name}
-    </delete>
-
     <select id="checkBookmark" resultType="int">
         select count(*)
         from hp_bookmark_view
         where email = #{email}
         and hp_name = #{hp_name}
     </select>
+
+    <insert id="addHpBookmark">
+        insert into hp_bookmark_view values(
+            #{email},
+            #{hp_name}
+        )
+    </insert>
+
+    <delete id="deleteHpBookmark">
+        delete from hp_bookmark_view
+        where email = #{email}
+        and hp_name = #{hp_name}
+    </delete>
 </mapper>

@@ -31,12 +31,9 @@
                     <div class="section_title wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".3s">
                         <h3 th:text="${parking.hp_name}" th:value="${parking.hp_name}" id="hp_name"></h3>
                         <div style="float: right">
-                            <div th:if="${checkBookmark==0}">
-                                <img src="/img/bookmark2.png" id="firstBookmark" style="width: 30px; height: 30px">
-                            </div>
-                            <div th:if="${checkBookmark==1}">
-                                <img src="/img/bookmark.png" id="secondBookmark" style="width: 30px; height: 30px">
-                            </div>
+                            <input type="hidden" th:value="${checkBookmark}" id="change">
+                            <img src="/img/bookmark2.png" id="addHpBookmark" style="width: 30px; height: 30px">
+                            <img src="/img/bookmark.png" id="deleteHpBookmark" style="width: 30px; height: 30px">
                         </div>
                     </div>
                     <p class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".4s">

@@ -1,10 +1,6 @@
 package com.fivekm_home.charge.controller;
 
-import com.fivekm_home.charge.domain.SCS.SCS_book;
-import com.fivekm_home.charge.domain.SCS.SCS_pay;
-import com.fivekm_home.charge.domain.SCS.SCS_reg;
-import com.fivekm_home.charge.domain.SCS.SCS_search;
-import com.fivekm_home.charge.domain.USER.RegCar;
+import com.fivekm_home.charge.domain.SCS.*;
 import com.fivekm_home.charge.service.SCSService;
 import com.fivekm_home.charge.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,11 +51,17 @@ public class SCSRestController {
         scsService.scsPay(scs_pay);
     }
 
-    // 차 불러오기
-    @PostMapping("/rest/loadMyCar")
-    public ArrayList<RegCar> loadMyCar(@RequestParam("email") String email){
-        System.out.println("email : " + email);
-        System.out.println("loadMyCarList : " + scsService.loadMyCar(email));
-        return scsService.loadMyCar(email);
+    // 충전소 즐겨찾기 추가
+    @PostMapping("/rest/addSCSBookmark")
+    public void addSCSBookmark(SCS_bookmark scs_bookmark) {
+        System.out.println("data : " + scs_bookmark.toString());
+        scsService.addSCSBookmark(scs_bookmark);
+    }
+
+    // 충전소 즐겨찾기 삭제
+    @PostMapping("/rest/deleteSCSBookmark")
+    public void deleteSCSBookmark(SCS_bookmark scs_bookmark) {
+        System.out.println("data : " + scs_bookmark.toString());
+        scsService.deleteSCSBookmark(scs_bookmark);
     }
 }

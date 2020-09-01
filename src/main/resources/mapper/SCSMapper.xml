@@ -81,7 +81,23 @@
         )
     </insert>
 
-    <select id="loadMyCar" resultType="com.fivekm_home.charge.domain.USER.RegCar">
-        select car_id from car_view where email = #{email}
+    <select id="checkBookmark" resultType="int">
+        select count(*)
+        from scs_bookmark_view
+        where email = #{email}
+        and scs_name = #{scs_name}
     </select>
+
+    <insert id="addSCSBookmark">
+        insert into scs_bookmark_view values(
+            #{email},
+            #{scs_name}
+        )
+    </insert>
+
+    <delete id="deleteSCSBookmark">
+        delete from scs_bookmark_view
+        where email = #{email}
+        and scs_name = #{scs_name}
+    </delete>
 </mapper>

@@ -44,18 +44,6 @@ public class HPRestController {
         return hpService.hpSearchDataList();
     }
 
-    // 주차장 즐겨찾기 추가
-    @PostMapping("/rest/hpBookmark")
-    public void addBookmark(HP_bookmark hp_bookmark) {
-        System.out.println("data : " + hp_bookmark.toString());
-        if(hp_bookmark.getImg_src().equals("/img/bookmark.png")){
-            hpService.addBookmark(hp_bookmark);
-        }
-        if(hp_bookmark.getImg_src().equals("/img/bookmark2.png")){
-            hpService.deleteBookmark(hp_bookmark);
-        }
-    }
-
     // 주차장 예약
     @PostMapping("/rest/hpBook")
     public void hpBook(HP_book hp_book){
@@ -68,5 +56,19 @@ public class HPRestController {
     public void hpPay(HP_pay hp_pay){
         System.out.println("HP_PAY " + hp_pay);
         hpService.hpPay(hp_pay);
+    }
+
+    // 주차장 즐겨찾기 추가
+    @PostMapping("/rest/addHpBookmark")
+    public void addHpBookmark(HP_bookmark hp_bookmark) {
+        System.out.println("data : " + hp_bookmark.toString());
+        hpService.addHpBookmark(hp_bookmark);
+    }
+
+    // 주차장 즐겨찾기 삭제
+    @PostMapping("/rest/deleteHpBookmark")
+    public void deleteHpBookmark(HP_bookmark hp_bookmark) {
+        System.out.println("data : " + hp_bookmark.toString());
+        hpService.deleteHpBookmark(hp_bookmark);
     }
 }

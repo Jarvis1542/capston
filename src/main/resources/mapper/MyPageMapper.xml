@@ -72,4 +72,7 @@
         where email = #{email}
     </select>
 
+    <select id="loadMyCar" resultType="com.fivekm_home.charge.domain.USER.RegCar">
+        select car_id from car_view where email = #{email}
+    </select>
 </mapper>
