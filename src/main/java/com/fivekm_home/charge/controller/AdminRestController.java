@@ -26,4 +26,5 @@ public class AdminRestController {
         System.out.println("csName : " + scs_name);
         scsService.updateChargingChk(scs_name);
     }
+
 }

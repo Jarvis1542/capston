@@ -6,6 +6,8 @@ $('#scsBookBack').on('click', function () {
 
 // 예약
 $('#scsBook').on('click', function () {
+    let start_manage_time = new Date($('#start_manage_time').val());
+    let end_manage_time = new Date($('#end_manage_time').val());
     let carNum = "";
     let start_date = new Date($('#start_date').val());
     let end_date = new Date($('#end_date').val());
@@ -13,6 +15,8 @@ $('#scsBook').on('click', function () {
     let result2 = new Date(end_date);
     console.log("시작일" + start_date);
     console.log("종료일" + end_date);
+    console.log("등록자 시작시간 " + start_manage_time);
+    console.log("등록자 마감시간 " + end_manage_time);
 
     let betweenDate = Math.ceil((end_date.getTime() - start_date.getTime()) / 60000 / 10 );
     console.log("결과값" + (betweenDate));

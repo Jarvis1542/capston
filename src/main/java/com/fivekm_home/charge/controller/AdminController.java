@@ -57,4 +57,10 @@ public class AdminController {
         return "/admin/hpRequest";
     }
 
+    // 매출현황 통계 그래프
+    @GetMapping("/sales")
+    public String salesStatus(){
+        return "/admin/sales";
+    }
+
 }
