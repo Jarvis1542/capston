@@ -1,8 +1,16 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
 <head th:replace="layout/layout :: head"/>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
 <body>
 <header th:replace="layout/layout :: header"/>
+
 <!-- bradcam_area  -->
 <div class="bradcam_area bradcam_bg_2">
     <div class="container">
@@ -16,6 +24,7 @@
     </div>
 </div>
 
+<table>
 <div class="about_area plus_padding">
     <div class="container">
         <div class="row">
@@ -27,20 +36,314 @@
                 </div>
             </div>
         </div>
-        <div class="row align-items-center">
-            <div class="col-lg-10 col-md-10">
-                <div class="about_info pl-68">
-                    <div class="section_title wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".3s">
-                        <h4>충주시청 주차장</h4>
+                <h3>서울특별시</h3>
+                <br>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" id="modal_show">
+                    서울 마포 한강아이파크 지하주차장
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">서울 마포 한강아이파크 지하주차장</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <img th:width="450" th:src="@{../img/happyParking/hp01.jpg}" alt="">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="about_img wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".3s">
-                    <img th:src="@{/img/other/undergroundParking.PNG}" alt="">
+
+                <script>
+                    $(document).ready(function() {
+                        $("#modal_show").click(function() {
+                            $("#exampleModal").modal("show");
+                        });
+
+                        $("#close_modal").click(function() {
+                            $("#exampleModal").modal("hide");
+                        });
+                    });
+                </script>
+
+
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" id="modal_show2">
+                            서울 마포 롯데캐슬 지하주차장
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel2">서울 마포 롯데캐슬 지하주차장</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <img th:width="450" th:src="@{../img/happyParking/hp01.jpg}" alt="">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <script>
+                            $(document).ready(function() {
+                                $("#modal_show2").click(function() {
+                                    $("#exampleModal2").modal("show");
+                                });
+
+                                $("#close_modal").click(function() {
+                                    $("#exampleModal2").modal("hide");
+                                });
+                            });
+                        </script>
+
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" id="modal_show3">
+                                    서울 명동 아이파크 지하주차장
+                                </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel3">서울 명동 아이파크 지하주차장</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <img th:width="450" th:src="@{../img/happyParking/hp01.jpg}" alt="">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <script>
+                                    $(document).ready(function() {
+                                        $("#modal_show3").click(function() {
+                                            $("#exampleModal3").modal("show");
+                                        });
+
+                                        $("#close_modal").click(function() {
+                                            $("#exampleModal3").modal("hide");
+                                        });
+                                    });
+                                </script>
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" id="modal_show4">
+            서울 압구정 현대아파트 지하주차장
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel4">서울 압구정 현대아파트 지하주차장</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img th:width="450" th:src="@{../img/happyParking/hp01.jpg}" alt="">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <script>
+            $(document).ready(function() {
+                $("#modal_show4").click(function() {
+                    $("#exampleModal4").modal("show");
+                });
+
+                $("#close_modal").click(function() {
+                    $("#exampleModal4").modal("hide");
+                });
+            });
+        </script>
+        <br>
+        <br>
+        <h3>대구광역시</h3>
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" id="modal_show5">
+            대구 복현동 장미아파트 지하주차장
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel5">대구 복현동 장미아파트 지하주차장</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img th:width="450" th:src="@{../img/happyParking/hp01.jpg}" alt="">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function() {
+                $("#modal_show5").click(function() {
+                    $("#exampleModal5").modal("show");
+                });
+
+                $("#close_modal").click(function() {
+                    $("#exampleModal5").modal("hide");
+                });
+            });
+        </script>
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" id="modal_show6">
+            대구 신천동 휴먼시아 지하주차장
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal6" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel6">대구 신천동 휴먼시아 지하주차장</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img th:width="450" th:src="@{../img/happyParking/hp01.jpg}" alt="">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function() {
+                $("#modal_show6").click(function() {
+                    $("#exampleModal6").modal("show");
+                });
+
+                $("#close_modal").click(function() {
+                    $("#exampleModal6").modal("hide");
+                });
+            });
+        </script>
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" id="modal_show7">
+            대구 반월당 SK허브스카이
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal7" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel7">대구 반월당 SK허브스카이</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img th:width="450" th:src="@{../img/happyParking/hp01.jpg}" alt="">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function() {
+                $("#modal_show7").click(function() {
+                    $("#exampleModal7").modal("show");
+                });
+
+                $("#close_modal").click(function() {
+                    $("#exampleModal7").modal("hide");
+                });
+            });
+        </script>
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" id="modal_show8">
+            대구 남산 자이하늘채 지하주차장
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal8" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel8">대구 남산 자이하늘채 지하주차장</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <img th:width="450" th:src="@{../img/happyParking/hp01.jpg}" alt="">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function() {
+                $("#modal_show8").click(function() {
+                    $("#exampleModal8").modal("show");
+                });
+
+                $("#close_modal").click(function() {
+                    $("#exampleModal8").modal("hide");
+                });
+            });
+        </script>
+            </div>
+        </div>
+</div>
+</div>
     </div>
 </div>
+</table>
 <footer th:replace="layout/layout :: footer"/>
 </body>
 <script th:replace="layout/layout :: script"/>
