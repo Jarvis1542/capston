@@ -47,19 +47,6 @@
         )
     </insert>
 
-    <select id="userHpBookmark" resultType="com.fivekm_home.charge.domain.USER.UserHpBookmark">
-        select hp_pic, hp_name, place, min30_fee, addmin10_fee, apt_map,
-        road_addr, extra_addr, name, phone, manage_time, m.email
-        from member_view m, hp_view p, res_view r
-        where m.email = r.email
-        and p.res_name = r.res_name
-        and m.email = #{email}
-        and hp_chk = (select hp_chk
-                            from hp_view
-                            where hp_chk = 'Y')
-        and hp_name = #{hp_name}
-    </select>
-
     <insert id="regCar">
         insert into car_view values (
             #{car_id}, #{car_name,jdbcType=VARCHAR}, #{car_model,jdbcType=VARCHAR},
@@ -74,5 +61,23 @@
 
     <select id="loadMyCar" resultType="com.fivekm_home.charge.domain.USER.RegCar">
         select car_id from car_view where email = #{email}
+    </select>
+
+    <select id="userHpBookmark" resultType="com.fivekm_home.charge.domain.USER.UserBookmark">
+        select b.email, b.hp_name, hp_pic, road_addr, extra_addr, start_manage_time,
+        end_manage_time, min30_fee, addmin10_fee
+        from hp_view s, hp_bookmark_view b, res_view r
+        where s.hp_name = b.hp_name
+        and s.res_name = r.res_name
+        and b.email = #{email}
+    </select>
+
+    <select id="userSCSBookmark" resultType="com.fivekm_home.charge.domain.USER.UserBookmark">
+        select b.email, b.scs_name, scs_pic, road_addr, extra_addr, start_manage_time,
+        end_manage_time, min30_fee, addmin10_fee
+        from scs_view s, scs_bookmark_view b, res_view r
+        where s.scs_name = b.scs_name
+        and s.res_name = r.res_name
+        and b.email = #{email}
     </select>
 </mapper>

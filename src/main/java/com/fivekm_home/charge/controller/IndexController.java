@@ -75,7 +75,7 @@ public class IndexController {
     }
 
     @GetMapping("/MS/kakaologin")
-    public String kakaoLogina(@RequestParam("code") String code, Kakao kakao, HttpSession httpSession) throws Exception{
+    public String kakaoLogina(@RequestParam("code") String code, Kakao kakao, HttpSession httpSession){
         JsonNode accessToken;
         org.codehaus.jackson.JsonNode jsonToken = KakaoAccessToken.getKakaoAccessToken(code);
         accessToken = jsonToken.get("access_token");

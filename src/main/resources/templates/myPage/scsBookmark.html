@@ -25,72 +25,63 @@
             <div class="col-lg-12">
                 <div class="section_title text-center mb-90">
                     <span class="wow fadeInUp"></span>
-                    <h3 class="wow fadeInUp">즐겨찾기</h3>
-                    <div  style="float: right">
-                        <select id="selectBookmark" class="selectpicker">
-                            <option value="충전소">충전소</option>
-                            <option data-divider="true"></option>
-                            <option value="주차장">주차장</option>
-                        </select>
-                    </div>
+                    <h3>즐겨찾기</h3>
+                </div>
+                <div style="float: right">
+                    <select class="selectpicker" id="selectBookmark">
+                        <option value="충전소" selected="selected">충전소</option>
+                        <option value="주차장">주차장</option>
+                    </select>
                 </div>
             </div>
         </div><br>
-        <div class="row align-items-center">
-            <div class="col-lg-6 col-md-6">
-                <div class="about_img wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".3s">
-                    <img style="width: 550px; height: 400px; margin-bottom: 70px;"
-                         src="https://img.cdn.encarmagazine.com/2019/09/IRw4P0kRoySwtzMbz6sV-jgU6p4c.jpg" alt="">
-                </div>
+        <div th:if="${#lists.isEmpty(scs)}">
+            <div class="section_title text-center mb-90">
+                <br><h4 style="text-align: center">조회된 데이터가 없습니다.</h4>
             </div>
-            <div class="col-lg-6 col-md-6">
-                <div class="about_info pl-68">
-                    <div class="section_title wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".3s">
-                        <h3>XX 충전소</h3>
-                    </div>
-                    <p class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".4s">대구 광역시 선원남로99 XXXX</p>
-                    <div class="about_list">
-                        <ul>
-                            <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">30분 요금 : XX원  </li>
-                            <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".6s">추가 요금(10분) : XX원</li>
-                            <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".7s">운영 시간</li>
-                            <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".8s">평일 - XX:XX ~ XX:XX</li>
-                            <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".9s">토요일 - XX:XX ~ XX:XX</li>
-                            <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".9s">공휴일(일요일) - XX:XX ~ XX:XX</li>
-                        </ul>
-                        <br><a class="boxed-btn3">충전소 예약</a><br><br>
+        </div>
+        <div th:if="${not #lists.isEmpty(scs)}">
+            <div class="row align-items-center" th:each="scs : ${scs}">
+                <div class="col-lg-6 col-md-6">
+                    <div class="about_img wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".3s">
+                        <img style="width: 550px; height: 400px; margin-bottom: 70px;"
+                             th:src="${scs.scs_pic}">
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-6 col-md-6">
-                <div class="about_img wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".3s">
-                    <img style="width: 550px; height: 400px; margin-bottom: 70px;"
-                         src="http://www.carguy.kr/news/photo/201804/32027_6843_1617.jpg" alt="">
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6">
-                <div class="about_info pl-68">
-                    <div class="section_title wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".3s">
-                        <h3>OO 충전소</h3>
-                    </div>
-                    <p class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".4s">대구 광역시 선원남로99 YYYY</p>
-                    <div class="about_list">
-                        <ul>
-                            <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">30분 요금 : XX원  </li>
-                            <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".6s">추가 요금(10분) : XX원</li>
-                            <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".7s">운영 시간</li>
-                            <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".8s">평일 - XX:XX ~ XX:XX</li>
-                            <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".9s">토요일 - XX:XX ~ XX:XX</li>
-                            <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".9s">공휴일(일요일) - XX:XX ~ XX:XX</li>
-                        </ul>
-                        <br><a class="boxed-btn3">충전소 예약</a><br><br>
+                <div class="col-lg-6 col-md-6">
+                    <div class="about_info pl-68">
+                        <div class="section_title wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".3s">
+                            <h3 th:text="${scs.scs_name}" th:value="${scs.scs_name}" id="scs_name"></h3>
+                        </div>
+                        <p class="wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".4s">
+                            <span th:text="${scs.road_addr}"></span><br>
+                            <span th:text="${scs.extra_addr}"></span>
+                        </p>
+                        <div class="about_list">
+                            <ul>
+                                <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">시작 운영 시간 :
+                                    <span th:text="${scs.start_manage_time}"/></li>
+                                <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".6s">종료 운영 시간 :
+                                    <span th:text="${scs.end_manage_time}"/></li>
+                                <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".7s">기본 요금(30분당) :
+                                    <span th:text="${scs.min30_fee+'원'}"/></li>
+                                <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".8s">추가 요금(10분당) :
+                                    <span th:text="${scs.addmin10_fee+'원'}"></span></li>
+                            </ul>
+                            <br><a class="boxed-btn3" th:href="@{'/chargingStation/scsBook/'+${scs.scs_name}+'+'
+                                                +${session.user.email}}">충전소 예약</a><br><br>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
 
+    /*]]>*/
+</script>
 <footer th:replace="layout/layout :: footer"/>
 </body>
 <script th:replace="layout/layout :: script"/>

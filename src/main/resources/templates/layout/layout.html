@@ -23,7 +23,7 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap/magnific-popup.css}">
     <link rel="stylesheet" th:href="@{/css/bootstrap/font-awesome.min.css}">
     <link rel="stylesheet" th:href="@{/css/bootstrap/themify-icons.css}">
-    <link rel="stylesheet" th:href="@{/css/bootstrap/nice-select.css}">
+<!--    <link rel="stylesheet" th:href="@{/css/bootstrap/nice-select.css}">-->
     <link rel="stylesheet" th:href="@{/css/bootstrap/flaticon.css}">
     <link rel="stylesheet" th:href="@{/css/bootstrap/gijgo.css}">
     <link rel="stylesheet" th:href="@{/css/bootstrap/animate.min.css}">
@@ -197,7 +197,7 @@
                                                     </div>
                                                     <div th:if="${session.user.role.getTitle()=='등록자'}">
                                                         <li><a th:href="@{/myPage/memberEdit}">정보 수정</a></li>
-                                                        <li><a th:href="@{'/myPage/hpBookmark/' + ${session.user.email}}">즐겨 찾기</a></li>
+                                                        <li><a th:href="@{'/myPage/SCSBookmark/' + ${session.user.email}}">즐겨 찾기</a></li>
                                                         <li><a th:href="@{/myPage/residence}">거주지 등록</a></li>
                                                         <li><a th:href="@{/chargingStation/scsRegister}">충전소 등록</a></li>
                                                         <li><a th:href="@{/happyParking/hpRegister}">주차장 등록</a></li>
@@ -205,13 +205,13 @@
                                                     </div>
                                                     <div th:if="${session.user.role.getTitle()=='경비'}">
                                                         <li><a th:href="@{/myPage/memberEdit}">정보 수정</a></li>
-                                                        <li><a th:href="@{'/myPage/hpBookmark/' + ${session.user.email}}">즐겨 찾기</a></li>
+                                                        <li><a th:href="@{'/myPage/SCSBookmark/' + ${session.user.email}}">즐겨 찾기</a></li>
                                                         <li><a th:href="@{/myPage/bookmark}">관리 아파트</a></li>
                                                         <li><a th:href="@{/myPage/history}">이용 내역</a></li>
                                                     </div>
                                                     <div th:if="${session.user.role.getTitle()=='일반'}">
                                                         <li class="login_none"><a th:href="@{/myPage/memberEdit}">정보 수정</a></li>
-                                                        <li class="login_none"><a th:href="@{'/myPage/hpBookmark/' + ${session.user.email}}">즐겨 찾기</a></li>
+                                                        <li class="login_none"><a th:href="@{'/myPage/SCSBookmark/' + ${session.user.email}}">즐겨 찾기</a></li>
                                                         <li class="login_none"><a th:href="@{/myPage/history}">이용 내역</a></li>
                                                     </div>
                                                 </div>
@@ -409,7 +409,7 @@
     <script th:async th:src="@{/js/bootstrap/scrollIt.js}"></script>
     <script th:async th:src="@{/js/bootstrap/jquery.scrollUp.min.js}"></script>
     <script th:async th:src="@{/js/bootstrap/wow.min.js}"></script>
-    <script th:async th:src="@{/js/bootstrap/nice-select.min.js}"></script>
+<!--    <script th:async th:src="@{/js/bootstrap/nice-select.min.js}"></script>-->
     <script th:async th:src="@{/js/bootstrap/jquery.slicknav.min.js}"></script>
     <script th:async th:src="@{/js/bootstrap/jquery.magnific-popup.min.js}"></script>
     <script th:async th:src="@{/js/bootstrap/plugins.js}"></script>

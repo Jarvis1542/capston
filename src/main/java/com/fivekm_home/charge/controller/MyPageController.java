@@ -3,7 +3,6 @@ package com.fivekm_home.charge.controller;
 import com.fivekm_home.charge.config.auth.dto.SessionUser;
 import com.fivekm_home.charge.domain.USER.MemberEdit;
 import com.fivekm_home.charge.domain.USER.RegCar;
-import com.fivekm_home.charge.domain.USER.UserSearchBookmark;
 import com.fivekm_home.charge.service.MyPageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,15 +37,6 @@ public class MyPageController {
 
     }
 
-    // 회원이 즐겨찾기한 주차장 목록 불러오기
-    @GetMapping("/hpBookmark/{email}")
-    public String hpBookmark(@PathVariable String email, Model model){
-        System.out.println("email : " + email);
-        System.out.println("hpBookmark return : " + myPageService.userHpBookmark(email));
-        model.addAttribute("usersHp", myPageService.userHpBookmark(email));
-        return "/myPage/hpBookmark";
-    }
-
     @GetMapping("/history")
     public String history(){
         return "/myPage/history";
@@ -57,11 +47,31 @@ public class MyPageController {
         return "/myPage/residence";
     }
 
-    // 차 불러오기
-    @PostMapping("/rest/loadMyCar")
-    public ArrayList<RegCar> loadMyCar(@RequestParam("email") String email){
+    // 회원 충전소 즐겨찾기 목록 불러오기
+    @GetMapping("/SCSBookmark/{email}")
+    public String SCSBookmark(@PathVariable String email, Model model){
         System.out.println("email : " + email);
-        System.out.println("loadMyCarList : " + myPageService.loadMyCar(email));
-        return myPageService.loadMyCar(email);
+        System.out.println("userSCSBookmark return : " + myPageService.userSCSBookmark(email));
+        System.out.println("asdfasdf : " + myPageService.userHpBookmark(email).isEmpty());
+        if(myPageService.userSCSBookmark(email).equals(null)){
+            model.addAttribute("scs", "조회된 데이터가 없습니다.");
+        }else{
+            model.addAttribute("scs", myPageService.userSCSBookmark(email));
+        }
+        return "/myPage/SCSBookmark";
+    }
+
+    // 회원 주차장 즐겨찾기 목록 불러오기
+    @GetMapping("/hpBookmark/{email}")
+    public String hpBookmark(@PathVariable String email, Model model){
+        System.out.println("email : " + email);
+        System.out.println("userHpBookmark return : " + myPageService.userHpBookmark(email));
+        System.out.println("asdfasdf : " + myPageService.userHpBookmark(email).isEmpty());
+        if(myPageService.userHpBookmark(email).equals(null)){
+            model.addAttribute("hp", "조회된 데이터가 없습니다.");
+        }else{
+            model.addAttribute("hp", myPageService.userHpBookmark(email));
+        }
+        return "/myPage/hpBookmark";
     }
 }

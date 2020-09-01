@@ -46,11 +46,6 @@ public class MyPageService {
         myPageMapper.regResidence(residence);
     }
 
-    // 회원이 즐겨찾기한 주차장 목록 불러오기
-    public ArrayList<UserHpBookmark> userHpBookmark(String email){
-        return myPageMapper.userHpBookmark(email);
-    }
-
     // 차량 등록
     public void regCar(RegCar regCar){
         myPageMapper.regCar(regCar);
@@ -64,5 +59,15 @@ public class MyPageService {
     // 차 불러오기
     public ArrayList<RegCar> loadMyCar(String email){
         return myPageMapper.loadMyCar(email);
+    }
+
+    // 유저가 저장한 주차장 즐겨찾기 목록 불러오기
+    public ArrayList<UserBookmark> userHpBookmark(String email){
+        return myPageMapper.userHpBookmark(email);
+    }
+
+    // 유저가 저장한 충전소 즐겨찾기 목록 불러오기
+    public ArrayList<UserBookmark> userSCSBookmark(String email){
+        return myPageMapper.userSCSBookmark(email);
     }
 }

@@ -16,15 +16,6 @@ $('#updatePassword').click(function () {
     });
 });
 
-$('select[name=select]').on('click', function () {
-    var text = $('select[name=select] option[value="충전소"]').text();
-    alert(text);
-});
-$('#parking').on('click', function () {
-    var text = $('#parking').text();
-    alert(text);
-});
-
 // 회원정보 수정 - 회원 구분에 따라 추가 양식 제공(memberEdit)
 $('input[type=radio][name=mem_role]').on('click', function() {
     var chkValue = $('input[type=radio][name=mem_role]:checked').val();
@@ -214,13 +205,6 @@ $('#reg_edit').on('click', function (event) {
     });
 });
 
-// 즐겨찾기의 예약 버튼
-$('#moveHpBook').on('click', function () {
-    let parkingName = $('#parkingName').text();
-    let email = $('#email').val()
-    window.location.href = '/happyParking/happyParkingBook/'+parkingName+'+'+email;
-})
-
 // 차량 등록
 $('#regCar').on('click', function (event) {
     event.preventDefault();
@@ -285,7 +269,20 @@ $('#regCar').on('click', function (event) {
     }
 });
 
+// 차량 등록 리셋
 $('#addCarModalBtn').on('click', function () {
     $('#carForm').resetForm();
     $('#errCar_id').empty();
+});
+
+// 즐겨찾기 select
+$('#selectBookmark').change(function () {
+    if($(this).val()=='충전소'){
+        let email = $('#email').val();
+        window.location.href = '/myPage/SCSBookmark/'+email;
+    }
+    if($(this).val()=='주차장'){
+        let email = $('#email').val();
+        window.location.href = '/myPage/hpBookmark/'+email;
+    }
 });

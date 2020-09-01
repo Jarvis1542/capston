@@ -6,10 +6,7 @@ import com.fivekm_home.charge.service.MemService;
 import com.fivekm_home.charge.service.MyPageService;
 import com.fivekm_home.charge.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
@@ -67,6 +64,14 @@ public class MyPageRestController {
     public void regCar(RegCar regCar){
         System.out.println("regCar : " + regCar.toString());
         myPageService.regCar(regCar);
+    }
+
+    // 차 불러오기
+    @PostMapping("/rest/loadMyCar")
+    public ArrayList<RegCar> loadMyCar(@RequestParam("email") String email){
+        System.out.println("email : " + email);
+        System.out.println("loadMyCarList : " + myPageService.loadMyCar(email));
+        return myPageService.loadMyCar(email);
     }
 
     @PostMapping("/rest/checkResidence")
