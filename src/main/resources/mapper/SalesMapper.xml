@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?> <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fivekm_home.charge.mapper.SalesIntfMapper">
+
+    <!-- 1월 ~ 12월 조회(String, number) -->
+    <select id="SalesXML" resultType="com.fivekm_home.charge.domain.SALES.SalesDAO">
+        select * from CCC
+    </select>
+
+    <select id="Sales2XML" resultType="com.fivekm_home.charge.domain.SALES.SalesDAO">
+        select * from DDD
+    </select>
+
+</mapper>

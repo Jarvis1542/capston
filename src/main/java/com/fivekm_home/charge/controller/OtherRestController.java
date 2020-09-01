@@ -2,8 +2,10 @@ package com.fivekm_home.charge.controller;
 
 import com.fivekm_home.charge.domain.DATE.*;
 import com.fivekm_home.charge.domain.OTHER.MembersDate;
+import com.fivekm_home.charge.domain.SALES.SalesDAO;
 import com.fivekm_home.charge.service.DateService;
 import com.fivekm_home.charge.service.OtherService;
+import com.fivekm_home.charge.service.SalesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +19,9 @@ public class OtherRestController {
 
     @Autowired
     DateService dateService;
+
+    @Autowired
+    SalesService salesService;
 
     @PostMapping("/rest/MembersDate")
     public ArrayList<MembersDate> memebersMonths() {
@@ -52,9 +57,18 @@ public class OtherRestController {
         return dateService.DateOneWeekService(DateSend);
     }
 
+    @PostMapping("/rest/Sales")
+    public ArrayList<SalesDAO> SalesController() {
+        System.out.println("컨트롤러4");
+        System.out.println("컨트롤러4 :  " + salesService.SalesService());
+        return salesService.SalesService();
+    }
 
-
-
-
+    @PostMapping("/rest/Sales2")
+    public ArrayList<SalesDAO> Sales2Controller() {
+        System.out.println("컨트롤러5");
+        System.out.println("컨트롤러5 :  " + salesService.Sales2Service());
+        return salesService.Sales2Service();
+    }
 
 }

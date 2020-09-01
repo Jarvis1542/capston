@@ -5,8 +5,8 @@
 /* 유저 생성(sysdab 권한) */
 conn sys as sysdba;
 1234
-create user test4 identified by test4;
-grant create trigger, connect, resource, dba to test4;
+create user cap identified by 1234;
+grant create trigger, connect, resource, dba to cap;
 commit;
 conn cap/1234;
 
@@ -14,5 +14,5 @@ conn cap/1234;
 /* 유저 삭제 */
 conn sys as sysdba;
 1234
-drop user test4 cascade;
+drop user cap cascade;
 commit;
