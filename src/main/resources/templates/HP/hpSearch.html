@@ -134,6 +134,9 @@
     var zoomControl = new kakao.maps.ZoomControl();
     map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
+
+
+
         $.ajax({
             url : '/rest/hpSearchData',
             type : 'GET',
@@ -141,17 +144,8 @@
             success : function(data) {
                 for (let i = 0; i < data.length; i++) {
                     takeTotal[i] = data[i];
-                    console.log('parkingName : ' + takeTotal[i].hp_name);
-                    console.log('parkingType : ' + takeTotal[i].hp_type);
-                    console.log('min30Fee : ' + takeTotal[i].min30_fee);
-                    console.log('addMin10Fee : ' + takeTotal[i].addMin10_fee);
-                    console.log('roadAddress : ' + takeTotal[i].road_addr);
-                    console.log('extraAddress : ' + takeTotal[i].extra_addr);
-                    console.log('manageTime : ' + takeTotal[i].manage_time);
-                    console.log('place : ' + takeTotal[i].place);
-                    console.log('parkingChk : ' + takeTotal[i].hp_chk);
-                    console.log('parkingPic : ' + takeTotal[i].hp_pic);
-                    console.log('==========================================');
+
+                    console.log(data[i]);
 
                     // 마커를 생성합니다
                     var marker = new kakao.maps.Marker({
@@ -175,6 +169,7 @@
                         '<span>' +
                         '시작운영시간 :'+data[i].start_manage_time+'<br>' +
                         '종료운영시간 :'+data[i].end_manage_time+'<br>' +
+                        '<a href="http://map.kakao.com/link/to/'+data[i].hp_name+ ',' +data[i].lat+ ','+data[i].lng+'"><button style="width: 100px; margin-left: 5px; margin-top: 5px" class="genric-btn primary small">길찾기</button></a>'+
                         '</span>'+
                         '</li>' +
                         '<li><span class="dataSubTitle">주차 요금</span>' +
@@ -182,7 +177,7 @@
                         '30분당 요금 : '+data[i].min30_fee+'<br>'+
                         '10분당 추가요금 : '+data[i].addMin10_fee+'<br>'+
                         '</span>'+
-                        '<button style="width: 100px; margin-left: 10px; margin-top: 5px" onClick="mapBook(\'' + data[i].hp_name + '\')" class="genric-btn primary small">예약</button>'+
+                        '<button style="width: 100px; margin-left: 5px; margin-top: 5px" onClick="mapBook(\'' + data[i].hp_name + '\')" class="genric-btn primary small">예약</button>'+
                         '</li>'+
                         '</ul>'+
                         '</div>');
