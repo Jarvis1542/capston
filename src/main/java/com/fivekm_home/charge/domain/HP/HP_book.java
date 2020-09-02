@@ -8,6 +8,7 @@ import java.util.Date;
 public class HP_book {
     private String hp_name;
     private String email;
+    private String car_num;
     private Date start_date;
     private Date end_date;
 }

@@ -137,7 +137,7 @@ create table scs
 
 /* 충전소 예약 */
 CREATE TABLE scs_book (
-    book_id      varchar2(100),          /* 예약 ID - SEQ, PK */
+    book_id      number,          /* 예약 ID - SEQ, PK */
     start_date   timestamp,             /* 예약 시작 시간 */
     end_date     timestamp,             /* 예약 종료 시간 */
     email       varchar2(100),          /* 사용자 이메일 - FK(MEMBER) */
@@ -152,13 +152,13 @@ CREATE TABLE scs_book (
 
 /* 충전소 결제 */
 CREATE TABLE scs_pay (
-    pay_id varchar2(100),        /* 결제 ID - SEQ, PK */
+    pay_id number,        /* 결제 ID - SEQ, PK */
     pay_way varchar2(20),     /* 결제 수단 */
     scs_name varchar2(50),    /* 충전소 이름 */
     price number,               /* 가격 */
     email varchar2(30),         /* 사용자 이메일 - FK(MEMBER) */
     phone varchar2(15),         /* 휴대폰 번호 */
-    book_id varchar2(100),       /* 예약 ID - FK */
+    book_id number,       /* 예약 ID - FK */
     pay_date timestamp,         /* 결제 날짜 */
     constraint scs_pay_pay_id_pk primary key (pay_id),
     constraint scs_pay_book_id_fk foreign key (book_id) references scs_book (book_id)
@@ -198,7 +198,7 @@ create table hp(
 /* 주차장 예약 */
 create table hp_book
 (
-    book_id      varchar2(100), /* YYYY/MM/dd + parkingName + email */
+    book_id      number, /* YYYY/MM/dd + parkingName + email */
     start_date   timestamp,
     end_date     timestamp,
     email       varchar2(100),
@@ -213,14 +213,14 @@ create table hp_book
 
 /* 주차장 결제 */
 create table hp_pay(
-   pay_id varchar2(100), /* YYYY/MM/dd + email */
+   pay_id number, /* YYYY/MM/dd + email */
    pay_way varchar2(20),
    name varchar2(10),
    price number,
    email varchar2(30),
    hp_name varchar2(300),
    phone varchar2(15),
-   book_id varchar2(100), /* parkingBook (fk) */
+   book_id number, /* parkingBook (fk) */
    pay_date timestamp,
    constraint hp_pay_pay_id_pk primary key (pay_id),
    constraint hp_pay_book_id_fk foreign key (book_id) references hp_book(book_id)
@@ -244,7 +244,7 @@ create table qna_board
     title   varchar2(100)  not null,
     content varchar2(1000) not null,
     writer  varchar2(50)   not null,
-    reg_date date,
+    reg_date timestamp,
     no_count number,
     no_reco  number,
     mbo     number,
