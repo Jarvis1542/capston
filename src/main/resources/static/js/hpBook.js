@@ -126,7 +126,7 @@ $('#addHpBookmark').on('click', function () {
 // 즐겨찾기 해제
 $('#deleteHpBookmark').on('click', function () {
     $('#addHpBookmark').show();
-    $('#deleteBookmark').hide();
+    $('#deleteHpBookmark').hide();
     let hp_name = $('#hp_name').text();
     let data = {
         email : $('#email').val(),
