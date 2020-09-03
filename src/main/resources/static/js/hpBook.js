@@ -21,7 +21,7 @@ $('#hpBook').on('click', function () {
     let min30_fee = $('#min30_fee').text();
 
     if(3<betweenDate)
-        $('#price').text(betweenDate*addmin10_fee-min30_fee-min30_fee);
+        $('#price').text(eval(addmin10_fee*(betweenDate-3) + eval(min30_fee)));
     else
         $('#price').text(min30_fee);
 
