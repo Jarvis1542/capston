@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--  Flatpicker Styles  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/themes/dark.css">
+    <style>
+        /*addHpBookmark 버튼 롤오버 시 손가락 모양 표시*/
+        #addHpBookmark{cursor: pointer;}
+        /*datepicer input 롤오버 시 손가락 모양 표시*/
+        #deleteHpBookmark{cursor: pointer;}
+    </style>
+</head>
 <head th:replace="layout/layout :: head"/>
-<style>
-    /*addHpBookmark 버튼 롤오버 시 손가락 모양 표시*/
-    #addHpBookmark{cursor: pointer;}
-    /*datepicer input 롤오버 시 손가락 모양 표시*/
-    #deleteHpBookmark{cursor: pointer;}
-</style>
 <body>
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!--  Flatpickr  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.js"></script>
 <header th:replace="layout/layout :: header"/>
 <!-- bradcam_area  -->
 <div class="bradcam_area bradcam_bg_2">
@@ -50,8 +59,8 @@
                         <ul>
                             <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".3s">시작 운영 시간 : <span th:text="${parking.start_manage_time}"/></li>
                             <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".3s">종료 운영 시간 : <span th:text="${parking.end_manage_time}"/></li>
-                            <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".4s">기본 요금(30분당) : <span id="min30_fee" th:text="${parking.min30_fee+'원'}"/></li>
-                            <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">추가 요금(10분당) : <span id="addmin10_fee" th:text="${parking.addmin10_fee+'원'}"/></li>
+                            <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".4s">기본 요금(30분당) : <span id="min30_fee" th:text="${parking.min30_fee}"/></li>
+                            <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">추가 요금(10분당) : <span id="addmin10_fee" th:text="${parking.addmin10_fee}"/></li>
                             <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".6s">이름 : <span th:text="${parking.name}"/></li>
                             <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".7s">폰번호 : <span th:text="${parking.phone}"/></li>
                             <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".8s">
@@ -59,6 +68,7 @@
                             </li>
                             <div id="loadMyCar"/>
                         </ul>
+
                         <br><h4>예약</h4><br>
                         <p>시작시간 : <input type="datetime-local" id="start_date"></p>
                         <p>종료시간 : <input type="datetime-local" id="end_date"></p><br>
@@ -99,4 +109,16 @@
 <script th:async src="/js/hpBook.js"></script>
 <script th:async th:replace="layout/layout :: script"/>
 <script th:async type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script>
+    const picker = document.getElementById('start_date');
+    picker.addEventListener('input', function(e){
+        var day = new Date(this.value).getUTCDay();
+        if([6,0].includes(day)){
+            e.preventDefault();
+            this.value = '';
+            alert('주말 및 공휴일은 불가능합니다');
+        }
+    });
+
+</script>
 </html>

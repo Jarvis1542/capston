@@ -11,8 +11,6 @@ $('#hpBook').on('click', function () {
     let end_date = new Date($('#end_date').val());
     let result1 = new Date(start_date);
     let result2 = new Date(end_date);
-    alert('start_date : ' + start_date);
-    alert('end_date : ' + end_date);
     console.log("시작일" + start_date);
     console.log("종료일" + end_date);
 
