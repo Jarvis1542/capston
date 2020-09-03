@@ -77,6 +77,7 @@ $('#reply').click(function () {
 //수정하기 버튼
 $('#update').click(function () {
     var data = {
+        bno : $('#bno').val(),
         title : $('#title').val(),
         writer : $('#writer').val(),
         content : $('#content').val(),
