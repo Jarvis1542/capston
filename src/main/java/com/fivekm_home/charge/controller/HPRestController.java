@@ -3,7 +3,9 @@ package com.fivekm_home.charge.controller;
 import com.fivekm_home.charge.domain.HP.*;
 import com.fivekm_home.charge.service.HPService;
 import com.fivekm_home.charge.service.StorageService;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -38,10 +40,24 @@ public class HPRestController {
     }
 
     // 지도에 마크를 찍을 데이터 불러오기
+//    @GetMapping("/rest/hpSearchData")
+//    public String hpSearchDataList(){
+//        System.out.println("return : " + hpService.hpTotalList());
+//        return hpService.hpTotalList().toString();
+//    }
+
+    // 지도에 마크를 찍을 데이터 불러오기
     @GetMapping("/rest/hpSearchData")
     public ArrayList<HP_search> hpSearchDataList(){
         System.out.println("return : " + hpService.hpSearchDataList());
         return hpService.hpSearchDataList();
+    }
+
+    // 지도에 주차장 자리 변화 불러오기
+    @GetMapping("/rest/hpPlaceData")
+    public ArrayList<HP_cnPlList> hpPlaceList(){
+        System.out.println("return : " + hpService.hpPlaceList());
+        return hpService.hpPlaceList();
     }
 
     // 주차장 예약

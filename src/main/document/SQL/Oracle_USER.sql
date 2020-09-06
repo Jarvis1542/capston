@@ -5,10 +5,10 @@
 /* 유저 생성(sysdab 권한) */
 conn sys as sysdba;
 1234
-create user cap identified by 1234;
-grant create trigger, connect, resource, dba to cap;
+create user test4 identified by test4;
+grant create trigger, connect, resource, dba to test4;
 commit;
-conn cap/1234;
+conn test4/1234;
 
 
 /* 유저 삭제 */

@@ -100,4 +100,8 @@
         where email = #{email}
         and scs_name = #{scs_name}
     </delete>
+
+    <select id="scsPlaceList" resultType="com.fivekm_home.charge.domain.HP.HP_cnPlList">
+        select * from scs_ch_pl_view
+    </select>
 </mapper>

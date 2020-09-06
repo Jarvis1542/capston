@@ -2,13 +2,22 @@ package com.fivekm_home.charge.service;
 
 import com.fivekm_home.charge.domain.HP.*;
 import com.fivekm_home.charge.mapper.HPMapper;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 
 @Service
-public class HPService {
+public class HPService<T> {
     @Autowired(required = false)
     private HPMapper hpMapper;
 
@@ -46,6 +55,25 @@ public class HPService {
     public ArrayList<HP_search> hpSearchDataList(){
         return hpMapper.hpSearchDataList();
     }
+
+    // 주차장 자리 변화 불러오기
+    public ArrayList<HP_cnPlList> hpPlaceList(){
+        return hpMapper.hpPlaceList();
+    }
+
+    // 지도에 보낼 데이터 total
+//    public JSONObject hpTotalList(){
+//        ArrayList<HP_search> se = hpMapper.hpSearchDataList();
+//        JSONObject data = new JSONObject();
+//        JSONArray total = new JSONArray();
+//        JSONObject sObject = new JSONObject();
+//        JsonArray hpSearch = new JsonArray();
+//        JSONObject hp_cn_pl = new JSONObject();
+//
+//        data.put("hsList",se);
+//        data.put("hpSearch", total);
+//        return data;
+//    }
 
     // 주차장 예약
     public void hpBook(HP_book hp_book){

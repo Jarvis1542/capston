@@ -114,7 +114,25 @@
 </body>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=31e2bf5613ce6e27d859ca41bb71d46e&libraries=services"></script>
 <script>
-    var takeTotal = [];
+    var search = [];
+    var place = [];
+
+    $.ajax({
+        url: '/rest/hpPlaceData',
+        type: 'get',
+        success: function (data) {
+            for (let i = 0; i < data.length; i++) {
+                place[i] = data[i];
+                console.log('hp_name : ' + place[i].hp_name);
+                console.log('hp_type : ' + place[i].hp_type);
+                console.log('place : ' + place[i].place);
+            }
+        },
+        error: function (error) {
+            alert(JSON.stringify(error));
+        }
+    });// 주차장 자리 변화 불러오기 ajax 끝
+
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
             center: new kakao.maps.LatLng(36.66061813442013, 127.86026006535788), // 지도의 중심좌표
@@ -137,26 +155,29 @@
         $.ajax({
             url : '/rest/hpSearchData',
             type : 'GET',
-            cache : false,
             success : function(data) {
-                for (let i = 0; i < data.length; i++) {
-                    takeTotal[i] = data[i];
-                    console.log('parkingName : ' + takeTotal[i].hp_name);
-                    console.log('parkingType : ' + takeTotal[i].hp_type);
-                    console.log('min30Fee : ' + takeTotal[i].min30_fee);
-                    console.log('addMin10Fee : ' + takeTotal[i].addMin10_fee);
-                    console.log('roadAddress : ' + takeTotal[i].road_addr);
-                    console.log('extraAddress : ' + takeTotal[i].extra_addr);
-                    console.log('manageTime : ' + takeTotal[i].manage_time);
-                    console.log('place : ' + takeTotal[i].place);
-                    console.log('parkingChk : ' + takeTotal[i].hp_chk);
-                    console.log('parkingPic : ' + takeTotal[i].hp_pic);
+                for (let i = 0; i <data.length; i++) {
+                    search[i] = data[i];
+                    console.log('parkingName : ' + search[i].hp_name);
+                    console.log('parkingType : ' + search[i].hp_type);
+                    console.log('min30Fee : ' + search[i].min30_fee);
+                    console.log('addMin10Fee : ' + search[i].addMin10_fee);
+                    console.log('roadAddress : ' + search[i].road_addr);
+                    console.log('extraAddress : ' + search[i].extra_addr);
+                    console.log('start_manage_time : ' + search[i].start_manage_time);
+                    console.log('end_manage_time : ' + search[i].end_manage_time);
+                    console.log('place : ' + search[i].place);
+                    console.log('parkingChk : ' + search[i].hp_chk);
+                    console.log('parkingPic : ' + search[i].hp_pic);
+                    console.log('change place : ' + search[i].place);
+                    console.log('lat : ' + search[i].lat);
+                    console.log('lng : ' + search[i].lng);
                     console.log('==========================================');
 
                     // 마커를 생성합니다
                     var marker = new kakao.maps.Marker({
                         map: map, // 마커를 표시할 지도
-                        position: new kakao.maps.LatLng(data[i].lat, data[i].lng), // 마커의 위치
+                        position: new kakao.maps.LatLng(search[i].lat, search[i].lng), // 마커의 위치
                     });
 
                     var closeOverlay = function() {
@@ -164,25 +185,26 @@
                     };
 
                     var $wrap = $('<div class="dataLayerOnMap" />');
-                    var $title = $('<div class="dataTitle" id="parkingName"/>').text(data[i].hp_name);
+                    var $title = $('<div class="dataTitle" id="parkingName"/>').text(search[i].hp_name);
                     var $close = $('<div class="close" title="닫기" style="width: 15px; height: 15px; font-size: 25px; margin-right: 15px">X</div>').click(closeOverlay);
                     var $body = $('<div class="body"/>');
-                    var $img = $('<div class="dataPicture"><img src="'+data[i].hp_pic+'" style="height: 110px; width: 100px;"></div>');
+                    var $img = $('<div class="dataPicture"><img src="'+search[i].hp_pic+'" style="height: 110px; width: 100px;"></div>');
                     var $desc = $('<div class="dataInfo" id="desc'+i+'">' +
-                        '<div class="dataAddress">'+data[i].road_addr+'</div>' +
+                        '<div class="dataAddress">'+search[i].road_addr+'</div>' +
                         '<ul>' +
                         '<li><span class="dataSubTitle">운영 정보</span>' +
                         '<span>' +
-                        '시작운영시간 :'+data[i].start_manage_time+'<br>' +
-                        '종료운영시간 :'+data[i].end_manage_time+'<br>' +
+                        '시작운영시간 : '+search[i].start_manage_time+'<br>' +
+                        '종료운영시간 : '+search[i].end_manage_time+'<br>' +
+                        '주차장칸 수 : '+place[i].place+' / '+search[i].place+'<br>' +
                         '</span>'+
                         '</li>' +
                         '<li><span class="dataSubTitle">주차 요금</span>' +
                         '<span>' +
-                        '30분당 요금 : '+data[i].min30_fee+'<br>'+
-                        '10분당 추가요금 : '+data[i].addMin10_fee+'<br>'+
+                        '30분당 요금 : '+search[i].min30_fee+'<br>'+
+                        '10분당 추가요금 : '+search[i].addMin10_fee+'<br>'+
                         '</span>'+
-                        '<button style="width: 100px; margin-left: 10px; margin-top: 5px" onClick="mapBook(\'' + data[i].hp_name + '\')" class="genric-btn primary small">예약</button>'+
+                        '<button style="width: 100px; margin-left: 10px; margin-top: 5px" onClick="mapBook(\'' + search[i].hp_name + '\')" class="genric-btn primary small">예약</button>'+
                         '</li>'+
                         '</ul>'+
                         '</div>');
@@ -204,15 +226,17 @@
                     });
                 } // for문 끝
 
-            } // success 끝
+            }, // success 끝
+            error : function (error) {
+                alert(JSON.stringify(error));
+            }
+        }); // 지도에 마크 찍을 데이터 불러오기 ajax 끝
 
-        }); //ajax 끝
     function mapBook(hp_name){
         var hp_name = hp_name;
         var email = $('#email').val();
         window.location.href = '/happyParking/hpBook/' + hp_name + '+' + email;
     }
-
 </script>
 
 <script th:replace="layout/layout :: script"/>

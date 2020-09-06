@@ -99,4 +99,8 @@
         where email = #{email}
         and hp_name = #{hp_name}
     </delete>
+    
+    <select id="hpPlaceList" resultType="com.fivekm_home.charge.domain.HP.HP_cnPlList">
+        select * from hp_ch_pl_view
+    </select>
 </mapper>

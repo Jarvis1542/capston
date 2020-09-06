@@ -17,4 +17,5 @@ public interface HPMapper {
     int checkBookmark(HP_bookmark hp_bookmark); // 주차장 예약 페이지에서 사용자가 즐겨찾기를 판단
     void addHpBookmark(HP_bookmark hp_bookmark); // 주차장 즐겨찾기 추가
     void deleteHpBookmark(HP_bookmark hp_bookmark); // 주차장 즐겨찾기 삭제
+    ArrayList<HP_cnPlList> hpPlaceList(); // 주차장 자리 변화 불러오기
 }
