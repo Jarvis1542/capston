@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout/layout :: head"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap/nice-select.css}">
 <body>
 <header th:replace="layout/layout :: header"/>
 <!-- bradcam_area  -->
@@ -107,6 +108,8 @@
 <footer th:replace="layout/layout :: footer"/>
 </body>
 <script th:replace="layout/layout :: script"/>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-<script src="/js/graph2.js"></script>    <!-- canvas 그리기 -->
+    <script th:async th:src="@{/js/bootstrap/nice-select.min.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="/js/graph2.js"></script>
+<!-- 차트 script 영역 -->
 </html>
