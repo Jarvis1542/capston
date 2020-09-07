@@ -6,4 +6,5 @@ import java.util.ArrayList;
 
 public interface OtherMapper {
     ArrayList<MembersDate> membersDate();
+
 }
