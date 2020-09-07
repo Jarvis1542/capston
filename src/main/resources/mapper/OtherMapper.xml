@@ -7,4 +7,10 @@
         select CREATED_DATE from member
     </select>
 
+    <!-- 충전소 랭킹 조회 -->
+    <select id="rakingSCS" resultType="com.fivekm_home.charge.domain.OTHER.MembersDate">
+        select SCS_NAME, count(*) from SCS_PAY
+        group by SCS_NAME
+    </select>
+
 </mapper>
