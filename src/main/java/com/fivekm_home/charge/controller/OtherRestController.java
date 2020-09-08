@@ -2,11 +2,14 @@ package com.fivekm_home.charge.controller;
 
 import com.fivekm_home.charge.domain.DATE.*;
 import com.fivekm_home.charge.domain.OTHER.MembersDate;
+import com.fivekm_home.charge.domain.OTHER.PaycountSCS;
 import com.fivekm_home.charge.domain.SALES.SalesDAO;
 import com.fivekm_home.charge.service.DateService;
 import com.fivekm_home.charge.service.OtherService;
 import com.fivekm_home.charge.service.SalesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -69,4 +72,8 @@ public class OtherRestController {
         return salesService.Sales2Service();
     }
 
+    @GetMapping("/rest/ranking")
+    public ArrayList<PaycountSCS> ranking() {
+        return otherService.ranking();
+    }
 }

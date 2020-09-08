@@ -16,13 +16,75 @@
     </div>
 </div>
 
-<div th:each ="PaycountSCS : ${PaycountSCS}">
-    <td><span th:text="${PaycountSCS.SCS_PIC}"/></td>
-    <td><span th:text="${PaycountSCS.ROAD_ADDR}"/></td>
-    <td><span th:text="${PaycountSCS.PAYCOUNT}"/></td>
+
+<!-- testimonial_area  -->
+<div class="testimonial_area custom_testimonial_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="testmonial_active owl-carousel none_aaa">
+
+<!--                    <div class="single_carousel">-->
+<!--                        <div class="row">-->
+<!--                            <div class="col-lg-11">-->
+<!--                                <div class="single_testmonial d-flex align-items-center">-->
+<!--                                    <div class="thumb">-->
+<!--                                        <img src="img/circleIcon/iconSCS01.png" alt="">-->
+<!--                                        <div class="quote_icon">-->
+<!--                                            <i class=" Flaticon flaticon-quote"></i>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="info">-->
+<!--                                        <p>1등 충전소</p>-->
+<!--                                        <span>...</span>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="single_carousel">-->
+<!--                        <div class="row">-->
+<!--                            <div class="col-lg-11">-->
+<!--                                <div class="single_testmonial d-flex align-items-center">-->
+<!--                                    <div class="thumb">-->
+<!--                                        <img src="img/circleIcon/iconSCS02.png" alt="">-->
+<!--                                        <div class="quote_icon">-->
+<!--                                            <i class=" Flaticon flaticon-quote"></i>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="info">-->
+<!--                                        <p>2등 충전소</p>-->
+<!--                                        <span>...</span>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="single_carousel">-->
+<!--                        <div class="row">-->
+<!--                            <div class="col-lg-11">-->
+<!--                                <div class="single_testmonial d-flex align-items-center">-->
+<!--                                    <div class="thumb">-->
+<!--                                        <img src="img/circleIcon/iconSCS03.png" alt="">-->
+<!--                                        <div class="quote_icon">-->
+<!--                                            <i class=" Flaticon flaticon-quote"></i>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="info">-->
+<!--                                        <p>3등 충전소</p>-->
+<!--                                        <span>...</span>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-
+<script src="/js/ranking.js"></script>
+<!-- /testimonial_area  -->
 <footer th:replace="layout/layout :: footer"/>
 </body>
 <script th:replace="layout/layout :: script"/>

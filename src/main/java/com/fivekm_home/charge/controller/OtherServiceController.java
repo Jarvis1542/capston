@@ -1,5 +1,7 @@
 package com.fivekm_home.charge.controller;
 
+import com.fivekm_home.charge.domain.OTHER.PaycountSCS;
+import com.fivekm_home.charge.domain.SALES.SalesDAO;
 import com.fivekm_home.charge.service.OtherService;
 import com.fivekm_home.charge.service.QBService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/otherService")
@@ -56,9 +59,7 @@ public class OtherServiceController {
     }
 
     @GetMapping("/aaa")
-    public String ranking(Model model) {
-        model.addAttribute("PaycountSCS", otherService.ranking());
-        System.out.println("페이카운트 : " + otherService.ranking());
+    public String ranking() {
         return "/otherService/aaa";
     }
 
