@@ -8,46 +8,17 @@
     </select>
 
     <!-- 충전소 랭킹 조회 -->
-    <select id="rankingSCS" resultType="com.fivekm_home.charge.domain.OTHER.PaycountSCS">
+    <select id="ranking" resultType="com.fivekm_home.charge.domain.OTHER.PaycountSCS">
         SELECT * FROM (
-            SELECT A.SCS_PIC, C.ROAD_ADDR, COUNT(B.SCS_NAME) as PAYNUM
+            SELECT A.SCS_PIC, C.ROAD_ADDR, COUNT(B.SCS_NAME) as PAYCOUNT
             FROM SCS A
             , SCS_PAY B
             , RES C
             WHERE A.SCS_NAME = B.SCS_NAME
             AND A.RES_NAME = C.RES_NAME
             GROUP BY A.SCS_PIC, C.ROAD_ADDR, B.SCS_NAME
-            order by PAYNUM desc
+            order by PAYCOUNT desc
         ) WHERE ROWNUM <![CDATA[ <= ]]> 3
-
-        <!--
-                SELECT  SCS.SCS_PIC, RES.ROAD_ADDR
-                FROM SCS, RES
-                WHERE SCS.RES_NAME = RES.RES_NAME;
-                -->
-
-<!--as PAYNUM from SCS_PAY
-        group by SCS_NAME -->
-<!--
-        SELECT *
-            FROM (
-                SELECT RES_NAME, SCS_PIC
-                FROM (
-                    SELECT RES_NAME, SCS_PIC
-                    FROM SCS
-                    WHERE SCS_NAME IN (select SCS_NAME as SCS_NAME from SCS_PAY)
-                )
-            )
-            -->
-        <!--WHERE ROWNUM <![CDATA[ <= ]]> 3 -->
-<!--
-        SELECT *
-        FROM (select SCS_NAME, count(*) as PAYNUM from SCS_PAY
-        group by SCS_NAME order by PAYNUM desc)
-        WHERE ROWNUM <![CDATA[ <= ]]> 3
-        -->
     </select>
-
-
 
 </mapper>

@@ -8,6 +8,6 @@ import java.util.ArrayList;
 
 public interface OtherMapper {
     ArrayList<MembersDate> membersDate();
-    ArrayList<PaycountSCS> rankingSCS();
+    ArrayList<PaycountSCS> ranking();
 
 }

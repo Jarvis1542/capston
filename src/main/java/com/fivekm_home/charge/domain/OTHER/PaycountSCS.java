@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class PaycountSCS {
-    private String SCS_NAME;
-    private int PAYNUM;
+    private String SCS_PIC;
+    private String ROAD_ADDR;
+    private int PAYCOUNT;
 }

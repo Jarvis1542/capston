@@ -56,10 +56,9 @@ public class OtherServiceController {
     }
 
     @GetMapping("/aaa")
-    public String rankingSCS(Model model) {
-        model.addAttribute("Paycount",otherService.RankingSCS());
-        System.out.println("페이카운트 : " + otherService.RankingSCS() );
-
+    public String ranking(Model model) {
+        model.addAttribute("PaycountSCS", otherService.ranking());
+        System.out.println("페이카운트 : " + otherService.ranking());
         return "/otherService/aaa";
     }
 

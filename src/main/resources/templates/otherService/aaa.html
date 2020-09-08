@@ -16,10 +16,10 @@
     </div>
 </div>
 
-<div th:each ="paycount : ${Paycount}">
-    <td><span th:text="${paycount.SCS_NAME}"/></td>
-    <td><span th:text="${paycount.PAYNUM}"/></td>
-
+<div th:each ="PaycountSCS : ${PaycountSCS}">
+    <td><span th:text="${PaycountSCS.SCS_PIC}"/></td>
+    <td><span th:text="${PaycountSCS.ROAD_ADDR}"/></td>
+    <td><span th:text="${PaycountSCS.PAYCOUNT}"/></td>
 </div>
 
 

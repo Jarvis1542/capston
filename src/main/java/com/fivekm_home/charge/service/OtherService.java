@@ -18,8 +18,8 @@ public class OtherService {
         return otherMapper.membersDate();
     }
 
-    public ArrayList<PaycountSCS> RankingSCS(){
-        return otherMapper.rankingSCS();
+    public ArrayList<PaycountSCS> ranking(){
+        return otherMapper.ranking();
     }
 
 }
