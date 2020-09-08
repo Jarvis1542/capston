@@ -59,6 +59,7 @@ public class OtherServiceController {
     public String rankingSCS(Model model) {
         model.addAttribute("Paycount",otherService.RankingSCS());
         System.out.println("페이카운트 : " + otherService.RankingSCS() );
+
         return "/otherService/aaa";
     }
 
