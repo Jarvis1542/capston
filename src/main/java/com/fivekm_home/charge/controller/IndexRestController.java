@@ -89,10 +89,4 @@ public class IndexRestController {
         }
     }
 
-    // BEST 1,2,3 처리 영역
-    @PostMapping("/rest/ranking")
-    public int ranking(LoginCheck loginCheck){
-        System.out.println("랭킹 : ");
-        return memService.checkId(loginCheck);
-    }
 }

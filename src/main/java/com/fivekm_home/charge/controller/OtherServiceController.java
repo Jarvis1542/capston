@@ -1,5 +1,6 @@
 package com.fivekm_home.charge.controller;
 
+import com.fivekm_home.charge.service.OtherService;
 import com.fivekm_home.charge.service.QBService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,8 @@ import javax.servlet.http.HttpSession;
 public class OtherServiceController {
     @Autowired
     QBService qbService;
+    @Autowired
+    OtherService otherService;
 
     @GetMapping("/parkingMap")
     public String ParkingMap() {
@@ -50,6 +53,13 @@ public class OtherServiceController {
     @GetMapping("/graph")
     public String graph() {
         return "/otherService/graph";
+    }
+
+    @GetMapping("/aaa")
+    public String rankingSCS(Model model) {
+        model.addAttribute("Paycount",otherService.RankingSCS());
+        System.out.println("페이카운트 : " + otherService.RankingSCS() );
+        return "/otherService/aaa";
     }
 
 }

@@ -73,14 +73,7 @@
 
 
 
-<div th:each ="memberList : ${memberList}">
-    <td><span th:text="${memberList.email}"/></td>
-    <td><span th:text="${memberList.name}"/></td>
-    <td><span th:text="${memberList.phone}"/></td>
-    <td><img th:src="${memberList.picture}" style="width: 70px; height: 60px"></td>
-    <td><span th:text="${memberList.role}"/></td>
-    <td><span th:text="${#dates.format(memberList.created_date, 'YYYY-MM-dd HH:mm:ss')}"/></td>
-</div>
+
 
 
 

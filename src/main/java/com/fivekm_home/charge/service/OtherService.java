@@ -1,6 +1,7 @@
 package com.fivekm_home.charge.service;
 
 import com.fivekm_home.charge.domain.OTHER.MembersDate;
+import com.fivekm_home.charge.domain.OTHER.PaycountSCS;
 import com.fivekm_home.charge.mapper.OtherMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,10 @@ public class OtherService {
 
     public ArrayList<MembersDate> MembersDate(){
         return otherMapper.membersDate();
+    }
+
+    public ArrayList<PaycountSCS> RankingSCS(){
+        return otherMapper.rankingSCS();
     }
 
 }

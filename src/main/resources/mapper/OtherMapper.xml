@@ -8,9 +8,13 @@
     </select>
 
     <!-- 충전소 랭킹 조회 -->
-    <select id="rakingSCS" resultType="com.fivekm_home.charge.domain.OTHER.MembersDate">
-        select SCS_NAME, count(*) from SCS_PAY
+    <select id="rankingSCS" resultType="com.fivekm_home.charge.domain.OTHER.PaycountSCS">
+        select * from (
+        select SCS_NAME, count(*) as PAYNUM from SCS_PAY
         group by SCS_NAME
+        ) order by PAYNUM desc
     </select>
+
+
 
 </mapper>
