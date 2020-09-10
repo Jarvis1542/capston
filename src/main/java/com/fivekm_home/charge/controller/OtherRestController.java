@@ -74,6 +74,7 @@ public class OtherRestController {
 
     @GetMapping("/rest/ranking")
     public ArrayList<PaycountSCS> ranking() {
+        System.out.println("AAA는?" + otherService.ranking());
         return otherService.ranking();
     }
 }

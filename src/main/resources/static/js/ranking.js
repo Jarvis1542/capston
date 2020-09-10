@@ -17,9 +17,9 @@ $(function() {
             "                        </div>\n" +
             "                        <div class=\"info\">\n" +
             "                            <p>충전소 인기 "+(i+1)+"위</p>\n" +
-            "                            <span>"+msg[i].road_ADDR+"<br>\n" +
-            "                                대구광역시 북구 복현동 218(복현로 35)<br>\n" +
-            "                                010-xxxx-xxxx</span>\n" +
+            "                            <span>" + msg[i].road_ADDR + "<br>\n" +    // ADDR 문자는 대문자로 JS에 넘어오니 주의(대소문자 구분 필수)
+            "                                " + msg[i].jibun_ADDR + "<br><br>\n" +
+            "                                " + msg[i].phone + "</span>\n" +
             "                        </div>\n" +
             "                    </div>\n" +
             "                </div>\n" +
@@ -67,6 +67,7 @@ $(function() {
         }
         console.log("rank_arr",rank_arr);
         console.log("rank_arr1", rank_arr[0].scs_PIC);
+        console.log("JIIIII", rank_arr[0].jibun_addr);
     }).fail(function (error) {
         console.log("에러 : ", error);
     });

@@ -10,11 +10,12 @@
     <!-- 충전소 랭킹 조회 -->
     <select id="ranking" resultType="com.fivekm_home.charge.domain.OTHER.PaycountSCS">
         SELECT * FROM (
-            SELECT A.SCS_PIC, C.ROAD_ADDR, COUNT(B.SCS_NAME) as PAYCOUNT
-            FROM SCS A, SCS_PAY B, RES C
-            WHERE A.SCS_NAME = B.SCS_NAME
-            AND A.RES_NAME = C.RES_NAME
-            GROUP BY A.SCS_PIC, C.ROAD_ADDR, B.SCS_NAME
+            SELECT S.SCS_PIC, R.ROAD_ADDR, R.JIBUN_ADDR, M.PHONE, COUNT(S.SCS_NAME) as PAYCOUNT
+            FROM SCS S, SCS_PAY P, RES R, MEMBER M
+            WHERE S.SCS_NAME = P.SCS_NAME
+            AND S.RES_NAME = R.RES_NAME
+            AND M.EMAIL = R.EMAIL
+            GROUP BY S.SCS_NAME, S.SCS_PIC, R.ROAD_ADDR, R.JIBUN_ADDR, M.PHONE
             order by PAYCOUNT desc
         ) WHERE ROWNUM <![CDATA[ <= ]]> 3
     </select>
