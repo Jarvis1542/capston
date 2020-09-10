@@ -73,15 +73,15 @@ public class OtherRestController {
         return salesService.Sales2Service();
     }
 
-    @GetMapping("/rest/ranking")
+    @GetMapping("/rest/rankingSCS")
     public ArrayList<PaycountSCS> ranking() {
-        System.out.println("SCS 랭킹 조회(OtherRestController)?" + otherService.ranking());
-        return otherService.ranking();
+        System.out.println("SCS 랭킹 조회(OtherRestController) : " + otherService.rankingSCS());
+        return otherService.rankingSCS();
     }
 
     @GetMapping("/rest/rankingHP")
     public ArrayList<PaycountHP> rankingHP() {
-        System.out.println("HP 랭킹 조회(OtherRestController)?" + otherService.rankingHP());
+        System.out.println("HP 랭킹 조회(OtherRestController) : " + otherService.rankingHP());
         return otherService.rankingHP();
     }
 }

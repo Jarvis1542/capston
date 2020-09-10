@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public interface OtherMapper {
     ArrayList<MembersDate> membersDate();
-    ArrayList<PaycountSCS> ranking();
+    ArrayList<PaycountSCS> rankingSCS();
     ArrayList<PaycountHP> rankingHP();
 
 }
