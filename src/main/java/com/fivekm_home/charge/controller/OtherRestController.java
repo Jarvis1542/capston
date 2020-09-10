@@ -2,6 +2,7 @@ package com.fivekm_home.charge.controller;
 
 import com.fivekm_home.charge.domain.DATE.*;
 import com.fivekm_home.charge.domain.OTHER.MembersDate;
+import com.fivekm_home.charge.domain.OTHER.PaycountHP;
 import com.fivekm_home.charge.domain.OTHER.PaycountSCS;
 import com.fivekm_home.charge.domain.SALES.SalesDAO;
 import com.fivekm_home.charge.service.DateService;
@@ -74,7 +75,13 @@ public class OtherRestController {
 
     @GetMapping("/rest/ranking")
     public ArrayList<PaycountSCS> ranking() {
-        System.out.println("AAA는?" + otherService.ranking());
+        System.out.println("SCS 랭킹 조회(OtherRestController)?" + otherService.ranking());
         return otherService.ranking();
+    }
+
+    @GetMapping("/rest/rankingHP")
+    public ArrayList<PaycountHP> rankingHP() {
+        System.out.println("HP 랭킹 조회(OtherRestController)?" + otherService.rankingHP());
+        return otherService.rankingHP();
     }
 }

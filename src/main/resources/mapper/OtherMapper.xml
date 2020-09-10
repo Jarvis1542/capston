@@ -20,4 +20,17 @@
         ) WHERE ROWNUM <![CDATA[ <= ]]> 3
     </select>
 
+    <!-- 주차장 랭킹 조회 -->
+    <select id="rankingHP" resultType="com.fivekm_home.charge.domain.OTHER.PaycountHP">
+        SELECT * FROM (
+            SELECT H.HP_PIC, R.ROAD_ADDR, R.JIBUN_ADDR, M.PHONE, COUNT(H.HP_NAME) as PAYCOUNT
+            FROM HP H, HP_PAY P, RES R, MEMBER M
+            WHERE H.HP_NAME = P.HP_NAME
+            AND H.RES_NAME = R.RES_NAME
+            AND M.EMAIL = R.EMAIL
+            GROUP BY H.HP_NAME, H.HP_PIC, R.ROAD_ADDR, R.JIBUN_ADDR, M.PHONE
+            order by PAYCOUNT desc
+        ) WHERE ROWNUM <![CDATA[ <= ]]> 3
+    </select>
+
 </mapper>
