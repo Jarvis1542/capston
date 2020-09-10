@@ -185,6 +185,16 @@
     vertical-align:top;
 }
 
+.rankingIcon {  /* 랭킹 아이콘 */
+    position: absolute;
+    width: 85px;
+    height: 85px;
+    text-align: center;
+    line-height: 58px;
+    right: 0;
+    bottom: 0;
+}
+
 /* -- //content -- */
 
 /* -- footer -- */
