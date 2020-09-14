@@ -18,5 +18,6 @@ public interface SCSMapper {
     int checkBookmark(SCS_bookmark scs_bookmark); // 충전소 예약 페이지에서 사용자가 즐겨찾기를 판단
     void addSCSBookmark(SCS_bookmark scs_bookmark); // 충전소 즐겨찾기 추가
     void deleteSCSBookmark(SCS_bookmark scs_bookmark); // 충전소 즐겨찾기 삭제
+    ArrayList<SCS_mapSearch> scsMapSearch(String scs_name); // 충전소 지도 검색
 }
 

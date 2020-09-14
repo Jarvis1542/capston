@@ -3,7 +3,9 @@ package com.fivekm_home.charge.controller;
 import com.fivekm_home.charge.domain.SCS.*;
 import com.fivekm_home.charge.service.SCSService;
 import com.fivekm_home.charge.service.StorageService;
+import oracle.ucp.proxy.annotation.Post;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -63,5 +65,11 @@ public class SCSRestController {
     public void deleteSCSBookmark(SCS_bookmark scs_bookmark) {
         System.out.println("data : " + scs_bookmark.toString());
         scsService.deleteSCSBookmark(scs_bookmark);
+    }
+
+    // 충전소 지도 검색
+    @PostMapping("/rest/scsMapSearch")
+    public ArrayList<SCS_mapSearch> scsMapSerch(String scs_name) {
+        return scsService.scsMapSearch(scs_name);
     }
 }

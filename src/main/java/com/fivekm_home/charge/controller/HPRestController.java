@@ -3,12 +3,16 @@ package com.fivekm_home.charge.controller;
 import com.fivekm_home.charge.domain.HP.*;
 import com.fivekm_home.charge.service.HPService;
 import com.fivekm_home.charge.service.StorageService;
+import com.google.gson.Gson;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.mail.Session;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 @RestController
@@ -86,5 +90,19 @@ public class HPRestController {
     public void deleteHpBookmark(HP_bookmark hp_bookmark) {
         System.out.println("data : " + hp_bookmark.toString());
         hpService.deleteHpBookmark(hp_bookmark);
+    }
+
+    // 주차장 지도 검색
+    @PostMapping("/rest/hpMapSearch")
+    public ArrayList<HP_mapSearch> hpMapSearch(String hp_name) {
+        System.out.println("r컨검정 : " + hp_name);
+        System.out.println("r검정리턴값 :"+ hpService.hpMapSearch(hp_name));
+
+        ArrayList<HP_mapSearch> a = hpService.hpMapSearch(hp_name);
+        for(HP_mapSearch aa : a){
+            System.out.println("dd" + aa.getHp_name());
+        }
+
+        return a;
     }
 }

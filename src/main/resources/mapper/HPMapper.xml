@@ -103,4 +103,11 @@
     <select id="hpPlaceList" resultType="com.fivekm_home.charge.domain.HP.HP_cnPlList">
         select * from hp_ch_pl_view
     </select>
+
+    <select id="hpMapSearch" resultType="com.fivekm_home.charge.domain.HP.HP_mapSearch">
+        select h.hp_name, r.lat, r.lng
+        from hp h, res r
+        where h.res_name = r.res_name
+        and hp_name like '%'||#{hp_name}||'%'
+    </select>
 </mapper>

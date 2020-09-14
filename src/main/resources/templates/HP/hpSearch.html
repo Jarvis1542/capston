@@ -103,6 +103,8 @@
                 </div>
             </div>
         </div>
+           <input type="text" name="keyword" id="keyword" />
+        <button id="keySearch" type="button" onclick="setCenter()" class="btn btn-primary">조회</button>
         <div class="row justify-content-center">
             <div class="map_wrap">
                 <div id="map" style="width:100%;height:600px;position:relative;overflow:hidden;"></div>
@@ -114,6 +116,8 @@
 </body>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=31e2bf5613ce6e27d859ca41bb71d46e&libraries=services"></script>
 <script>
+
+
     var search = [];
     var place = [];
 
@@ -132,6 +136,7 @@
             alert(JSON.stringify(error));
         }
     });// 주차장 자리 변화 불러오기 ajax 끝
+
 
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
@@ -152,27 +157,15 @@
     var zoomControl = new kakao.maps.ZoomControl();
     map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
+
+
         $.ajax({
             url : '/rest/hpSearchData',
             type : 'GET',
             success : function(data) {
                 for (let i = 0; i <data.length; i++) {
                     search[i] = data[i];
-                    console.log('parkingName : ' + search[i].hp_name);
-                    console.log('parkingType : ' + search[i].hp_type);
-                    console.log('min30Fee : ' + search[i].min30_fee);
-                    console.log('addMin10Fee : ' + search[i].addMin10_fee);
-                    console.log('roadAddress : ' + search[i].road_addr);
-                    console.log('extraAddress : ' + search[i].extra_addr);
-                    console.log('start_manage_time : ' + search[i].start_manage_time);
-                    console.log('end_manage_time : ' + search[i].end_manage_time);
-                    console.log('place : ' + search[i].place);
-                    console.log('parkingChk : ' + search[i].hp_chk);
-                    console.log('parkingPic : ' + search[i].hp_pic);
-                    console.log('change place : ' + search[i].place);
-                    console.log('lat : ' + search[i].lat);
-                    console.log('lng : ' + search[i].lng);
-                    console.log('==========================================');
+                    console.log(data);
 
                     // 마커를 생성합니다
                     var marker = new kakao.maps.Marker({
@@ -197,6 +190,7 @@
                         '시작운영시간 : '+search[i].start_manage_time+'<br>' +
                         '종료운영시간 : '+search[i].end_manage_time+'<br>' +
                         '주차장칸 수 : '+place[i].place+' / '+search[i].place+'<br>' +
+                        '<a href="http://map.kakao.com/link/to/'+data[i].hp_name+ ',' +data[i].lat+ ','+data[i].lng+'"><button style="width: 100px; margin-left: 5px; margin-top: 5px" class="genric-btn primary small">길찾기</button></a>'+
                         '</span>'+
                         '</li>' +
                         '<li><span class="dataSubTitle">주차 요금</span>' +
@@ -216,7 +210,7 @@
                     var content = $wrap[0];
                     var overlay = new kakao.maps.CustomOverlay({
                         content: content,
-                        map: map,
+                        map: map.click,
                         position: marker.getPosition()
                     });
 
@@ -237,6 +231,19 @@
         var email = $('#email').val();
         window.location.href = '/happyParking/hpBook/' + hp_name + '+' + email;
     }
+
+
+    function setCenter(lat, lng) {
+        // 이동할 위도 경도 위치를 생성합니다
+        var moveLatLon = new kakao.maps.LatLng(lat, lng);
+
+        map.setLevel(3);
+
+        // 지도 중심을 이동 시킵니다
+        map.setCenter(moveLatLon);
+    }
+
+
 </script>
 
 <script th:replace="layout/layout :: script"/>

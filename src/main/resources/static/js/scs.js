@@ -60,3 +60,24 @@ $('#csRequestBtn').on('click', function () {
         }
     });
 });
+
+// 충전소 지도 검색
+$('#keySearch').on('click', function () {
+
+    var data = {
+        scs_name : $('#keyword').val()
+    }
+    $.ajax({
+        data : data,
+        type : 'POST',
+        url : '/rest/scsMapSearch',
+        success : function (data) {
+            setCenter(data[0].lat, data[0].lng);
+            // window.location.replace(document.location.href);
+        },
+        error : function (error) {
+            alert(JSON.stringify(error));
+        }
+    });
+});
+

@@ -73,6 +73,7 @@ $('#hpReg').on('click', function (event) {
     }
 
     let formData = new FormData($('#hp_form')[0]);
+    console.log(formData);
 
     $.ajax({
         type : 'POST',
@@ -110,6 +111,26 @@ $('#hpRequestBtn').on('click', function () {
         success : function () {
             alert('승인 완료 되었습니다.');
             window.location.href = '/admin/hpRequestList';
+        },
+        error : function (error) {
+            alert(JSON.stringify(error));
+        }
+    });
+});
+
+// 주차장 지도 검색
+$('#keySearch').on('click', function () {
+
+    var data = {
+        hp_name : $('#keyword').val()
+    }
+    $.ajax({
+        data : data,
+        type : 'POST',
+        url : '/rest/hpMapSearch',
+        success : function (data) {
+            setCenter(data[0].lat, data[0].lng);
+            // window.location.replace(document.location.href);
         },
         error : function (error) {
             alert(JSON.stringify(error));
