@@ -6,8 +6,15 @@ $('#scsBookBack').on('click', function () {
 
 // 예약
 $('#scsBook').on('click', function () {
-    let start_manage_time = new Date($('#start_manage_time').val());
-    let end_manage_time = new Date($('#end_manage_time').val());
+    var d = new Date();
+    var day = d.getDate();
+    var month = d.getMonth() + 1;
+    var year = d.getFullYear();
+    var dateStr = year + "-" + month + "-" + day;
+    console.log(dateStr);
+
+    let start_manage_time = new Date(dateStr+" "+$("#start_manage_time").text()+":00");
+    let end_manage_time = new Date(dateStr+" "+$("#end_manage_time").text()+":00");
     let carNum = "";
     let start_date = new Date($('#start_date').val());
     let end_date = new Date($('#end_date').val());
@@ -15,6 +22,7 @@ $('#scsBook').on('click', function () {
     let result2 = new Date(end_date);
     console.log("시작일" + start_date);
     console.log("종료일" + end_date);
+
     console.log("등록자 시작시간 " + start_manage_time);
     console.log("등록자 마감시간 " + end_manage_time);
 
