@@ -1,33 +1,80 @@
 'use strict';
 $(document).ready(function () {
+    const picker2 = document.getElementById('start_date');
+    const picker3 = document.getElementById('end_date');
+
     // 지도로 뒤로가기
     $('#scsBookBack').on('click', function () {
         window.location.href = '/chargingStation/scsSearch';
     });
-    const picker2 = document.getElementById('start_date');
 
-    picker2.addEventListener('input', function(e){
+    let start_manage_time, end_manage_time;
+    function compare_func(hour, min) {
+        let start_hour = start_manage_time.getHours();
+        let end_hour = end_manage_time.getHours();
+        let start_min = start_manage_time.getMinutes();
+        let end_min = end_manage_time.getMinutes();
+
+        if(start_hour == hour) {
+            if(start_min <= min){
+                console.log("운영 시간 범위 내에 들어옵니다.");
+            } else {
+                alert("운영시간이 초과 되었습니다.");
+                $('#start_date').val("");
+                $('#end_date').val("");
+                return false;
+            }
+        } else if(end_hour == hour) {
+            if(end_min >= min){
+                console.log("운영 시간 범위 내에 들어옵니다.");
+            } else {
+                alert("운영시간이 초과 되었습니다.");
+                $('#start_date').val("");
+                $('#end_date').val("");
+                return false;
+            }
+        } else if(start_hour <= hour && end_hour >= hour){
+            console.log("운영 시간 범위 내에 들어옵니다.");
+        } else {
+            alert("운영시간이 초과 되었습니다.");
+            $('#start_date').val("");
+            $('#end_date').val("");
+            return false;
+        }
+    }
+    picker2.addEventListener('change', function(e){
         let start_date = new Date($('#start_date').val());
         let day = start_date.getDate();
         let month = start_date.getMonth() + 1;
         let year = start_date.getFullYear();
         let hour = start_date.getHours();
         let min = start_date.getMinutes();
-        if(hour > 10) {
-            hour = hour;
-        } else {
-            hour = "0" + hour;
-        }
-        if(month > 10) {
-            month = month;
-        } else {
-            month = "0" + month;
-        }
+
+        hour > 10 ? hour = hour : hour = "0" + hour;
+        min > 10 ? min = min : min = "0" + min;
+        month > 10 ? month = month : month = "0" + month;
 
         let dateStr = year + "-" + month + "-" + day + "T" + hour + ":" + min;
+        let dateStr2 = year + "-" + month + "-" + day;
         console.log(dateStr);
-        $("#end_date").val(dateStr);
-    })
+
+        start_manage_time = new Date(dateStr2+" "+$("#start_manage_time").text()+":00");
+        end_manage_time = new Date(dateStr2+" "+$("#end_manage_time").text()+":00");
+
+        let picker_bool = compare_func(hour, min, dateStr2);
+        if(picker_bool != false) {
+            $("#end_date").val(dateStr);
+        }
+    });
+
+    picker3.addEventListener('change', function(e){
+        let end_date = new Date($('#end_date').val());
+        let hour = end_date.getHours();
+        let min = end_date.getMinutes();
+
+        compare_func(hour, min);
+    });
+
     // 예약
     $('#scsBook').on('click', function () {
         let carNum = "";
