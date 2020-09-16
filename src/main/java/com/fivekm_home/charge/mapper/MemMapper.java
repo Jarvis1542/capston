@@ -1,7 +1,5 @@
 package com.fivekm_home.charge.mapper;
 
-
-
 import com.fivekm_home.charge.domain.USER.*;
 
 import java.util.ArrayList;

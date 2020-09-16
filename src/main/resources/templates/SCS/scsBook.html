@@ -115,7 +115,7 @@
     const picker = document.getElementById('end_date');
     picker.addEventListener('input', function(e){
         var day = new Date(this.value).getUTCDay();
-        if([5,6].includes(day)){
+        if([0,6].includes(day)){
             e.preventDefault();
             this.value = '';
             alert('주말 및 공휴일은 불가능합니다');
@@ -126,7 +126,7 @@
     const picker2 = document.getElementById('start_date');
     picker2.addEventListener('input', function(e){
         var day = new Date(this.value).getUTCDay();
-        if([5,6].includes(day)){
+        if([0,6].includes(day)){
             e.preventDefault();
             this.value = '';
             alert('주말 및 공휴일은 불가능합니다');

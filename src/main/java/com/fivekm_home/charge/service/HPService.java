@@ -22,42 +22,42 @@ public class HPService<T> {
     private HPMapper hpMapper;
 
     // 거주지 불러오기
-    public ArrayList<HP_loadRes> loadResidence(String email){
+    public ArrayList<HP_loadRes> loadResidence(String email) {
         return hpMapper.loadResidence(email);
     }
 
     // 주차장 등록
-    public void hpReg(HP_reg hp_reg){
+    public void hpReg(HP_reg hp_reg) {
         hpMapper.hpReg(hp_reg);
     }
 
     // 관리자에게 주차장 요청
-    public HP_request hpRequest(String hp_name){
+    public HP_request hpRequest(String hp_name) {
         return hpMapper.hpRequest(hp_name);
     }
 
     // 주차장 요청 리스트
-    public ArrayList<HP_requestList> hpRequestList(){
+    public ArrayList<HP_requestList> hpRequestList() {
         return hpMapper.hpRequestList();
     }
 
     // 주차장 예약 페이지
-    public HP_bookPage hpBookPage(String hp_name){
+    public HP_bookPage hpBookPage(String hp_name) {
         return hpMapper.hpBookPage(hp_name);
     }
 
     // 주차장 승인
-    public void updateParkingChk(String hp_name){
+    public void updateParkingChk(String hp_name) {
         hpMapper.updateParkingChk(hp_name);
     }
 
     // 지도에 마크를 찍을 데이터 불러오기
-    public ArrayList<HP_search> hpSearchDataList(){
+    public ArrayList<HP_search> hpSearchDataList() {
         return hpMapper.hpSearchDataList();
     }
 
     // 주차장 자리 변화 불러오기
-    public ArrayList<HP_cnPlList> hpPlaceList(){
+    public ArrayList<HP_cnPlList> hpPlaceList() {
         return hpMapper.hpPlaceList();
     }
 
@@ -76,27 +76,34 @@ public class HPService<T> {
 //    }
 
     // 주차장 예약
-    public void hpBook(HP_book hp_book){
+    public void hpBook(HP_book hp_book) {
         hpMapper.hpBook(hp_book);
     }
 
     // 주차장 결제
-    public void hpPay(HP_pay hp_pay){
+    public void hpPay(HP_pay hp_pay) {
         hpMapper.hpPay(hp_pay);
     }
 
     // 주차장 예약 페이지에서 사용자가 즐겨찾기를 판단
-    public int checkBookmark(HP_bookmark hp_bookmark){
+    public int checkBookmark(HP_bookmark hp_bookmark) {
         return hpMapper.checkBookmark(hp_bookmark);
     }
 
     // 주차장 즐겨찾기 추가
-    public void addHpBookmark(HP_bookmark hp_bookmark){
+    public void addHpBookmark(HP_bookmark hp_bookmark) {
         hpMapper.addHpBookmark(hp_bookmark);
     }
 
     // 주차장 즐겨찾기 삭제
-    public void deleteHpBookmark(HP_bookmark hp_bookmark){
+    public void deleteHpBookmark(HP_bookmark hp_bookmark) {
         hpMapper.deleteHpBookmark(hp_bookmark);
     }
+
+    // 주차장 지도 검색
+    public ArrayList<HP_mapSearch> hpMapSearch(String hp_name) { // 주차장 지도 검색
+        System.out.println("서비스검정 : "+ hp_name);
+        return hpMapper.hpMapSearch(hp_name);
+    }
+
 }

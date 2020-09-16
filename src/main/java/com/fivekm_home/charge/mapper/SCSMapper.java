@@ -1,6 +1,5 @@
 package com.fivekm_home.charge.mapper;
 
-import com.fivekm_home.charge.domain.HP.HP_cnPlList;
 import com.fivekm_home.charge.domain.HP.HP_loadRes;
 import com.fivekm_home.charge.domain.SCS.*;
 
@@ -20,5 +19,6 @@ public interface SCSMapper {
     void addSCSBookmark(SCS_bookmark scs_bookmark); // 충전소 즐겨찾기 추가
     void deleteSCSBookmark(SCS_bookmark scs_bookmark); // 충전소 즐겨찾기 삭제
     ArrayList<SCS_chPlList> scsPlaceList(); // 주차장 자리 변화 불러오기
+    ArrayList<SCS_mapSearch> scsMapSearch(String scs_name); // 충전소 지도 검색
 }
 

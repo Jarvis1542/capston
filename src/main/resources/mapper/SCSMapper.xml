@@ -104,4 +104,11 @@
     <select id="scsPlaceList" resultType="com.fivekm_home.charge.domain.HP.HP_cnPlList">
         select * from scs_ch_pl_view
     </select>
+
+    <select id="scsMapSearch" resultType="com.fivekm_home.charge.domain.SCS.SCS_mapSearch">
+        select s.scs_name, r.lat, r.lng
+        from scs s, res r
+        where s.res_name = r.res_name
+        and scs_name like '%'||#{scs_name}||'%'
+    </select>
 </mapper>

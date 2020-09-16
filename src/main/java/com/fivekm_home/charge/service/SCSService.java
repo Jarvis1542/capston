@@ -80,4 +80,9 @@ public class SCSService {
     public void deleteSCSBookmark(SCS_bookmark scs_bookmark){
         scsMapper.deleteSCSBookmark(scs_bookmark);
     }
+
+    // 충전소 지도검색
+    public ArrayList<SCS_mapSearch> scsMapSearch(String scs_name){
+        return scsMapper.scsMapSearch(scs_name);
+    }
 }

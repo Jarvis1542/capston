@@ -18,4 +18,5 @@ public interface HPMapper {
     void addHpBookmark(HP_bookmark hp_bookmark); // 주차장 즐겨찾기 추가
     void deleteHpBookmark(HP_bookmark hp_bookmark); // 주차장 즐겨찾기 삭제
     ArrayList<HP_cnPlList> hpPlaceList(); // 주차장 자리 변화 불러오기
+    ArrayList<HP_mapSearch> hpMapSearch(String hp_name); // 주차장 지도 검색
 }

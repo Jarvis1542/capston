@@ -103,9 +103,11 @@
                 </div>
             </div>
         </div>
+           <input type="text" name="keyword" id="keyword" />
+        <button id="keySearch" type="button" onclick="setCenter()" class="btn btn-primary">조회</button>
         <div class="row justify-content-center">
             <div class="map_wrap">
-                <div id="map" style="width:100%;height:600px;position:relative;overflow:hidden;"></div>
+                <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
             </div>
         </div>
     </div>
@@ -197,6 +199,7 @@
                         '시작운영시간 : '+search[i].start_manage_time+'<br>' +
                         '종료운영시간 : '+search[i].end_manage_time+'<br>' +
                         '주차장칸 수 : '+place[i].place+' / '+search[i].place+'<br>' +
+                        '<a href="http://map.kakao.com/link/to/'+data[i].hp_name+ ',' +data[i].lat+ ','+data[i].lng+'"><button style="width: 100px; margin-left: 5px; margin-top: 5px" class="genric-btn primary small">길찾기</button></a>'+
                         '</span>'+
                         '</li>' +
                         '<li><span class="dataSubTitle">주차 요금</span>' +
@@ -216,7 +219,7 @@
                     var content = $wrap[0];
                     var overlay = new kakao.maps.CustomOverlay({
                         content: content,
-                        map: map,
+                        map: map.click,
                         position: marker.getPosition()
                     });
 
@@ -237,6 +240,19 @@
         var email = $('#email').val();
         window.location.href = '/happyParking/hpBook/' + hp_name + '+' + email;
     }
+
+
+    function setCenter(lat, lng) {
+        // 이동할 위도 경도 위치를 생성합니다
+        var moveLatLon = new kakao.maps.LatLng(lat, lng);
+
+        map.setLevel(3);
+
+        // 지도 중심을 이동 시킵니다
+        map.setCenter(moveLatLon);
+    }
+
+
 </script>
 
 <script th:replace="layout/layout :: script"/>
