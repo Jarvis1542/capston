@@ -51,6 +51,11 @@ public class SCSService {
         return scsMapper.scsSearchDataList();
     }
 
+    // 충전소 자리 변화 불러오기
+    public ArrayList<SCS_chPlList> scsPlaceList(){
+        return scsMapper.scsPlaceList();
+    }
+
     // 충전소 예약
     public void scsBook(SCS_book cs_book){
         scsMapper.scsBook(cs_book);

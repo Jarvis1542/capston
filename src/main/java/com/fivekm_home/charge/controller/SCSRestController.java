@@ -1,5 +1,6 @@
 package com.fivekm_home.charge.controller;
 
+import com.fivekm_home.charge.domain.HP.HP_cnPlList;
 import com.fivekm_home.charge.domain.SCS.*;
 import com.fivekm_home.charge.service.SCSService;
 import com.fivekm_home.charge.service.StorageService;
@@ -35,6 +36,13 @@ public class SCSRestController {
     public ArrayList<SCS_search> scsSearchDataList(){
         System.out.println("return : " + scsService.scsSearchDataList());
         return scsService.scsSearchDataList();
+    }
+
+    // 지도에 충전소 자리 변화 불러오기
+    @GetMapping("/rest/scsPlaceData")
+    public ArrayList<SCS_chPlList> scsPlaceList(){
+        System.out.println("return : " + scsService.scsPlaceList());
+        return scsService.scsPlaceList();
     }
 
     // 충전소 예약

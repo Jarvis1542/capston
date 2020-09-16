@@ -114,7 +114,25 @@
 </body>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=31e2bf5613ce6e27d859ca41bb71d46e&libraries=services"></script>
 <script>
-    var takeTotal = [];
+    let search = [];
+    let place = [];
+
+    $.ajax({
+        url: '/rest/scsPlaceData',
+        type: 'get',
+        success: function (data) {
+            for (let i = 0; i < data.length; i++) {
+                place[i] = data[i];
+                console.log('scs_name : ' + place[i].scs_name);
+                console.log('scs_type : ' + place[i].scs_type);
+                console.log('scs_amount : ' + place[i].scs_amount);
+            }
+        },
+        error: function (error) {
+            alert(JSON.stringify(error));
+        }
+    });// 충전소 자리 변화 불러오기 ajax 끝
+
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
             center: new kakao.maps.LatLng(36.66061813442013, 127.86026006535788), // 지도의 중심좌표
@@ -140,17 +158,20 @@
         cache : false,
         success : function(data) {
             for (let i = 0; i < data.length; i++) {
-                takeTotal[i] = data[i];
-                console.log('chargeName : ' + takeTotal[i].scs_name);
-                console.log('operation : ' + takeTotal[i].oper_ins);
-                console.log('chargeAmount' + takeTotal[i].scs_amount);
-                console.log('min30Fee : ' + takeTotal[i].min30_fee);
-                console.log('addMin10Fee : ' + takeTotal[i].addMin10_fee);
-                console.log('roadAddress : ' + takeTotal[i].road_addr);
-                console.log('extraAddress : ' + takeTotal[i].extra_addr);
-                console.log('manageTime : ' + takeTotal[i].manage_time);
-                console.log('chargingChk : ' + takeTotal[i].scs_chk);
-                console.log('chargePic : ' + takeTotal[i].scs_pic);
+                search[i] = data[i];
+                console.log('chargeName : ' + search[i].scs_name);
+                console.log('operation : ' + search[i].oper_ins);
+                console.log('chargeAmount' + search[i].scs_amount);
+                console.log('min30Fee : ' + search[i].min30_fee);
+                console.log('addMin10Fee : ' + search[i].addMin10_fee);
+                console.log('roadAddress : ' + search[i].road_addr);
+                console.log('extraAddress : ' + search[i].extra_addr);
+                console.log('start_manage_time : ' + search[i].start_manage_time);
+                console.log('end_manage_time : ' + search[i].end_manage_time);
+                console.log('chargingChk : ' + search[i].scs_chk);
+                console.log('chargePic : ' + search[i].scs_pic);
+                console.log('lat : ' + search[i].lat);
+                console.log('lng : ' + search[i].lng);
                 console.log('==========================================');
 
                 // 마커를 생성합니다
@@ -167,23 +188,23 @@
                 var $title = $('<div class="dataTitle" id="chargeName"/>').text(data[i].scs_name);
                 var $close = $('<div class="close" title="닫기" style="width: 15px; height: 15px; font-size: 25px; margin-right: 15px">X</div>').click(closeOverlay);
                 var $body = $('<div class="body"/>');
-                var $img = $('<div class="dataPicture"><img src="'+data[i].scs_pic+'" style="height: 110px; width: 100px;"></div>');
+                var $img = $('<div class="dataPicture"><img src="'+search[i].scs_pic+'" style="height: 110px; width: 100px;"></div>');
                 var $desc = $('<div class="dataInfo" id="desc'+i+'">' +
-                    '<div class="dataAddress">'+data[i].road_addr+'</div>' +
+                    '<div class="dataAddress">'+search[i].road_addr+'</div>' +
                     '<ul>' +
                     '<li><span class="dataSubTitle">운영 정보</span>' +
                     '<span>' +
-                    '시작운영시간 : '+data[i].start_manage_time+'<br>' +
-                    '종료운영시간 : '+data[i].end_manage_time+'<br>' +
-                    '잔여 충전기 수 : '+data[i].scs_amount+'<br>'+
+                    '시작운영시간 : '+search[i].start_manage_time+'<br>' +
+                    '종료운영시간 : '+search[i].end_manage_time+'<br>' +
+                    '충전소 수 : '+place[i].scs_amount+' / '+search[i].scs_amount+'<br>' +
                     '</span>'+
                     '</li>' +
                     '<li><span class="dataSubTitle">주차 요금</span>' +
                     '<span>' +
-                    '30분당 요금 : '+data[i].min30_fee+'<br>'+
-                    '10분당 추가요금 : '+data[i].addMin10_fee+'<br>'+
+                    '30분당 요금 : '+search[i].min30_fee+'<br>'+
+                    '10분당 추가요금 : '+search[i].addMin10_fee+'<br>'+
                     '</span>'+
-                     '<button style="width: 100px; margin-left: 10px; margin-top: 5px" onClick="mapBook(\'' + data[i].scs_name + '\')" class="genric-btn primary small">예약</button>'+
+                     '<button style="width: 100px; margin-left: 10px; margin-top: 5px" onClick="mapBook(\'' + search[i].scs_name + '\')" class="genric-btn primary small">예약</button>'+
                     '</li>'+
                     '</ul>'+
                     '</div>');
@@ -205,15 +226,18 @@
                 });
             } // for문 끝
 
-        } // success 끝
+        }, // success 끝
+        error : function (error) {
+            alert(JSON.stringify(error));
+        }
 
-    }); //ajax 끝
+    }); // 지도에 마크 찍을 데이터 불러오기 ajax 끝
+
     function mapBook(scs_name){
         var scs_name = scs_name;
         var email = $('#email').val();
         window.location.href = '/chargingStation/scsBook/' + scs_name + '+' + email;
     }
-
 </script>
 
 <script th:replace="layout/layout :: script"/>

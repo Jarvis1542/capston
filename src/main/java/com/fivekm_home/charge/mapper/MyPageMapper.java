@@ -3,6 +3,7 @@ package com.fivekm_home.charge.mapper;
 import com.fivekm_home.charge.domain.RES.Residence;
 import com.fivekm_home.charge.domain.USER.*;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public interface MyPageMapper {
@@ -16,4 +17,6 @@ public interface MyPageMapper {
     ArrayList<RegCar> loadMyCar(String email); // 차 불러오기
     ArrayList<UserBookmark> userHpBookmark(String email); // 즐겨찾기 주차장 목록 불러오기
     ArrayList<UserBookmark> userSCSBookmark(String email); // 즐겨찾기 충전소 목록 불러오기
+    ArrayList<SCSHistory> userSCSHistory(String email); // 충전소 이용 내역
+    ArrayList<HPHistory> userHPHistory(String email); // 주차장 이용 내역
 }

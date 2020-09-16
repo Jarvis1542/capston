@@ -40,13 +40,6 @@ public class HPRestController {
     }
 
     // 지도에 마크를 찍을 데이터 불러오기
-//    @GetMapping("/rest/hpSearchData")
-//    public String hpSearchDataList(){
-//        System.out.println("return : " + hpService.hpTotalList());
-//        return hpService.hpTotalList().toString();
-//    }
-
-    // 지도에 마크를 찍을 데이터 불러오기
     @GetMapping("/rest/hpSearchData")
     public ArrayList<HP_search> hpSearchDataList(){
         System.out.println("return : " + hpService.hpSearchDataList());

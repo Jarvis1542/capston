@@ -275,14 +275,20 @@ $('#addCarModalBtn').on('click', function () {
     $('#errCar_id').empty();
 });
 
-// 즐겨찾기 select
-$('#selectBookmark').change(function () {
-    if($(this).val()=='충전소'){
-        let email = $('#email').val();
-        window.location.href = '/myPage/SCSBookmark/'+email;
+// 충전소 이용 내역 날짜 검색
+$('#scsHistorySearch').on('click', function () {
+    let data = {
+        email :  $('#email').val(),
+        start_date : $('#start_date').val(),
+        end_date : $('#end_date').val()
     }
-    if($(this).val()=='주차장'){
-        let email = $('#email').val();
-        window.location.href = '/myPage/hpBookmark/'+email;
-    }
+
+    $.ajax({
+        data : data,
+        type : 'get',
+        url : '/rest/scsHistory',
+        success : function (data) {
+
+        }
+    });
 });

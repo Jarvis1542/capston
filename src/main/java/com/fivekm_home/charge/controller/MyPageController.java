@@ -2,7 +2,6 @@ package com.fivekm_home.charge.controller;
 
 import com.fivekm_home.charge.config.auth.dto.SessionUser;
 import com.fivekm_home.charge.domain.USER.MemberEdit;
-import com.fivekm_home.charge.domain.USER.RegCar;
 import com.fivekm_home.charge.service.MyPageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/myPage")
@@ -37,9 +35,32 @@ public class MyPageController {
 
     }
 
-    @GetMapping("/history")
-    public String history(){
-        return "/myPage/history";
+    @GetMapping("/scsHistory/{email}")
+    public String scsHistory(@PathVariable String email, Model model, HttpSession httpSession){
+        if(httpSession.getAttribute("user")!=null){
+            SessionUser sessionUser = (SessionUser) httpSession.getAttribute("user");
+            MemberEdit memberEdit = new MemberEdit(sessionUser);
+            model.addAttribute("mem", memberEdit);
+            model.addAttribute("scsHistory", myPageService.userSCSHistory(email));
+            return "/myPage/scsHistory";
+        }else {
+            System.out.println("MyPageController : 로그인되어 있지 않아 로그인 페이지로 요청했습니다.");
+            return "/index/login";
+        }
+    }
+
+    @GetMapping("/hpHistory/{email}")
+    public String hpHistory(@PathVariable String email, Model model, HttpSession httpSession){
+        if(httpSession.getAttribute("user")!=null){
+            SessionUser sessionUser = (SessionUser) httpSession.getAttribute("user");
+            MemberEdit memberEdit = new MemberEdit(sessionUser);
+            model.addAttribute("mem", memberEdit);
+            model.addAttribute("hpHistory", myPageService.userHPHistory(email));
+            return "/myPage/hpHistory";
+        }else {
+            System.out.println("MyPageController : 로그인되어 있지 않아 로그인 페이지로 요청했습니다.");
+            return "/index/login";
+        }
     }
 
     @GetMapping("/residence")
@@ -48,11 +69,10 @@ public class MyPageController {
     }
 
     // 회원 충전소 즐겨찾기 목록 불러오기
-    @GetMapping("/SCSBookmark/{email}")
+    @GetMapping("/scsBookmark/{email}")
     public String SCSBookmark(@PathVariable String email, Model model){
         System.out.println("email : " + email);
         System.out.println("userSCSBookmark return : " + myPageService.userSCSBookmark(email));
-        System.out.println("asdfasdf : " + myPageService.userHpBookmark(email).isEmpty());
         if(myPageService.userSCSBookmark(email).equals(null)){
             model.addAttribute("scs", "조회된 데이터가 없습니다.");
         }else{
@@ -66,7 +86,6 @@ public class MyPageController {
     public String hpBookmark(@PathVariable String email, Model model){
         System.out.println("email : " + email);
         System.out.println("userHpBookmark return : " + myPageService.userHpBookmark(email));
-        System.out.println("asdfasdf : " + myPageService.userHpBookmark(email).isEmpty());
         if(myPageService.userHpBookmark(email).equals(null)){
             model.addAttribute("hp", "조회된 데이터가 없습니다.");
         }else{

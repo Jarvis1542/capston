@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<style>
+    table {
+        margin-left: 10%;
+        margin-right: auto;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+</style>
+<head th:replace="layout/layout :: head"/>
+<body>
+<header th:replace="layout/layout :: header"/>
+<!-- bradcam_area  -->
+<div class="bradcam_area bradcam_bg_3">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text">
+                    <h3>이용 내역</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" id="email" th:value="${mem.email}">
+<div class="container">
+    <div class="row">
+        <div style="font-size: 40px">
+            <br><span th:text="${mem.name}+ '님'"/>&emsp14;이용 내역
+        </div>
+    </div>
+</div>
+<div style="float: right; margin-right: 9%">
+    <input type="date" id="start_date">&emsp;~&emsp;<input type="date" id="end_date">&emsp;<button id="scsHistorySearch" class="genric-btn success radius">검색</button>&emsp;&emsp;&emsp;
+        <select class="selectpicker" id="selectHistory">
+            <option value="충전소" selected="selected">충전소</option>
+            <option value="주차장">주차장</option>
+        </select>
+    <pre></pre>
+</div>
+
+<div class="section_title text-center mb-90">
+    <div class="col-lg-10">
+        <table class="table table-horizontal">
+            <thead class="thead-strong">
+            <tr>
+                <th>상품이름</th>
+                <th>사용위치</th>
+                <th>사용시간</th>
+                <th>이용가격</th>
+                <th>결제일자</th>
+            </tr>
+            </thead>
+            <tbody id="tbody">
+            <tr th:each ="scsHistory : ${scsHistory}">
+                <td><span th:text="${scsHistory.scs_name}"/></td>
+                <td><span th:text="${scsHistory.road_addr}"/></td>
+                <td><span th:text="${scsHistory.usedTime}"/></td>
+                <td><span th:text="${scsHistory.price}"/></td>
+                <td><span th:text="${#dates.format(scsHistory.pay_date, 'YYYY-MM-dd HH:mm:ss')}"/></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<footer th:replace="layout/layout :: footer"/>
+</body>
+<script>
+    // history select
+    $('#selectHistory').change(function () {
+        if($(this).val()=='충전소'){
+            let email = $('#email').val();
+            window.location.href = '/myPage/scsHistory/'+email;
+        }
+        if($(this).val()=='주차장'){
+            let email = $('#email').val();
+            window.location.href = '/myPage/hpHistory/'+email;
+        }
+    });
+</script>
+<script th:replace="layout/layout :: script"/>
+</html>

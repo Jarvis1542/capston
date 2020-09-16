@@ -80,4 +80,31 @@
         and s.res_name = r.res_name
         and b.email = #{email}
     </select>
+
+    <select id="userSCSHistory" resultType="com.fivekm_home.charge.domain.USER.SCSHistory">
+        select s.scs_name, r.road_addr, b.start_date, b.end_date, p.price, p.pay_date, b.email
+        from res_view r, scs_book_view b, scs_pay_view p, scs_view s
+        where b.email = #{email}
+        and s.scs_name = b.scs_name
+        and r.res_name = s.res_name
+        and p.book_id = b.book_id
+    </select>
+
+    <select id="userHPHistory" resultType="com.fivekm_home.charge.domain.USER.HPHistory">
+        select h.hp_name, r.road_addr, b.start_date, b.end_date, p.price, p.pay_date, b.email
+        from res_view r, hp_book_view b, hp_pay_view p, hp_view h
+        where b.email = #{email}
+        and h.hp_name = b.hp_name
+        and r.res_name = h.res_name
+        and p.book_id = b.book_id;
+    </select>
+
+    <select id="scsHistorySearchList" resultType="com.fivekm_home.charge.domain.USER.SCSHistory">
+        select s.scs_name, r.road_addr, b.start_date, b.end_date, p.price, b.book_date, b.email
+        from res_view r, scs_book_view b, scs_pay_view p, scs_view s
+        where b.email = #{email}
+        and s.scs_name = b.scs_name
+        and r.res_name = s.res_name
+        and p.book_id = b.book_id
+    </select>
 </mapper>

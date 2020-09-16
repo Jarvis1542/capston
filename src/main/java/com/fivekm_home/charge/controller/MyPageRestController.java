@@ -116,4 +116,9 @@ public class MyPageRestController {
             myPageService.regResidence(residence);
         }
     }// end of regResidence
+
+    @GetMapping("/rest/scsHistory")
+    public ArrayList<SCSHistory> scsHistorySearchList(SCSHistory scsHistory){
+        return myPageService.userSCSHistory(scsHistory.getEmail());
+    }
 } // end of MyPageRestController

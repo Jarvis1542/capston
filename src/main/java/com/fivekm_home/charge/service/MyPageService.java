@@ -70,4 +70,14 @@ public class MyPageService {
     public ArrayList<UserBookmark> userSCSBookmark(String email){
         return myPageMapper.userSCSBookmark(email);
     }
+
+    // 충전소 이용 내역
+    public ArrayList<SCSHistory> userSCSHistory(String email){
+        return myPageMapper.userSCSHistory(email);
+    }
+
+    // 주차장 이용 내역
+    public ArrayList<HPHistory> userHPHistory(String email){
+        return myPageMapper.userHPHistory(email);
+    }
 }
