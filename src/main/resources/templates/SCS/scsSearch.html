@@ -123,6 +123,7 @@
         url: '/rest/scsPlaceData',
         type: 'get',
         success: function (data) {
+            console.log("data 1111 ", data);
             for (let i = 0; i < data.length; i++) {
 
                 place[i] = data[i];
@@ -155,11 +156,16 @@
     var zoomControl = new kakao.maps.ZoomControl();
     map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
+    var $wrap, $body, $title, $title, $close, $img, $desc;
+    var wrap_arr = [], overlay = [];
+
+
     $.ajax({
         url : '/rest/scsSearchData',
         type : 'GET',
         cache : false,
         success : function(data) {
+            console.log("data 2222 ", data);
             for (let i = 0; i < data.length; i++) {
                 search[i] = data[i];
                 console.log('chargeName : ' + search[i].scs_name);
@@ -183,16 +189,12 @@
                     position: new kakao.maps.LatLng(data[i].lat, data[i].lng), // 마커의 위치
                 });
 
-                var closeOverlay = function() {
-                    overlay.setMap(null);
-                };
-
-                var $wrap = $('<div class="dataLayerOnMap" />');
-                var $title = $('<div class="dataTitle" id="chargeName"/>').text(data[i].scs_name);
-                var $close = $('<div class="close" title="닫기" style="width: 15px; height: 15px; font-size: 25px; margin-right: 15px">X</div>').click(closeOverlay);
-                var $body = $('<div class="body"/>');
-                var $img = $('<div class="dataPicture"><img src="'+search[i].scs_pic+'" style="height: 110px; width: 100px;"></div>');
-                var $desc = $('<div class="dataInfo" id="desc'+i+'">' +
+                $wrap = $('<div class="dataLayerOnMap" />');
+                $title = $('<div class="dataTitle" id="chargeName"/>').text(data[i].scs_name);
+                $close = $('<div class="close" title="닫기" style="width: 15px; height: 15px; font-size: 25px; margin-right: 15px" onclick="closeOverlay('+i+')">X</div>');
+                $body = $('<div class="body"/>');
+                $img = $('<div class="dataPicture"><img src="'+search[i].scs_pic+'" style="height: 110px; width: 100px;"></div>');
+                $desc = $('<div class="dataInfo" id="desc'+i+'">' +
                     '<div class="dataAddress">'+search[i].road_addr+'</div>' +
                     '<ul>' +
                     '<li><span class="dataSubTitle">운영 정보</span>' +
@@ -216,16 +218,17 @@
                 $body.append($img).append($desc);
                 $title.append($close);
 
-                var content = $wrap[0];
-                var overlay = new kakao.maps.CustomOverlay({
+                wrap_arr.push($wrap);
+
+                var content = wrap_arr[i][0].outerHTML;
+                overlay[i] = new kakao.maps.CustomOverlay({
                     content: content,
-                    map: map.click,
                     position: marker.getPosition()
                 });
 
                 // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
                 kakao.maps.event.addListener(marker, 'click', function() {
-                    overlay.setMap(map);
+                    overlay[i].setMap(map);
                 });
             } // for문 끝
 
@@ -233,8 +236,11 @@
         error : function (error) {
             alert(JSON.stringify(error));
         }
-
     }); // 지도에 마크 찍을 데이터 불러오기 ajax 끝
+
+    function closeOverlay(index) {
+        overlay[index].setMap(null);
+    };
 
     function mapBook(scs_name){
         var scs_name = scs_name;
