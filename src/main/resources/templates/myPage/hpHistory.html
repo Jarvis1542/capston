@@ -32,7 +32,7 @@
     </div>
 </div>
 <div style="margin-left: 20%">
-    <form th:action="${'/myPage/scsHistorySearch/'}+${session.user.email}" method="post">
+    <form th:action="${'/myPage/hpHistorySearch/'}+${session.user.email}" method="post">
         <br><input type="date" name="find_start_date">&emsp;~&emsp;<input type="date" name="find_end_date">&emsp;
         <input type="submit" id="hpHistorySearch" class="genric-btn success radius" value="검색">
     </form>
@@ -57,24 +57,25 @@
             </tr>
             </thead>
             <tbody id="tbody">
-            <div th:if="${not #lists.isEmpty(scsHistory)}">
-                <tr th:each ="scsHistory : ${scsHistory}">
-                    <td><span id="scs_name" th:text="${scsHistory.scs_name}"/></td>
-                    <td><span id="road_addr" th:text="${scsHistory.road_addr}"/></td>
-                    <td><span id="start_date" th:text="${#dates.format(scsHistory.start_date, 'YYYY-MM-dd HH:mm:ss')}"/>
-                        <span id="end_date" th:text="${#dates.format(scsHistory.end_date, 'YYYY-MM-dd HH:mm:ss')}"/>
-                        &emsp14;/&emsp14;<span id="used_time" th:text="${scsHistory.used_time} + 'h'"/></td>
-                    <td><span id="price" th:text="${scsHistory.price}"/></td>
-                    <td><span id="pay_date" th:text="${#dates.format(scsHistory.pay_date, 'YYYY-MM-dd HH:mm:ss')}"/></td>
-                </tr>
-            </div>
+                <div th:if="${not #lists.isEmpty(hpHistory)}">
+                    <tr id="tr" th:each ="hpHistory : ${hpHistory}">
+                        <td><div id="scs_name" th:text="${hpHistory.hp_name}"/></td>
+                        <td><div id="road_addr" th:text="${hpHistory.road_addr}"/></td>
+                        <td><div id="start_date" th:text="${#dates.format(hpHistory.start_date, 'YYYY-MM-dd HH:mm:ss')}"/>
+                            <div id="end_date" th:text="${#dates.format(hpHistory.end_date, 'YYYY-MM-dd HH:mm:ss')}"/>
+                            <div id="used_time" th:text="${hpHistory.used_time} + 'h'"/></td>
+                        <td><div id="price" th:text="${hpHistory.price}"/></td>
+                        <td><div id="pay_date" th:text="${#dates.format(hpHistory.pay_date, 'YYYY-MM-dd HH:mm:ss')}"/></td>
+                    </tr>
+                </div>
             </tbody>
         </table>
-        <div th:if="${#lists.isEmpty(scsHistory)}">
+        <div th:if="${#lists.isEmpty(hpHistory)}">
             <div style="margin-left: 20%">
                 <br><br><h4 style="text-align: center">조회된 데이터가 없습니다.</h4>
             </div>
         </div>
+        <div id="noneData"></div>
     </div>
 </div>
 <footer th:replace="layout/layout :: footer"/>

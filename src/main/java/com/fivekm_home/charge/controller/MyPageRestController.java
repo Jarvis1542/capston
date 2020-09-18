@@ -33,7 +33,7 @@ public class MyPageRestController {
         System.out.println("updateMem : " + updateMem.toString());
 
         // 일반
-        if(updateMem.getMem_role()==null){
+        if(updateMem.getMem_role().equals("no")){
             memService.updateNormal(updateMem);
             return 3;
         }else {
@@ -116,9 +116,4 @@ public class MyPageRestController {
             myPageService.regResidence(residence);
         }
     }// end of regResidence
-
-    @GetMapping("/rest/scsHistory")
-    public ArrayList<SCSHistory> scsHistorySearchList(SCSHistory scsHistory){
-        return myPageService.userSCSHistory(scsHistory.getEmail());
-    }
-} // end of MyPageRestController
+}

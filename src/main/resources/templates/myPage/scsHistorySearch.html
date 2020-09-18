@@ -57,20 +57,20 @@
             </tr>
             </thead>
             <tbody id="tbody">
-            <div th:if="${not #lists.isEmpty(scsHistory)}">
-                <tr th:each ="scsHistory : ${scsHistory}">
-                    <td><span id="scs_name" th:text="${scsHistory.scs_name}"/></td>
-                    <td><span id="road_addr" th:text="${scsHistory.road_addr}"/></td>
-                    <td><span id="start_date" th:text="${#dates.format(scsHistory.start_date, 'YYYY-MM-dd HH:mm:ss')}"/>
-                        <span id="end_date" th:text="${#dates.format(scsHistory.end_date, 'YYYY-MM-dd HH:mm:ss')}"/>
-                        &emsp14;/&emsp14;<span id="used_time" th:text="${scsHistory.used_time} + 'h'"/></td>
-                    <td><span id="price" th:text="${scsHistory.price}"/></td>
-                    <td><span id="pay_date" th:text="${#dates.format(scsHistory.pay_date, 'YYYY-MM-dd HH:mm:ss')}"/></td>
+            <div th:if="${not #lists.isEmpty(scsSearchHistory)}">
+                <tr th:each ="scsSearchHistory : ${scsSearchHistory}">
+                    <td><span id="scs_name" th:text="${scsSearchHistory.scs_name}"/></td>
+                    <td><span id="road_addr" th:text="${scsSearchHistory.road_addr}"/></td>
+                    <td><span id="start_date" th:text="${#dates.format(scsSearchHistory.start_date, 'YYYY-MM-dd HH:mm:ss')}"/>
+                        <span id="end_date" th:text="${#dates.format(scsSearchHistory.end_date, 'YYYY-MM-dd HH:mm:ss')}"/>
+                        &emsp14;/&emsp14;<span id="used_time" th:text="${scsSearchHistory.used_time} + 'h'"/></td>
+                    <td><span id="price" th:text="${scsSearchHistory.price}"/></td>
+                    <td><span id="pay_date" th:text="${#dates.format(scsSearchHistory.pay_date, 'YYYY-MM-dd HH:mm:ss')}"/></td>
                 </tr>
             </div>
             </tbody>
         </table>
-        <div th:if="${#lists.isEmpty(scsHistory)}">
+        <div th:if="${#lists.isEmpty(scsSearchHistory)}">
             <div style="margin-left: 20%">
                 <br><br><h4 style="text-align: center">조회된 데이터가 없습니다.</h4>
             </div>

@@ -7,7 +7,10 @@ import com.fivekm_home.charge.mapper.MyPageMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -72,12 +75,22 @@ public class MyPageService {
     }
 
     // 충전소 이용 내역
-    public ArrayList<SCSHistory> userSCSHistory(String email){
+    public ArrayList<History> userSCSHistory(String email){
         return myPageMapper.userSCSHistory(email);
     }
 
     // 주차장 이용 내역
-    public ArrayList<HPHistory> userHPHistory(String email){
+    public ArrayList<History> userHPHistory(String email){
         return myPageMapper.userHPHistory(email);
+    }
+
+    // 충전소 이용 내역 날짜 검색
+    public ArrayList<History> scsHistorySearchList(History history){
+        return myPageMapper.scsHistorySearchList(history);
+    }
+
+    // 주차장 이용 내역 날짜 검색
+    public ArrayList<History> hpHistorySearchList(History history){
+        return myPageMapper.hpHistorySearchList(history);
     }
 }

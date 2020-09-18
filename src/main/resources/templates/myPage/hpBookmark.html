@@ -80,5 +80,18 @@
 
 <footer th:replace="layout/layout :: footer"/>
 </body>
+<script>
+    // 즐겨찾기 select
+    $('#selectBookmark').change(function () {
+        if($(this).val()=='충전소'){
+            let email = $('#email').val();
+            window.location.href = '/myPage/scsBookmark/'+email;
+        }
+        if($(this).val()=='주차장'){
+            let email = $('#email').val();
+            window.location.href = '/myPage/hpBookmark/'+email;
+        }
+    });
+</script>
 <script th:replace="layout/layout :: script"/>
 </html>

@@ -373,28 +373,24 @@ begin
 end;
 /
 
--- 차가 들어오는 차단기 입구 카메라가 차번호를 찍으면 자동으로 scs_place 테이블 자리수 - 1
+-- 예약하면 자동으로 scs_place 테이블 자리수 - 1
 create or replace trigger update_sub_scs_ch_pl_view
-    after insert on entry_info
+    after insert on scs_book
     for each row
 declare
 begin
     update scs_ch_pl_view set scs_amount = scs_amount - 1
-    where scs_name = ( select scs_name from scs
-                                where res_name = :new.res_name)
-    and res_name = :new.res_name;
+    where scs_name = :new.scs_name;
 end;
 /
 
--- 차가 들어오는 차단기 입구 카메라가 차번호를 찍으면 자동으로 hp_place 테이블 자리수 - 1
+-- 예약하면 자동으로 hp_place 테이블 자리수 - 1
 create or replace trigger update_sub_hp_ch_pl_view
-    after insert on entry_info
+    after insert on hp_book
     for each row
 declare
 begin
     update hp_ch_pl_view set place = place - 1
-    where hp_name = ( select hp_name from hp
-                                where res_name = :new.res_name)
-    and res_name = :new.res_name;
+    where hp_name = :new.hp_name;
 end;
 /

@@ -57,6 +57,10 @@ $('#no_edit').on('click', function (event) {
     $.ajax({
         type : 'POST',
         url : '/rest/edit',
+        enctype: 'multipart/form-data',
+        processData: false,
+        contentType: false,
+        cache: false,
         data : formData,
         success : function (data) {
             if(data==3){
@@ -263,6 +267,9 @@ $('#regCar').on('click', function (event) {
                 +'<input type="hidden" value="'+$('#car_id').val()+'">';
                 $('#addedCar').focus();
                 $('#addedCar').append(html);
+            },
+            error : function (error) {
+                alert(JSON.stringify(error));
             }
         });
         $('#modalClose').click();
@@ -275,20 +282,20 @@ $('#addCarModalBtn').on('click', function () {
     $('#errCar_id').empty();
 });
 
-// 충전소 이용 내역 날짜 검색
-$('#scsHistorySearch').on('click', function () {
-    let data = {
-        email :  $('#email').val(),
-        start_date : $('#start_date').val(),
-        end_date : $('#end_date').val()
-    }
-
-    $.ajax({
-        data : data,
-        type : 'get',
-        url : '/rest/scsHistory',
-        success : function (data) {
-
-        }
-    });
-});
+// $('#hpHistorySearch').on('click' ,function (event) {
+//     event.preventDefault();
+//     if($('#find_start_date').val() == null || $('#find_end_date').val() == null ||
+//         $('#find_start_date').val() == '' || $('#find_end_date').val() == '') {
+//         alert('날짜를 선택해주시기 바랍니다.');
+//         return false;
+//     }
+// });
+//
+// $('#scsHistorySearch').on('click' ,function (event) {
+//     event.preventDefault();
+//     if($('#find_start_date').val() == null || $('#find_end_date').val() == null ||
+//         $('#find_start_date').val() == '' || $('#find_end_date').val() == '') {
+//         alert('날짜를 선택해주시기 바랍니다.');
+//         return false;
+//     }
+// });

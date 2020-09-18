@@ -114,21 +114,21 @@
                                                         <li><a th:href="@{/chargingStation/scsRegister}">충전소 등록</a></li>
                                                         <li><a th:href="@{#}">충전소 매출 현황</a></li>
                                                         <li><a th:href="@{/chargingStation/scsSearch}">충전소 찾기</a></li>
-                                                        <li><a th:href="@{/chargingStation/scsHistory}">이용 내역</a></li>
+                                                        <li><a th:href="@{'/myPage/scsHistory/' + ${session.user.email}}">이용 내역</a></li>
                                                     </div>
                                                     <div th:if="${session.user.role.getTitle()=='등록자'}">
                                                         <li><a th:href="@{/chargingStation/scsRegister}">충전소 등록</a></li>
                                                         <li><a th:href="@{/chargingStation/scsSearch}">충전소 찾기</a></li>
-                                                        <li><a th:href="@{/chargingStation/scsHistory}">이용 내역</a></li>
+                                                        <li><a th:href="@{'/myPage/scsHistory/' + ${session.user.email}}">이용 내역</a></li>
                                                     </div>
                                                     <div th:if="${session.user.role.getTitle()=='경비'}">
                                                         <li><a th:href="@{#}">충전소 관리</a></li>
                                                         <li><a th:href="@{/chargingStation/scsSearch}">충전소 찾기</a></li>
-                                                        <li><a th:href="@{/chargingStation/scsHistory}">이용 내역</a></li>
+                                                        <li><a th:href="@{'/myPage/scsHistory/' + ${session.user.email}}">이용 내역</a></li>
                                                     </div>
                                                     <div th:if="${session.user.role.getTitle()=='일반'}">
                                                         <li><a th:href="@{/chargingStation/scsSearch}">충전소 찾기</a></li>
-                                                        <li><a th:href="@{/chargingStation/scsHistory}">이용 내역</a></li>
+                                                        <li><a th:href="@{'/myPage/scsHistory/' + ${session.user.email}}">이용 내역</a></li>
                                                     </div>
                                                 </div>
                                             </ul>
@@ -143,21 +143,21 @@
                                                         <li><a th:href="@{/happyParking/hpResigter}">주차장 등록</a></li>
                                                         <li><a th:href="@{#}">주차장 매출 현황</a></li>
                                                         <li><a th:href="@{/happyParking/hpSearch}">주차장 찾기</a></li>
-                                                        <li><a th:href="@{/happyParking/hpHistory}">주차장 이용 내역</a></li>
+                                                        <li><a th:href="@{'/myPage/hpHistory/' + ${session.user.email}}">이용 내역</a></li>
                                                     </div>
                                                     <div th:if="${session.user.role.getTitle()=='등록자'}">
                                                         <li><a th:href="@{/happyParking/hpRegister}">주차장 등록</a></li>
                                                         <li><a th:href="@{/happyParking/hpSearch}">주차장 찾기</a></li>
-                                                        <li><a th:href="@{/happyParking/hpHistory}">이용 내역</a></li>
+                                                        <li><a th:href="@{'/myPage/hpHistory/' + ${session.user.email}}">이용 내역</a></li>
                                                     </div>
                                                     <div th:if="${session.user.role.getTitle()=='경비'}">
                                                         <li><a th:href="@{#}">주차장 관리</a></li>
                                                         <li><a th:href="@{/happyParking/hpSearch}">주차장 찾기</a></li>
-                                                        <li><a th:href="@{/happyParking/hpHistory}">이용 내역</a></li>
+                                                        <li><a th:href="@{'/myPage/hpHistory/' + ${session.user.email}}">이용 내역</a></li>
                                                     </div>
                                                     <div th:if="${session.user.role.getTitle()=='일반'}">
                                                         <li><a th:href="@{/happyParking/hpSearch}">주차장 찾기</a></li>
-                                                        <li><a th:href="@{/happyParking/hpHistory}">이용 내역</a></li>
+                                                        <li><a th:href="@{'/myPage/hpHistory/' + ${session.user.email}}">이용 내역</a></li>
                                                     </div>
                                                 </div>
                                             </ul>
@@ -192,25 +192,25 @@
                                                         <li><a th:href="@{/myPage/residence}">거주지 등록</a></li>
                                                         <li><a th:href="@{/chargingStation/scsRegister}">충전소 등록</a></li>
                                                         <li><a th:href="@{/happyParking/hpRegister}">주차장 등록</a></li>
-                                                        <li><a th:href="@{/myPage/history}">이용 내역</a></li>
+                                                        <li><a th:href="@{'/myPage/scsHistory/' + ${session.user.email}}">이용 내역</a></li>
                                                     </div>
                                                     <div th:if="${session.user.role.getTitle()=='등록자'}">
                                                         <li><a th:href="@{/myPage/memberEdit}">정보 수정</a></li>
-                                                        <li><a th:href="@{'/myPage/SCSBookmark/' + ${session.user.email}}">즐겨 찾기</a></li>
+                                                        <li><a th:href="@{'/myPage/scsBookmark/' + ${session.user.email}}">즐겨 찾기</a></li>
                                                         <li><a th:href="@{/myPage/residence}">거주지 등록</a></li>
                                                         <li><a th:href="@{/chargingStation/scsRegister}">충전소 등록</a></li>
                                                         <li><a th:href="@{/happyParking/hpRegister}">주차장 등록</a></li>
-                                                        <li><a th:href="@{/myPage/history}">이용 내역</a></li>
+                                                        <li><a th:href="@{'/myPage/scsHistory/' + ${session.user.email}}">이용 내역</a></li>
                                                     </div>
                                                     <div th:if="${session.user.role.getTitle()=='경비'}">
                                                         <li><a th:href="@{/myPage/memberEdit}">정보 수정</a></li>
-                                                        <li><a th:href="@{'/myPage/SCSBookmark/' + ${session.user.email}}">즐겨 찾기</a></li>
+                                                        <li><a th:href="@{'/myPage/scsBookmark/' + ${session.user.email}}">즐겨 찾기</a></li>
                                                         <li><a th:href="@{/myPage/bookmark}">관리 아파트</a></li>
-                                                        <li><a th:href="@{/myPage/history}">이용 내역</a></li>
+                                                        <li><a th:href="@{'/myPage/scsHistory/' + ${session.user.email}}">이용 내역</a></li>
                                                     </div>
                                                     <div th:if="${session.user.role.getTitle()=='일반'}">
                                                         <li class="login_none"><a th:href="@{/myPage/memberEdit}">정보 수정</a></li>
-                                                        <li class="login_none"><a th:href="@{'/myPage/SCSBookmark/' + ${session.user.email}}">즐겨 찾기</a></li>
+                                                        <li class="login_none"><a th:href="@{'/myPage/scsBookmark/' + ${session.user.email}}">즐겨 찾기</a></li>
                                                         <li class="login_none"><a th:href="@{'/myPage/scsHistory/' + ${session.user.email}}">이용 내역</a></li>
                                                     </div>
                                                 </div>
@@ -389,6 +389,7 @@
 <!-- link that opens popup -->
 <!-- JS here -->
 <section th:fragment="script">
+    <script th:async src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.28.0/moment.min.js"></script>
     <!-- 모달 -->
     <script th:async src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script th:async src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>

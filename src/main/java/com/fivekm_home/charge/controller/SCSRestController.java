@@ -77,7 +77,7 @@ public class SCSRestController {
 
     // 충전소 지도 검색
     @PostMapping("/rest/scsMapSearch")
-    public ArrayList<SCS_mapSearch> scsMapSerch(String scs_name) {
+    public ArrayList<SCS_mapSearch> scsMapSearch(String scs_name) {
         return scsService.scsMapSearch(scs_name);
     }
 }

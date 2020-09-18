@@ -23,40 +23,47 @@
                 <div class="def_mar">
                     <h1>충전소 요청 목록</h1><br>
                 </div>
-                    <table class="table table-striped">
-                        <thead class="thead-strong">
-                        <tr>
-                            <th>순번</th>
-                            <th>충전소 명</th>
-                            <th>충전기 수</th>
-                            <th>아파트 명</th>
-                            <th>도로명주소</th>
-                            <th>지번주소</th>
-                            <th>상세주소</th>
-                            <th>등록날짜</th>
-                            <th>등록자</th>
-                            <th>승인여부</th>
-                        </tr>
-                        </thead>
-                        <tbody id="tbody">
-                        <tr th:each="SCSRequestList, num : ${SCSRequestList}">
-                            <td><span th:text="${num.count}"></span></td>
-                            <td><a th:href="@{'/admin/scsRequest/' + ${SCSRequestList.scs_name}}"><span th:text="${SCSRequestList.scs_name}"/></a><span>
-                            <td><span th:text="${SCSRequestList.scs_amount}"/></td>
-                            <td><span th:text="${SCSRequestList.res_name}"/></td>
-                            <td><span th:text="${SCSRequestList.road_addr}"/></td>
-                            <td><span th:text="${SCSRequestList.jibun_addr}"/></td>
-                            <td><span th:text="${SCSRequestList.detail_addr}"/></td>
-                            <td><span th:text="${#dates.format(SCSRequestList.reg_date, 'YYYY-MM-dd HH:mm:ss')}"/></td>
-                            <td><span th:text="${SCSRequestList.name}"/></td>
-                            <td><span th:text="${SCSRequestList.scs_chk}"/></td>
-                        </tr>
-                        </tbody>
-                    </table>
-
+                <table class="table table-striped">
+                    <thead class="thead-strong">
+                    <tr>
+                        <th>순번</th>
+                        <th>충전소 명</th>
+                        <th>충전기 수</th>
+                        <th>아파트 명</th>
+                        <th>도로명주소</th>
+                        <th>지번주소</th>
+                        <th>상세주소</th>
+                        <th>등록날짜</th>
+                        <th>등록자</th>
+                        <th>승인여부</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tbody">
+                        <div th:if="${not #lists.isEmpty(SCSRequestList)}">
+                            <tr th:each="SCSRequestList, num : ${SCSRequestList}">
+                                <td><span th:text="${num.count}"></span></td>
+                                <td><a th:href="@{'/admin/scsRequest/' + ${SCSRequestList.scs_name}}"><span
+                                        th:text="${SCSRequestList.scs_name}"/></a><span>
+                                <td><span th:text="${SCSRequestList.scs_amount}"/></td>
+                                <td><span th:text="${SCSRequestList.res_name}"/></td>
+                                <td><span th:text="${SCSRequestList.road_addr}"/></td>
+                                <td><span th:text="${SCSRequestList.jibun_addr}"/></td>
+                                <td><span th:text="${SCSRequestList.detail_addr}"/></td>
+                                <td><span th:text="${#dates.format(SCSRequestList.reg_date, 'YYYY-MM-dd HH:mm:ss')}"/></td>
+                                <td><span th:text="${SCSRequestList.name}"/></td>
+                                <td><span th:text="${SCSRequestList.scs_chk}"/></td>
+                            </tr>
+                        </div>
+                    </tbody>
+                </table>
             </div>
         </div>
+        <div th:if="${#lists.isEmpty(SCSRequestList)}">
+            <div>
+                <br><br><h4 style="text-align: center">조회된 데이터가 없습니다.</h4>
+            </div>
         </div>
+    </div>
 </section>
 <footer th:replace="layout/layout :: footer"/>
 </body>

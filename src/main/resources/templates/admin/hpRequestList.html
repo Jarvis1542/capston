@@ -16,47 +16,52 @@
     </div>
 </div>
 
-<!-- ================ contact section start ================= -->
 <section class="contact-section section_padding">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col">
+            <div class="col-lg-12">
                 <div class="def_mar">
-                    <h1>주차장 요청 목록</h1><br>
+                    <h1>충전소 요청 목록</h1><br>
                 </div>
                 <table class="table table-striped">
                     <thead class="thead-strong">
                     <tr>
                         <th>순번</th>
-                        <th>주차장 이름</th>
+                        <th>주차장 명</th>
                         <th>주차장 타입</th>
                         <th>주차장 칸 수</th>
-                        <th>아파트 이름</th>
-                        <th>도로명 주소</th>
-                        <th>지번 주소</th>
-                        <th>상세 주소</th>
+                        <th>아파트 명</th>
+                        <th>도로명주소</th>
+                        <th>지번주소</th>
+                        <th>상세주소</th>
                         <th>등록일</th>
                         <th>등록자</th>
-                        <th>관리자 승인</th>
+                        <th>승인여부</th>
                     </tr>
                     </thead>
                     <tbody id="tbody">
-                    <tr th:each ="hpRequestList, num : ${hpRequestList}">
-                        <td><span th:text="${num.count}"></span></td>
-                        <td><a th:href="@{'/admin/hpRequest/' + ${hpRequestList.hp_name}}"><span th:text="${hpRequestList.hp_name}"/></a></td>
-                        <td><span th:text="${hpRequestList.hp_type}"/></td>
-                        <td><span th:text="${hpRequestList.place}"/></td>
-                        <td><span th:text="${hpRequestList.res_name}"/></td>
-                        <td><span th:text="${hpRequestList.road_addr}"/></td>
-                        <td><span th:text="${hpRequestList.jibun_addr}"/></td>
-                        <td><span th:text="${hpRequestList.detail_addr}"/></td>
-                        <td><span th:text="${#dates.format(hpRequestList.reg_date, 'YYYY-MM-dd HH:mm:ss')}"/></td>
-                        <td><span th:text="${hpRequestList.name}"/></td>
-                        <td><span th:text="${hpRequestList.hp_chk}"/></td>
-
-                    </tr>
+                        <div th:if="${not #lists.isEmpty(hpRequestList)}">
+                            <tr th:each ="hpRequestList, num : ${hpRequestList}">
+                                <td><div th:text="${num.count}"></div></td>
+                                <td><a th:href="@{'/admin/hpRequest/' + ${hpRequestList.hp_name}}"><span th:text="${hpRequestList.hp_name}"/></a></td>
+                                <td><div th:text="${hpRequestList.hp_type}"/></td>
+                                <td><div th:text="${hpRequestList.place}"/></td>
+                                <td><div th:text="${hpRequestList.res_name}"/></td>
+                                <td><div th:text="${hpRequestList.road_addr}"/></td>
+                                <td><div th:text="${hpRequestList.jibun_addr}"/></td>
+                                <td><div th:text="${hpRequestList.detail_addr}"/></td>
+                                <td><div th:text="${#dates.format(hpRequestList.reg_date, 'YYYY-MM-dd HH:mm:ss')}"/></td>
+                                <td><div th:text="${hpRequestList.name}"/></td>
+                                <td><div th:text="${hpRequestList.hp_chk}"/></td>
+                            </tr>
+                        </div>
                     </tbody>
                 </table>
+            </div>
+        </div>
+        <div th:if="${#lists.isEmpty(hpRequestList)}">
+            <div>
+                <br><br><h4 style="text-align: center">조회된 데이터가 없습니다.</h4>
             </div>
         </div>
     </div>

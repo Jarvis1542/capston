@@ -1,6 +1,7 @@
 package com.fivekm_home.charge.controller;
 
 import com.fivekm_home.charge.config.auth.dto.SessionUser;
+import com.fivekm_home.charge.domain.USER.History;
 import com.fivekm_home.charge.domain.USER.MemberEdit;
 import com.fivekm_home.charge.service.MyPageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,8 +56,39 @@ public class MyPageController {
             SessionUser sessionUser = (SessionUser) httpSession.getAttribute("user");
             MemberEdit memberEdit = new MemberEdit(sessionUser);
             model.addAttribute("mem", memberEdit);
+            System.out.println("myPageService.userHPHistory(email) : " + myPageService.userHPHistory(email));
             model.addAttribute("hpHistory", myPageService.userHPHistory(email));
             return "/myPage/hpHistory";
+        }else {
+            System.out.println("MyPageController : 로그인되어 있지 않아 로그인 페이지로 요청했습니다.");
+            return "/index/login";
+        }
+    }
+
+    // 충전소 이용 내역 날짜 검색
+    @PostMapping("/scsHistorySearch/{email}")
+    public String scsHistorySearchList(@PathVariable String email, Model model, HttpSession httpSession, History history){
+        if(httpSession.getAttribute("user")!=null){
+            SessionUser sessionUser = (SessionUser) httpSession.getAttribute("user");
+            MemberEdit memberEdit = new MemberEdit(sessionUser);
+            model.addAttribute("mem", memberEdit);
+            model.addAttribute("scsSearchHistory", myPageService.scsHistorySearchList(history));
+            return "/myPage/hpHistorySearch";
+        }else {
+            System.out.println("MyPageController : 로그인되어 있지 않아 로그인 페이지로 요청했습니다.");
+            return "/index/login";
+        }
+    }
+
+    // 주차장 이용 내역 날짜 검색
+    @PostMapping("/hpHistorySearch/{email}")
+    public String hpHistorySearchList(@PathVariable String email, Model model, HttpSession httpSession, History history){
+        if(httpSession.getAttribute("user")!=null){
+            SessionUser sessionUser = (SessionUser) httpSession.getAttribute("user");
+            MemberEdit memberEdit = new MemberEdit(sessionUser);
+            model.addAttribute("mem", memberEdit);
+            model.addAttribute("hpSearchHistory", myPageService.hpHistorySearchList(history));
+            return "/myPage/hpHistorySearch";
         }else {
             System.out.println("MyPageController : 로그인되어 있지 않아 로그인 페이지로 요청했습니다.");
             return "/index/login";
