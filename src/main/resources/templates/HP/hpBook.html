@@ -57,8 +57,8 @@
                     </p>
                     <div class="about_list">
                         <ul>
-                            <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".3s">시작 운영 시간 : <span th:text="${parking.start_manage_time}"/></li>
-                            <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".3s">종료 운영 시간 : <span th:text="${parking.end_manage_time}"/></li>
+                            <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".3s">시작 운영 시간 : <span id="start_manage_time" th:text="${parking.start_manage_time}"/></li>
+                            <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".3s">종료 운영 시간 : <span id="end_manage_time" th:text="${parking.end_manage_time}"/></li>
                             <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".4s">기본 요금(30분당) : <span id="min30_fee" th:text="${parking.min30_fee}"/></li>
                             <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".5s">추가 요금(10분당) : <span id="addmin10_fee" th:text="${parking.addmin10_fee}"/></li>
                             <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".6s">이름 : <span th:text="${parking.name}"/></li>
@@ -109,18 +109,6 @@
 <script th:async src="/js/hpBook.js"></script>
 <script th:async th:replace="layout/layout :: script"/>
 <script th:async type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-<script>
-    const picker = document.getElementById('start_date');
-    picker.addEventListener('input', function(e){
-        var day = new Date(this.value).getUTCDay();
-        if([5,6].includes(day)){
-            e.preventDefault();
-            this.value = '';
-            alert('주말 및 공휴일은 불가능합니다');
-        }
-    });
-
-</script>
 <script>
     const picker = document.getElementById('end_date');
     picker.addEventListener('input', function(e){

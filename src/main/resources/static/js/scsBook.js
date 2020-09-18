@@ -50,9 +50,9 @@ $(document).ready(function () {
         let hour = start_date.getHours();
         let min = start_date.getMinutes();
 
-        hour > 10 ? hour = hour : hour = "0" + hour;
-        min > 10 ? min = min : min = "0" + min;
-        month > 10 ? month = month : month = "0" + month;
+        hour >= 10 ? hour = hour : hour = "0" + hour;
+        min >= 10 ? min = min : min = "0" + min;
+        month >= 10 ? month = month : month = "0" + month;
 
         let dateStr = year + "-" + month + "-" + day + "T" + hour + ":" + min;
         let dateStr2 = year + "-" + month + "-" + day;
