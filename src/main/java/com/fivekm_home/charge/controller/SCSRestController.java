@@ -43,7 +43,7 @@ public class SCSRestController {
     // 지도에 충전소 자리 변화 불러오기
     @GetMapping("/rest/scsPlaceData")
     public ArrayList<SCS_chPlList> scsPlaceList(){
-        System.out.println("return : " + scsService.scsPlaceList());
+        System.out.println("return scsPlaceList CONTROLLER : " + scsService.scsPlaceList());
         return scsService.scsPlaceList();
     }
 

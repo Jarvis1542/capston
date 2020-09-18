@@ -9,48 +9,48 @@
 
     <insert id="scsReg">
         insert into scs values(
-        #{scs_name},
-        #{oper_ins},
-        #{scs_speed},
-        #{scs_amount},
-        #{min30_fee},
-        #{addMin10_fee},
-        #{start_manage_time},
-        #{end_manage_time},
-        #{scs_pic},
-        #{apt_map},
-        #{cable},
-        #{scs_type},
-        sysdate,
-        'N',
-        #{res_name}
-        )
+                                  #{scs_name},
+                                  #{oper_ins},
+                                  #{scs_speed},
+                                  #{scs_amount},
+                                  #{min30_fee},
+                                  #{addMin10_fee},
+                                  #{start_manage_time},
+                                  #{end_manage_time},
+                                  #{scs_pic},
+                                  #{apt_map},
+                                  #{cable},
+                                  #{scs_type},
+                                  sysdate,
+                                  'N',
+                                  #{res_name}
+                              )
     </insert>
 
     <select id="scsRequestList" resultType="com.fivekm_home.charge.domain.SCS.SCS_requestList">
         SELECT scs_name, scs_amount, scs_type, scs_chk, c.res_name, r.road_addr, r.jibun_addr,
-            r.detail_addr, c.reg_date, m.name
+               r.detail_addr, c.reg_date, m.name
         FROM scs_view c, res_view r, member_view m
         where c.res_name = r.res_name
-        and m.email = r.email
+          and m.email = r.email
     </select>
 
     <select id="scsRequest" resultType="com.fivekm_home.charge.domain.SCS.SCS_request">
         SELECT m.name, scs_name, oper_ins, scs_speed, scs_amount, min30_fee, addmin10_fee, cable, scs_type, scs_chk, c.scs_pic, c.apt_map,
-        r.lat, r.lng, r.post_code, r.road_addr, r.jibun_addr, r.detail_addr, r.extra_addr
+               r.lat, r.lng, r.post_code, r.road_addr, r.jibun_addr, r.detail_addr, r.extra_addr
         from scs_view c, res_view r, member_view m
         where c.res_name = r.res_name
-        and m.email = r.email
-        and scs_name = #{scs_name}
+          and m.email = r.email
+          and scs_name = #{scs_name}
     </select>
 
     <select id="scsBookPage" resultType="com.fivekm_home.charge.domain.SCS.SCS_bookPage">
         select scs_pic, scs_name, min30_fee, addmin10_fee, apt_map,
-                road_addr, extra_addr, name, phone, start_manage_time, end_manage_time, m.email
+               road_addr, extra_addr, name, phone, start_manage_time, end_manage_time, m.email
         from member_view m, scs_view c, res_view r
         where m.email = r.email
-        and c.res_name = r.res_name
-        and scs_name = #{scs_name}
+          and c.res_name = r.res_name
+          and scs_name = #{scs_name}
     </select>
 
     <update id="updateChargingChk">
@@ -61,54 +61,54 @@
 
     <select id="scsSearchDataList" resultType="com.fivekm_home.charge.domain.SCS.SCS_search">
         select scs_name, scs_amount , oper_ins, min30_fee, addMin10_fee, road_addr, extra_addr,
-        start_manage_time, end_manage_time, scs_pic, lat, lng, scs_chk
+               start_manage_time, end_manage_time, scs_pic, lat, lng, scs_chk
         from scs_view c, res_view r
         where c.res_name = r.res_name
-        and scs_chk = 'Y'
+          and scs_chk = 'Y'
     </select>
 
     <insert id="scsBook">
         insert into scs_book_view values (
-            scs_book_seq.nextval, #{start_date}, #{end_date},
-            #{email}, #{car_num}, #{scs_name}, sysdate
-        )
+                                             scs_book_seq.nextval, #{start_date}, #{end_date},
+                                             #{email}, #{car_num}, #{scs_name}, sysdate
+                                         )
     </insert>
 
     <insert id="scsPay">
         insert into scs_pay_view values (
-            scs_pay_seq.nextval, 'card', #{scs_name}, #{price},
-            #{email}, #{phone}, scs_book_seq.currval, sysdate
-        )
+                                            scs_pay_seq.nextval, 'card', #{scs_name}, #{price},
+                                            #{email}, #{phone}, scs_book_seq.currval, sysdate
+                                        )
     </insert>
 
     <select id="checkBookmark" resultType="int">
         select count(*)
         from scs_bookmark_view
         where email = #{email}
-        and scs_name = #{scs_name}
+          and scs_name = #{scs_name}
     </select>
 
     <insert id="addSCSBookmark">
         insert into scs_bookmark_view values(
-            #{email},
-            #{scs_name}
-        )
+                                                #{email},
+                                                #{scs_name}
+                                            )
     </insert>
 
     <delete id="deleteSCSBookmark">
         delete from scs_bookmark_view
         where email = #{email}
-        and scs_name = #{scs_name}
+          and scs_name = #{scs_name}
     </delete>
 
-    <select id="scsPlaceList" resultType="com.fivekm_home.charge.domain.HP.HP_cnPlList">
-        select * from scs_ch_pl_view
+    <select id="scsPlaceList" resultType="com.fivekm_home.charge.domain.SCS.SCS_chPlList">
+        select * from SCS_CH_PL_VIEW
     </select>
 
     <select id="scsMapSearch" resultType="com.fivekm_home.charge.domain.SCS.SCS_mapSearch">
         select s.scs_name, r.lat, r.lng
         from scs s, res r
         where s.res_name = r.res_name
-        and scs_name like '%'||#{scs_name}||'%'
+          and scs_name like '%'||#{scs_name}||'%'
     </select>
 </mapper>

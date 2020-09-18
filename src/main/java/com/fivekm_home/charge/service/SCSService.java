@@ -53,6 +53,7 @@ public class SCSService {
 
     // 충전소 자리 변화 불러오기
     public ArrayList<SCS_chPlList> scsPlaceList(){
+        System.out.println("return scsPlaceList Sservice : " + scsMapper.scsPlaceList());
         return scsMapper.scsPlaceList();
     }
 
