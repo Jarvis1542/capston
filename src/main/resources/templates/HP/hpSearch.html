@@ -154,86 +154,90 @@
     var zoomControl = new kakao.maps.ZoomControl();
     map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
-        $.ajax({
-            url : '/rest/hpSearchData',
-            type : 'GET',
-            success : function(data) {
-                for (let i = 0; i <data.length; i++) {
-                    search[i] = data[i];
-                    console.log('parkingName : ' + search[i].hp_name);
-                    console.log('parkingType : ' + search[i].hp_type);
-                    console.log('min30Fee : ' + search[i].min30_fee);
-                    console.log('addMin10Fee : ' + search[i].addMin10_fee);
-                    console.log('roadAddress : ' + search[i].road_addr);
-                    console.log('extraAddress : ' + search[i].extra_addr);
-                    console.log('start_manage_time : ' + search[i].start_manage_time);
-                    console.log('end_manage_time : ' + search[i].end_manage_time);
-                    console.log('place : ' + search[i].place);
-                    console.log('parkingChk : ' + search[i].hp_chk);
-                    console.log('parkingPic : ' + search[i].hp_pic);
-                    console.log('change place : ' + search[i].place);
-                    console.log('lat : ' + search[i].lat);
-                    console.log('lng : ' + search[i].lng);
-                    console.log('==========================================');
+    var $wrap, $body, $title, $title, $close, $img, $desc;
+    var wrap_arr = [], overlay = [];
 
-                    // 마커를 생성합니다
-                    var marker = new kakao.maps.Marker({
-                        map: map, // 마커를 표시할 지도
-                        position: new kakao.maps.LatLng(search[i].lat, search[i].lng), // 마커의 위치
-                    });
+    $.ajax({
+        url : '/rest/hpSearchData',
+        type : 'GET',
+        success : function(data) {
+            for (let i = 0; i <data.length; i++) {
+                search[i] = data[i];
+                console.log('parkingName : ' + search[i].hp_name);
+                console.log('parkingType : ' + search[i].hp_type);
+                console.log('min30Fee : ' + search[i].min30_fee);
+                console.log('addMin10Fee : ' + search[i].addMin10_fee);
+                console.log('roadAddress : ' + search[i].road_addr);
+                console.log('extraAddress : ' + search[i].extra_addr);
+                console.log('start_manage_time : ' + search[i].start_manage_time);
+                console.log('end_manage_time : ' + search[i].end_manage_time);
+                console.log('place : ' + search[i].place);
+                console.log('parkingChk : ' + search[i].hp_chk);
+                console.log('parkingPic : ' + search[i].hp_pic);
+                console.log('change place : ' + search[i].place);
+                console.log('lat : ' + search[i].lat);
+                console.log('lng : ' + search[i].lng);
+                console.log('==========================================');
 
-                    var closeOverlay = function() {
-                        overlay.setMap(null);
-                    };
+                // 마커를 생성합니다
+                var marker = new kakao.maps.Marker({
+                    map: map, // 마커를 표시할 지도
+                    position: new kakao.maps.LatLng(search[i].lat, search[i].lng), // 마커의 위치
+                });
 
-                    var $wrap = $('<div class="dataLayerOnMap" />');
-                    var $title = $('<div class="dataTitle" id="parkingName"/>').text(search[i].hp_name);
-                    var $close = $('<div class="close" title="닫기" style="width: 15px; height: 15px; font-size: 25px; margin-right: 15px">X</div>').click(closeOverlay);
-                    var $body = $('<div class="body"/>');
-                    var $img = $('<div class="dataPicture"><img src="'+search[i].hp_pic+'" style="height: 110px; width: 100px;"></div>');
-                    var $desc = $('<div class="dataInfo" id="desc'+i+'">' +
-                        '<div class="dataAddress">'+search[i].road_addr+'</div>' +
-                        '<ul>' +
-                        '<li><span class="dataSubTitle">운영 정보</span>' +
-                        '<span>' +
-                        '시작운영시간 : '+search[i].start_manage_time+'<br>' +
-                        '종료운영시간 : '+search[i].end_manage_time+'<br>' +
-                        '주차장칸 수 : '+place[i].place+' / '+search[i].place+'<br>' +
-                        '<a href="http://map.kakao.com/link/to/'+data[i].hp_name+ ',' +data[i].lat+ ','+data[i].lng+'"><button style="width: 100px; margin-left: 5px; margin-top: 5px" class="genric-btn primary small">길찾기</button></a>'+
-                        '</span>'+
-                        '</li>' +
-                        '<li><span class="dataSubTitle">주차 요금</span>' +
-                        '<span>' +
-                        '30분당 요금 : '+search[i].min30_fee+'<br>'+
-                        '10분당 추가요금 : '+search[i].addMin10_fee+'<br>'+
-                        '</span>'+
-                        '<button style="width: 100px; margin-left: 10px; margin-top: 5px" onClick="mapBook(\'' + search[i].hp_name + '\')" class="genric-btn primary small">예약</button>'+
-                        '</li>'+
-                        '</ul>'+
-                        '</div>');
+                $wrap = $('<div class="dataLayerOnMap" />');
+                $title = $('<div class="dataTitle" id="parkingName"/>').text(search[i].hp_name);
+                $close = $('<div class="close" title="닫기" style="width: 15px; height: 15px; font-size: 25px; margin-right: 15px" onclick="closeOverlay('+i+')">X</div>');
+                $body = $('<div class="body"/>');
+                $img = $('<div class="dataPicture"><img src="'+search[i].hp_pic+'" style="height: 110px; width: 100px;"></div>');
+                $desc = $('<div class="dataInfo" id="desc'+i+'">' +
+                    '<div class="dataAddress">'+search[i].road_addr+'</div>' +
+                    '<ul>' +
+                    '<li><span class="dataSubTitle">운영 정보</span>' +
+                    '<span>' +
+                    '시작운영시간 : '+search[i].start_manage_time+'<br>' +
+                    '종료운영시간 : '+search[i].end_manage_time+'<br>' +
+                    '주차장칸 수 : '+place[i].place+' / '+search[i].place+'<br>' +
+                    '<a href="http://map.kakao.com/link/to/'+data[i].hp_name+ ',' +data[i].lat+ ','+data[i].lng+'"><button style="width: 100px; margin-left: 5px; margin-top: 5px" class="genric-btn primary small">길찾기</button></a>'+
+                    '</span>'+
+                    '</li>' +
+                    '<li><span class="dataSubTitle">주차 요금</span>' +
+                    '<span>' +
+                    '30분당 요금 : '+search[i].min30_fee+'<br>'+
+                    '10분당 추가요금 : '+search[i].addMin10_fee+'<br>'+
+                    '</span>'+
+                    '<button style="width: 100px; margin-left: 10px; margin-top: 5px" onClick="mapBook(\'' + search[i].hp_name + '\')" class="genric-btn primary small">예약</button>'+
+                    '</li>'+
+                    '</ul>'+
+                    '</div>');
 
-                    $wrap.append($title).append($body);
-                    $body.append($img).append($desc);
-                    $title.append($close);
+                $wrap.append($title).append($body);
+                $body.append($img).append($desc);
+                $title.append($close);
 
-                    var content = $wrap[0];
-                    var overlay = new kakao.maps.CustomOverlay({
-                        content: content,
-                        map: map.click,
-                        position: marker.getPosition()
-                    });
+                wrap_arr.push($wrap);
 
-                    // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
-                    kakao.maps.event.addListener(marker, 'click', function() {
-                        overlay.setMap(map);
-                    });
-                } // for문 끝
+                var content = wrap_arr[i][0].outerHTML;
+                overlay[i] = new kakao.maps.CustomOverlay({
+                    content: content,
+                    position: marker.getPosition()
+                });
 
-            }, // success 끝
-            error : function (error) {
-                alert(JSON.stringify(error));
-            }
-        }); // 지도에 마크 찍을 데이터 불러오기 ajax 끝
+                // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+                kakao.maps.event.addListener(marker, 'click', function() {
+                    overlay[i].setMap(map);
+                });
+            } // for문 끝
+
+        }, // success 끝
+        error : function (error) {
+            alert(JSON.stringify(error));
+        }
+    }); // 지도에 마크 찍을 데이터 불러오기 ajax 끝
+
+    function closeOverlay(index) {
+        overlay[index].setMap(null);
+    };
 
     function mapBook(hp_name){
         var hp_name = hp_name;
