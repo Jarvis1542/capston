@@ -43,8 +43,7 @@ $(function() {
             url: "/rest/rankingHP"
         }).done(function (msg) {
             for (var i = 0; i < msg.length; i++) {
-
-                $(".rankingSCS").append("" +
+                $(".ranking").append("" +
                     "<div class=\"single_carousel\">\n" +
                     "            <div class=\"row\">\n" +
                     "                <div class=\"col-lg-11\">\n" +
