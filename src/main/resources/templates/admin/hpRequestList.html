@@ -42,7 +42,7 @@
                                 <td><a th:href="@{'/admin/hpRequest/' + ${hpRequestList.hp_name}}"><span th:text="${hpRequestList.hp_name}"/></a></td>
                                 <td><div th:text="${hpRequestList.place}"/></td>
                                 <td><div th:text="${hpRequestList.res_name}"/></td>
-                                <td><div th:text="${#dates.format(hpRequestList.hp_reg_date, 'YYYY-MM-dd')}"/></td>
+                                <td><div th:text="${#dates.format(hpRequestList.hp_reg_date, 'YYYY-MM-dd HH:mm:ss')}"/></td>
                                 <td><div th:text="${hpRequestList.name}"/></td>
                                 <td><div th:text="${hpRequestList.hp_chk}"/></td>
                             </tr>
