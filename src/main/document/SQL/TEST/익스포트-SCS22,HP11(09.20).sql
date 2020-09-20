@@ -1,0 +1,1075 @@
+-- Sqldeveloper에서 익스포트로 뽑아낸 것.
+-- 사용자 이름 바꿀 시 Ctrl+R로 CAP3를 원하는 사용자명(대소문자 구분 필수)으로 모두 변경
+--------------------------------------------------------
+--  파일이 생성됨 - 일요일-9월-20-2020
+--------------------------------------------------------
+--------------------------------------------------------
+--  DDL for Sequence ENTRY_INFO_SEQ
+--------------------------------------------------------
+
+CREATE SEQUENCE  "CAP3"."ENTRY_INFO_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence HP_BOOK_SEQ
+--------------------------------------------------------
+
+CREATE SEQUENCE  "CAP3"."HP_BOOK_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence HP_PAY_SEQ
+--------------------------------------------------------
+
+CREATE SEQUENCE  "CAP3"."HP_PAY_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence QNA_BOARD_SEQ
+--------------------------------------------------------
+
+CREATE SEQUENCE  "CAP3"."QNA_BOARD_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence SCS_BOOK_SEQ
+--------------------------------------------------------
+
+CREATE SEQUENCE  "CAP3"."SCS_BOOK_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence SCS_PAY_SEQ
+--------------------------------------------------------
+
+CREATE SEQUENCE  "CAP3"."SCS_PAY_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Table CAR
+--------------------------------------------------------
+
+CREATE TABLE "CAP3"."CAR"
+(	"CAR_ID" VARCHAR2(255 BYTE),
+     "CAR_NAME" VARCHAR2(100 BYTE),
+     "CAR_MODEL" VARCHAR2(255 BYTE),
+     "CAR_SCS_TYPE" VARCHAR2(25 BYTE),
+     "EMAIL" VARCHAR2(100 BYTE)
+) SEGMENT CREATION IMMEDIATE
+    PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+    STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+    PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+    TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table ENTRY_INFO
+--------------------------------------------------------
+
+CREATE TABLE "CAP3"."ENTRY_INFO"
+(	"ENTRY_ID" NUMBER,
+     "EN_CAR" VARCHAR2(10 BYTE),
+     "EN_TIME" TIMESTAMP (6),
+     "EX_TIME" TIMESTAMP (6),
+     "RES_NAME" VARCHAR2(300 BYTE)
+) SEGMENT CREATION IMMEDIATE
+    PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+    STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+    PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+    TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table HP
+--------------------------------------------------------
+
+CREATE TABLE "CAP3"."HP"
+(	"HP_NAME" VARCHAR2(300 BYTE),
+     "HP_TYPE" VARCHAR2(30 BYTE),
+     "PLACE" NUMBER,
+     "MIN30_FEE" NUMBER,
+     "ADDMIN10_FEE" NUMBER,
+     "START_MANAGE_TIME" VARCHAR2(30 BYTE),
+     "END_MANAGE_TIME" VARCHAR2(30 BYTE),
+     "HP_PIC" VARCHAR2(2000 BYTE),
+     "APT_MAP" VARCHAR2(2000 BYTE),
+     "REG_DATE" TIMESTAMP (6),
+     "HP_CHK" VARCHAR2(1 BYTE) DEFAULT 'N',
+     "RES_NAME" VARCHAR2(300 BYTE)
+) SEGMENT CREATION IMMEDIATE
+    PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+    STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+    PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+    TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table HP_BOOK
+--------------------------------------------------------
+
+CREATE TABLE "CAP3"."HP_BOOK"
+(	"BOOK_ID" NUMBER,
+     "START_DATE" TIMESTAMP (6),
+     "END_DATE" TIMESTAMP (6),
+     "EMAIL" VARCHAR2(100 BYTE),
+     "CAR_NUM" VARCHAR2(10 BYTE),
+     "HP_NAME" VARCHAR2(300 BYTE),
+     "BOOK_DATE" TIMESTAMP (6)
+) SEGMENT CREATION IMMEDIATE
+    PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+    STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+    PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+    TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table HP_BOOKMARK
+--------------------------------------------------------
+
+CREATE TABLE "CAP3"."HP_BOOKMARK"
+(	"EMAIL" VARCHAR2(100 BYTE),
+     "HP_NAME" VARCHAR2(300 BYTE)
+) SEGMENT CREATION IMMEDIATE
+    PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+    STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+    PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+    TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table HP_CH_PL
+--------------------------------------------------------
+
+CREATE TABLE "CAP3"."HP_CH_PL"
+(	"HP_NAME" VARCHAR2(300 BYTE),
+     "PLACE" NUMBER,
+     "HP_CHK" VARCHAR2(1 BYTE) DEFAULT 'N',
+     "RES_NAME" VARCHAR2(300 BYTE)
+) SEGMENT CREATION IMMEDIATE
+    PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+    STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+    PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+    TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table HP_PAY
+--------------------------------------------------------
+
+CREATE TABLE "CAP3"."HP_PAY"
+(	"PAY_ID" NUMBER,
+     "PAY_WAY" VARCHAR2(20 BYTE),
+     "NAME" VARCHAR2(10 BYTE),
+     "PRICE" NUMBER,
+     "EMAIL" VARCHAR2(30 BYTE),
+     "HP_NAME" VARCHAR2(300 BYTE),
+     "PHONE" VARCHAR2(15 BYTE),
+     "BOOK_ID" NUMBER,
+     "PAY_DATE" TIMESTAMP (6)
+) SEGMENT CREATION IMMEDIATE
+    PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+    STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+    PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+    TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table MEMBER
+--------------------------------------------------------
+
+CREATE TABLE "CAP3"."MEMBER"
+(	"EMAIL" VARCHAR2(100 BYTE),
+     "CREATED_DATE" TIMESTAMP (6),
+     "MODIFIED_DATE" TIMESTAMP (6),
+     "NAME" VARCHAR2(30 BYTE),
+     "PASSWORD" VARCHAR2(100 BYTE),
+     "PHONE" VARCHAR2(20 BYTE),
+     "PICTURE" VARCHAR2(1000 BYTE),
+     "ROLE" VARCHAR2(10 BYTE)
+) SEGMENT CREATION IMMEDIATE
+    PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+    STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+    PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+    TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table MP
+--------------------------------------------------------
+
+CREATE TABLE "CAP3"."MP"
+(	"EMAIL" VARCHAR2(100 BYTE),
+     "MP_LIC" VARCHAR2(2000 BYTE),
+     "MP_CO" VARCHAR2(100 BYTE),
+     "MP_CO_NUM" VARCHAR2(20 BYTE),
+     "REG_DATE" TIMESTAMP (6),
+     "RES_NAME" VARCHAR2(300 BYTE)
+) SEGMENT CREATION IMMEDIATE
+    PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+    STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+    PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+    TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table QNA_BOARD
+--------------------------------------------------------
+
+CREATE TABLE "CAP3"."QNA_BOARD"
+(	"BNO" NUMBER,
+     "TITLE" VARCHAR2(100 BYTE),
+     "CONTENT" VARCHAR2(1000 BYTE),
+     "WRITER" VARCHAR2(50 BYTE),
+     "REG_DATE" TIMESTAMP (6),
+     "NO_COUNT" NUMBER,
+     "NO_RECO" NUMBER,
+     "MBO" NUMBER
+) SEGMENT CREATION IMMEDIATE
+    PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+    STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+    PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+    TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table REG
+--------------------------------------------------------
+
+CREATE TABLE "CAP3"."REG"
+(	"EMAIL" VARCHAR2(100 BYTE),
+     "REG_LIC" VARCHAR2(2000 BYTE),
+     "ACC_NUM" VARCHAR2(200 BYTE),
+     "BANK_NAME" VARCHAR2(200 BYTE),
+     "REG_DATE" TIMESTAMP (6)
+) SEGMENT CREATION IMMEDIATE
+    PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+    STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+    PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+    TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table RES
+--------------------------------------------------------
+
+CREATE TABLE "CAP3"."RES"
+(	"RES_NAME" VARCHAR2(300 BYTE),
+     "POST_CODE" VARCHAR2(10 BYTE),
+     "ROAD_ADDR" VARCHAR2(300 BYTE),
+     "JIBUN_ADDR" VARCHAR2(300 BYTE),
+     "DETAIL_ADDR" VARCHAR2(300 BYTE),
+     "EXTRA_ADDR" VARCHAR2(300 BYTE),
+     "LAT" NUMBER,
+     "LNG" NUMBER,
+     "REG_DATE" TIMESTAMP (6),
+     "EMAIL" VARCHAR2(100 BYTE)
+) SEGMENT CREATION IMMEDIATE
+    PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+    STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+    PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+    TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table SCS
+--------------------------------------------------------
+
+CREATE TABLE "CAP3"."SCS"
+(	"SCS_NAME" VARCHAR2(50 BYTE),
+     "OPER_INS" VARCHAR2(100 BYTE),
+     "SCS_SPEED" VARCHAR2(50 BYTE),
+     "SCS_AMOUNT" VARCHAR2(50 BYTE),
+     "MIN30_FEE" VARCHAR2(100 BYTE),
+     "ADDMIN10_FEE" VARCHAR2(100 BYTE),
+     "START_MANAGE_TIME" VARCHAR2(30 BYTE),
+     "END_MANAGE_TIME" VARCHAR2(30 BYTE),
+     "SCS_PIC" VARCHAR2(2000 BYTE),
+     "APT_MAP" VARCHAR2(2000 BYTE),
+     "CABLE" VARCHAR2(50 BYTE),
+     "SCS_TYPE" VARCHAR2(50 BYTE),
+     "REG_DATE" TIMESTAMP (6),
+     "SCS_CHK" VARCHAR2(1 BYTE) DEFAULT 'N',
+     "RES_NAME" VARCHAR2(300 BYTE)
+) SEGMENT CREATION IMMEDIATE
+    PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+    STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+    PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+    TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table SCS_BOOK
+--------------------------------------------------------
+
+CREATE TABLE "CAP3"."SCS_BOOK"
+(	"BOOK_ID" NUMBER,
+     "START_DATE" TIMESTAMP (6),
+     "END_DATE" TIMESTAMP (6),
+     "EMAIL" VARCHAR2(100 BYTE),
+     "CAR_NUM" VARCHAR2(10 BYTE),
+     "SCS_NAME" VARCHAR2(300 BYTE),
+     "BOOK_DATE" TIMESTAMP (6)
+) SEGMENT CREATION IMMEDIATE
+    PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+    STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+    PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+    TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table SCS_BOOKMARK
+--------------------------------------------------------
+
+CREATE TABLE "CAP3"."SCS_BOOKMARK"
+(	"EMAIL" VARCHAR2(100 BYTE),
+     "SCS_NAME" VARCHAR2(300 BYTE)
+) SEGMENT CREATION IMMEDIATE
+    PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+    STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+    PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+    TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table SCS_CH_PL
+--------------------------------------------------------
+
+CREATE TABLE "CAP3"."SCS_CH_PL"
+(	"SCS_NAME" VARCHAR2(300 BYTE),
+     "SCS_AMOUNT" NUMBER,
+     "SCS_CHK" VARCHAR2(1 BYTE) DEFAULT 'N',
+     "RES_NAME" VARCHAR2(300 BYTE)
+) SEGMENT CREATION IMMEDIATE
+    PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+    STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+    PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+    TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table SCS_PAY
+--------------------------------------------------------
+
+CREATE TABLE "CAP3"."SCS_PAY"
+(	"PAY_ID" NUMBER,
+     "PAY_WAY" VARCHAR2(20 BYTE),
+     "SCS_NAME" VARCHAR2(50 BYTE),
+     "PRICE" NUMBER,
+     "EMAIL" VARCHAR2(30 BYTE),
+     "PHONE" VARCHAR2(15 BYTE),
+     "BOOK_ID" NUMBER,
+     "PAY_DATE" TIMESTAMP (6)
+) SEGMENT CREATION IMMEDIATE
+    PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+    STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+    PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+    TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for View CAR_VIEW
+--------------------------------------------------------
+
+CREATE OR REPLACE FORCE VIEW "CAP3"."CAR_VIEW" ("CAR_ID", "CAR_NAME", "CAR_MODEL", "CAR_SCS_TYPE", "EMAIL") AS
+select "CAR_ID","CAR_NAME","CAR_MODEL","CAR_SCS_TYPE","EMAIL" from car
+;
+--------------------------------------------------------
+--  DDL for View ENTRY_INFO_VIEW
+--------------------------------------------------------
+
+CREATE OR REPLACE FORCE VIEW "CAP3"."ENTRY_INFO_VIEW" ("ENTRY_ID", "EN_CAR", "EN_TIME", "EX_TIME", "RES_NAME") AS
+select "ENTRY_ID","EN_CAR","EN_TIME","EX_TIME","RES_NAME" from entry_info
+;
+--------------------------------------------------------
+--  DDL for View HP_BOOKMARK_VIEW
+--------------------------------------------------------
+
+CREATE OR REPLACE FORCE VIEW "CAP3"."HP_BOOKMARK_VIEW" ("EMAIL", "HP_NAME") AS
+select "EMAIL","HP_NAME" from hp_bookmark
+;
+--------------------------------------------------------
+--  DDL for View HP_BOOK_VIEW
+--------------------------------------------------------
+
+CREATE OR REPLACE FORCE VIEW "CAP3"."HP_BOOK_VIEW" ("BOOK_ID", "START_DATE", "END_DATE", "EMAIL", "CAR_NUM", "HP_NAME", "BOOK_DATE") AS
+select "BOOK_ID","START_DATE","END_DATE","EMAIL","CAR_NUM","HP_NAME","BOOK_DATE" from hp_book
+;
+--------------------------------------------------------
+--  DDL for View HP_CH_PL_VIEW
+--------------------------------------------------------
+
+CREATE OR REPLACE FORCE VIEW "CAP3"."HP_CH_PL_VIEW" ("HP_NAME", "PLACE", "HP_CHK", "RES_NAME") AS
+select "HP_NAME","PLACE","HP_CHK","RES_NAME" from HP_ch_pl
+;
+--------------------------------------------------------
+--  DDL for View HP_PAY_VIEW
+--------------------------------------------------------
+
+CREATE OR REPLACE FORCE VIEW "CAP3"."HP_PAY_VIEW" ("PAY_ID", "PAY_WAY", "NAME", "PRICE", "EMAIL", "HP_NAME", "PHONE", "BOOK_ID", "PAY_DATE") AS
+select "PAY_ID","PAY_WAY","NAME","PRICE","EMAIL","HP_NAME","PHONE","BOOK_ID","PAY_DATE" from hp_pay
+;
+--------------------------------------------------------
+--  DDL for View HP_VIEW
+--------------------------------------------------------
+
+CREATE OR REPLACE FORCE VIEW "CAP3"."HP_VIEW" ("HP_NAME", "HP_TYPE", "PLACE", "MIN30_FEE", "ADDMIN10_FEE", "START_MANAGE_TIME", "END_MANAGE_TIME", "HP_PIC", "APT_MAP", "REG_DATE", "HP_CHK", "RES_NAME") AS
+select "HP_NAME","HP_TYPE","PLACE","MIN30_FEE","ADDMIN10_FEE","START_MANAGE_TIME","END_MANAGE_TIME","HP_PIC","APT_MAP","REG_DATE","HP_CHK","RES_NAME" from hp
+;
+--------------------------------------------------------
+--  DDL for View MEMBER_VIEW
+--------------------------------------------------------
+
+CREATE OR REPLACE FORCE VIEW "CAP3"."MEMBER_VIEW" ("EMAIL", "CREATED_DATE", "MODIFIED_DATE", "NAME", "PASSWORD", "PHONE", "PICTURE", "ROLE") AS
+select "EMAIL","CREATED_DATE","MODIFIED_DATE","NAME","PASSWORD","PHONE","PICTURE","ROLE" from member
+;
+--------------------------------------------------------
+--  DDL for View MP_VIEW
+--------------------------------------------------------
+
+CREATE OR REPLACE FORCE VIEW "CAP3"."MP_VIEW" ("EMAIL", "MP_LIC", "MP_CO", "MP_CO_NUM", "REG_DATE", "RES_NAME") AS
+select "EMAIL","MP_LIC","MP_CO","MP_CO_NUM","REG_DATE","RES_NAME" from mp
+;
+--------------------------------------------------------
+--  DDL for View QNA_BOARD_VIEW
+--------------------------------------------------------
+
+CREATE OR REPLACE FORCE VIEW "CAP3"."QNA_BOARD_VIEW" ("BNO", "TITLE", "CONTENT", "WRITER", "REG_DATE", "NO_COUNT", "NO_RECO", "MBO") AS
+select "BNO","TITLE","CONTENT","WRITER","REG_DATE","NO_COUNT","NO_RECO","MBO" from qna_board
+;
+--------------------------------------------------------
+--  DDL for View REG_VIEW
+--------------------------------------------------------
+
+CREATE OR REPLACE FORCE VIEW "CAP3"."REG_VIEW" ("EMAIL", "REG_LIC", "ACC_NUM", "BANK_NAME", "REG_DATE") AS
+select "EMAIL","REG_LIC","ACC_NUM","BANK_NAME","REG_DATE" from reg
+;
+--------------------------------------------------------
+--  DDL for View RES_VIEW
+--------------------------------------------------------
+
+CREATE OR REPLACE FORCE VIEW "CAP3"."RES_VIEW" ("RES_NAME", "POST_CODE", "ROAD_ADDR", "JIBUN_ADDR", "DETAIL_ADDR", "EXTRA_ADDR", "LAT", "LNG", "REG_DATE", "EMAIL") AS
+select "RES_NAME","POST_CODE","ROAD_ADDR","JIBUN_ADDR","DETAIL_ADDR","EXTRA_ADDR","LAT","LNG","REG_DATE","EMAIL" from res
+;
+--------------------------------------------------------
+--  DDL for View SCS_BOOKMARK_VIEW
+--------------------------------------------------------
+
+CREATE OR REPLACE FORCE VIEW "CAP3"."SCS_BOOKMARK_VIEW" ("EMAIL", "SCS_NAME") AS
+select "EMAIL","SCS_NAME" from scs_bookmark
+;
+--------------------------------------------------------
+--  DDL for View SCS_BOOK_VIEW
+--------------------------------------------------------
+
+CREATE OR REPLACE FORCE VIEW "CAP3"."SCS_BOOK_VIEW" ("BOOK_ID", "START_DATE", "END_DATE", "EMAIL", "CAR_NUM", "SCS_NAME", "BOOK_DATE") AS
+select "BOOK_ID","START_DATE","END_DATE","EMAIL","CAR_NUM","SCS_NAME","BOOK_DATE" from scs_book
+;
+--------------------------------------------------------
+--  DDL for View SCS_CH_PL_VIEW
+--------------------------------------------------------
+
+CREATE OR REPLACE FORCE VIEW "CAP3"."SCS_CH_PL_VIEW" ("SCS_NAME", "SCS_AMOUNT", "SCS_CHK", "RES_NAME") AS
+select "SCS_NAME","SCS_AMOUNT","SCS_CHK","RES_NAME" from scs_ch_pl
+;
+--------------------------------------------------------
+--  DDL for View SCS_PAY_VIEW
+--------------------------------------------------------
+
+CREATE OR REPLACE FORCE VIEW "CAP3"."SCS_PAY_VIEW" ("PAY_ID", "PAY_WAY", "SCS_NAME", "PRICE", "EMAIL", "PHONE", "BOOK_ID", "PAY_DATE") AS
+select "PAY_ID","PAY_WAY","SCS_NAME","PRICE","EMAIL","PHONE","BOOK_ID","PAY_DATE" from scs_pay
+;
+--------------------------------------------------------
+--  DDL for View SCS_VIEW
+--------------------------------------------------------
+
+CREATE OR REPLACE FORCE VIEW "CAP3"."SCS_VIEW" ("SCS_NAME", "OPER_INS", "SCS_SPEED", "SCS_AMOUNT", "MIN30_FEE", "ADDMIN10_FEE", "START_MANAGE_TIME", "END_MANAGE_TIME", "SCS_PIC", "APT_MAP", "CABLE", "SCS_TYPE", "REG_DATE", "SCS_CHK", "RES_NAME") AS
+select "SCS_NAME","OPER_INS","SCS_SPEED","SCS_AMOUNT","MIN30_FEE","ADDMIN10_FEE","START_MANAGE_TIME","END_MANAGE_TIME","SCS_PIC","APT_MAP","CABLE","SCS_TYPE","REG_DATE","SCS_CHK","RES_NAME" from scs
+;
+REM INSERTING into CAP3.CAR
+SET DEFINE OFF;
+REM INSERTING into CAP3.ENTRY_INFO
+SET DEFINE OFF;
+REM INSERTING into CAP3.HP
+SET DEFINE OFF;
+Insert into CAP3.HP (HP_NAME,HP_TYPE,PLACE,MIN30_FEE,ADDMIN10_FEE,START_MANAGE_TIME,END_MANAGE_TIME,HP_PIC,APT_MAP,REG_DATE,HP_CHK,RES_NAME) values ('영진전문대학교 주차장','공동 주택',10,2000,500,'07:00','20:00','/img/upload/42.png','/img/upload/43.jpg',to_timestamp('20/09/20 15:05:06.000000000','RR/MM/DD HH24:MI:SSXFF'),'Y','영진전문대학교');
+Insert into CAP3.HP (HP_NAME,HP_TYPE,PLACE,MIN30_FEE,ADDMIN10_FEE,START_MANAGE_TIME,END_MANAGE_TIME,HP_PIC,APT_MAP,REG_DATE,HP_CHK,RES_NAME) values ('강남 부방빌딩 주차장','단독 주택',5,4200,400,'16:00','17:00','/img/upload/43.jpg','/img/upload/44.jpg',to_timestamp('20/09/20 15:06:06.000000000','RR/MM/DD HH24:MI:SSXFF'),'Y','비즈앤테크컨설팅');
+Insert into CAP3.HP (HP_NAME,HP_TYPE,PLACE,MIN30_FEE,ADDMIN10_FEE,START_MANAGE_TIME,END_MANAGE_TIME,HP_PIC,APT_MAP,REG_DATE,HP_CHK,RES_NAME) values ('KCC 스위첸 아파트 주차장','공동 주택',20,3000,500,'11:00','18:00','/img/upload/44.jpg','/img/upload/45.jpg',to_timestamp('20/09/20 15:07:31.000000000','RR/MM/DD HH24:MI:SSXFF'),'Y','속초 KCC스위첸아파트');
+Insert into CAP3.HP (HP_NAME,HP_TYPE,PLACE,MIN30_FEE,ADDMIN10_FEE,START_MANAGE_TIME,END_MANAGE_TIME,HP_PIC,APT_MAP,REG_DATE,HP_CHK,RES_NAME) values ('제주 정든마을 주공1단지 아파트 주차장','공동 주택',15,3000,600,'05:10','14:10','/img/upload/47.jpg','/img/upload/48.jpg',to_timestamp('20/09/20 15:08:54.000000000','RR/MM/DD HH24:MI:SSXFF'),'Y','제주 정든마을 주공1단지 아파트');
+Insert into CAP3.HP (HP_NAME,HP_TYPE,PLACE,MIN30_FEE,ADDMIN10_FEE,START_MANAGE_TIME,END_MANAGE_TIME,HP_PIC,APT_MAP,REG_DATE,HP_CHK,RES_NAME) values ('전주종합경기장 주차장','공동 주택',15,2200,600,'16:10','19:10','/img/upload/49.jpg','/img/upload/50.jpg',to_timestamp('20/09/20 15:09:43.000000000','RR/MM/DD HH24:MI:SSXFF'),'Y','전주 종합경기장');
+Insert into CAP3.HP (HP_NAME,HP_TYPE,PLACE,MIN30_FEE,ADDMIN10_FEE,START_MANAGE_TIME,END_MANAGE_TIME,HP_PIC,APT_MAP,REG_DATE,HP_CHK,RES_NAME) values ('선화 센트럴 뷰 아파트 주차장','공동 주택',30,4000,600,'10:10','18:10','/img/upload/50.jpg','/img/upload/51.jpg',to_timestamp('20/09/20 15:11:57.000000000','RR/MM/DD HH24:MI:SSXFF'),'Y','대전 중구 선화 센트럴뷰 아파트');
+Insert into CAP3.HP (HP_NAME,HP_TYPE,PLACE,MIN30_FEE,ADDMIN10_FEE,START_MANAGE_TIME,END_MANAGE_TIME,HP_PIC,APT_MAP,REG_DATE,HP_CHK,RES_NAME) values ('수원시 상송마을 주공아파트 주차장','공동 주택',10,1200,900,'06:10','20:10','/img/upload/52.png','/img/upload/53.png',to_timestamp('20/09/20 15:13:02.000000000','RR/MM/DD HH24:MI:SSXFF'),'Y','경기 상송마을 주공아파트');
+Insert into CAP3.HP (HP_NAME,HP_TYPE,PLACE,MIN30_FEE,ADDMIN10_FEE,START_MANAGE_TIME,END_MANAGE_TIME,HP_PIC,APT_MAP,REG_DATE,HP_CHK,RES_NAME) values ('거제시 덕산4차 아파트 주차장','공동 주택',10,3500,500,'05:10','21:15','/img/upload/52.png','/img/upload/53.png',to_timestamp('20/09/20 15:15:23.000000000','RR/MM/DD HH24:MI:SSXFF'),'Y','거제 덕산4차 아파트');
+Insert into CAP3.HP (HP_NAME,HP_TYPE,PLACE,MIN30_FEE,ADDMIN10_FEE,START_MANAGE_TIME,END_MANAGE_TIME,HP_PIC,APT_MAP,REG_DATE,HP_CHK,RES_NAME) values ('익산 부영아파트 주차장','공동 주택',5,2000,700,'04:15','20:20','/img/upload/55.png','/img/upload/54.png',to_timestamp('20/09/20 15:16:44.000000000','RR/MM/DD HH24:MI:SSXFF'),'Y','익산 영등부영 2차 아파트');
+Insert into CAP3.HP (HP_NAME,HP_TYPE,PLACE,MIN30_FEE,ADDMIN10_FEE,START_MANAGE_TIME,END_MANAGE_TIME,HP_PIC,APT_MAP,REG_DATE,HP_CHK,RES_NAME) values ('철원 ESA 아파트 주차장','공동 주택',5,2000,500,'09:00','16:00','/img/upload/55.png','/img/upload/56.png',to_timestamp('20/09/20 15:17:40.000000000','RR/MM/DD HH24:MI:SSXFF'),'Y','철원 ESA 아파트');
+Insert into CAP3.HP (HP_NAME,HP_TYPE,PLACE,MIN30_FEE,ADDMIN10_FEE,START_MANAGE_TIME,END_MANAGE_TIME,HP_PIC,APT_MAP,REG_DATE,HP_CHK,RES_NAME) values ('여수 여서동 금호타운 아파트 주차장','공동 주택',22,2000,600,'10:30','18:00','/img/upload/57.png','/img/upload/58.png',to_timestamp('20/09/20 15:18:36.000000000','RR/MM/DD HH24:MI:SSXFF'),'Y','여서동 금호타운 아파트');
+REM INSERTING into CAP3.HP_BOOK
+SET DEFINE OFF;
+REM INSERTING into CAP3.HP_BOOKMARK
+SET DEFINE OFF;
+REM INSERTING into CAP3.HP_CH_PL
+SET DEFINE OFF;
+Insert into CAP3.HP_CH_PL (HP_NAME,PLACE,HP_CHK,RES_NAME) values ('영진전문대학교 주차장',10,'Y','영진전문대학교');
+Insert into CAP3.HP_CH_PL (HP_NAME,PLACE,HP_CHK,RES_NAME) values ('강남 부방빌딩 주차장',5,'Y','비즈앤테크컨설팅');
+Insert into CAP3.HP_CH_PL (HP_NAME,PLACE,HP_CHK,RES_NAME) values ('KCC 스위첸 아파트 주차장',20,'Y','속초 KCC스위첸아파트');
+Insert into CAP3.HP_CH_PL (HP_NAME,PLACE,HP_CHK,RES_NAME) values ('제주 정든마을 주공1단지 아파트 주차장',15,'Y','제주 정든마을 주공1단지 아파트');
+Insert into CAP3.HP_CH_PL (HP_NAME,PLACE,HP_CHK,RES_NAME) values ('전주종합경기장 주차장',15,'Y','전주 종합경기장');
+Insert into CAP3.HP_CH_PL (HP_NAME,PLACE,HP_CHK,RES_NAME) values ('선화 센트럴 뷰 아파트 주차장',30,'Y','대전 중구 선화 센트럴뷰 아파트');
+Insert into CAP3.HP_CH_PL (HP_NAME,PLACE,HP_CHK,RES_NAME) values ('수원시 상송마을 주공아파트 주차장',10,'Y','경기 상송마을 주공아파트');
+Insert into CAP3.HP_CH_PL (HP_NAME,PLACE,HP_CHK,RES_NAME) values ('거제시 덕산4차 아파트 주차장',10,'Y','거제 덕산4차 아파트');
+Insert into CAP3.HP_CH_PL (HP_NAME,PLACE,HP_CHK,RES_NAME) values ('익산 부영아파트 주차장',5,'Y','익산 영등부영 2차 아파트');
+Insert into CAP3.HP_CH_PL (HP_NAME,PLACE,HP_CHK,RES_NAME) values ('철원 ESA 아파트 주차장',5,'Y','철원 ESA 아파트');
+Insert into CAP3.HP_CH_PL (HP_NAME,PLACE,HP_CHK,RES_NAME) values ('여수 여서동 금호타운 아파트 주차장',22,'Y','여서동 금호타운 아파트');
+REM INSERTING into CAP3.HP_PAY
+SET DEFINE OFF;
+REM INSERTING into CAP3.MEMBER
+SET DEFINE OFF;
+Insert into CAP3.MEMBER (EMAIL,CREATED_DATE,MODIFIED_DATE,NAME,PASSWORD,PHONE,PICTURE,ROLE) values ('qw',to_timestamp('20/09/20 11:36:26.000000000','RR/MM/DD HH24:MI:SSXFF'),null,'유승우','qw','01012345678','/img/upload/1.png','관리자');
+Insert into CAP3.MEMBER (EMAIL,CREATED_DATE,MODIFIED_DATE,NAME,PASSWORD,PHONE,PICTURE,ROLE) values ('qwe',to_timestamp('20/09/20 11:36:26.000000000','RR/MM/DD HH24:MI:SSXFF'),null,'김영진','qw','01012345678','/img/upload/2.png','등록자');
+Insert into CAP3.MEMBER (EMAIL,CREATED_DATE,MODIFIED_DATE,NAME,PASSWORD,PHONE,PICTURE,ROLE) values ('qwer',to_timestamp('20/09/20 11:36:26.000000000','RR/MM/DD HH24:MI:SSXFF'),null,'홍승우','qw','01012345678','/img/upload/3.png','일반');
+Insert into CAP3.MEMBER (EMAIL,CREATED_DATE,MODIFIED_DATE,NAME,PASSWORD,PHONE,PICTURE,ROLE) values ('reg1',to_timestamp('20/09/20 11:36:26.000000000','RR/MM/DD HH24:MI:SSXFF'),null,'대표','qw','01012345678','/img/upload/2.png','등록자');
+Insert into CAP3.MEMBER (EMAIL,CREATED_DATE,MODIFIED_DATE,NAME,PASSWORD,PHONE,PICTURE,ROLE) values ('reg2',to_timestamp('20/09/20 11:36:26.000000000','RR/MM/DD HH24:MI:SSXFF'),null,'대표2','qw','01012345678','/img/upload/3.png','등록자');
+Insert into CAP3.MEMBER (EMAIL,CREATED_DATE,MODIFIED_DATE,NAME,PASSWORD,PHONE,PICTURE,ROLE) values ('reg3',to_timestamp('20/09/20 11:36:26.000000000','RR/MM/DD HH24:MI:SSXFF'),null,'대표3','qw','01012345678','/img/upload/4.png','등록자');
+Insert into CAP3.MEMBER (EMAIL,CREATED_DATE,MODIFIED_DATE,NAME,PASSWORD,PHONE,PICTURE,ROLE) values ('reg4',to_timestamp('20/09/20 11:36:26.000000000','RR/MM/DD HH24:MI:SSXFF'),null,'대표4','qw','01012345678','/img/upload/5.png','등록자');
+Insert into CAP3.MEMBER (EMAIL,CREATED_DATE,MODIFIED_DATE,NAME,PASSWORD,PHONE,PICTURE,ROLE) values ('reg5',to_timestamp('20/09/20 11:36:26.000000000','RR/MM/DD HH24:MI:SSXFF'),null,'대표5','qw','01012345678','/img/upload/6.png','등록자');
+Insert into CAP3.MEMBER (EMAIL,CREATED_DATE,MODIFIED_DATE,NAME,PASSWORD,PHONE,PICTURE,ROLE) values ('reg6',to_timestamp('20/09/20 11:36:26.000000000','RR/MM/DD HH24:MI:SSXFF'),null,'대표6','qw','01012345678','/img/upload/7.png','등록자');
+Insert into CAP3.MEMBER (EMAIL,CREATED_DATE,MODIFIED_DATE,NAME,PASSWORD,PHONE,PICTURE,ROLE) values ('reg7',to_timestamp('20/09/20 11:36:26.000000000','RR/MM/DD HH24:MI:SSXFF'),null,'대표7','qw','01012345678','/img/upload/8.png','등록자');
+REM INSERTING into CAP3.MP
+SET DEFINE OFF;
+REM INSERTING into CAP3.QNA_BOARD
+SET DEFINE OFF;
+REM INSERTING into CAP3.REG
+SET DEFINE OFF;
+Insert into CAP3.REG (EMAIL,REG_LIC,ACC_NUM,BANK_NAME,REG_DATE) values ('qwe','/img/upload/4.png','302-0747-8036-71','농협은행',to_timestamp('20/09/20 11:39:50.000000000','RR/MM/DD HH24:MI:SSXFF'));
+Insert into CAP3.REG (EMAIL,REG_LIC,ACC_NUM,BANK_NAME,REG_DATE) values ('reg1','/img/upload/4.png','302-0747-8036-71','농협은행',to_timestamp('20/09/20 11:39:50.000000000','RR/MM/DD HH24:MI:SSXFF'));
+Insert into CAP3.REG (EMAIL,REG_LIC,ACC_NUM,BANK_NAME,REG_DATE) values ('reg2','/img/upload/4.png','302-0747-8036-71','농협은행',to_timestamp('20/09/20 11:39:50.000000000','RR/MM/DD HH24:MI:SSXFF'));
+Insert into CAP3.REG (EMAIL,REG_LIC,ACC_NUM,BANK_NAME,REG_DATE) values ('reg3','/img/upload/4.png','302-0747-8036-71','농협은행',to_timestamp('20/09/20 11:39:50.000000000','RR/MM/DD HH24:MI:SSXFF'));
+Insert into CAP3.REG (EMAIL,REG_LIC,ACC_NUM,BANK_NAME,REG_DATE) values ('reg4','/img/upload/4.png','302-0747-8036-71','농협은행',to_timestamp('20/09/20 11:39:50.000000000','RR/MM/DD HH24:MI:SSXFF'));
+Insert into CAP3.REG (EMAIL,REG_LIC,ACC_NUM,BANK_NAME,REG_DATE) values ('reg5','/img/upload/4.png','302-0747-8036-71','농협은행',to_timestamp('20/09/20 11:39:50.000000000','RR/MM/DD HH24:MI:SSXFF'));
+Insert into CAP3.REG (EMAIL,REG_LIC,ACC_NUM,BANK_NAME,REG_DATE) values ('reg6','/img/upload/4.png','302-0747-8036-71','농협은행',to_timestamp('20/09/20 11:39:50.000000000','RR/MM/DD HH24:MI:SSXFF'));
+Insert into CAP3.REG (EMAIL,REG_LIC,ACC_NUM,BANK_NAME,REG_DATE) values ('reg7','/img/upload/4.png','302-0747-8036-71','농협은행',to_timestamp('20/09/20 11:39:50.000000000','RR/MM/DD HH24:MI:SSXFF'));
+REM INSERTING into CAP3.RES
+SET DEFINE OFF;
+Insert into CAP3.RES (RES_NAME,POST_CODE,ROAD_ADDR,JIBUN_ADDR,DETAIL_ADDR,EXTRA_ADDR,LAT,LNG,REG_DATE,EMAIL) values ('영진전문대학교','41527','대구 북구 복현로 35','대구 북구 복현동 218','본관 300호',' (복현동)',35.8967508816129,128.62074782491626,to_timestamp('20/09/20 11:54:17.000000000','RR/MM/DD HH24:MI:SSXFF'),'qwe');
+Insert into CAP3.RES (RES_NAME,POST_CODE,ROAD_ADDR,JIBUN_ADDR,DETAIL_ADDR,EXTRA_ADDR,LAT,LNG,REG_DATE,EMAIL) values ('비즈앤테크컨설팅','06167','서울 강남구 삼성로 528','부방빌딩','부방빌딩 4층',' (삼성동)',37.50925704827092,127.05581096198189,to_timestamp('20/09/20 11:54:17.000000000','RR/MM/DD HH24:MI:SSXFF'),'qwe');
+Insert into CAP3.RES (RES_NAME,POST_CODE,ROAD_ADDR,JIBUN_ADDR,DETAIL_ADDR,EXTRA_ADDR,LAT,LNG,REG_DATE,EMAIL) values ('속초 KCC스위첸아파트','24894','강원 속초시 청대로 40','강원 속초시 조양동 1572','KCC 스위첸',' (조양동, KCC스위첸아파트)',38.18548125337897,128.59600163586254,to_timestamp('20/09/20 11:58:17.000000000','RR/MM/DD HH24:MI:SSXFF'),'qwe');
+Insert into CAP3.RES (RES_NAME,POST_CODE,ROAD_ADDR,JIBUN_ADDR,DETAIL_ADDR,EXTRA_ADDR,LAT,LNG,REG_DATE,EMAIL) values ('태백산 국립공원 당골 제1주차장 전기차 충전소','26043',null,'강원 태백시 소도동 326','전기차 충전소',null,37.11948223537601,128.95047851949366,to_timestamp('20/09/20 11:59:38.000000000','RR/MM/DD HH24:MI:SSXFF'),'reg1');
+Insert into CAP3.RES (RES_NAME,POST_CODE,ROAD_ADDR,JIBUN_ADDR,DETAIL_ADDR,EXTRA_ADDR,LAT,LNG,REG_DATE,EMAIL) values ('경기 상송마을 주공아파트','16636','경기 수원시 권선구 오목천로 15','경기 수원시 권선구 오목천동 946','상송마을 주공아파트',' (오목천동, 상송마을주공아파트)',37.241151128904555,126.96376639297995,to_timestamp('20/09/20 12:02:51.000000000','RR/MM/DD HH24:MI:SSXFF'),'reg1');
+Insert into CAP3.RES (RES_NAME,POST_CODE,ROAD_ADDR,JIBUN_ADDR,DETAIL_ADDR,EXTRA_ADDR,LAT,LNG,REG_DATE,EMAIL) values ('대전 중구 선화 센트럴뷰 아파트','34867','대전 중구 중앙로 45','대전 중구 선화동 877','선화 센트럴 뷰 아파트',' (선화동, 센트럴뷰아파트)',36.32390126281328,127.41674376300455,to_timestamp('20/09/20 12:02:51.000000000','RR/MM/DD HH24:MI:SSXFF'),'reg1');
+Insert into CAP3.RES (RES_NAME,POST_CODE,ROAD_ADDR,JIBUN_ADDR,DETAIL_ADDR,EXTRA_ADDR,LAT,LNG,REG_DATE,EMAIL) values ('제주 정든마을 주공1단지 아파트','63100','제주특별자치도 제주시 정존11길 54','제주특별자치도 제주시 노형동 2582-4','정든마을 주공1단지 아파트',' (노형동, 정든마을1단지)',33.48833908842645,126.47388251347574,to_timestamp('20/09/20 12:10:48.000000000','RR/MM/DD HH24:MI:SSXFF'),'reg2');
+Insert into CAP3.RES (RES_NAME,POST_CODE,ROAD_ADDR,JIBUN_ADDR,DETAIL_ADDR,EXTRA_ADDR,LAT,LNG,REG_DATE,EMAIL) values ('전주 종합경기장','54894','전북 전주시 덕진구 기린대로 451','전주','전주종합경기장',' (덕진동1가)',35.83921746841405,127.1264245529002,to_timestamp('20/09/20 12:11:52.000000000','RR/MM/DD HH24:MI:SSXFF'),'reg2');
+Insert into CAP3.RES (RES_NAME,POST_CODE,ROAD_ADDR,JIBUN_ADDR,DETAIL_ADDR,EXTRA_ADDR,LAT,LNG,REG_DATE,EMAIL) values ('부산 LG 메트로 시티 1단지 아파트','48516','부산 남구 분포로 111',null,'LG 메트로 시티 1단지 아파트',' (용호동, 엘지메트로시티)',35.130191026279384,129.11006295011745,to_timestamp('20/09/20 12:15:22.000000000','RR/MM/DD HH24:MI:SSXFF'),'reg2');
+Insert into CAP3.RES (RES_NAME,POST_CODE,ROAD_ADDR,JIBUN_ADDR,DETAIL_ADDR,EXTRA_ADDR,LAT,LNG,REG_DATE,EMAIL) values ('거제 덕산4차 아파트','53225','경남 거제시 옥포로 305','경남 거제시 옥포동 1279','덕산4차 아파트',' (옥포동, 덕산4차아파트)',34.90030717798856,128.68502597392475,to_timestamp('20/09/20 12:16:41.000000000','RR/MM/DD HH24:MI:SSXFF'),'reg3');
+Insert into CAP3.RES (RES_NAME,POST_CODE,ROAD_ADDR,JIBUN_ADDR,DETAIL_ADDR,EXTRA_ADDR,LAT,LNG,REG_DATE,EMAIL) values ('용인 행정타운 두산위브 3단지 아파트','17091','경기 용인시 처인구 지삼로590번길 29','경기 용인시 처인구 삼가동 564','용인 행정타운 두산위브 3단지',' (삼가동, 용인 행정타운 두산위브 3단지)',37.23948055613477,127.1698546034083,to_timestamp('20/09/20 12:17:34.000000000','RR/MM/DD HH24:MI:SSXFF'),'reg3');
+Insert into CAP3.RES (RES_NAME,POST_CODE,ROAD_ADDR,JIBUN_ADDR,DETAIL_ADDR,EXTRA_ADDR,LAT,LNG,REG_DATE,EMAIL) values ('국립경주박물관','38171','경북 경주시 일정로 186','경북 경주시 인왕동 76','국립경주박물관',' (인왕동)',35.828874873076046,129.2279236281906,to_timestamp('20/09/20 12:19:40.000000000','RR/MM/DD HH24:MI:SSXFF'),'reg3');
+Insert into CAP3.RES (RES_NAME,POST_CODE,ROAD_ADDR,JIBUN_ADDR,DETAIL_ADDR,EXTRA_ADDR,LAT,LNG,REG_DATE,EMAIL) values ('청주 푸르지오캐슬4단지','28661','충북 청주시 서원구 창직로 50','충북 청주시 서원구 사직동 937','청주푸르지오캐슬4단지',' (사직동, 청주푸르지오캐슬4단지)',36.62967111649658,127.46682325772471,to_timestamp('20/09/20 12:19:40.000000000','RR/MM/DD HH24:MI:SSXFF'),'reg4');
+Insert into CAP3.RES (RES_NAME,POST_CODE,ROAD_ADDR,JIBUN_ADDR,DETAIL_ADDR,EXTRA_ADDR,LAT,LNG,REG_DATE,EMAIL) values ('목포 비파 2차아파트','58661','전남 목포시 백년대로337번길 23','전남 목포시 상동 845-1','비파 2차아파트',' (상동, 비파2차아파트)',34.807482307045866,126.4219580475998,to_timestamp('20/09/20 12:21:44.000000000','RR/MM/DD HH24:MI:SSXFF'),'reg4');
+Insert into CAP3.RES (RES_NAME,POST_CODE,ROAD_ADDR,JIBUN_ADDR,DETAIL_ADDR,EXTRA_ADDR,LAT,LNG,REG_DATE,EMAIL) values ('익산 영등부영 2차 아파트','54640','전북 익산시 동서로61길 34',null,'부영아파트',' (어양동, 부영아파트)',35.954529862380966,126.98194876193557,to_timestamp('20/09/20 12:21:44.000000000','RR/MM/DD HH24:MI:SSXFF'),'reg4');
+Insert into CAP3.RES (RES_NAME,POST_CODE,ROAD_ADDR,JIBUN_ADDR,DETAIL_ADDR,EXTRA_ADDR,LAT,LNG,REG_DATE,EMAIL) values ('경산 사동 부영사랑으로 6차 아파트','38604','경북 경산시 백자로10길 11',null,'경산 사동 부영사랑으로 6차 아파트',' (사동, 경산사동사랑으로부영6차)',35.811128266216684,128.7564424630947,to_timestamp('20/09/20 12:23:28.000000000','RR/MM/DD HH24:MI:SSXFF'),'reg5');
+Insert into CAP3.RES (RES_NAME,POST_CODE,ROAD_ADDR,JIBUN_ADDR,DETAIL_ADDR,EXTRA_ADDR,LAT,LNG,REG_DATE,EMAIL) values ('철원 ESA 아파트','24045','강원 철원군 갈말읍 명성로139번길 13-22','강원 철원군 갈말읍 지포리 138','철원 ESA 아파트',null,38.14353026965678,127.30499276308711,to_timestamp('20/09/20 12:23:28.000000000','RR/MM/DD HH24:MI:SSXFF'),'reg5');
+Insert into CAP3.RES (RES_NAME,POST_CODE,ROAD_ADDR,JIBUN_ADDR,DETAIL_ADDR,EXTRA_ADDR,LAT,LNG,REG_DATE,EMAIL) values ('영양군 승민파랑새뷰 아파트','36540','경북 영양군 영양읍 중앙로 94','경북 영양군 영양읍 서부리 251-5','승민파랑새뷰 아파트',null,36.661858860845776,129.11299287504028,to_timestamp('20/09/20 12:27:48.000000000','RR/MM/DD HH24:MI:SSXFF'),'reg5');
+Insert into CAP3.RES (RES_NAME,POST_CODE,ROAD_ADDR,JIBUN_ADDR,DETAIL_ADDR,EXTRA_ADDR,LAT,LNG,REG_DATE,EMAIL) values ('대구역 서희스타힐스아파트','41587','대구 북구 칠성남로 101','대구 북구 칠성동2가 715','대구역 서희스타힐스아파트',' (칠성동2가, 대구역 서희스타힐스)',35.8793630807894,128.59163481512238,to_timestamp('20/09/20 12:27:48.000000000','RR/MM/DD HH24:MI:SSXFF'),'reg6');
+Insert into CAP3.RES (RES_NAME,POST_CODE,ROAD_ADDR,JIBUN_ADDR,DETAIL_ADDR,EXTRA_ADDR,LAT,LNG,REG_DATE,EMAIL) values ('여서동 금호타운 아파트','59710','전남 여수시 여서2로 20','전남 여수시 여서동 373','여서동 금호타운 아파트',' (여서동, 금호아파트)',34.750085218725104,127.70554825140323,to_timestamp('20/09/20 12:30:12.000000000','RR/MM/DD HH24:MI:SSXFF'),'reg6');
+Insert into CAP3.RES (RES_NAME,POST_CODE,ROAD_ADDR,JIBUN_ADDR,DETAIL_ADDR,EXTRA_ADDR,LAT,LNG,REG_DATE,EMAIL) values ('함양군 진하맨션아파트','50039','경남 함양군 함양읍 용평3길 24','경남 함양군 함양읍 용평리 627-5','진하맨션아파트',null,35.51969659059643,127.73166056635587,to_timestamp('20/09/20 15:22:33.000000000','RR/MM/DD HH24:MI:SSXFF'),'reg7');
+Insert into CAP3.RES (RES_NAME,POST_CODE,ROAD_ADDR,JIBUN_ADDR,DETAIL_ADDR,EXTRA_ADDR,LAT,LNG,REG_DATE,EMAIL) values ('원주시 현대반곡 IPARK 아파트','26458','강원 원주시 늘품로 199','강원 원주시 반곡동 1805','진하맨션아파트',' (반곡동, 원주반곡아이파크)',37.33485192852939,127.9640328931903,to_timestamp('20/09/20 15:22:33.000000000','RR/MM/DD HH24:MI:SSXFF'),'reg7');
+REM INSERTING into CAP3.SCS
+SET DEFINE OFF;
+Insert into CAP3.SCS (SCS_NAME,OPER_INS,SCS_SPEED,SCS_AMOUNT,MIN30_FEE,ADDMIN10_FEE,START_MANAGE_TIME,END_MANAGE_TIME,SCS_PIC,APT_MAP,CABLE,SCS_TYPE,REG_DATE,SCS_CHK,RES_NAME) values ('영진전문대학교 충전소','환경부(한국자동차환경협회)','80','5','2500','500','08:30','18:30','/img/upload/5.png','/img/upload/6.png','장착된 케이블','AC3상',to_timestamp('20/09/20 12:32:36.000000000','RR/MM/DD HH24:MI:SSXFF'),'Y','영진전문대학교');
+Insert into CAP3.SCS (SCS_NAME,OPER_INS,SCS_SPEED,SCS_AMOUNT,MIN30_FEE,ADDMIN10_FEE,START_MANAGE_TIME,END_MANAGE_TIME,SCS_PIC,APT_MAP,CABLE,SCS_TYPE,REG_DATE,SCS_CHK,RES_NAME) values ('강남 부방빌딩 충전소','한국 전력','2000','7','400',null,'13:40','20:40','/img/upload/7.png','/img/upload/8.png','차주 케이블','AC3상,AC3상',to_timestamp('20/09/20 12:37:43.000000000','RR/MM/DD HH24:MI:SSXFF'),'Y','비즈앤테크컨설팅');
+Insert into CAP3.SCS (SCS_NAME,OPER_INS,SCS_SPEED,SCS_AMOUNT,MIN30_FEE,ADDMIN10_FEE,START_MANAGE_TIME,END_MANAGE_TIME,SCS_PIC,APT_MAP,CABLE,SCS_TYPE,REG_DATE,SCS_CHK,RES_NAME) values ('속초 KCC아파트 충전소','GS 칼텍스','60','20','2200','600','10:45','17:45','/img/upload/9.png','/img/upload/10.png','장착된 케이블','AC3상,AC3상,AC3상,AC3상',to_timestamp('20/09/20 12:38:44.000000000','RR/MM/DD HH24:MI:SSXFF'),'Y','속초 KCC스위첸아파트');
+Insert into CAP3.SCS (SCS_NAME,OPER_INS,SCS_SPEED,SCS_AMOUNT,MIN30_FEE,ADDMIN10_FEE,START_MANAGE_TIME,END_MANAGE_TIME,SCS_PIC,APT_MAP,CABLE,SCS_TYPE,REG_DATE,SCS_CHK,RES_NAME) values ('태백산 국립공원 주차장','환경부(한국자동차환경협회)','20','10','4000','500','09:40','16:30','/img/upload/11.png','/img/upload/12.png','차주 케이블','AC3상,AC3상,AC3상,AC3상',to_timestamp('20/09/20 14:34:37.000000000','RR/MM/DD HH24:MI:SSXFF'),'Y','태백산 국립공원 당골 제1주차장 전기차 충전소');
+Insert into CAP3.SCS (SCS_NAME,OPER_INS,SCS_SPEED,SCS_AMOUNT,MIN30_FEE,ADDMIN10_FEE,START_MANAGE_TIME,END_MANAGE_TIME,SCS_PIC,APT_MAP,CABLE,SCS_TYPE,REG_DATE,SCS_CHK,RES_NAME) values ('경기 상송마을주공아파트 충전소','현대자동차','80','3','3500','500','10:30','17:30','/img/upload/13.png','/img/upload/14.png','장착된 케이블','AC3상,AC3상,AC3상,AC3상,AC3상,AC3상',to_timestamp('20/09/20 14:35:45.000000000','RR/MM/DD HH24:MI:SSXFF'),'Y','경기 상송마을 주공아파트');
+Insert into CAP3.SCS (SCS_NAME,OPER_INS,SCS_SPEED,SCS_AMOUNT,MIN30_FEE,ADDMIN10_FEE,START_MANAGE_TIME,END_MANAGE_TIME,SCS_PIC,APT_MAP,CABLE,SCS_TYPE,REG_DATE,SCS_CHK,RES_NAME) values ('센트럴뷰아파트 충전소','기아자동차','60','5','2200','700','11:05','19:30','/img/upload/15.png','/img/upload/16.png','장착된 케이블','AC3상,AC3상,AC3상',to_timestamp('20/09/20 14:36:48.000000000','RR/MM/DD HH24:MI:SSXFF'),'Y','대전 중구 선화 센트럴뷰 아파트');
+Insert into CAP3.SCS (SCS_NAME,OPER_INS,SCS_SPEED,SCS_AMOUNT,MIN30_FEE,ADDMIN10_FEE,START_MANAGE_TIME,END_MANAGE_TIME,SCS_PIC,APT_MAP,CABLE,SCS_TYPE,REG_DATE,SCS_CHK,RES_NAME) values ('제주 정든마을1단지','한국GM','40','2','1000','500','06:50','18:40','/img/upload/17.png','/img/upload/18.png','차주 케이블','AC3상,AC3상,AC3상,AC3상',to_timestamp('20/09/20 14:38:22.000000000','RR/MM/DD HH24:MI:SSXFF'),'Y','제주 정든마을 주공1단지 아파트');
+Insert into CAP3.SCS (SCS_NAME,OPER_INS,SCS_SPEED,SCS_AMOUNT,MIN30_FEE,ADDMIN10_FEE,START_MANAGE_TIME,END_MANAGE_TIME,SCS_PIC,APT_MAP,CABLE,SCS_TYPE,REG_DATE,SCS_CHK,RES_NAME) values ('전주종합경기장 충전소','차지비','72','20','3300','400','10:40','20:00','/img/upload/19.png','/img/upload/20.png','장착된 케이블','AC3상,AC3상,AC3상',to_timestamp('20/09/20 14:39:43.000000000','RR/MM/DD HH24:MI:SSXFF'),'Y','전주 종합경기장');
+Insert into CAP3.SCS (SCS_NAME,OPER_INS,SCS_SPEED,SCS_AMOUNT,MIN30_FEE,ADDMIN10_FEE,START_MANAGE_TIME,END_MANAGE_TIME,SCS_PIC,APT_MAP,CABLE,SCS_TYPE,REG_DATE,SCS_CHK,RES_NAME) values ('LG 메트로 시티 1단지 아파트 충전소','현대자동차','80','55','3200','650','10:40','16:40','/img/upload/21.png','/img/upload/22.png','장착된 케이블','AC3상,AC3상,AC3상',to_timestamp('20/09/20 14:41:13.000000000','RR/MM/DD HH24:MI:SSXFF'),'Y','부산 LG 메트로 시티 1단지 아파트');
+Insert into CAP3.SCS (SCS_NAME,OPER_INS,SCS_SPEED,SCS_AMOUNT,MIN30_FEE,ADDMIN10_FEE,START_MANAGE_TIME,END_MANAGE_TIME,SCS_PIC,APT_MAP,CABLE,SCS_TYPE,REG_DATE,SCS_CHK,RES_NAME) values ('거제시 덕산4차 아파트','기아자동차','55','10','2500','500','07:30','20:30','/img/upload/23.png','/img/upload/24.png','둘 다','AC3상,AC3상,AC3상',to_timestamp('20/09/20 14:43:44.000000000','RR/MM/DD HH24:MI:SSXFF'),'Y','거제 덕산4차 아파트');
+Insert into CAP3.SCS (SCS_NAME,OPER_INS,SCS_SPEED,SCS_AMOUNT,MIN30_FEE,ADDMIN10_FEE,START_MANAGE_TIME,END_MANAGE_TIME,SCS_PIC,APT_MAP,CABLE,SCS_TYPE,REG_DATE,SCS_CHK,RES_NAME) values ('용인 행정타운 두산위브 3단지 아파트','환경부(한국자동차환경협회)','80','20','4000','700','11:50','20:50','/img/upload/25.png','/img/upload/26.png','장착된 케이블','AC3상',to_timestamp('20/09/20 14:47:19.000000000','RR/MM/DD HH24:MI:SSXFF'),'Y','용인 행정타운 두산위브 3단지 아파트');
+Insert into CAP3.SCS (SCS_NAME,OPER_INS,SCS_SPEED,SCS_AMOUNT,MIN30_FEE,ADDMIN10_FEE,START_MANAGE_TIME,END_MANAGE_TIME,SCS_PIC,APT_MAP,CABLE,SCS_TYPE,REG_DATE,SCS_CHK,RES_NAME) values ('국립경주박물관 충전소','차지비','70','15','3300','600','09:30','18:50','/img/upload/27.png','/img/upload/28.png','둘 다','AC3상,AC3상,AC3상,AC3상',to_timestamp('20/09/20 14:48:24.000000000','RR/MM/DD HH24:MI:SSXFF'),'Y','국립경주박물관');
+Insert into CAP3.SCS (SCS_NAME,OPER_INS,SCS_SPEED,SCS_AMOUNT,MIN30_FEE,ADDMIN10_FEE,START_MANAGE_TIME,END_MANAGE_TIME,SCS_PIC,APT_MAP,CABLE,SCS_TYPE,REG_DATE,SCS_CHK,RES_NAME) values ('청주푸르지오캐슬4단지 아파트','운영기관을 선택해주세요','80','15','4300','500','07:00','18:00','/img/upload/29.png','/img/upload/30.png','장착된 케이블','AC3상,AC3상,AC3상,AC3상,AC3상,AC3상',to_timestamp('20/09/20 14:50:00.000000000','RR/MM/DD HH24:MI:SSXFF'),'Y','청주 푸르지오캐슬4단지');
+Insert into CAP3.SCS (SCS_NAME,OPER_INS,SCS_SPEED,SCS_AMOUNT,MIN30_FEE,ADDMIN10_FEE,START_MANAGE_TIME,END_MANAGE_TIME,SCS_PIC,APT_MAP,CABLE,SCS_TYPE,REG_DATE,SCS_CHK,RES_NAME) values ('목포 비파 2차아파트','차지비','40','5','3000','500','13:00','17:50','/img/upload/31.png','/img/upload/32.png','둘 다','AC3상,AC3상,AC3상,AC3상,AC3상,AC3상',to_timestamp('20/09/20 14:51:00.000000000','RR/MM/DD HH24:MI:SSXFF'),'Y','목포 비파 2차아파트');
+Insert into CAP3.SCS (SCS_NAME,OPER_INS,SCS_SPEED,SCS_AMOUNT,MIN30_FEE,ADDMIN10_FEE,START_MANAGE_TIME,END_MANAGE_TIME,SCS_PIC,APT_MAP,CABLE,SCS_TYPE,REG_DATE,SCS_CHK,RES_NAME) values ('익산시 부영아파트 충전소','한국 전력','95','5','1600','700','08:50','20:50','/img/upload/33.jpg','/img/upload/34.jpg','둘 다','AC3상,AC3상',to_timestamp('20/09/20 14:52:14.000000000','RR/MM/DD HH24:MI:SSXFF'),'Y','익산 영등부영 2차 아파트');
+Insert into CAP3.SCS (SCS_NAME,OPER_INS,SCS_SPEED,SCS_AMOUNT,MIN30_FEE,ADDMIN10_FEE,START_MANAGE_TIME,END_MANAGE_TIME,SCS_PIC,APT_MAP,CABLE,SCS_TYPE,REG_DATE,SCS_CHK,RES_NAME) values ('경산 부영사랑으로 6차 아파트','현대자동차','65','10','2500','500','08:00','20:00','/img/upload/34.jpg','/img/upload/35.png','장착된 케이블','AC3상,AC3상,AC3상,AC3상,AC3상',to_timestamp('20/09/20 14:53:38.000000000','RR/MM/DD HH24:MI:SSXFF'),'Y','경산 사동 부영사랑으로 6차 아파트');
+Insert into CAP3.SCS (SCS_NAME,OPER_INS,SCS_SPEED,SCS_AMOUNT,MIN30_FEE,ADDMIN10_FEE,START_MANAGE_TIME,END_MANAGE_TIME,SCS_PIC,APT_MAP,CABLE,SCS_TYPE,REG_DATE,SCS_CHK,RES_NAME) values ('철원 ESA 아파트 충전소','한국 전력','70','2','4500','500','10:55','22:55','/img/upload/36.png','/img/upload/37.png','장착된 케이블','AC3상,AC3상,AC3상',to_timestamp('20/09/20 14:54:26.000000000','RR/MM/DD HH24:MI:SSXFF'),'Y','철원 ESA 아파트');
+Insert into CAP3.SCS (SCS_NAME,OPER_INS,SCS_SPEED,SCS_AMOUNT,MIN30_FEE,ADDMIN10_FEE,START_MANAGE_TIME,END_MANAGE_TIME,SCS_PIC,APT_MAP,CABLE,SCS_TYPE,REG_DATE,SCS_CHK,RES_NAME) values ('영양군 승민파랑새뷰','기아자동차','50','3','1200','400','11:55','18:55','/img/upload/38.png','/img/upload/39.png','차주 케이블','AC3상,AC3상',to_timestamp('20/09/20 14:55:41.000000000','RR/MM/DD HH24:MI:SSXFF'),'Y','영양군 승민파랑새뷰 아파트');
+Insert into CAP3.SCS (SCS_NAME,OPER_INS,SCS_SPEED,SCS_AMOUNT,MIN30_FEE,ADDMIN10_FEE,START_MANAGE_TIME,END_MANAGE_TIME,SCS_PIC,APT_MAP,CABLE,SCS_TYPE,REG_DATE,SCS_CHK,RES_NAME) values ('대구역 서희스타힐스아파트','현대자동차','60','12','3300','500','04:00','11:00','/img/upload/38.png','/img/upload/39.png','장착된 케이블','AC3상,AC3상',to_timestamp('20/09/20 14:59:12.000000000','RR/MM/DD HH24:MI:SSXFF'),'Y','대구역 서희스타힐스아파트');
+Insert into CAP3.SCS (SCS_NAME,OPER_INS,SCS_SPEED,SCS_AMOUNT,MIN30_FEE,ADDMIN10_FEE,START_MANAGE_TIME,END_MANAGE_TIME,SCS_PIC,APT_MAP,CABLE,SCS_TYPE,REG_DATE,SCS_CHK,RES_NAME) values ('여서동 금호타운 아파트','한국 전력','60','3','2000','600','15:00','21:00','/img/upload/40.png','/img/upload/41.png','장착된 케이블','AC3상,AC3상,AC3상',to_timestamp('20/09/20 15:00:02.000000000','RR/MM/DD HH24:MI:SSXFF'),'Y','여서동 금호타운 아파트');
+Insert into CAP3.SCS (SCS_NAME,OPER_INS,SCS_SPEED,SCS_AMOUNT,MIN30_FEE,ADDMIN10_FEE,START_MANAGE_TIME,END_MANAGE_TIME,SCS_PIC,APT_MAP,CABLE,SCS_TYPE,REG_DATE,SCS_CHK,RES_NAME) values ('함양군 진하맨션아파트 충전소','GS 칼텍스','60','10','3000','400','08:30','18:25','/img/upload/60.jpg','/img/upload/61.jpg','차주 케이블','AC3상,AC3상,AC3상,AC3상',to_timestamp('20/09/20 15:24:07.000000000','RR/MM/DD HH24:MI:SSXFF'),'Y','함양군 진하맨션아파트');
+Insert into CAP3.SCS (SCS_NAME,OPER_INS,SCS_SPEED,SCS_AMOUNT,MIN30_FEE,ADDMIN10_FEE,START_MANAGE_TIME,END_MANAGE_TIME,SCS_PIC,APT_MAP,CABLE,SCS_TYPE,REG_DATE,SCS_CHK,RES_NAME) values ('원주시 진하맨션아파트 충전소','현대자동차','50','5','4000','600','10:30','19:30','/img/upload/63.jpg','/img/upload/64.jpg','장착된 케이블','AC3상,AC3상,AC3상,AC3상,AC3상',to_timestamp('20/09/20 15:24:58.000000000','RR/MM/DD HH24:MI:SSXFF'),'Y','원주시 현대반곡 IPARK 아파트');
+REM INSERTING into CAP3.SCS_BOOK
+SET DEFINE OFF;
+REM INSERTING into CAP3.SCS_BOOKMARK
+SET DEFINE OFF;
+REM INSERTING into CAP3.SCS_CH_PL
+SET DEFINE OFF;
+Insert into CAP3.SCS_CH_PL (SCS_NAME,SCS_AMOUNT,SCS_CHK,RES_NAME) values ('영진전문대학교 충전소',5,'Y','영진전문대학교');
+Insert into CAP3.SCS_CH_PL (SCS_NAME,SCS_AMOUNT,SCS_CHK,RES_NAME) values ('강남 부방빌딩 충전소',7,'Y','비즈앤테크컨설팅');
+Insert into CAP3.SCS_CH_PL (SCS_NAME,SCS_AMOUNT,SCS_CHK,RES_NAME) values ('속초 KCC아파트 충전소',20,'Y','속초 KCC스위첸아파트');
+Insert into CAP3.SCS_CH_PL (SCS_NAME,SCS_AMOUNT,SCS_CHK,RES_NAME) values ('태백산 국립공원 주차장',10,'Y','태백산 국립공원 당골 제1주차장 전기차 충전소');
+Insert into CAP3.SCS_CH_PL (SCS_NAME,SCS_AMOUNT,SCS_CHK,RES_NAME) values ('경기 상송마을주공아파트 충전소',3,'Y','경기 상송마을 주공아파트');
+Insert into CAP3.SCS_CH_PL (SCS_NAME,SCS_AMOUNT,SCS_CHK,RES_NAME) values ('센트럴뷰아파트 충전소',5,'Y','대전 중구 선화 센트럴뷰 아파트');
+Insert into CAP3.SCS_CH_PL (SCS_NAME,SCS_AMOUNT,SCS_CHK,RES_NAME) values ('제주 정든마을1단지',2,'Y','제주 정든마을 주공1단지 아파트');
+Insert into CAP3.SCS_CH_PL (SCS_NAME,SCS_AMOUNT,SCS_CHK,RES_NAME) values ('전주종합경기장 충전소',20,'Y','전주 종합경기장');
+Insert into CAP3.SCS_CH_PL (SCS_NAME,SCS_AMOUNT,SCS_CHK,RES_NAME) values ('LG 메트로 시티 1단지 아파트 충전소',55,'Y','부산 LG 메트로 시티 1단지 아파트');
+Insert into CAP3.SCS_CH_PL (SCS_NAME,SCS_AMOUNT,SCS_CHK,RES_NAME) values ('거제시 덕산4차 아파트',10,'Y','거제 덕산4차 아파트');
+Insert into CAP3.SCS_CH_PL (SCS_NAME,SCS_AMOUNT,SCS_CHK,RES_NAME) values ('용인 행정타운 두산위브 3단지 아파트',20,'Y','용인 행정타운 두산위브 3단지 아파트');
+Insert into CAP3.SCS_CH_PL (SCS_NAME,SCS_AMOUNT,SCS_CHK,RES_NAME) values ('국립경주박물관 충전소',15,'Y','국립경주박물관');
+Insert into CAP3.SCS_CH_PL (SCS_NAME,SCS_AMOUNT,SCS_CHK,RES_NAME) values ('청주푸르지오캐슬4단지 아파트',15,'Y','청주 푸르지오캐슬4단지');
+Insert into CAP3.SCS_CH_PL (SCS_NAME,SCS_AMOUNT,SCS_CHK,RES_NAME) values ('목포 비파 2차아파트',5,'Y','목포 비파 2차아파트');
+Insert into CAP3.SCS_CH_PL (SCS_NAME,SCS_AMOUNT,SCS_CHK,RES_NAME) values ('익산시 부영아파트 충전소',5,'Y','익산 영등부영 2차 아파트');
+Insert into CAP3.SCS_CH_PL (SCS_NAME,SCS_AMOUNT,SCS_CHK,RES_NAME) values ('경산 부영사랑으로 6차 아파트',10,'Y','경산 사동 부영사랑으로 6차 아파트');
+Insert into CAP3.SCS_CH_PL (SCS_NAME,SCS_AMOUNT,SCS_CHK,RES_NAME) values ('철원 ESA 아파트 충전소',2,'Y','철원 ESA 아파트');
+Insert into CAP3.SCS_CH_PL (SCS_NAME,SCS_AMOUNT,SCS_CHK,RES_NAME) values ('영양군 승민파랑새뷰',3,'Y','영양군 승민파랑새뷰 아파트');
+Insert into CAP3.SCS_CH_PL (SCS_NAME,SCS_AMOUNT,SCS_CHK,RES_NAME) values ('대구역 서희스타힐스아파트',12,'Y','대구역 서희스타힐스아파트');
+Insert into CAP3.SCS_CH_PL (SCS_NAME,SCS_AMOUNT,SCS_CHK,RES_NAME) values ('여서동 금호타운 아파트',3,'Y','여서동 금호타운 아파트');
+Insert into CAP3.SCS_CH_PL (SCS_NAME,SCS_AMOUNT,SCS_CHK,RES_NAME) values ('함양군 진하맨션아파트 충전소',10,'Y','함양군 진하맨션아파트');
+Insert into CAP3.SCS_CH_PL (SCS_NAME,SCS_AMOUNT,SCS_CHK,RES_NAME) values ('원주시 진하맨션아파트 충전소',5,'Y','원주시 현대반곡 IPARK 아파트');
+REM INSERTING into CAP3.SCS_PAY
+SET DEFINE OFF;
+--------------------------------------------------------
+--  DDL for Index SCS_BOOKMARK_PK
+--------------------------------------------------------
+
+CREATE UNIQUE INDEX "CAP3"."SCS_BOOKMARK_PK" ON "CAP3"."SCS_BOOKMARK" ("EMAIL", "SCS_NAME")
+    PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+    STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+    PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+    TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index SCS_PAY_PAY_ID_PK
+--------------------------------------------------------
+
+CREATE UNIQUE INDEX "CAP3"."SCS_PAY_PAY_ID_PK" ON "CAP3"."SCS_PAY" ("PAY_ID")
+    PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+    STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+    PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+    TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index RES_RES_NAME_PK
+--------------------------------------------------------
+
+CREATE UNIQUE INDEX "CAP3"."RES_RES_NAME_PK" ON "CAP3"."RES" ("RES_NAME")
+    PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+    STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+    PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+    TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index HP_BOOK_BOOK_ID_PK
+--------------------------------------------------------
+
+CREATE UNIQUE INDEX "CAP3"."HP_BOOK_BOOK_ID_PK" ON "CAP3"."HP_BOOK" ("BOOK_ID")
+    PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+    STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+    PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+    TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index CAR_CAR_ID_PK
+--------------------------------------------------------
+
+CREATE UNIQUE INDEX "CAP3"."CAR_CAR_ID_PK" ON "CAP3"."CAR" ("CAR_ID")
+    PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+    STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+    PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+    TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index HP_BOOKMARK_EMAIL_HP_NAME_PK
+--------------------------------------------------------
+
+CREATE UNIQUE INDEX "CAP3"."HP_BOOKMARK_EMAIL_HP_NAME_PK" ON "CAP3"."HP_BOOKMARK" ("EMAIL", "HP_NAME")
+    PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+    STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+    PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+    TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index QNA_BOARD_BNO_PK
+--------------------------------------------------------
+
+CREATE UNIQUE INDEX "CAP3"."QNA_BOARD_BNO_PK" ON "CAP3"."QNA_BOARD" ("BNO")
+    PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+    STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+    PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+    TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index SCS_BOOK_ID_PK
+--------------------------------------------------------
+
+CREATE UNIQUE INDEX "CAP3"."SCS_BOOK_ID_PK" ON "CAP3"."SCS_BOOK" ("BOOK_ID")
+    PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+    STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+    PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+    TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index MP_EMAIL_PK
+--------------------------------------------------------
+
+CREATE UNIQUE INDEX "CAP3"."MP_EMAIL_PK" ON "CAP3"."MP" ("EMAIL")
+    PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+    STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+    PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+    TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index REG_EMAIL_PK
+--------------------------------------------------------
+
+CREATE UNIQUE INDEX "CAP3"."REG_EMAIL_PK" ON "CAP3"."REG" ("EMAIL")
+    PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+    STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+    PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+    TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index HP_PAY_PAY_ID_PK
+--------------------------------------------------------
+
+CREATE UNIQUE INDEX "CAP3"."HP_PAY_PAY_ID_PK" ON "CAP3"."HP_PAY" ("PAY_ID")
+    PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+    STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+    PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+    TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index HP_HP_NAME_PK
+--------------------------------------------------------
+
+CREATE UNIQUE INDEX "CAP3"."HP_HP_NAME_PK" ON "CAP3"."HP" ("HP_NAME")
+    PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+    STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+    PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+    TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index HP_CH_PL_HP_NAME_PK
+--------------------------------------------------------
+
+CREATE UNIQUE INDEX "CAP3"."HP_CH_PL_HP_NAME_PK" ON "CAP3"."HP_CH_PL" ("HP_NAME")
+    PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+    STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+    PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+    TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index ENTRY_INFO_ENTRY_ID_PK
+--------------------------------------------------------
+
+CREATE UNIQUE INDEX "CAP3"."ENTRY_INFO_ENTRY_ID_PK" ON "CAP3"."ENTRY_INFO" ("ENTRY_ID")
+    PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+    STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+    PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+    TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index SCS_CH_PL_SCS_NAME_PK
+--------------------------------------------------------
+
+CREATE UNIQUE INDEX "CAP3"."SCS_CH_PL_SCS_NAME_PK" ON "CAP3"."SCS_CH_PL" ("SCS_NAME")
+    PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+    STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+    PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+    TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index SCS_SCS_NAME_PK
+--------------------------------------------------------
+
+CREATE UNIQUE INDEX "CAP3"."SCS_SCS_NAME_PK" ON "CAP3"."SCS" ("SCS_NAME")
+    PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+    STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+    PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+    TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Trigger INSERT_HP_CH_PL_VIEW
+--------------------------------------------------------
+
+CREATE OR REPLACE TRIGGER "CAP3"."INSERT_HP_CH_PL_VIEW"
+    after insert on hp
+    for each row
+declare
+begin
+    insert into hp_ch_pl_view (hp_name, place, res_name) values
+    (:new.hp_name,
+     :new.place,
+     :new.res_name);
+end;
+/
+ALTER TRIGGER "CAP3"."INSERT_HP_CH_PL_VIEW" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger INSERT_SCS_CH_PL_VIEW
+--------------------------------------------------------
+
+CREATE OR REPLACE TRIGGER "CAP3"."INSERT_SCS_CH_PL_VIEW"
+    after insert on scs
+    for each row
+declare
+begin
+    insert into scs_ch_pl_view (scs_name, scs_amount, res_name) values
+    (:new.scs_name,
+     :new.scs_amount,
+     :new.res_name);
+end;
+/
+ALTER TRIGGER "CAP3"."INSERT_SCS_CH_PL_VIEW" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger UPDATE_HP_CH_PL_VIEW
+--------------------------------------------------------
+
+CREATE OR REPLACE TRIGGER "CAP3"."UPDATE_HP_CH_PL_VIEW"
+    after update on hp
+    for each row
+declare
+begin
+    update hp_ch_pl_view set hp_chk = :new.hp_chk where hp_name = :new.hp_name;
+end;
+/
+ALTER TRIGGER "CAP3"."UPDATE_HP_CH_PL_VIEW" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger UPDATE_SCS_CH_PL_VIEW
+--------------------------------------------------------
+
+CREATE OR REPLACE TRIGGER "CAP3"."UPDATE_SCS_CH_PL_VIEW"
+    after update on scs
+    for each row
+declare
+begin
+    update scs_ch_pl_view set scs_chk = :new.scs_chk where scs_name = :new.scs_name;
+end;
+/
+ALTER TRIGGER "CAP3"."UPDATE_SCS_CH_PL_VIEW" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger UPDATE_SUB_HP_CH_PL_VIEW
+--------------------------------------------------------
+
+CREATE OR REPLACE TRIGGER "CAP3"."UPDATE_SUB_HP_CH_PL_VIEW"
+    after insert on hp_book
+    for each row
+declare
+begin
+    update hp_ch_pl_view set place = place - 1
+    where hp_name = :new.hp_name;
+end;
+/
+ALTER TRIGGER "CAP3"."UPDATE_SUB_HP_CH_PL_VIEW" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger UPDATE_SUB_SCS_CH_PL_VIEW
+--------------------------------------------------------
+
+CREATE OR REPLACE TRIGGER "CAP3"."UPDATE_SUB_SCS_CH_PL_VIEW"
+    after insert on scs_book
+    for each row
+declare
+begin
+    update scs_ch_pl_view set scs_amount = scs_amount - 1
+    where scs_name = :new.scs_name;
+end;
+/
+ALTER TRIGGER "CAP3"."UPDATE_SUB_SCS_CH_PL_VIEW" ENABLE;
+--------------------------------------------------------
+--  Constraints for Table HP_PAY
+--------------------------------------------------------
+
+ALTER TABLE "CAP3"."HP_PAY" ADD CONSTRAINT "HP_PAY_PAY_ID_PK" PRIMARY KEY ("PAY_ID")
+    USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+        STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+        PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+        TABLESPACE "SYSTEM"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table SCS_BOOKMARK
+--------------------------------------------------------
+
+ALTER TABLE "CAP3"."SCS_BOOKMARK" ADD CONSTRAINT "SCS_BOOKMARK_PK" PRIMARY KEY ("EMAIL", "SCS_NAME")
+    USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+        STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+        PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+        TABLESPACE "SYSTEM"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table QNA_BOARD
+--------------------------------------------------------
+
+ALTER TABLE "CAP3"."QNA_BOARD" ADD CONSTRAINT "QNA_BOARD_BNO_PK" PRIMARY KEY ("BNO")
+    USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+        STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+        PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+        TABLESPACE "SYSTEM"  ENABLE;
+ALTER TABLE "CAP3"."QNA_BOARD" MODIFY ("WRITER" NOT NULL ENABLE);
+ALTER TABLE "CAP3"."QNA_BOARD" MODIFY ("CONTENT" NOT NULL ENABLE);
+ALTER TABLE "CAP3"."QNA_BOARD" MODIFY ("TITLE" NOT NULL ENABLE);
+ALTER TABLE "CAP3"."QNA_BOARD" MODIFY ("BNO" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table HP
+--------------------------------------------------------
+
+ALTER TABLE "CAP3"."HP" ADD CONSTRAINT "HP_HP_NAME_PK" PRIMARY KEY ("HP_NAME")
+    USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+        STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+        PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+        TABLESPACE "SYSTEM"  ENABLE;
+ALTER TABLE "CAP3"."HP" ADD CONSTRAINT "HP_HP_CHK_CK" CHECK (hp_chk in('Y', 'N')) ENABLE;
+--------------------------------------------------------
+--  Constraints for Table HP_BOOKMARK
+--------------------------------------------------------
+
+ALTER TABLE "CAP3"."HP_BOOKMARK" ADD CONSTRAINT "HP_BOOKMARK_EMAIL_HP_NAME_PK" PRIMARY KEY ("EMAIL", "HP_NAME")
+    USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+        STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+        PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+        TABLESPACE "SYSTEM"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table RES
+--------------------------------------------------------
+
+ALTER TABLE "CAP3"."RES" ADD CONSTRAINT "RES_RES_NAME_PK" PRIMARY KEY ("RES_NAME")
+    USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+        STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+        PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+        TABLESPACE "SYSTEM"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table MEMBER
+--------------------------------------------------------
+
+ALTER TABLE "CAP3"."MEMBER" ADD PRIMARY KEY ("EMAIL")
+    USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+        STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+        PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+        TABLESPACE "SYSTEM"  ENABLE;
+ALTER TABLE "CAP3"."MEMBER" MODIFY ("ROLE" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table MP
+--------------------------------------------------------
+
+ALTER TABLE "CAP3"."MP" ADD CONSTRAINT "MP_EMAIL_PK" PRIMARY KEY ("EMAIL")
+    USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+        STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+        PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+        TABLESPACE "SYSTEM"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table ENTRY_INFO
+--------------------------------------------------------
+
+ALTER TABLE "CAP3"."ENTRY_INFO" ADD CONSTRAINT "ENTRY_INFO_ENTRY_ID_PK" PRIMARY KEY ("ENTRY_ID")
+    USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+        STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+        PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+        TABLESPACE "SYSTEM"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table HP_CH_PL
+--------------------------------------------------------
+
+ALTER TABLE "CAP3"."HP_CH_PL" ADD CONSTRAINT "HP_CH_PL_HP_NAME_PK" PRIMARY KEY ("HP_NAME")
+    USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+        STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+        PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+        TABLESPACE "SYSTEM"  ENABLE;
+ALTER TABLE "CAP3"."HP_CH_PL" ADD CONSTRAINT "HP_CH_PL_HP_CHK_CK" CHECK (hp_chk in('Y', 'N')) ENABLE;
+--------------------------------------------------------
+--  Constraints for Table REG
+--------------------------------------------------------
+
+ALTER TABLE "CAP3"."REG" ADD CONSTRAINT "REG_EMAIL_PK" PRIMARY KEY ("EMAIL")
+    USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+        STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+        PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+        TABLESPACE "SYSTEM"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table SCS
+--------------------------------------------------------
+
+ALTER TABLE "CAP3"."SCS" ADD CONSTRAINT "SCS_SCS_NAME_PK" PRIMARY KEY ("SCS_NAME")
+    USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+        STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+        PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+        TABLESPACE "SYSTEM"  ENABLE;
+ALTER TABLE "CAP3"."SCS" ADD CONSTRAINT "SCS_SCS_CHK_CK" CHECK (scs_chk in('Y', 'N')) ENABLE;
+--------------------------------------------------------
+--  Constraints for Table CAR
+--------------------------------------------------------
+
+ALTER TABLE "CAP3"."CAR" ADD CONSTRAINT "CAR_CAR_ID_PK" PRIMARY KEY ("CAR_ID")
+    USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+        STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+        PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+        TABLESPACE "SYSTEM"  ENABLE;
+ALTER TABLE "CAP3"."CAR" MODIFY ("EMAIL" NOT NULL ENABLE);
+ALTER TABLE "CAP3"."CAR" MODIFY ("CAR_ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table SCS_PAY
+--------------------------------------------------------
+
+ALTER TABLE "CAP3"."SCS_PAY" ADD CONSTRAINT "SCS_PAY_PAY_ID_PK" PRIMARY KEY ("PAY_ID")
+    USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+        STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+        PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+        TABLESPACE "SYSTEM"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table HP_BOOK
+--------------------------------------------------------
+
+ALTER TABLE "CAP3"."HP_BOOK" ADD CONSTRAINT "HP_BOOK_BOOK_ID_PK" PRIMARY KEY ("BOOK_ID")
+    USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+        STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+        PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+        TABLESPACE "SYSTEM"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table SCS_CH_PL
+--------------------------------------------------------
+
+ALTER TABLE "CAP3"."SCS_CH_PL" ADD CONSTRAINT "SCS_CH_PL_SCS_NAME_PK" PRIMARY KEY ("SCS_NAME")
+    USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+        STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+        PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+        TABLESPACE "SYSTEM"  ENABLE;
+ALTER TABLE "CAP3"."SCS_CH_PL" ADD CONSTRAINT "SCS_CH_PL_CHK_CK" CHECK (scs_chk in('Y', 'N')) ENABLE;
+--------------------------------------------------------
+--  Constraints for Table SCS_BOOK
+--------------------------------------------------------
+
+ALTER TABLE "CAP3"."SCS_BOOK" ADD CONSTRAINT "SCS_BOOK_ID_PK" PRIMARY KEY ("BOOK_ID")
+    USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS
+        STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+        PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+        TABLESPACE "SYSTEM"  ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table CAR
+--------------------------------------------------------
+
+ALTER TABLE "CAP3"."CAR" ADD CONSTRAINT "CAR_EMAIL_FK" FOREIGN KEY ("EMAIL")
+    REFERENCES "CAP3"."MEMBER" ("EMAIL") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table ENTRY_INFO
+--------------------------------------------------------
+
+ALTER TABLE "CAP3"."ENTRY_INFO" ADD CONSTRAINT "ENTRY_INFO_RES_NAME_FK" FOREIGN KEY ("RES_NAME")
+    REFERENCES "CAP3"."RES" ("RES_NAME") ON DELETE CASCADE ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table HP
+--------------------------------------------------------
+
+ALTER TABLE "CAP3"."HP" ADD CONSTRAINT "HP_RES_NAME_FK" FOREIGN KEY ("RES_NAME")
+    REFERENCES "CAP3"."RES" ("RES_NAME") ON DELETE CASCADE ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table HP_BOOK
+--------------------------------------------------------
+
+ALTER TABLE "CAP3"."HP_BOOK" ADD CONSTRAINT "HP_BOOK_EMAIL_FK" FOREIGN KEY ("EMAIL")
+    REFERENCES "CAP3"."MEMBER" ("EMAIL") ENABLE;
+ALTER TABLE "CAP3"."HP_BOOK" ADD CONSTRAINT "HP_BOOK_HP_NAME_FK" FOREIGN KEY ("HP_NAME")
+    REFERENCES "CAP3"."HP" ("HP_NAME") ON DELETE CASCADE ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table HP_BOOKMARK
+--------------------------------------------------------
+
+ALTER TABLE "CAP3"."HP_BOOKMARK" ADD CONSTRAINT "HP_BOOKMARK_EMAIL_FK" FOREIGN KEY ("EMAIL")
+    REFERENCES "CAP3"."MEMBER" ("EMAIL") ENABLE;
+ALTER TABLE "CAP3"."HP_BOOKMARK" ADD CONSTRAINT "HP_BOOKMARK_HP_NAME_FK" FOREIGN KEY ("HP_NAME")
+    REFERENCES "CAP3"."HP" ("HP_NAME") ON DELETE CASCADE ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table HP_CH_PL
+--------------------------------------------------------
+
+ALTER TABLE "CAP3"."HP_CH_PL" ADD CONSTRAINT "HP_CH_PL_HP_NAME_FK" FOREIGN KEY ("HP_NAME")
+    REFERENCES "CAP3"."HP" ("HP_NAME") ON DELETE CASCADE ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table HP_PAY
+--------------------------------------------------------
+
+ALTER TABLE "CAP3"."HP_PAY" ADD CONSTRAINT "HP_PAY_BOOK_ID_FK" FOREIGN KEY ("BOOK_ID")
+    REFERENCES "CAP3"."HP_BOOK" ("BOOK_ID") ON DELETE CASCADE ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table MP
+--------------------------------------------------------
+
+ALTER TABLE "CAP3"."MP" ADD CONSTRAINT "MP_EMAIL_FK" FOREIGN KEY ("EMAIL")
+    REFERENCES "CAP3"."MEMBER" ("EMAIL") ON DELETE CASCADE ENABLE;
+ALTER TABLE "CAP3"."MP" ADD CONSTRAINT "MP_RES_NAME_FK" FOREIGN KEY ("RES_NAME")
+    REFERENCES "CAP3"."RES" ("RES_NAME") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table REG
+--------------------------------------------------------
+
+ALTER TABLE "CAP3"."REG" ADD CONSTRAINT "REG_EMAIL_FK" FOREIGN KEY ("EMAIL")
+    REFERENCES "CAP3"."MEMBER" ("EMAIL") ON DELETE CASCADE ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table RES
+--------------------------------------------------------
+
+ALTER TABLE "CAP3"."RES" ADD CONSTRAINT "RES_EMAIL_FK" FOREIGN KEY ("EMAIL")
+    REFERENCES "CAP3"."REG" ("EMAIL") ON DELETE CASCADE ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table SCS
+--------------------------------------------------------
+
+ALTER TABLE "CAP3"."SCS" ADD CONSTRAINT "SCS_RES_NAME_FK" FOREIGN KEY ("RES_NAME")
+    REFERENCES "CAP3"."RES" ("RES_NAME") ON DELETE CASCADE ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table SCS_BOOK
+--------------------------------------------------------
+
+ALTER TABLE "CAP3"."SCS_BOOK" ADD CONSTRAINT "SCS_BOOK_EMAIL_FK" FOREIGN KEY ("EMAIL")
+    REFERENCES "CAP3"."MEMBER" ("EMAIL") ENABLE;
+ALTER TABLE "CAP3"."SCS_BOOK" ADD CONSTRAINT "SCS_BOOK_SCS_NAME_FK" FOREIGN KEY ("SCS_NAME")
+    REFERENCES "CAP3"."SCS" ("SCS_NAME") ON DELETE CASCADE ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table SCS_BOOKMARK
+--------------------------------------------------------
+
+ALTER TABLE "CAP3"."SCS_BOOKMARK" ADD CONSTRAINT "SCS_BOOKMARK_ENAUK_FK" FOREIGN KEY ("EMAIL")
+    REFERENCES "CAP3"."MEMBER" ("EMAIL") ENABLE;
+ALTER TABLE "CAP3"."SCS_BOOKMARK" ADD CONSTRAINT "SCS_BOOKMARK_SCS_NAME_FK" FOREIGN KEY ("SCS_NAME")
+    REFERENCES "CAP3"."SCS" ("SCS_NAME") ON DELETE CASCADE ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table SCS_CH_PL
+--------------------------------------------------------
+
+ALTER TABLE "CAP3"."SCS_CH_PL" ADD CONSTRAINT "SCS_CH_PL_SCS_NAME_FK" FOREIGN KEY ("SCS_NAME")
+    REFERENCES "CAP3"."SCS" ("SCS_NAME") ON DELETE CASCADE ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table SCS_PAY
+--------------------------------------------------------
+
+ALTER TABLE "CAP3"."SCS_PAY" ADD CONSTRAINT "SCS_PAY_BOOK_ID_FK" FOREIGN KEY ("BOOK_ID")
+    REFERENCES "CAP3"."SCS_BOOK" ("BOOK_ID") ON DELETE CASCADE ENABLE;
