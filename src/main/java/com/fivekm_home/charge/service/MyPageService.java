@@ -69,9 +69,19 @@ public class MyPageService {
         return myPageMapper.userHpBookmark(email);
     }
 
+    // 즐겨찾기 주차장 목록 총 갯수 - 페이징
+    public int userHpBookmarkCnt(UserCriteria userCriteria){
+        return myPageMapper.userHpBookmarkCnt(userCriteria);
+    }
+
     // 유저가 저장한 충전소 즐겨찾기 목록 불러오기
     public ArrayList<UserBookmark> userSCSBookmark(String email){
         return myPageMapper.userSCSBookmark(email);
+    }
+
+    // 즐겨찾기 충전소 목록 총 갯수 - 페이징
+    public int userSCSBookmarkCnt(UserCriteria userCriteria){
+        return myPageMapper.userSCSBookmarkCnt(userCriteria);
     }
 
     // 충전소 이용 내역
@@ -79,9 +89,25 @@ public class MyPageService {
         return myPageMapper.userSCSHistory(email);
     }
 
+    // 충전소 이용 내역 총 갯수 - 페이징
+    public int userSCSHistoryCnt(UserCriteria userCriteria){
+        return myPageMapper.userSCSHistoryCnt(userCriteria);
+    }
+
     // 주차장 이용 내역
     public ArrayList<History> userHPHistory(String email){
         return myPageMapper.userHPHistory(email);
+    }
+
+    // 주차장 이용 내역 리스트 - 페이징
+    public ArrayList<History> userHPHistoryList(UserCriteria userCriteria){
+        System.out.println("myPageService userHPHistoryList userCriteria : " + userCriteria.toString());
+        return myPageMapper.userHPHistoryList(userCriteria);
+    }
+
+    // 주차장 이용 내역 총 갯수 - 페이징
+    public int userHPHistoryCnt(UserCriteria userCriteria){
+        return myPageMapper.userHPHistoryCnt(userCriteria);
     }
 
     // 충전소 이용 내역 날짜 검색
@@ -89,8 +115,18 @@ public class MyPageService {
         return myPageMapper.scsHistorySearchList(history);
     }
 
+    // 충전소 이용 내역 날짜 검색 총 갯수 - 페이징
+    public int scsHistorySearchListCnt(UserCriteria userCriteria){
+        return myPageMapper.scsHistorySearchListCnt(userCriteria);
+    }
+
     // 주차장 이용 내역 날짜 검색
     public ArrayList<History> hpHistorySearchList(History history){
         return myPageMapper.hpHistorySearchList(history);
+    }
+
+    // 주차장 이용 내역 날짜 검색 총 갯수 - 페이징
+    public int hpHistorySearchListCnt(UserCriteria userCriteria){
+        return myPageMapper.hpHistorySearchListCnt(userCriteria);
     }
 }

@@ -3,11 +3,15 @@ package com.fivekm_home.charge.controller;
 import com.fivekm_home.charge.config.auth.dto.SessionUser;
 import com.fivekm_home.charge.domain.USER.History;
 import com.fivekm_home.charge.domain.USER.MemberEdit;
+import com.fivekm_home.charge.domain.USER.UserCriteria;
+import com.fivekm_home.charge.domain.USER.UserPagination;
 import com.fivekm_home.charge.service.MyPageService;
+import javafx.scene.control.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import sun.misc.Request;
 
 import javax.servlet.http.HttpSession;
 
@@ -51,13 +55,17 @@ public class MyPageController {
     }
 
     @GetMapping("/hpHistory/{email}")
-    public String hpHistory(@PathVariable String email, Model model, HttpSession httpSession){
+    public String hpHistory(@PathVariable String email, Model model, HttpSession httpSession, UserCriteria userCriteria,
+                            @RequestParam(defaultValue = "1") int page){
         if(httpSession.getAttribute("user")!=null){
+            UserPagination userPagination = new UserPagination(myPageService.userHPHistoryCnt(userCriteria), page);
+            userCriteria.setPage(page);
+            userCriteria.setEmail(email);
             SessionUser sessionUser = (SessionUser) httpSession.getAttribute("user");
             MemberEdit memberEdit = new MemberEdit(sessionUser);
+            model.addAttribute("pagination", userPagination);
             model.addAttribute("mem", memberEdit);
-            System.out.println("myPageService.userHPHistory(email) : " + myPageService.userHPHistory(email));
-            model.addAttribute("hpHistory", myPageService.userHPHistory(email));
+            model.addAttribute("hpHistory", myPageService.userHPHistoryList(userCriteria));
             return "/myPage/hpHistory";
         }else {
             System.out.println("MyPageController : 로그인되어 있지 않아 로그인 페이지로 요청했습니다.");
@@ -102,7 +110,11 @@ public class MyPageController {
 
     // 회원 충전소 즐겨찾기 목록 불러오기
     @GetMapping("/scsBookmark/{email}")
-    public String SCSBookmark(@PathVariable String email, Model model){
+    public String SCSBookmark(@PathVariable String email, Model model, UserCriteria userCriteria,
+                                @RequestParam(defaultValue = "1") int page){
+//        UserPagination userPagination = new UserPagination(myPageService.);
+//        userCriteria.setPage(page);
+//        model.addAttribute("pagination", userPagination); // 충전소 즐겨찾기 목록 하단 페이징
         System.out.println("email : " + email);
         System.out.println("userSCSBookmark return : " + myPageService.userSCSBookmark(email));
         if(myPageService.userSCSBookmark(email).equals(null)){
@@ -115,7 +127,11 @@ public class MyPageController {
 
     // 회원 주차장 즐겨찾기 목록 불러오기
     @GetMapping("/hpBookmark/{email}")
-    public String hpBookmark(@PathVariable String email, Model model){
+    public String hpBookmark(@PathVariable String email, Model model, UserCriteria userCriteria,
+                             @RequestParam(defaultValue = "1") int page){
+//        UserPagination userPagination = new UserPagination(myPageService.);
+        userCriteria.setPage(page);
+
         System.out.println("email : " + email);
         System.out.println("userHpBookmark return : " + myPageService.userHpBookmark(email));
         if(myPageService.userHpBookmark(email).equals(null)){

@@ -72,6 +72,16 @@
         and b.email = #{email}
     </select>
 
+    <select id="userHpBookmarkCnt" resultType="int">
+        select count(*) from
+        (select b.email, b.hp_name, hp_pic, road_addr, extra_addr, start_manage_time,
+        end_manage_time, min30_fee, addmin10_fee
+        from hp_view s, hp_bookmark_view b, res_view r
+        where s.hp_name = b.hp_name
+        and s.res_name = r.res_name
+        and b.email = #{email})
+    </select>
+
     <select id="userSCSBookmark" resultType="com.fivekm_home.charge.domain.USER.UserBookmark">
         select b.email, b.scs_name, scs_pic, road_addr, extra_addr, start_manage_time,
         end_manage_time, min30_fee, addmin10_fee
@@ -79,6 +89,16 @@
         where s.scs_name = b.scs_name
         and s.res_name = r.res_name
         and b.email = #{email}
+    </select>
+
+    <select id="userSCSBookmarkCnt" resultType="int">
+        select count(*) from
+        (select b.email, b.scs_name, scs_pic, road_addr, extra_addr, start_manage_time,
+        end_manage_time, min30_fee, addmin10_fee
+        from scs_view s, scs_bookmark_view b, res_view r
+        where s.scs_name = b.scs_name
+        and s.res_name = r.res_name
+        and b.email = #{email})
     </select>
 
     <select id="userSCSHistory" resultType="com.fivekm_home.charge.domain.USER.History">
@@ -92,6 +112,18 @@
         and p.book_id = b.book_id
     </select>
 
+    <select id="userSCSHistoryCnt" resultType="int">
+        select count(*) from
+        (select s.scs_name, r.road_addr, b.start_date, b.end_date, p.price, p.pay_date, b.email,
+        TRUNC((to_date(to_char(end_date, 'yyyymmddhh24miss'),'yyyymmddhh24miss') -
+        to_date(to_char(start_date, 'yyyymmddhh24miss'), 'yyyymmddhh24miss'))*24) used_time
+        from res_view r, scs_book_view b, scs_pay_view p, scs_view s
+        where b.email = #{email}
+        and s.scs_name = b.scs_name
+        and r.res_name = s.res_name
+        and p.book_id = b.book_id)
+    </select>
+
     <select id="userHPHistory" resultType="com.fivekm_home.charge.domain.USER.History">
         select h.hp_name, r.road_addr, b.start_date, b.end_date, p.price, p.pay_date, b.email,
         TRUNC((to_date(to_char(end_date, 'yyyymmddhh24miss'),'yyyymmddhh24miss') -
@@ -101,6 +133,33 @@
         and h.hp_name = b.hp_name
         and r.res_name = h.res_name
         and p.book_id = b.book_id
+    </select>
+
+    <select id="userHPHistoryList" resultType="com.fivekm_home.charge.domain.USER.History">
+        select * from
+        (select h.hp_name, r.road_addr, b.start_date, b.end_date, p.price, p.pay_date, b.email,
+        TRUNC((to_date(to_char(end_date, 'yyyymmddhh24miss'),'yyyymmddhh24miss') -
+        to_date(to_char(start_date, 'yyyymmddhh24miss'), 'yyyymmddhh24miss'))*24) used_time,
+        b.book_date, row_number() over(order by b.book_date desc) ronum
+        from res_view r, hp_book_view b, hp_pay_view p, hp_view h
+        where b.email = #{email}
+        and h.hp_name = b.hp_name
+        and r.res_name = h.res_name
+        and p.book_id = b.book_id)
+        where ronum between #{rowStart} and #{rowEnd}
+        order by book_date desc
+    </select>
+
+    <select id="userHPHistoryCnt" resultType="int">
+        select count(*) from
+        (select h.hp_name, r.road_addr, b.start_date, b.end_date, p.price, p.pay_date, b.email,
+        TRUNC((to_date(to_char(end_date, 'yyyymmddhh24miss'),'yyyymmddhh24miss') -
+        to_date(to_char(start_date, 'yyyymmddhh24miss'), 'yyyymmddhh24miss'))*24) used_time
+        from res_view r, hp_book_view b, hp_pay_view p, hp_view h
+        where b.email = #{email}
+        and h.hp_name = b.hp_name
+        and r.res_name = h.res_name
+        and p.book_id = b.book_id)
     </select>
 
     <select id="scsHistorySearchList" resultType="com.fivekm_home.charge.domain.USER.History">
@@ -116,6 +175,20 @@
         and to_date(#{find_end_date}||' 23:59:59', 'yyyy-mm-dd hh24:mi:ss')
     </select>
 
+    <select id="scsHistorySearchListCnt" resultType="int">
+        select count(*) from
+        (select s.scs_name, r.road_addr, b.start_date, b.end_date, p.price, p.pay_date, b.email,
+        TRUNC((to_date(to_char(end_date, 'yyyymmddhh24miss'),'yyyymmddhh24miss') -
+        to_date(to_char(start_date, 'yyyymmddhh24miss'), 'yyyymmddhh24miss'))*24) used_time
+        from res_view r, scs_book_view b, scs_pay_view p, scs_view s
+        where b.email = #{email}
+        and s.scs_name = b.scs_name
+        and r.res_name = s.res_name
+        and p.book_id = b.book_id
+        and pay_date between to_date(#{find_start_date}, 'yyyy-mm-dd')
+        and to_date(#{find_end_date}||' 23:59:59', 'yyyy-mm-dd hh24:mi:ss'))
+    </select>
+
     <select id="hpHistorySearchList" resultType="com.fivekm_home.charge.domain.USER.History">
         select h.hp_name, r.road_addr, b.start_date, b.end_date, p.price, p.pay_date, b.email,
         TRUNC((to_date(to_char(end_date, 'yyyymmddhh24miss'),'yyyymmddhh24miss') -
@@ -127,5 +200,19 @@
         and p.book_id = b.book_id
         and pay_date between to_date(#{find_start_date}, 'yyyy-mm-dd hh24:mi:ss')
         and to_date(#{find_end_date}||' 23:59:59', 'yyyy-mm-dd hh24:mi:ss')
+    </select>
+
+    <select id="hpHistorySearchListCnt" resultType="int">
+        select count(*) from
+        (select h.hp_name, r.road_addr, b.start_date, b.end_date, p.price, p.pay_date, b.email,
+        TRUNC((to_date(to_char(end_date, 'yyyymmddhh24miss'),'yyyymmddhh24miss') -
+        to_date(to_char(start_date, 'yyyymmddhh24miss'), 'yyyymmddhh24miss'))*24) used_time
+        from res_view r, hp_book_view b, hp_pay_view p, hp_view h
+        where b.email = #{email}
+        and h.hp_name = b.hp_name
+        and r.res_name = h.res_name
+        and p.book_id = b.book_id
+        and pay_date between to_date(#{find_start_date}, 'yyyy-mm-dd hh24:mi:ss')
+        and to_date(#{find_end_date}||' 23:59:59', 'yyyy-mm-dd hh24:mi:ss'))
     </select>
 </mapper>

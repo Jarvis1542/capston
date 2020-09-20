@@ -179,6 +179,7 @@ create TABLE scs_pay (
 create TABLE scs_bookmark (
     email varchar2(100),        /* 이메일 - PK/FK(MEMBER) */
     scs_name varchar2(300),   /* 충전소 이름 - PK/FK(CS) */
+    reg_date timestamp,
     constraint scs_bookmark_pk primary key (email, scs_name), /* EMAIL+CHARGENAME = PK */
     constraint scs_bookmark_enauk_fk foreign key (email) references member (email),
     constraint scs_bookmark_scs_name_fk foreign key (scs_name) references scs(scs_name)
@@ -253,6 +254,7 @@ create table hp_pay(
 create table hp_bookmark(
     email varchar2(100),
     hp_name varchar2(300),
+    reg_date timestamp,
     constraint hp_bookmark_email_hp_name_pk primary key (email, hp_name),
     constraint hp_bookmark_email_fk foreign key (email) references member(email),
     constraint hp_bookmark_hp_name_fk foreign key (hp_name) references hp(hp_name)
@@ -334,9 +336,7 @@ create or replace trigger insert_scs_ch_pl_view
 declare
 begin
     insert into scs_ch_pl_view (scs_name, scs_amount, res_name) values
-    (:new.scs_name,
-     :new.scs_amount,
-     :new.res_name);
+    (:new.scs_name, :new.scs_amount, :new.res_name);
 end;
 /
 
@@ -347,9 +347,7 @@ create or replace trigger insert_hp_ch_pl_view
 declare
 begin
      insert into hp_ch_pl_view (hp_name, place, res_name) values
-     (:new.hp_name,
-     :new.place,
-     :new.res_name);
+     (:new.hp_name, :new.place, :new.res_name);
 end;
 /
 
