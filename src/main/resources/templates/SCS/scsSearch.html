@@ -3,8 +3,8 @@
 <head th:replace="layout/layout :: head"/>
 <style>
     .dataLayerOnMap{
-        width: 385px;
-        height: 170px;
+        width: 400px;
+        height: 190px;
         position: relative;
         border: solid 1px #555f64;
         background: #ffffff;
@@ -202,6 +202,7 @@
                     '시작운영시간 : '+search[i].start_manage_time+'<br>' +
                     '종료운영시간 : '+search[i].end_manage_time+'<br>' +
                     '충전소 수 : '+place[i].scs_amount+' / '+search[i].scs_amount+'<br>' +
+                    '<a href="http://map.kakao.com/link/to/'+data[i].scs_name+ ',' +data[i].lat+ ','+data[i].lng+'"><button style="width: 100px; margin-left: 5px; margin-top: 5px" class="genric-btn primary small">길찾기</button></a>'+
                     '</span>'+
                     '</li>' +
                     '<li><span class="dataSubTitle">주차 요금</span>' +
@@ -209,7 +210,7 @@
                     '30분당 요금 : '+search[i].min30_fee+'<br>'+
                     '10분당 추가요금 : '+search[i].addMin10_fee+'<br>'+
                     '</span>'+
-                     '<button style="width: 100px; margin-left: 10px; margin-top: 5px" onClick="mapBook(\'' + search[i].scs_name + '\')" class="genric-btn primary small">예약</button>'+
+                     '<button style="width: 100px; margin-top: 23px;" onClick="mapBook(\'' + search[i].scs_name + '\')" class="genric-btn primary small">예약</button>'+
                     '</li>'+
                     '</ul>'+
                     '</div>');
