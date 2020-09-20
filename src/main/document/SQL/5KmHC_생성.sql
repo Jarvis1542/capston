@@ -58,7 +58,7 @@ create table reg(
      reg_lic varchar2(2000), /*아파트 대표 증명 사진*/
      acc_num      varchar2(200), /*계좌 번호*/
      bank_name        varchar2(200), /*은행 이름*/
-     reg_date         timestamp, /*등록자 등록 일자*/
+     reg_reg_date         timestamp, /*등록자 등록 일자*/
      constraint reg_email_pk primary key (email),
      constraint reg_email_fk foreign key (email) references member(email)
          on delete cascade
@@ -74,7 +74,7 @@ create table res(
     extra_addr  varchar2(300), /*참고 항목*/
     lat           number null, /*위도*/
     lng           number null, /*경도*/
-    reg_date       timestamp, /*등록 날짜*/
+    res_reg_date       timestamp, /*등록 날짜*/
     email         varchar2(100), /*등록자(fk)*/
     constraint res_res_name_pk primary key (res_name),
     constraint res_email_fk foreign key (email) references reg(email)
@@ -88,7 +88,7 @@ create table mp /* management office 경비 줄인말 */
     mp_lic varchar2(2000), /*경비 교육 이수증*/
     mp_co      varchar2(100), /*관리업체 이름*/
     mp_co_num   varchar2(20), /*관리업체 번호*/
-    reg_date      timestamp, /*경비 등록 일자*/
+    mp_reg_date      timestamp, /*경비 등록 일자*/
     res_name      varchar2(300), /*거주지이름 (fk)*/
     constraint mp_email_pk primary key (email),
     constraint mp_res_name_fk foreign key (res_name) references res (res_name),
@@ -124,7 +124,7 @@ create table scs
     apt_map varchar2(2000),              /* 아파트 내부단지 지도 */
     cable varchar2(50) NULL,            /* 케이블 */
     scs_type varchar2(50) NULL,       /* 충전 타입 */
-    reg_date timestamp,                  /* 충전소 등록 날짜 */
+    scs_reg_date timestamp,                  /* 충전소 등록 날짜 */
     scs_chk  varchar2(1) default 'N', /* 승인 여부 */
     res_name     varchar2(300),          /* 거주지 등록자 이름 */
     constraint scs_scs_name_pk primary key (scs_name),
@@ -153,7 +153,7 @@ create TABLE scs_book (
     email       varchar2(100),          /* 사용자 이메일 - FK(MEMBER) */
     car_num     varchar2(10),           /* 차번호 */
     scs_name varchar2(300),           /* 충전소 이름 - FK(CS) */
-    book_date    timestamp,             /* 예약 날짜 */
+    scs_book_date    timestamp,             /* 예약 날짜 */
     constraint scs_book_id_pk primary key (book_id),
     constraint scs_book_email_fk foreign key (email) references member (email),
     constraint scs_book_scs_name_fk foreign key (scs_name) references scs (scs_name)
@@ -169,7 +169,7 @@ create TABLE scs_pay (
     email varchar2(30),         /* 사용자 이메일 - FK(MEMBER) */
     phone varchar2(15),         /* 휴대폰 번호 */
     book_id number,       /* 예약 ID - FK */
-    pay_date timestamp,         /* 결제 날짜 */
+    scs_pay_date timestamp,         /* 결제 날짜 */
     constraint scs_pay_pay_id_pk primary key (pay_id),
     constraint scs_pay_book_id_fk foreign key (book_id) references scs_book (book_id)
        on delete cascade
@@ -179,7 +179,7 @@ create TABLE scs_pay (
 create TABLE scs_bookmark (
     email varchar2(100),        /* 이메일 - PK/FK(MEMBER) */
     scs_name varchar2(300),   /* 충전소 이름 - PK/FK(CS) */
-    reg_date timestamp,
+    scs_bookmark_reg_date timestamp,
     constraint scs_bookmark_pk primary key (email, scs_name), /* EMAIL+CHARGENAME = PK */
     constraint scs_bookmark_enauk_fk foreign key (email) references member (email),
     constraint scs_bookmark_scs_name_fk foreign key (scs_name) references scs(scs_name)
@@ -197,7 +197,7 @@ create table hp(
     end_manage_time  varchar2(30),           /* 종료 운영 시간 */
     hp_pic  varchar2(2000), /* 주차장 사진 */
     apt_map      varchar2(2000), /* 아파트 단지 내부 지도(사진) */
-    reg_date     timestamp, /* 주차장 등록 날짜 */
+    hp_reg_date     timestamp, /* 주차장 등록 날짜 */
     hp_chk  varchar2(1) default 'N',
     res_name     varchar2(300), /* 거주지이름(fk) */
     constraint hp_hp_name_pk primary key (hp_name),
@@ -227,7 +227,7 @@ create table hp_book
     email       varchar2(100),
     car_num     varchar2(10),           /* 차번호 */
     hp_name varchar2(300),
-    book_date    timestamp,
+    hp_book_date    timestamp,
     constraint hp_book_book_id_pk primary key (book_id),
     constraint hp_book_email_fk foreign key (email) references member (email),
     constraint hp_book_hp_name_fk foreign key (hp_name) references hp (hp_name)
@@ -244,7 +244,7 @@ create table hp_pay(
    hp_name varchar2(300),
    phone varchar2(15),
    book_id number, /* parkingBook (fk) */
-   pay_date timestamp,
+   hp_pay_date timestamp,
    constraint hp_pay_pay_id_pk primary key (pay_id),
    constraint hp_pay_book_id_fk foreign key (book_id) references hp_book(book_id)
        on delete cascade
@@ -254,7 +254,7 @@ create table hp_pay(
 create table hp_bookmark(
     email varchar2(100),
     hp_name varchar2(300),
-    reg_date timestamp,
+    hp_bookmark_reg_date timestamp,
     constraint hp_bookmark_email_hp_name_pk primary key (email, hp_name),
     constraint hp_bookmark_email_fk foreign key (email) references member(email),
     constraint hp_bookmark_hp_name_fk foreign key (hp_name) references hp(hp_name)
@@ -268,7 +268,7 @@ create table qna_board
     title   varchar2(100)  not null,
     content varchar2(1000) not null,
     writer  varchar2(50)   not null,
-    reg_date timestamp,
+    board_reg_date timestamp,
     no_count number,
     no_reco  number,
     mbo     number,

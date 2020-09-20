@@ -55,8 +55,8 @@ public class MyPageController {
     }
 
     @GetMapping("/hpHistory/{email}")
-    public String hpHistory(@PathVariable String email, Model model, HttpSession httpSession, UserCriteria userCriteria,
-                            @RequestParam(defaultValue = "1") int page){
+    public String hpHistory(@PathVariable String email, Model model, HttpSession httpSession,
+                            UserCriteria userCriteria, @RequestParam(defaultValue = "1") int page){
         if(httpSession.getAttribute("user")!=null){
             UserPagination userPagination = new UserPagination(myPageService.userHPHistoryCnt(userCriteria), page);
             userCriteria.setPage(page);

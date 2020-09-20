@@ -25,32 +25,24 @@
                 </div>
                 <table class="table table-striped">
                     <thead class="thead-strong">
-                    <tr>
+                    <tr style="text-align: center;">
                         <th>순번</th>
                         <th>주차장 명</th>
-                        <th>주차장 타입</th>
                         <th>주차장 칸 수</th>
                         <th>아파트 명</th>
-                        <th>도로명주소</th>
-                        <th>지번주소</th>
-                        <th>상세주소</th>
                         <th>등록일</th>
                         <th>등록자</th>
                         <th>승인여부</th>
                     </tr>
                     </thead>
-                    <tbody id="tbody">
+                    <tbody id="tbody" style="text-align: center;">
                         <div th:if="${not #lists.isEmpty(hpRequestList)}">
                             <tr th:each ="hpRequestList, num : ${hpRequestList}">
                                 <td><div th:text="${num.count}"></div></td>
                                 <td><a th:href="@{'/admin/hpRequest/' + ${hpRequestList.hp_name}}"><span th:text="${hpRequestList.hp_name}"/></a></td>
-                                <td><div th:text="${hpRequestList.hp_type}"/></td>
                                 <td><div th:text="${hpRequestList.place}"/></td>
                                 <td><div th:text="${hpRequestList.res_name}"/></td>
-                                <td><div th:text="${hpRequestList.road_addr}"/></td>
-                                <td><div th:text="${hpRequestList.jibun_addr}"/></td>
-                                <td><div th:text="${hpRequestList.detail_addr}"/></td>
-                                <td><div th:text="${#dates.format(hpRequestList.reg_date, 'YYYY-MM-dd HH:mm:ss')}"/></td>
+                                <td><div th:text="${#dates.format(hpRequestList.hp_reg_date, 'YYYY-MM-dd')}"/></td>
                                 <td><div th:text="${hpRequestList.name}"/></td>
                                 <td><div th:text="${hpRequestList.hp_chk}"/></td>
                             </tr>
@@ -65,7 +57,40 @@
             </div>
         </div>
     </div>
+    <!-- paging button-->
+    <div id="pagingButton" style="margin-left: 43.5%;">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" th:href="@{?page=1}" aria-label="Previous">
+                    <span aria-hidden="true">처음</span>
+                </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" th:href="@{?page={page} (page = ${pagination.prevBlock})}" aria-label="Previous">
+                    <span aria-hidden="true">이전</span>
+                </a>
+            </li>
+            <th:block  th:with="start = ${pagination.startPage}, end = ${pagination.endPage}">
+                <li class="page-item"
+                    th:with="start = ${pagination.startPage}, end = ${pagination.endPage}"
+                    th:each="pageButton : ${#numbers.sequence(start, end)}">
+                    <a class="page-link" th:href="@{?page={page} (page = ${pageButton})}" th:text=${pageButton}></a>
+                </li>
+            </th:block>
+            <li class="page-item">
+                <a class="page-link" th:href="@{?page={page} (page = ${pagination.nextBlock})}" aria-label="Next">
+                    <span aria-hidden="true">다음</span>
+                </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" th:href="@{?page={page} (page = ${pagination.totalPageCnt})}" aria-label="Previous">
+                    <span aria-hidden="true">끝</span>
+                </a>
+            </li>
+        </ul>
+    </div>
 </section>
+
 <footer th:replace="layout/layout :: footer"/>
 </body>
 <script th:replace="layout/layout :: script"/>

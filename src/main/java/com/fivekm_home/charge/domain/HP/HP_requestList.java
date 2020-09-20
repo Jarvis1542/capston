@@ -13,7 +13,7 @@ public class HP_requestList {
     private String road_addr;
     private String jibun_addr;
     private String detail_addr;
-    private Date reg_date;
+    private Date hp_reg_date;
     private String name;
     private String hp_chk;
 }

@@ -7,9 +7,6 @@
         margin-top: auto;
         margin-bottom: auto;
     }
-    div#pagingButton {
-        margin-left: 43.5%;
-    }
 </style>
 <head th:replace="layout/layout :: head"/>
 <body>
@@ -82,7 +79,7 @@
     </div>
 </div>
 <!-- paging button-->
-<div id="pagingButton">
+<div id="pagingButton" style="margin-left: 43.5%;">
     <ul class="pagination">
         <li class="page-item">
             <a class="page-link" th:href="@{?page=1}" aria-label="Previous">

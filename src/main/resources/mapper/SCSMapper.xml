@@ -29,7 +29,7 @@
 
     <select id="scsRequestList" resultType="com.fivekm_home.charge.domain.SCS.SCS_requestList">
         SELECT scs_name, scs_amount, scs_type, scs_chk, c.res_name, r.road_addr, r.jibun_addr,
-               r.detail_addr, c.reg_date, m.name
+               r.detail_addr, scs_reg_date, m.name
         FROM scs_view c, res_view r, member_view m
         where c.res_name = r.res_name
           and m.email = r.email
@@ -69,16 +69,14 @@
 
     <insert id="scsBook">
         insert into scs_book_view values (
-                                             scs_book_seq.nextval, #{start_date}, #{end_date},
-                                             #{email}, #{car_num}, #{scs_name}, sysdate
-                                         )
+         scs_book_seq.nextval, #{start_date}, #{end_date},
+         #{email}, #{car_num}, #{scs_name}, sysdate)
     </insert>
 
     <insert id="scsPay">
         insert into scs_pay_view values (
-                                            scs_pay_seq.nextval, 'card', #{scs_name}, #{price},
-                                            #{email}, #{phone}, scs_book_seq.currval, sysdate
-                                        )
+        scs_pay_seq.nextval, 'card', #{scs_name}, #{price},
+        #{email}, #{phone}, scs_book_seq.currval, sysdate)
     </insert>
 
     <select id="checkBookmark" resultType="int">
@@ -90,9 +88,8 @@
 
     <insert id="addSCSBookmark">
         insert into scs_bookmark_view values(
-                                                #{email},
-                                                #{scs_name}
-                                            )
+        #{email},
+        #{scs_name})
     </insert>
 
     <delete id="deleteSCSBookmark">

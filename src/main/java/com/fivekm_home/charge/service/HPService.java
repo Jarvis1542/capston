@@ -37,8 +37,13 @@ public class HPService<T> {
     }
 
     // 주차장 요청 리스트
-    public ArrayList<HP_requestList> hpRequestList() {
-        return hpMapper.hpRequestList();
+    public ArrayList<HP_requestList> hpRequestList(HP_criteria hp_criteria) {
+        return hpMapper.hpRequestList(hp_criteria);
+    }
+
+    // 주차장 요청 리스트 총 갯수 - 페이징
+    public int hpRequestListCnt(){
+        return hpMapper.hpRequestListCnt();
     }
 
     // 주차장 예약 페이지

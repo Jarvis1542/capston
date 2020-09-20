@@ -25,11 +25,23 @@
     </insert>
 
     <select id="hpRequestList" resultType="com.fivekm_home.charge.domain.HP.HP_requestList">
-        select hp_name, hp_type, place, p.res_name, r.road_addr, r.jibun_addr,
-               r.detail_addr, p.reg_date, m.name, hp_chk
+        select * from
+        (select hp_name, hp_type, place, p.res_name, r.road_addr, r.jibun_addr, r.detail_addr,
+         hp_reg_date, m.name, hp_chk, row_number() over(order by hp_reg_date desc) ronum
         from hp_view p, res_view r, member_view m
         where p.res_name = r.res_name
-        and m.email = r.email
+        and m.email = r.email)
+        where ronum between #{rowStart} and #{rowEnd}
+        order by hp_reg_date desc
+    </select>
+
+    <select id="hpRequestListCnt" resultType="int">
+        select count(*) from
+        (select hp_name, hp_type, place, p.res_name, r.road_addr, r.jibun_addr, r.detail_addr,
+         hp_reg_date, m.name, hp_chk, row_number() over(order by hp_reg_date desc) ronum
+        from hp_view p, res_view r, member_view m
+        where p.res_name = r.res_name
+        and m.email = r.email)
     </select>
 
     <select id="hpRequest"  resultType="com.fivekm_home.charge.domain.HP.HP_request">

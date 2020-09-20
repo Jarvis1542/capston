@@ -1,5 +1,8 @@
 package com.fivekm_home.charge.controller;
 
+import com.fivekm_home.charge.domain.HP.HP_criteria;
+import com.fivekm_home.charge.domain.HP.HP_pagination;
+import com.fivekm_home.charge.domain.USER.UserCriteria;
 import com.fivekm_home.charge.service.HPService;
 import com.fivekm_home.charge.service.MemService;
 import com.fivekm_home.charge.service.SCSService;
@@ -9,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/admin/*")
@@ -45,8 +49,12 @@ public class AdminController {
     /* HP - 주차장 영역 --------------------------------------------- */
     // 주차장 요청 목록
     @GetMapping("/hpRequestList")
-    public String hpRequestList(Model model){
-        model.addAttribute("hpRequestList", hpService.hpRequestList());
+    public String hpRequestList(Model model, HP_criteria hp_criteria,
+                                @RequestParam(defaultValue = "1") int page){
+        HP_pagination hp_pagination = new HP_pagination(hpService.hpRequestListCnt(), page);
+        hp_criteria.setPage(page);
+        model.addAttribute("pagination", hp_pagination);
+        model.addAttribute("hpRequestList", hpService.hpRequestList(hp_criteria));
         return "/admin/hpRequestList";
     }
     // 해당 주차장 자세히 보기
