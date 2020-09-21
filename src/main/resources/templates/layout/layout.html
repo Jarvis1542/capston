@@ -186,7 +186,7 @@
                                                     <div th:if="${session.user.role.getTitle()=='관리자'}">
                                                         <li><a th:href="@{'/myPage/scsBookmark/' + ${session.user.email}}">즐겨 찾기</a></li>
                                                         <li><a th:href="@{/admin/memberList}">회원 및 가입자 통계</a></li>
-                                                        <li><a th:href="@{/admin/sales}">매출 및 수익 통계</a></li>
+                                                        <li><a th:href="@{/admin/sales}">매출 통계 및 랭킹</a></li>
                                                         <li><a th:href="@{/admin/scsRequestList}">충전소 요청 목록</a></li>
                                                         <li><a th:href="@{/admin/hpRequestList}">주차장 요청 목록</a></li>
                                                         <li><a th:href="@{/myPage/residence}">거주지 등록</a></li>
