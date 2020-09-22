@@ -1,6 +1,7 @@
 package com.fivekm_home.charge.service;
 
 import com.fivekm_home.charge.domain.HP.*;
+import com.fivekm_home.charge.domain.PAGING.Criteria;
 import com.fivekm_home.charge.mapper.HPMapper;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -36,14 +37,14 @@ public class HPService<T> {
         return hpMapper.hpRequest(hp_name);
     }
 
-    // 주차장 요청 리스트
-    public ArrayList<HP_requestList> hpRequestList(HP_criteria hp_criteria) {
-        return hpMapper.hpRequestList(hp_criteria);
-    }
-
     // 주차장 요청 리스트 총 갯수 - 페이징
     public int hpRequestListCnt(){
         return hpMapper.hpRequestListCnt();
+    }
+
+    // 주차장 요청 리스트
+    public ArrayList<HP_requestList> hpRequestList(Criteria criteria) {
+        return hpMapper.hpRequestList(criteria);
     }
 
     // 주차장 예약 페이지

@@ -1,5 +1,6 @@
 package com.fivekm_home.charge.service;
 
+import com.fivekm_home.charge.domain.PAGING.Criteria;
 import com.fivekm_home.charge.domain.SCS.*;
 import com.fivekm_home.charge.domain.HP.HP_loadRes;
 import com.fivekm_home.charge.mapper.HPMapper;
@@ -13,8 +14,6 @@ import java.util.ArrayList;
 public class SCSService {
     @Autowired(required = false)
     private SCSMapper scsMapper;
-    @Autowired(required = false)
-    private HPMapper hpMapper;
 
     //충전소 등록
     public void scsReg(SCS_reg scs_reg) {
@@ -22,23 +21,23 @@ public class SCSService {
     }
 
     // 충전소 요청 리스트
-    public ArrayList<SCS_requestList> scsRequestList(){
-        return scsMapper.scsRequestList();
+    public ArrayList<SCS_requestList> scsRequestList(Criteria criteria){
+        return scsMapper.scsRequestList(criteria);
     }
 
+    // 충전소 요청 리스트 총 갯수 - 페이징
+    public int scsRequestListCnt(){
+        return scsMapper.scsRequestListCnt();
+    }
+
+    // 관리자에게 주차장 요청
     public SCS_request scsRequest(String scs_name) {
-        System.out.println("충전소 명 : " + scs_name);
         return scsMapper.scsRequest(scs_name);
     }
 
     // 주차장 예약 페이지
     public SCS_bookPage scsBookPage(String scs_name){
         return scsMapper.scsBookPage(scs_name);
-    }
-
-    // 거주지 불러오기
-    public ArrayList<HP_loadRes> loadResidence(String email){
-        return hpMapper.loadResidence(email);
     }
 
     // 충전소 승인
@@ -53,7 +52,6 @@ public class SCSService {
 
     // 충전소 자리 변화 불러오기
     public ArrayList<SCS_chPlList> scsPlaceList(){
-        System.out.println("return scsPlaceList Sservice : " + scsMapper.scsPlaceList());
         return scsMapper.scsPlaceList();
     }
 

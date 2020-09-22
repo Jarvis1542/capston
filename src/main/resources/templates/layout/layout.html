@@ -207,6 +207,7 @@
                                                     </div>
                                                     <div th:if="${session.user.role.getTitle()=='일반'}">
                                                         <li class="login_none"><a th:href="@{'/myPage/scsBookmark/' + ${session.user.email}}">즐겨 찾기</a></li>
+                                                        <li><a th:href="@{'/myPage/scsHistory/' + ${session.user.email}}">이용 내역</a></li>
                                                         <li class="login_none"><a th:href="@{/myPage/memberEdit}">정보 수정</a></li>
 
                                                     </div>

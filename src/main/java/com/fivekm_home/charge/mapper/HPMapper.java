@@ -1,6 +1,7 @@
 package com.fivekm_home.charge.mapper;
 
 import com.fivekm_home.charge.domain.HP.*;
+import com.fivekm_home.charge.domain.PAGING.Criteria;
 
 import java.util.ArrayList;
 
@@ -8,7 +9,7 @@ public interface HPMapper {
     ArrayList<HP_loadRes> loadResidence(String email); // 거주지 불러오기
     void hpReg(HP_reg hp_reg); // 주차장 등록
     HP_request hpRequest(String parkingName); // 주차장 요청 목록에서 해당 주차장 불러오기
-    ArrayList<HP_requestList> hpRequestList(HP_criteria hp_criteria); // 주차장 요청 리스트
+    ArrayList<HP_requestList> hpRequestList(Criteria criteria); // 주차장 요청 리스트
     int hpRequestListCnt(); // 주차장 요청 리스트 총 갯수 - 페이징
     void updateParkingChk(String parkingName); // 주차장 승인(주차장 요청 리스트에 n -> y
     ArrayList<HP_search> hpSearchDataList(); // 카카오 지도에 마크 등 데이터 불러오기

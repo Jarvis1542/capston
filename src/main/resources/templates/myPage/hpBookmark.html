@@ -35,11 +35,6 @@
                 </div>
             </div>
         </div><br>
-        <div th:if="${#lists.isEmpty(hp)}">
-            <div class="section_title text-center mb-90">
-                <br><h4 style="text-align: center">조회된 데이터가 없습니다.</h4>
-            </div>
-        </div>
         <div th:if="${not #lists.isEmpty(hp)}">
             <div class="row align-items-center" th:each="hp : ${hp}">
                 <div class="col-lg-6 col-md-6">
@@ -73,6 +68,43 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <br><!-- paging button--><br>
+            <div id="pagingButton" style="margin-left: 35%;">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{?page=1}" aria-label="Previous">
+                            <span aria-hidden="true">처음</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{?page={page} (page = ${pagination.prevBlock})}" aria-label="Previous">
+                            <span aria-hidden="true">이전</span>
+                        </a>
+                    </li>
+                    <th:block  th:with="start = ${pagination.startPage}, end = ${pagination.endPage}">
+                        <li class="page-item"
+                            th:with="start = ${pagination.startPage}, end = ${pagination.endPage}"
+                            th:each="pageButton : ${#numbers.sequence(start, end)}">
+                            <a class="page-link" th:href="@{?page={page} (page = ${pageButton})}" th:text=${pageButton}></a>
+                        </li>
+                    </th:block>
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{?page={page} (page = ${pagination.nextBlock})}" aria-label="Next">
+                            <span aria-hidden="true">다음</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{?page={page} (page = ${pagination.totalPageCnt})}" aria-label="Previous">
+                            <span aria-hidden="true">끝</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div th:if="${#lists.isEmpty(hp)}">
+            <div class="section_title text-center mb-90">
+                <br><h4 style="text-align: center">조회된 데이터가 없습니다.</h4>
             </div>
         </div>
     </div>

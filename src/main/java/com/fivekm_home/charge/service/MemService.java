@@ -1,5 +1,6 @@
 package com.fivekm_home.charge.service;
 
+import com.fivekm_home.charge.domain.PAGING.Criteria;
 import com.fivekm_home.charge.domain.USER.*;
 import com.fivekm_home.charge.mapper.MemMapper;
 import lombok.Data;
@@ -13,9 +14,14 @@ public class MemService {
     @Autowired(required=false)
     MemMapper memMapper;
 
-    // 회원리스트
-    public ArrayList<MemberList> memberList(){
-        return memMapper.memberList();
+    // 회원 리스트
+    public ArrayList<MemberList> memberList(Criteria criteria){
+        return memMapper.memberList(criteria);
+    }
+
+    // 회원 리스트 총 갯수 - 페이징
+    public int memberListCnt(){
+        return memMapper.memberListCnt();
     }
 
     //회원가입

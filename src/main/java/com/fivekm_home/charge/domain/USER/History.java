@@ -12,7 +12,8 @@ public class History {
     private Date start_date;
     private Date end_date;
     private int price;
-    private Date pay_date;
+    private Date scs_pay_date;
+    private Date hp_pay_date;
     private String email;
     private int used_time;
     private String find_start_date;

@@ -2,7 +2,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fivekm_home.charge.mapper.MemMapper">
     <select id="memberList" resultType="com.fivekm_home.charge.domain.USER.MemberList">
-        select * from member_view
+        select * from
+        (select email, name, phone, picture, role, created_date,
+         row_number() over(order by created_date desc) ronum
+         from member_view)
+         where ronum between #{rowStart} and #{rowEnd}
+         order by created_date desc
+     </select>
+
+    <select id="memberListCnt" resultType="int">
+        select count(*) from (select * from member_view)
      </select>
 
     <insert id="join">

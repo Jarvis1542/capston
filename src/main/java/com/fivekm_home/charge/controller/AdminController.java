@@ -2,6 +2,8 @@ package com.fivekm_home.charge.controller;
 
 import com.fivekm_home.charge.domain.HP.HP_criteria;
 import com.fivekm_home.charge.domain.HP.HP_pagination;
+import com.fivekm_home.charge.domain.PAGING.Criteria;
+import com.fivekm_home.charge.domain.PAGING.Pagination;
 import com.fivekm_home.charge.domain.USER.UserCriteria;
 import com.fivekm_home.charge.service.HPService;
 import com.fivekm_home.charge.service.MemService;
@@ -26,15 +28,27 @@ public class AdminController {
 
     // 사용자 목록
     @GetMapping("/memberList")
-    public String memberList(Model model){
-        model.addAttribute("memberList", memService.memberList());
+    public String memberList(Model model, Criteria criteria,
+                             @RequestParam(defaultValue = "1") int page){
+        Pagination pagination = new Pagination(memService.memberListCnt(), page);
+        criteria.setPage(page);
+        System.out.println("pagination : " + pagination);
+        System.out.println("criteria : " + criteria.toString());
+        model.addAttribute("pagination", pagination);
+        model.addAttribute("memberList", memService.memberList(criteria));
         return "admin/memberList";
     }
     /* CS - 충전소 영역 ---------------------------------------------- */
     // CS 충전소 요청 목록
     @GetMapping("/scsRequestList")
-    public String scsRequestList(Model model){
-        model.addAttribute("SCSRequestList", scsService.scsRequestList());
+    public String scsRequestList(Model model, Criteria criteria,
+                                 @RequestParam(defaultValue = "1") int page){
+        Pagination pagination = new Pagination(scsService.scsRequestListCnt(), page);
+        criteria.setPage(page);
+        System.out.println("pagination : " + pagination);
+        System.out.println("criteria : " + criteria.toString());
+        model.addAttribute("pagination", pagination);
+        model.addAttribute("SCSRequestList", scsService.scsRequestList(criteria));
         return "/admin/scsRequestList";
     }
 
@@ -49,12 +63,14 @@ public class AdminController {
     /* HP - 주차장 영역 --------------------------------------------- */
     // 주차장 요청 목록
     @GetMapping("/hpRequestList")
-    public String hpRequestList(Model model, HP_criteria hp_criteria,
+    public String hpRequestList(Model model, Criteria criteria,
                                 @RequestParam(defaultValue = "1") int page){
-        HP_pagination hp_pagination = new HP_pagination(hpService.hpRequestListCnt(), page);
-        hp_criteria.setPage(page);
-        model.addAttribute("pagination", hp_pagination);
-        model.addAttribute("hpRequestList", hpService.hpRequestList(hp_criteria));
+        Pagination pagination = new Pagination(hpService.hpRequestListCnt(), page);
+        criteria.setPage(page);
+        model.addAttribute("pagination", pagination);
+        System.out.println("pagination : " + pagination);
+        System.out.println("criteria : " + criteria.toString());
+        model.addAttribute("hpRequestList", hpService.hpRequestList(criteria));
         return "/admin/hpRequestList";
     }
     // 해당 주차장 자세히 보기

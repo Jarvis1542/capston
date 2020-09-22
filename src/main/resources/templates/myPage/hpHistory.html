@@ -27,11 +27,11 @@
 <div class="container">
     <div class="row">
         <div style="font-size: 40px">
-            <br><span th:text="${mem.name}+ '님'"/>&emsp14;이용 내역
+            <br><div th:text="${mem.name}+ '님 이용내역'"></div>
         </div>
     </div>
 </div>
-<div style="margin-left: 20%">
+<div style="text-align: center">
     <form th:action="${'/myPage/hpHistorySearch/'}+${session.user.email}" method="post">
         <br><input type="date" name="find_start_date">&emsp;~&emsp;<input type="date" name="find_end_date">&emsp;
         <input type="submit" id="hpHistorySearch" class="genric-btn success radius" value="검색">
@@ -46,69 +46,74 @@
 </div>
 <div class="section_title text-center mb-90">
     <div class="col-lg-10">
-        <table class="table table-horizontal">
-            <thead class="thead-strong">
-            <tr>
-                <th>상품이름</th>
-                <th>사용위치</th>
-                <th>사용시간</th>
-                <th>이용가격</th>
-                <th>결제일자</th>
-            </tr>
-            </thead>
-            <tbody id="tbody">
-                <div th:if="${not #lists.isEmpty(hpHistory)}">
-                    <tr id="tr" th:each ="hpHistory : ${hpHistory}">
-                        <td><div id="scs_name" th:text="${hpHistory.hp_name}"/></td>
-                        <td><div id="road_addr" th:text="${hpHistory.road_addr}"/></td>
-                        <td><div id="start_date" th:text="${#dates.format(hpHistory.start_date, 'YYYY-MM-dd HH:mm:ss')}"/>
-                            <div id="end_date" th:text="${#dates.format(hpHistory.end_date, 'YYYY-MM-dd HH:mm:ss')}"/>
-                            <div id="used_time" th:text="${hpHistory.used_time} + 'h'"/></td>
-                        <td><div id="price" th:text="${hpHistory.price}"/></td>
-                        <td><div id="pay_date" th:text="${#dates.format(hpHistory.pay_date, 'YYYY-MM-dd HH:mm:ss')}"/></td>
-                    </tr>
-                </div>
-            </tbody>
-        </table>
-        <div th:if="${#lists.isEmpty(hpHistory)}">
-            <div style="margin-left: 20%">
-                <br><br><h4 style="text-align: center">조회된 데이터가 없습니다.</h4>
+        <div th:if="${not #lists.isEmpty(hpHistory)}">
+            <table class="table table-horizontal">
+                <thead class="thead-strong">
+                <tr>
+                    <th>상품이름</th>
+                    <th>사용위치</th>
+                    <th>사용시간</th>
+                    <th>이용가격</th>
+                    <th>결제일자</th>
+                </tr>
+                </thead>
+                <tbody id="tbody">
+                <tr id="tr" th:each="hpHistory : ${hpHistory}">
+                    <td><div id="scs_name" th:text="${hpHistory.hp_name}"/></td>
+                    <td><div id="road_addr" th:text="${hpHistory.road_addr}"/></td>
+                    <td>
+                        <div id="start_date" th:text="${#dates.format(hpHistory.start_date, 'YYYY-MM-dd HH:mm:ss')}"/>
+                        <div id="end_date" th:text="${#dates.format(hpHistory.end_date, 'YYYY-MM-dd HH:mm:ss')}"/>
+                        <div id="used_time" th:text="${hpHistory.used_time} + 'h'"/>
+                    </td>
+                    <td><div id="price" th:text="${hpHistory.price}"/></td>
+                    <td><div id="pay_date" th:text="${#dates.format(hpHistory.hp_pay_date, 'YYYY-MM-dd HH:mm:ss')}"/></td>
+                </tr>
+                </tbody>
+            </table>
+            <br><!-- paging button--><br>
+            <div id="pagingButton" style="margin-left: 50%">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{?page=1}" aria-label="Previous">
+                            <div aria-hidden="true">처음</div>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{?page={page} (page = ${pagination.prevBlock})}"
+                           aria-label="Previous">
+                            <div aria-hidden="true">이전</div>
+                        </a>
+                    </li>
+                    <th:block th:with="start = ${pagination.startPage}, end = ${pagination.endPage}">
+                        <li class="page-item"
+                            th:with="start = ${pagination.startPage}, end = ${pagination.endPage}"
+                            th:each="pageButton : ${#numbers.sequence(start, end)}">
+                            <a class="page-link" th:href="@{?page={page} (page = ${pageButton})}"
+                               th:text=${pageButton}></a>
+                        </li>
+                    </th:block>
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{?page={page} (page = ${pagination.nextBlock})}"
+                           aria-label="Next">
+                            <div aria-hidden="true">다음</div>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" th:href="@{?page={page} (page = ${pagination.totalPageCnt})}"
+                           aria-label="Previous">
+                            <div aria-hidden="true">끝</div>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
-        <div id="noneData"></div>
+        <div th:if="${#lists.isEmpty(hpHistory)}">
+            <div style="margin-left: 30%">
+                <br><br><br><br><h4 style="text-align: center">조회된 데이터가 없습니다.</h4>
+            </div>
+        </div>
     </div>
-</div>
-<!-- paging button-->
-<div id="pagingButton" style="margin-left: 43.5%;">
-    <ul class="pagination">
-        <li class="page-item">
-            <a class="page-link" th:href="@{?page=1}" aria-label="Previous">
-                <span aria-hidden="true">처음</span>
-            </a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" th:href="@{?page={page} (page = ${pagination.prevBlock})}" aria-label="Previous">
-                <span aria-hidden="true">이전</span>
-            </a>
-        </li>
-        <th:block  th:with="start = ${pagination.startPage}, end = ${pagination.endPage}">
-            <li class="page-item"
-                th:with="start = ${pagination.startPage}, end = ${pagination.endPage}"
-                th:each="pageButton : ${#numbers.sequence(start, end)}">
-                <a class="page-link" th:href="@{?page={page} (page = ${pageButton})}" th:text=${pageButton}></a>
-            </li>
-        </th:block>
-        <li class="page-item">
-            <a class="page-link" th:href="@{?page={page} (page = ${pagination.nextBlock})}" aria-label="Next">
-                <span aria-hidden="true">다음</span>
-            </a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" th:href="@{?page={page} (page = ${pagination.totalPageCnt})}" aria-label="Previous">
-                <span aria-hidden="true">끝</span>
-            </a>
-        </li>
-    </ul>
 </div>
 <footer th:replace="layout/layout :: footer"/>
 </body>

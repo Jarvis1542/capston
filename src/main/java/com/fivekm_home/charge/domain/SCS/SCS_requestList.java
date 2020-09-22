@@ -13,7 +13,7 @@ public class SCS_requestList {
     private String road_addr;     /* 도로명 주소 */
     private String jibun_addr;    /* 지번 주소 */
     private String detail_addr;   /* 상세 주소 */
-    private Date reg_date;
+    private Date scs_reg_date;
     private String name;
     private String scs_chk;
 }

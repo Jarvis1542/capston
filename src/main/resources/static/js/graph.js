@@ -267,7 +267,7 @@ $(document).ready(function () {
             // The data for our dataset
             data: {
                 datasets: [{
-                    label: '주간 가입자 통계',
+                    label: '가입자 통계',
                     backgroundColor: 'rgb(255,171,45)',
                     borderColor: 'rgb(64,64,64)'
                 }]

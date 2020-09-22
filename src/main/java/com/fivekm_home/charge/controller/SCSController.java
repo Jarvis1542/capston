@@ -31,11 +31,11 @@ public class SCSController {
 
     @GetMapping("/scsHistory")
     public String chargingHistory(){
-        return "/SCS/scsHistory";
+        return "/myPage/scsHistory";
     }
 
     // 주차장 예약 페이지
-    @GetMapping("/scsBook/{scs_name}+{email}")
+    @GetMapping("/scsBook/{scs_name}/{email}")
     public String csBookPage(@PathVariable String scs_name,  @PathVariable String email,
                              Model model, HttpSession httpSession){
         // 로그인 되어있는지 검사부터 할께용

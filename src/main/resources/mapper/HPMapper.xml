@@ -102,7 +102,8 @@
     <insert id="addHpBookmark">
         insert into hp_bookmark_view values(
             #{email},
-            #{hp_name}
+            #{hp_name},
+            sysdate
         )
     </insert>
 

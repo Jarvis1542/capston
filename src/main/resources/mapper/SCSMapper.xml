@@ -9,30 +9,42 @@
 
     <insert id="scsReg">
         insert into scs values(
-                                  #{scs_name},
-                                  #{oper_ins},
-                                  #{scs_speed},
-                                  #{scs_amount},
-                                  #{min30_fee},
-                                  #{addMin10_fee},
-                                  #{start_manage_time},
-                                  #{end_manage_time},
-                                  #{scs_pic},
-                                  #{apt_map},
-                                  #{cable},
-                                  #{scs_type},
-                                  sysdate,
-                                  'N',
-                                  #{res_name}
-                              )
+           #{scs_name},
+           #{oper_ins},
+           #{scs_speed},
+           #{scs_amount},
+           #{min30_fee},
+           #{addMin10_fee},
+           #{start_manage_time},
+           #{end_manage_time},
+           #{scs_pic},
+           #{apt_map},
+           #{cable},
+           #{scs_type},
+           sysdate,
+           'N',
+           #{res_name}
+        )
     </insert>
 
     <select id="scsRequestList" resultType="com.fivekm_home.charge.domain.SCS.SCS_requestList">
-        SELECT scs_name, scs_amount, scs_type, scs_chk, c.res_name, r.road_addr, r.jibun_addr,
-               r.detail_addr, scs_reg_date, m.name
-        FROM scs_view c, res_view r, member_view m
+        select * from
+        (select scs_name, scs_amount, scs_type, scs_chk, c.res_name, r.road_addr, r.jibun_addr,
+         r.detail_addr, m.name, scs_reg_date, row_number() over(order by scs_reg_date desc) ronum
+        from scs_view c, res_view r, member_view m
         where c.res_name = r.res_name
-          and m.email = r.email
+        and m.email = r.email)
+        where ronum between #{rowStart} and #{rowEnd}
+        order by scs_reg_date desc
+    </select>
+
+    <select id="scsRequestListCnt" resultType="int">
+        select count(*) from
+        (select scs_name, scs_amount, scs_type, scs_chk, c.res_name, r.road_addr, r.jibun_addr,
+         r.detail_addr, m.name, scs_reg_date, row_number() over(order by scs_reg_date desc) ronum
+        from scs_view c, res_view r, member_view m
+        where c.res_name = r.res_name
+        and m.email = r.email)
     </select>
 
     <select id="scsRequest" resultType="com.fivekm_home.charge.domain.SCS.SCS_request">
@@ -89,7 +101,8 @@
     <insert id="addSCSBookmark">
         insert into scs_bookmark_view values(
         #{email},
-        #{scs_name})
+        #{scs_name},
+        sysdate)
     </insert>
 
     <delete id="deleteSCSBookmark">

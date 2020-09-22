@@ -20,25 +20,24 @@ public class HPController {
     @Autowired
     HPService hpService;
 
-
     @GetMapping("/hpRegister")
     public String hpRegister(){
         return "/HP/hpRegister";
     }
 
     @GetMapping("/hpSearch")
-    public String happyParkingSearch(Model model, HP_search hp_search){
+    public String happyParkingSearch(Model model){
         model.addAttribute("searchList", hpService.hpSearchDataList());
         return "/HP/hpSearch";
     }
 
-    @GetMapping("/hpHistory") // 데이터 없음
+    @GetMapping("/hpHistory")
     public String hpHistory(){
-        return "/HP/hpHistory";
+        return "/myPage/hpHistory";
     }
 
     // 주차장 예약 페이지
-    @GetMapping("/hpBook/{hp_name}+{email}")
+    @GetMapping("/hpBook/{hp_name}/{email}")
     public String hpBookPage(@PathVariable String hp_name,
             @PathVariable String email, Model model, HttpSession httpSession){
 
@@ -53,13 +52,10 @@ public class HPController {
             hp_chkBookmark.setHp_name(hp_name);
             System.out.println("checkBookmark return : " + hpService.checkBookmark(hp_chkBookmark));
             model.addAttribute("checkBookmark", hpService.checkBookmark(hp_chkBookmark));
-
             return "/HP/hpBook";
         } else {
             System.out.println("HPController : 로그인되어 있지 않아 로그인 페이지로 요청했습니다.");
             return "/index/login";
         }
-
     }
-
 }

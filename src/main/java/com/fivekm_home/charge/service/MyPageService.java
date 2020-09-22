@@ -65,38 +65,33 @@ public class MyPageService {
     }
 
     // 유저가 저장한 주차장 즐겨찾기 목록 불러오기
-    public ArrayList<UserBookmark> userHpBookmark(String email){
-        return myPageMapper.userHpBookmark(email);
+    public ArrayList<UserBookmark> userHpBookmark(UserHistoryCriteria userHistoryCriteria){
+        return myPageMapper.userHpBookmark(userHistoryCriteria);
     }
 
     // 즐겨찾기 주차장 목록 총 갯수 - 페이징
-    public int userHpBookmarkCnt(UserCriteria userCriteria){
-        return myPageMapper.userHpBookmarkCnt(userCriteria);
+    public int userHpBookmarkCnt(UserHistoryCriteria userHistoryCriteria){
+        return myPageMapper.userHpBookmarkCnt(userHistoryCriteria);
     }
 
     // 유저가 저장한 충전소 즐겨찾기 목록 불러오기
-    public ArrayList<UserBookmark> userSCSBookmark(String email){
-        return myPageMapper.userSCSBookmark(email);
+    public ArrayList<UserBookmark> userSCSBookmark(UserHistoryCriteria userHistoryCriteria){
+        return myPageMapper.userSCSBookmark(userHistoryCriteria);
     }
 
     // 즐겨찾기 충전소 목록 총 갯수 - 페이징
-    public int userSCSBookmarkCnt(UserCriteria userCriteria){
-        return myPageMapper.userSCSBookmarkCnt(userCriteria);
+    public int userSCSBookmarkCnt(UserHistoryCriteria userHistoryCriteria){
+        return myPageMapper.userSCSBookmarkCnt(userHistoryCriteria);
     }
 
     // 충전소 이용 내역
-    public ArrayList<History> userSCSHistory(String email){
-        return myPageMapper.userSCSHistory(email);
+    public ArrayList<History> userSCSHistoryList(UserCriteria userCriteria){
+        return myPageMapper.userSCSHistoryList(userCriteria);
     }
 
     // 충전소 이용 내역 총 갯수 - 페이징
-    public int userSCSHistoryCnt(UserCriteria userCriteria){
-        return myPageMapper.userSCSHistoryCnt(userCriteria);
-    }
-
-    // 주차장 이용 내역
-    public ArrayList<History> userHPHistory(String email){
-        return myPageMapper.userHPHistory(email);
+    public int userSCSHistoryListCnt(UserCriteria userCriteria){
+        return myPageMapper.userSCSHistoryListCnt(userCriteria);
     }
 
     // 주차장 이용 내역 리스트 - 페이징
@@ -106,13 +101,13 @@ public class MyPageService {
     }
 
     // 주차장 이용 내역 총 갯수 - 페이징
-    public int userHPHistoryCnt(UserCriteria userCriteria){
-        return myPageMapper.userHPHistoryCnt(userCriteria);
+    public int userHPHistoryListCnt(UserCriteria userCriteria){
+        return myPageMapper.userHPHistoryListCnt(userCriteria);
     }
 
     // 충전소 이용 내역 날짜 검색
-    public ArrayList<History> scsHistorySearchList(History history){
-        return myPageMapper.scsHistorySearchList(history);
+    public ArrayList<History> scsHistorySearchList(UserCriteria userCriteria){
+        return myPageMapper.scsHistorySearchList(userCriteria);
     }
 
     // 충전소 이용 내역 날짜 검색 총 갯수 - 페이징
@@ -121,8 +116,8 @@ public class MyPageService {
     }
 
     // 주차장 이용 내역 날짜 검색
-    public ArrayList<History> hpHistorySearchList(History history){
-        return myPageMapper.hpHistorySearchList(history);
+    public ArrayList<History> hpHistorySearchList(UserCriteria userCriteria){
+        return myPageMapper.hpHistorySearchList(userCriteria);
     }
 
     // 주차장 이용 내역 날짜 검색 총 갯수 - 페이징

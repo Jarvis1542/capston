@@ -1,9 +1,9 @@
-package com.fivekm_home.charge.domain.HP;
+package com.fivekm_home.charge.domain.USER;
 
 import lombok.Data;
 
 @Data
-public class HP_criteria {
+public class UserHistoryCriteria {
     private String email;
     private int page; // 선택한 페이지
     private int perPageNum; // 선택한 페이지에 보여줄 갯수
@@ -12,9 +12,9 @@ public class HP_criteria {
     private String find_start_date;
     private String find_end_date;
 
-    public HP_criteria() {
+    public UserHistoryCriteria() {
         this.page = 1;
-        this.perPageNum = 5;
+        this.perPageNum = 3;
     }
 
     public void setPage(int page) {
@@ -27,7 +27,7 @@ public class HP_criteria {
 
     public void setPerPageNum(int perPageNum) {
         if (perPageNum <= 0 || perPageNum > 100) {
-            this.perPageNum = 5;
+            this.perPageNum = 3;
             return;
         }
         this.perPageNum = perPageNum;
