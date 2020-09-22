@@ -14,12 +14,12 @@
     </insert>
 
     <select id="qboardList" resultType="com.fivekm_home.charge.domain.OS.QBoardList">
-            select bno, title, writer, reg_date, no_count, no_reco
+            select bno, title, writer, board_reg_date, no_count, no_reco
             from qna_board_view
         </select>
 
     <select id="select" resultType="com.fivekm_home.charge.domain.OS.QBSelect">
-            select bno, title, writer, reg_date, content, no_count, no_reco
+            select bno, title, writer, board_reg_date, content, no_count, no_reco
             from qna_board_view
             where bno = #{bno}
         </select>
