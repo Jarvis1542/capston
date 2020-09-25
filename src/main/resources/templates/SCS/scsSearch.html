@@ -103,8 +103,33 @@
                 </div>
             </div>
         </div>
-        <input type="text" name="keyword" id="keyword" />
-        <button id="keySearch" type="button" onclick="setCenter()" class="btn btn-primary">조회</button>
+
+        <div class="row"  id="search_frm">
+        <label class="interval">
+            <input type="checkbox" id="ac3" name="scs_type[]" value="AC3상" class="d-inline-block" onchange="makeFilter(this)">AC3상
+        </label>
+        <label class="interval">
+            <input type="checkbox" id="combo" name="scs_type[]" value="DC콤보" class="d-inline-block" onchange="makeFilter(this)">DC콤보
+        </label>
+        <label class="interval">
+            <input type="checkbox" id="demo" name="scs_type[]" value="DC차데모" class="d-inline-block" onchange="makeFilter(this)">DC차데모
+        </label>
+        <label class="interval">
+            <input type="checkbox" id="super" name="scs_type[]" value="수퍼차저" class="d-inline-block" onchange="makeFilter(this)">수퍼차저
+        </label>
+        <label class="interval">
+            <input type="checkbox" id="slow" name="scs_type[]" value="완속" class="d-inline-block" onchange="makeFilter(this)">완속
+        </label>
+        <label class="interval">
+            <input type="checkbox" id="des" name="scs_type[]" value="데스티네이션" class="d-inline-block" onchange="makeFilter(this)">데스티네이션
+        </label>
+
+            <input type="text" name="keyword" id="keyword"/>
+            <button id="keySearch" type="button" onclick="setCenter()" class="btn btn-primary">조회</button>
+        </div>
+
+
+        <br>
         <div class="row justify-content-center">
             <div class="map_wrap">
                 <div id="map" style="width:100%;height:100%; position:relative;overflow:hidden;"></div>
@@ -127,9 +152,9 @@
             for (let i = 0; i < data.length; i++) {
 
                 place[i] = data[i];
-                console.log('scs_name : ' + place[i].scs_name);
-                console.log('scs_type : ' + place[i].scs_type);
-                console.log('scs_amount : ' + place[i].scs_amount);
+                // console.log('scs_name : ' + place[i].scs_name);
+                // console.log('scs_type : ' + place[i].scs_type);
+                // console.log('scs_amount : ' + place[i].scs_amount);
             }
         },
         error: function (error) {
@@ -168,20 +193,20 @@
             console.log("data 2222 ", data);
             for (let i = 0; i < data.length; i++) {
                 search[i] = data[i];
-                console.log('chargeName : ' + search[i].scs_name);
-                console.log('operation : ' + search[i].oper_ins);
-                console.log('chargeAmount' + search[i].scs_amount);
-                console.log('min30Fee : ' + search[i].min30_fee);
-                console.log('addMin10Fee : ' + search[i].addMin10_fee);
-                console.log('roadAddress : ' + search[i].road_addr);
-                console.log('extraAddress : ' + search[i].extra_addr);
-                console.log('start_manage_time : ' + search[i].start_manage_time);
-                console.log('end_manage_time : ' + search[i].end_manage_time);
-                console.log('chargingChk : ' + search[i].scs_chk);
-                console.log('chargePic : ' + search[i].scs_pic);
-                console.log('lat : ' + search[i].lat);
-                console.log('lng : ' + search[i].lng);
-                console.log('==========================================');
+                // console.log('chargeName : ' + search[i].scs_name);
+                // console.log('operation : ' + search[i].oper_ins);
+                // console.log('chargeAmount' + search[i].scs_amount);
+                // console.log('min30Fee : ' + search[i].min30_fee);
+                // console.log('addMin10Fee : ' + search[i].addMin10_fee);
+                // console.log('roadAddress : ' + search[i].road_addr);
+                // console.log('extraAddress : ' + search[i].extra_addr);
+                // console.log('start_manage_time : ' + search[i].start_manage_time);
+                // console.log('end_manage_time : ' + search[i].end_manage_time);
+                // console.log('chargingChk : ' + search[i].scs_chk);
+                // console.log('chargePic : ' + search[i].scs_pic);
+                // console.log('lat : ' + search[i].lat);
+                // console.log('lng : ' + search[i].lng);
+                // console.log('==========================================');
 
                 // 마커를 생성합니다
                 var marker = new kakao.maps.Marker({
@@ -209,8 +234,9 @@
                     '<span>' +
                     '30분당 요금 : '+search[i].min30_fee+'<br>'+
                     '10분당 추가요금 : '+search[i].addMin10_fee+'<br>'+
+                    '충전 타입 : '+search[i].scs_type+'<br>'+
+                    '<button style="width: 100px; margin-left: 5px; margin-top: 5px" onClick="mapBook(\'' + search[i].scs_name + '\')" class="genric-btn primary small">예약</button>'+
                     '</span>'+
-                     '<button style="width: 100px; margin-top: 23px;" onClick="mapBook(\'' + search[i].scs_name + '\')" class="genric-btn primary small">예약</button>'+
                     '</li>'+
                     '</ul>'+
                     '</div>');

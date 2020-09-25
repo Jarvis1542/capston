@@ -21,5 +21,13 @@ public interface SCSMapper {
     void deleteSCSBookmark(SCS_bookmark scs_bookmark); // 충전소 즐겨찾기 삭제
     ArrayList<SCS_chPlList> scsPlaceList(); // 주차장 자리 변화 불러오기
     ArrayList<SCS_mapSearch> scsMapSearch(String scs_name); // 충전소 지도 검색
+
+    // 충전소 타입 검색
+    ArrayList<SCS_type> scsType1(Asdf asdf);
+    ArrayList<SCS_type> scsType2(Asdf asdf);
+    ArrayList<SCS_type> scsType3(Asdf asdf);
+    ArrayList<SCS_type> scsType4(Asdf asdf);
+    ArrayList<SCS_type> scsType5(Asdf asdf);
+    ArrayList<SCS_type> scsType6(Asdf asdf);
 }
 

@@ -17,4 +17,5 @@ public class SCS_search {
     private double lat;
     private double lng;
     private String scs_chk;
+    private String scs_type;
 }

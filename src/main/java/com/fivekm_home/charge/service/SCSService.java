@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 @Service
 public class SCSService {
@@ -84,4 +87,26 @@ public class SCSService {
     public ArrayList<SCS_mapSearch> scsMapSearch(String scs_name){
         return scsMapper.scsMapSearch(scs_name);
     }
+
+    // 충전소 타입 검색
+    public ArrayList<SCS_type> scsType(Asdf asdf){
+
+//        scs_type = "asdf, qwer";
+//        String type_str[] = scs_type.split(",");
+//        String type1 = type_str[0];
+//        String typ2 = type_str[1];
+//        Asdf asdf = new Asdf();
+//        asdf.setTpye1 =type1;
+//
+//        type1.setType1(type1);
+//        if (type1.isEmpty()!= null && typ2.isEmpty() == null){
+//            return scsMap
+//        }
+//        if (type1.isEmpty()!= null && typ2.isEmpty() != null){
+//            return scsMapper.scsType2();
+//        }
+        return scsMapper.scsType1(asdf);
+    }
+
+
 }

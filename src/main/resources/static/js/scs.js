@@ -73,7 +73,6 @@ $('#keySearch').on('click', function () {
         url : '/rest/scsMapSearch',
         success : function (data) {
             setCenter(data[0].lat, data[0].lng);
-            // window.location.replace(document.location.href);
         },
         error : function (error) {
             alert(JSON.stringify(error));
@@ -81,3 +80,60 @@ $('#keySearch').on('click', function () {
     });
 });
 
+// 충전소 타입별 검색
+var type = {
+    "AC3상" : false,
+    "DC콤보" : false,
+    "DC차데모" : false,
+    "수퍼차저" : false,
+    "완속" : false,
+    "데스티네이션" : false,
+}
+function makeFilter(target){
+    var tval = target.value;
+    type[tval]=!type[tval];
+    console.log(type);
+
+    $.ajax({
+        data : JSON.stringify(type),
+        type : 'POST',
+        contentType:'application/json',
+        dataType: 'json',
+        url : '/rest/typeFilter',
+        success : function (data) {
+            console.log("타입data :" + JSON.stringify(data));
+            for(let i=0; i < data.length; i++) {
+                type[i] = data[i];
+                console.log("===============");
+                console.log("타입결과 충전소 이름 : " + type[i].scs_name);
+                console.log("타입결과 충전소 타입 : " + type[i].scs_type);
+                console.log("타입결과 충전소 위도 : " + type[i].lat);
+                console.log("타입결과 충전소 경도 : " + type[i].lng);
+
+            }
+        },
+        error : function (error) {
+            console.log('실패');
+            console.log(JSON.stringify(error));
+        }
+    });
+}
+
+/*$("input:checkbox[name='scs_type[]']").change(function () {
+
+    var type = [];
+
+        console.log("gd :" + JSON.stringify(data));
+
+});*/
+
+// 로그인 엔터
+$("#search_frm input").keypress(function( event ) {
+    if ( event.which == 13 ) {
+        event.preventDefault();
+        if($("#search_frm input").eq(0).val() == '' && $("#search_frm input").eq(1).val() == '') {
+            return false;
+        }
+        $("#keySearch").first().trigger("click");
+    }
+});

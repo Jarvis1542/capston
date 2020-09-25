@@ -1,16 +1,24 @@
 package com.fivekm_home.charge.controller;
 
 import com.fivekm_home.charge.domain.HP.HP_cnPlList;
+import com.fivekm_home.charge.domain.HP.HP_mapSearch;
 import com.fivekm_home.charge.domain.SCS.*;
 import com.fivekm_home.charge.service.SCSService;
 import com.fivekm_home.charge.service.StorageService;
+import com.google.gson.JsonObject;
 import oracle.ucp.proxy.annotation.Post;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 public class SCSRestController {
@@ -80,4 +88,43 @@ public class SCSRestController {
     public ArrayList<SCS_mapSearch> scsMapSearch(String scs_name) {
         return scsService.scsMapSearch(scs_name);
     }
+
+
+    // 충전소 타입 검색
+    @PostMapping("/rest/typeFilter")
+    @ResponseBody
+    public void scsType(@RequestBody String aa) throws Exception {
+        System.out.println("=======================");
+        System.out.println("controller String 값 : " +  aa);
+
+//        JSONObject jo = new JSONObject(aa);
+//        ArrayList<String> list = new ArrayList<>();
+
+
+        try{
+            HashMap<String,Boolean> c = new ObjectMapper().readValue(aa, HashMap.class);
+            System.out.println("ㅇㅇㅇ값: " + c.toString());
+
+            for (String key : c.keySet()) {
+                Boolean value = c.get(key);
+                System.out.println(key + " : " + value);
+            }
+//            scsService.scsType(c);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
+//        ArrayList<SCS_type> a = scsService.scsType(scs_type);
+//        for(SCS_type aa : a){
+//            System.out.println("충전소이름 : " + aa.getScs_name());
+//            System.out.println("충전소타입 : " + aa.getScs_type());
+//            System.out.println("충전소경도 : " + aa.getLat());
+//            System.out.println("충전소위도 : " + aa.getLng());
+//        }
+////        return scsService.scsType(scs_type);
+//        return a;
+    }
+
 }
