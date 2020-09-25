@@ -11,4 +11,6 @@ public class HP_pay {
     private String email;
     private String user_name;
     private String phone;
+    private String car_num;
+    private Date start_date;
 }

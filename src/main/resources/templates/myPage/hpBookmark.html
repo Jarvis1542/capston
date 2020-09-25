@@ -63,8 +63,8 @@
                                 <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".8s">추가 요금(10분당) :
                                     <span th:text="${hp.addmin10_fee+'원'}"></span></li>
                             </ul>
-                            <br><a class="boxed-btn3" th:href="@{'/happyParking/hpBook/'+${hp.hp_name}+'+'
-                                                +${session.user.email}}">충전소 예약</a><br><br>
+                            <br><a class="boxed-btn3" th:href="@{'/happyParking/hpBook/'+${hp.hp_name}+'/'
+                                                +${session.user.email}}">주차장 예약</a><br><br>
                         </div>
                     </div>
                 </div>

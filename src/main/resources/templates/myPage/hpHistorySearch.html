@@ -64,7 +64,7 @@
                             <div id="end_date" th:text="${#dates.format(hpSearchHistory.end_date, 'YYYY-MM-dd HH:mm:ss')}"/>
                             <div id="used_time" th:text="${hpSearchHistory.used_time} + 'h'"/></td>
                         <td><div id="price" th:text="${hpSearchHistory.price}"/></td>
-                        <td><div id="pay_date" th:text="${#dates.format(hpSearchHistory.pay_date, 'YYYY-MM-dd HH:mm:ss')}"/></td>
+                        <td><div id="pay_date" th:text="${#dates.format(hpSearchHistory.hp_pay_date, 'YYYY-MM-dd HH:mm:ss')}"/></td>
                     </tr>
                 </div>
             </tbody>

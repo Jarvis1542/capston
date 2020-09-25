@@ -4,26 +4,6 @@ create sequence  qna_board_seq
     increment by 1
     start with 1;
 
--- cs_pay 시퀀스
-create sequence scs_pay_seq
-    start with 1
-    increment by 1;
-
--- cs_book 시퀀스
-create sequence scs_book_seq
-    start with 1
-    increment by 1;
-
--- hp_pay 시퀀스
-create sequence hp_pay_seq
-start with 1
-increment by 1;
-
--- hp_book 시퀀스
-create sequence hp_book_seq
-start with 1
-increment by 1;
-
 -- entry_info 시퀀스
 create sequence entry_info_seq
 start with 1
@@ -154,10 +134,14 @@ create TABLE scs_book (
     car_num     varchar2(10),           /* 차번호 */
     scs_name varchar2(300),           /* 충전소 이름 - FK(CS) */
     scs_book_date    timestamp,             /* 예약 날짜 */
+    scs_chk varchar2(1) default 'N',
+    scs_cnt number,
+    scs_state varchar2(15),
     constraint scs_book_id_pk primary key (book_id),
+    constraint scs_book_scs_chk_ck check (scs_chk in('Y', 'N')),
     constraint scs_book_email_fk foreign key (email) references member (email),
     constraint scs_book_scs_name_fk foreign key (scs_name) references scs (scs_name)
-        on delete cascade
+    on delete cascade
 );
 
 /* 충전소 결제 */
@@ -170,6 +154,8 @@ create TABLE scs_pay (
     phone varchar2(15),         /* 휴대폰 번호 */
     book_id number,       /* 예약 ID - FK */
     scs_pay_date timestamp,         /* 결제 날짜 */
+    car_num varchar2(10),
+    scs_pay_cnt number,
     constraint scs_pay_pay_id_pk primary key (pay_id),
     constraint scs_pay_book_id_fk foreign key (book_id) references scs_book (book_id)
        on delete cascade
@@ -228,23 +214,28 @@ create table hp_book
     car_num     varchar2(10),           /* 차번호 */
     hp_name varchar2(300),
     hp_book_date    timestamp,
+    hp_chk varchar2(1) default 'N',
+    hp_cnt number,
+    hp_state varchar2(15),
     constraint hp_book_book_id_pk primary key (book_id),
+    constraint hp_book_hp_chk_ck check (hp_chk in('Y', 'N')),
     constraint hp_book_email_fk foreign key (email) references member (email),
     constraint hp_book_hp_name_fk foreign key (hp_name) references hp (hp_name)
-        on delete cascade
+    on delete cascade
 );
 
 /* 주차장 결제 */
 create table hp_pay(
-   pay_id number, /* YYYY/MM/dd + email */
-   pay_way varchar2(20),
-   name varchar2(10),
-   price number,
-   email varchar2(30),
-   hp_name varchar2(300),
-   phone varchar2(15),
-   book_id number, /* parkingBook (fk) */
-   hp_pay_date timestamp,
+    pay_id number,        /* 결제 ID - SEQ, PK */
+    pay_way varchar2(20),     /* 결제 수단 */
+    hp_name varchar2(50),    /* 충전소 이름 */
+    price number,               /* 가격 */
+    email varchar2(30),         /* 사용자 이메일 - FK(MEMBER) */
+    phone varchar2(15),         /* 휴대폰 번호 */
+    book_id number,       /* 예약 ID - FK */
+    hp_pay_date timestamp,         /* 결제 날짜 */
+    car_num varchar2(10),
+    hp_pay_cnt number,
    constraint hp_pay_pay_id_pk primary key (pay_id),
    constraint hp_pay_book_id_fk foreign key (book_id) references hp_book(book_id)
        on delete cascade
@@ -326,6 +317,7 @@ as select * from hp_bookmark;
 /* QnA 게시판 뷰 작성*/
 create view qna_board_view
 as select * from qna_board;
+
 ----------------------- 트리거 생성 -----------------------
 -- 트리거는 view에서 사용 안됨!
 

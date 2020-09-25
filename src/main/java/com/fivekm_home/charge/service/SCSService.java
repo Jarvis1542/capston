@@ -58,9 +58,41 @@ public class SCSService {
         return scsMapper.scsPlaceList();
     }
 
+    // 예약버튼확인
+    public int checkSCSBookBtn(String email, String scs_name){
+        return scsMapper.checkSCSBookBtn(email, scs_name);
+    }
+
     // 충전소 예약
     public void scsBook(SCS_book cs_book){
         scsMapper.scsBook(cs_book);
+    }
+
+    // 충전소 예약 체크 N -> y
+    public void updateSCSBookCHk(SCS_pay scs_pay){
+        scsMapper.updateSCSBookCHk(scs_pay);
+    }
+
+    // 충전소 scs_chk = y 카운터 + 1
+    public void updateSCSCnt(){
+        scsMapper.updateSCSCnt();
+    }
+
+    public void scsPayCnt(){
+        scsMapper.scsPayCnt();
+    }
+
+    public int checkSCSBookCnt(){
+        return scsMapper.checkSCSBookCnt();
+    }
+
+    public int checkSCSChk(SCS_pay scs_pay){
+        return scsMapper.checkSCSChk(scs_pay);
+    }
+
+    // book_id fk 넣기
+    public void scsPayBookIdUpdate(SCS_pay scs_pay){
+        scsMapper.scsPayBookIdUpdate(scs_pay);
     }
 
     // 충전소 결제
@@ -86,6 +118,11 @@ public class SCSService {
     // 충전소 지도검색
     public ArrayList<SCS_mapSearch> scsMapSearch(String scs_name){
         return scsMapper.scsMapSearch(scs_name);
+    }
+
+    // 예약취소
+    public void scsBookCancel(SCS_book scs_book){
+        scsMapper.scsBookCancel(scs_book);
     }
 
     // 충전소 타입 검색

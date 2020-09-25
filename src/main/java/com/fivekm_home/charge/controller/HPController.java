@@ -44,6 +44,8 @@ public class HPController {
         // 로그인 되어있는지 검사부터 할께용
         if(httpSession.getAttribute("user") != null){
             System.out.println("주차장 이름 : " + hp_name + "    사용자 이메일 : " + email);
+            System.out.println("checkHPBookBtn : " + hpService.checkHPBookBtn(email, hp_name));
+            model.addAttribute("checkHPBookBtn", hpService.checkHPBookBtn(email, hp_name));
             model.addAttribute("parking", hpService.hpBookPage(hp_name));
 
             // 북마크 검사

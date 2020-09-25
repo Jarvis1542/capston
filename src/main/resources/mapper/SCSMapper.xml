@@ -69,27 +69,78 @@
         update scs_view
         set scs_chk = 'Y'
         where scs_name = #{scs_name}
+        and email = #{email}
+        and
     </update>
 
     <select id="scsSearchDataList" resultType="com.fivekm_home.charge.domain.SCS.SCS_search">
         select scs_name, scs_amount , oper_ins, min30_fee, addMin10_fee, road_addr, extra_addr,
-               start_manage_time, end_manage_time, scs_pic, lat, lng, scs_chk, scs_type
+               start_manage_time, end_manage_time, scs_pic, lat, lng, scs_chk
         from scs_view c, res_view r
         where c.res_name = r.res_name
           and scs_chk = 'Y'
     </select>
 
+    <select id="checkSCSBookBtn" resultType="int">
+        select count(*) from scs_book
+        where email = #{email}
+        and scs_name = #{scs_name}
+        and scs_chk = 'N'
+        and scs_state = '예약준비'
+    </select>
+
     <insert id="scsBook">
         insert into scs_book_view values (
-         scs_book_seq.nextval, #{start_date}, #{end_date},
-         #{email}, #{car_num}, #{scs_name}, sysdate)
+         to_char(systimestamp, 'yyyymmddhh24miss.ff3'), #{start_date}, #{end_date},
+         #{email}, #{car_num}, #{scs_name}, sysdate, 'N', 0, '예약준비'
+         )
     </insert>
 
+    <update id="updateSCSBookCHk">
+        update scs_book_view set scs_chk = 'Y', scs_state = '예약완료'
+        where scs_name = #{scs_name}
+        and email = #{email}
+        and start_date = #{start_date}
+    </update>
+
+    <update id="updateSCSCnt">
+        update scs_book_view set scs_cnt = scs_cnt + 1
+        where scs_chk = 'Y'
+    </update>
+
+    <select id="checkSCSChk" resultType="int">
+        select count(*) from scs_book_view
+        where scs_name = #{scs_name}
+        and email = #{email}
+        and start_date = #{start_date}
+        and scs_chk = 'Y'
+    </select>
+
     <insert id="scsPay">
-        insert into scs_pay_view values (
-        scs_pay_seq.nextval, 'card', #{scs_name}, #{price},
-        #{email}, #{phone}, scs_book_seq.currval, sysdate)
+        insert into scs_pay_view (pay_id, pay_way, scs_name, price, email, phone,
+        scs_pay_date, car_num, scs_pay_cnt) values (
+        to_char(systimestamp, 'yyyymmddhh24miss.ff3'), 'card', #{scs_name}, #{price},
+        #{email}, #{phone}, sysdate, #{car_num}, 0
+        )
     </insert>
+
+    <update id="scsPayBookIdUpdate">
+        update scs_pay set book_id = (select book_id from scs_book
+                                where email = #{email}
+                                and car_num = #{car_num}
+                                and scs_name = #{scs_name}
+                                and start_date = #{start_date}
+                                )
+        where scs_pay_cnt = 1
+    </update>
+
+    <update id="scsPayCnt">
+        update scs_pay set scs_pay_cnt = scs_pay_cnt + 1
+    </update>
+
+    <select id="checkSCSBookCnt" resultType="int">
+        select count(*) from scs_pay where scs_pay_cnt = 1
+    </select>
 
     <select id="checkBookmark" resultType="int">
         select count(*)
@@ -102,13 +153,14 @@
         insert into scs_bookmark_view values(
         #{email},
         #{scs_name},
-        sysdate)
+        sysdate
+        )
     </insert>
 
     <delete id="deleteSCSBookmark">
         delete from scs_bookmark_view
         where email = #{email}
-          and scs_name = #{scs_name}
+        and scs_name = #{scs_name}
     </delete>
 
     <select id="scsPlaceList" resultType="com.fivekm_home.charge.domain.SCS.SCS_chPlList">
@@ -122,45 +174,10 @@
           and scs_name like '%'||#{scs_name}||'%'
     </select>
 
-    <select id="scsType1" resultType="com.fivekm_home.charge.domain.SCS.SCS_type">
-        select s.scs_name, s.scs_type, r.lat, r.lng
-        from scs s, res r
-        where s.res_name = r.res_name
-        and scs_type like '%'||#{scs_type}||'%'
-    </select>
-
-    <select id="scsType2" resultType="com.fivekm_home.charge.domain.SCS.SCS_type">
-        select s.scs_name, s.scs_type, r.lat, r.lng
-        from scs s, res r
-        where s.res_name = r.res_name
-        and regexp_like(s.scs_type ,#{type1}|#{type2})
-    </select>
-
-    <select id="scsType3" resultType="com.fivekm_home.charge.domain.SCS.SCS_type">
-        select s.scs_name, s.scs_type, r.lat, r.lng
-        from scs s, res r
-        where s.res_name = r.res_name
-        and regexp_like(s.scs_type ,#{type1}|#{type2}|#{type3})
-    </select>
-
-    <select id="scsType4" resultType="com.fivekm_home.charge.domain.SCS.SCS_type">
-        select s.scs_name, s.scs_type, r.lat, r.lng
-        from scs s, res r
-        where s.res_name = r.res_name
-        and regexp_like(s.scs_type ,#{type1}|#{type2}|#{type3}|#{type4})
-    </select>
-
-    <select id="scsType5" resultType="com.fivekm_home.charge.domain.SCS.SCS_type">
-        select s.scs_name, s.scs_type, r.lat, r.lng
-        from scs s, res r
-        where s.res_name = r.res_name
-        and regexp_like(s.scs_type ,#{type1}|#{type2}|#{type3}|#{type4}|#{type5})
-    </select>
-
-    <select id="scsType6" resultType="com.fivekm_home.charge.domain.SCS.SCS_type">
-        select s.scs_name, s.scs_type, r.lat, r.lng
-        from scs s, res r
-        where s.res_name = r.res_name
-        and regexp_like(s.scs_type ,#{type1}|#{type2}|#{type3}|#{type4}|#{type5}|#{type6})
-    </select>
+    <update id="scsBookCancel">
+        update scs_book_view set scs_state = '예약취소'
+        where email = #{email}
+        and scs_name = #{scs_name}
+        and scs_chk = 'N'
+    </update>
 </mapper>

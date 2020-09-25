@@ -1,7 +1,6 @@
 package com.fivekm_home.charge.controller;
 
 import com.fivekm_home.charge.domain.HP.HP_cnPlList;
-import com.fivekm_home.charge.domain.HP.HP_mapSearch;
 import com.fivekm_home.charge.domain.SCS.*;
 import com.fivekm_home.charge.service.SCSService;
 import com.fivekm_home.charge.service.StorageService;
@@ -66,7 +65,15 @@ public class SCSRestController {
     @PostMapping("/rest/scsPay")
     public void scsPay(SCS_pay scs_pay){
         System.out.println("SCS_PAY " + scs_pay);
-        scsService.scsPay(scs_pay);
+        scsService.updateSCSBookCHk(scs_pay);
+        scsService.updateSCSCnt();
+        if(scsService.checkSCSChk(scs_pay)==1){
+            scsService.scsPay(scs_pay);
+            scsService.scsPayCnt();
+            if(scsService.checkSCSBookCnt()==1){
+                scsService.scsPayBookIdUpdate(scs_pay);
+            }
+        }
     }
 
     // 충전소 즐겨찾기 추가
@@ -127,4 +134,11 @@ public class SCSRestController {
 //        return a;
     }
 
+
+    // 예약 취소
+    @PostMapping("/rest/scsBookCancel")
+    public void scsBookCancel(SCS_book scs_book){
+        System.out.println("scs_book : " + scs_book.toString());
+        scsService.scsBookCancel(scs_book);
+    }
 }

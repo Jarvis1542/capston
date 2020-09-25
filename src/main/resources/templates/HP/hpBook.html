@@ -72,6 +72,8 @@
                         <br><h4>예약</h4><br>
                         <p>시작시간 : <input type="datetime-local" id="start_date"></p>
                         <p>종료시간 : <input type="datetime-local" id="end_date"></p><br>
+                        <input type="hidden" th:value="${checkHPBookBtn}" id="checkHPBookBtn">
+                        <button style="float: right; color: #FFFFFF" class="genric-btn success radius" id="hpBookCancel">예약취소</button>
                         <button style="float: right; color: #FFFFFF" class="genric-btn success radius" id="hpBook">예약</button>
                         가격 : <span id="price"></span>원
                     </div>
