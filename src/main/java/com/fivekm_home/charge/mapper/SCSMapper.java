@@ -23,11 +23,7 @@ public interface SCSMapper {
     ArrayList<SCS_mapSearch> scsMapSearch(String scs_name); // 충전소 지도 검색
 
     // 충전소 타입 검색
-    ArrayList<SCS_type> scsType1(Asdf asdf);
-    ArrayList<SCS_type> scsType2(Asdf asdf);
-    ArrayList<SCS_type> scsType3(Asdf asdf);
-    ArrayList<SCS_type> scsType4(Asdf asdf);
-    ArrayList<SCS_type> scsType5(Asdf asdf);
-    ArrayList<SCS_type> scsType6(Asdf asdf);
+    ArrayList<SCS_type> scsType(String realSend);
+
 }
 

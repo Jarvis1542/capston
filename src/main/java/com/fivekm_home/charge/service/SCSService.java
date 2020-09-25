@@ -88,25 +88,17 @@ public class SCSService {
         return scsMapper.scsMapSearch(scs_name);
     }
 
-    // 충전소 타입 검색
-    public ArrayList<SCS_type> scsType(Asdf asdf){
+    public ArrayList<SCS_type> scsType(ArrayList a){
+        StringBuffer buffer = new StringBuffer();
 
-//        scs_type = "asdf, qwer";
-//        String type_str[] = scs_type.split(",");
-//        String type1 = type_str[0];
-//        String typ2 = type_str[1];
-//        Asdf asdf = new Asdf();
-//        asdf.setTpye1 =type1;
-//
-//        type1.setType1(type1);
-//        if (type1.isEmpty()!= null && typ2.isEmpty() == null){
-//            return scsMap
-//        }
-//        if (type1.isEmpty()!= null && typ2.isEmpty() != null){
-//            return scsMapper.scsType2();
-//        }
-        return scsMapper.scsType1(asdf);
+        for (Object val: a) {
+            buffer.append(val+"|");
+        }
+
+        String send = buffer.toString();
+        String realSend = send.substring(0, send.length()-1);
+        System.out.println("reslSend :" + send.substring(0, send.length()-1));
+        return scsMapper.scsType(realSend);
     }
-
 
 }

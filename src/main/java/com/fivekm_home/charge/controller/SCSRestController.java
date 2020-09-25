@@ -6,6 +6,7 @@ import com.fivekm_home.charge.domain.SCS.*;
 import com.fivekm_home.charge.service.SCSService;
 import com.fivekm_home.charge.service.StorageService;
 import com.google.gson.JsonObject;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import oracle.ucp.proxy.annotation.Post;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.JSONObject;
@@ -93,38 +94,22 @@ public class SCSRestController {
     // 충전소 타입 검색
     @PostMapping("/rest/typeFilter")
     @ResponseBody
-    public void scsType(@RequestBody String aa) throws Exception {
-        System.out.println("=======================");
-        System.out.println("controller String 값 : " +  aa);
-
-//        JSONObject jo = new JSONObject(aa);
-//        ArrayList<String> list = new ArrayList<>();
-
-
+    public ArrayList<SCS_type> scsType(@RequestBody String aa){
+        ArrayList<String> params = new ArrayList<>();
+        System.out.println(aa);
         try{
             HashMap<String,Boolean> c = new ObjectMapper().readValue(aa, HashMap.class);
-            System.out.println("ㅇㅇㅇ값: " + c.toString());
 
             for (String key : c.keySet()) {
-                Boolean value = c.get(key);
+                Boolean value =  c.get(key);
                 System.out.println(key + " : " + value);
+                if(c.get(key)) params.add(key);
             }
-//            scsService.scsType(c);
+//            return scsService.scsType(params);
+            System.out.println("return : " + scsService.scsType(params).toString());
         } catch (Exception e){
             e.printStackTrace();
         }
-
-
-
-//        ArrayList<SCS_type> a = scsService.scsType(scs_type);
-//        for(SCS_type aa : a){
-//            System.out.println("충전소이름 : " + aa.getScs_name());
-//            System.out.println("충전소타입 : " + aa.getScs_type());
-//            System.out.println("충전소경도 : " + aa.getLat());
-//            System.out.println("충전소위도 : " + aa.getLng());
-//        }
-////        return scsService.scsType(scs_type);
-//        return a;
+        return scsService.scsType(params);
     }
-
 }

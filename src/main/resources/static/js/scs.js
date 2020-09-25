@@ -89,6 +89,7 @@ var type = {
     "완속" : false,
     "데스티네이션" : false,
 }
+var types =[];
 function makeFilter(target){
     var tval = target.value;
     type[tval]=!type[tval];
@@ -103,12 +104,11 @@ function makeFilter(target){
         success : function (data) {
             console.log("타입data :" + JSON.stringify(data));
             for(let i=0; i < data.length; i++) {
-                type[i] = data[i];
+                types[i] = data[i];
                 console.log("===============");
-                console.log("타입결과 충전소 이름 : " + type[i].scs_name);
-                console.log("타입결과 충전소 타입 : " + type[i].scs_type);
-                console.log("타입결과 충전소 위도 : " + type[i].lat);
-                console.log("타입결과 충전소 경도 : " + type[i].lng);
+                console.log("타입결과 충전소 이름 : " + types[i].scs_name);
+                console.log("타입결과 충전소 타입 : " + types[i].scs_type);
+
 
             }
         },
@@ -118,14 +118,6 @@ function makeFilter(target){
         }
     });
 }
-
-/*$("input:checkbox[name='scs_type[]']").change(function () {
-
-    var type = [];
-
-        console.log("gd :" + JSON.stringify(data));
-
-});*/
 
 // 로그인 엔터
 $("#search_frm input").keypress(function( event ) {

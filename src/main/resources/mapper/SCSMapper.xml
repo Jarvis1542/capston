@@ -122,12 +122,12 @@
           and scs_name like '%'||#{scs_name}||'%'
     </select>
 
-    <select id="scsType1" resultType="com.fivekm_home.charge.domain.SCS.SCS_type">
-        select s.scs_name, s.scs_type, r.lat, r.lng
-        from scs s, res r
-        where s.res_name = r.res_name
-        and scs_type like '%'||#{scs_type}||'%'
-    </select>
+<!--    <select id="scsType1" resultType="com.fivekm_home.charge.domain.SCS.SCS_type">-->
+<!--        select s.scs_name, s.scs_type, r.lat, r.lng-->
+<!--        from scs s, res r-->
+<!--        where s.res_name = r.res_name-->
+<!--        and scs_type like '%'||#{scs_type}||'%'-->
+<!--    </select>-->
 
     <select id="scsType2" resultType="com.fivekm_home.charge.domain.SCS.SCS_type">
         select s.scs_name, s.scs_type, r.lat, r.lng
@@ -162,5 +162,22 @@
         from scs s, res r
         where s.res_name = r.res_name
         and regexp_like(s.scs_type ,#{type1}|#{type2}|#{type3}|#{type4}|#{type5}|#{type6})
+    </select>
+
+<!--    <select id="scsType1" resultType="com.fivekm_home.charge.domain.SCS.SCS_type">-->
+<!--        select s.scs_name, s.scs_type, r.lat, r.lng-->
+<!--        from scs s, res r-->
+<!--        where s.res_name = r.res_name-->
+<!--         and regexp_like-->
+<!--        <foreach item="item" index="index" collection="list"-->
+<!--                 open="(s.scs_type ," separator="||" close=")">-->
+<!--            #{item}-->
+<!--        </foreach>-->
+<!--    </select>-->
+    <select id="scsType" resultType="com.fivekm_home.charge.domain.SCS.SCS_type">
+        select s.scs_name, s.scs_type, r.lat, r.lng
+          from scs s, res r
+          where s.res_name = r.res_name
+          and regexp_like(s.scs_type ,#{realSend})
     </select>
 </mapper>
