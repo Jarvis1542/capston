@@ -184,7 +184,6 @@
     var $wrap, $body, $title, $title, $close, $img, $desc;
     var wrap_arr = [], overlay = [];
 
-
     $.ajax({
         url : '/rest/scsSearchData',
         type : 'GET',
@@ -193,20 +192,6 @@
             console.log("data 2222 ", data);
             for (let i = 0; i < data.length; i++) {
                 search[i] = data[i];
-                // console.log('chargeName : ' + search[i].scs_name);
-                // console.log('operation : ' + search[i].oper_ins);
-                // console.log('chargeAmount' + search[i].scs_amount);
-                // console.log('min30Fee : ' + search[i].min30_fee);
-                // console.log('addMin10Fee : ' + search[i].addMin10_fee);
-                // console.log('roadAddress : ' + search[i].road_addr);
-                // console.log('extraAddress : ' + search[i].extra_addr);
-                // console.log('start_manage_time : ' + search[i].start_manage_time);
-                // console.log('end_manage_time : ' + search[i].end_manage_time);
-                // console.log('chargingChk : ' + search[i].scs_chk);
-                // console.log('chargePic : ' + search[i].scs_pic);
-                // console.log('lat : ' + search[i].lat);
-                // console.log('lng : ' + search[i].lng);
-                // console.log('==========================================');
 
                 // 마커를 생성합니다
                 var marker = new kakao.maps.Marker({
@@ -278,12 +263,18 @@
     function setCenter(lat, lng) {
         // 이동할 위도 경도 위치를 생성합니다
         var moveLatLon = new kakao.maps.LatLng(lat, lng);
-
         map.setLevel(3);
-
         // 지도 중심을 이동 시킵니다
         map.setCenter(moveLatLon);
     }
+
+    function removeMarker() {
+        for ( var i = 0; i < markers.length; i++ ) {
+            markers[i].setMap(null);
+        }
+        markers = [];
+    }
+
 
 </script>
 
