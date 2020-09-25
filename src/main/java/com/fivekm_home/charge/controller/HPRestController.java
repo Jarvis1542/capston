@@ -68,7 +68,15 @@ public class HPRestController {
     @PostMapping("/rest/hpPay")
     public void hpPay(HP_pay hp_pay){
         System.out.println("HP_PAY " + hp_pay);
-        hpService.hpPay(hp_pay);
+        hpService.updateHPBookCHk(hp_pay);
+        hpService.updateHPCnt();
+        if(hpService.checkHPChk(hp_pay)==1){
+            hpService.hpPay(hp_pay);
+            hpService.hpPayCnt();
+            if(hpService.checkHPBookCnt()==1){
+                hpService.hpPayBookIdUpdate(hp_pay);
+            }
+        }
     }
 
     // 주차장 즐겨찾기 추가
@@ -97,5 +105,12 @@ public class HPRestController {
         }
 
         return a;
+    }
+
+    // 예약 취소
+    @PostMapping("/rest/hpBookCancel")
+    public void hpBookCancel(HP_book hp_book){
+        System.out.println("hp_book : " + hp_book.toString());
+        hpService.hpBookCancel(hp_book);
     }
 }

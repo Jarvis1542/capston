@@ -162,16 +162,16 @@
         (select s.scs_name, r.road_addr, b.start_date, b.end_date, p.price, scs_pay_date, b.email,
         TRUNC((to_date(to_char(end_date, 'yyyymmddhh24miss'),'yyyymmddhh24miss') -
         to_date(to_char(start_date, 'yyyymmddhh24miss'), 'yyyymmddhh24miss'))*24) used_time,
-        row_number() over(order by hp_pay_date desc) ronum
+        row_number() over(order by scs_pay_date desc) ronum
         from res_view r, scs_book_view b, scs_pay_view p, scs_view s
         where b.email = #{email}
         and s.scs_name = b.scs_name
         and r.res_name = s.res_name
         and p.book_id = b.book_id
-        and hp_pay_date between to_date(#{find_start_date}, 'yyyy-mm-dd')
+        and scs_pay_date between to_date(#{find_start_date}, 'yyyy-mm-dd')
         and to_date(#{find_end_date}||' 23:59:59', 'yyyy-mm-dd hh24:mi:ss'))
         where ronum between #{rowStart} and #{rowEnd}
-        order by hp_pay_date desc
+        order by scs_pay_date desc
     </select>
 
     <select id="scsHistorySearchListCnt" resultType="int">
@@ -179,13 +179,13 @@
         (select s.scs_name, r.road_addr, b.start_date, b.end_date, p.price, scs_pay_date, b.email,
         TRUNC((to_date(to_char(end_date, 'yyyymmddhh24miss'),'yyyymmddhh24miss') -
         to_date(to_char(start_date, 'yyyymmddhh24miss'), 'yyyymmddhh24miss'))*24) used_time,
-        row_number() over(order by hp_pay_date desc) ronum
+        row_number() over(order by scs_pay_date desc) ronum
         from res_view r, scs_book_view b, scs_pay_view p, scs_view s
         where b.email = #{email}
         and s.scs_name = b.scs_name
         and r.res_name = s.res_name
         and p.book_id = b.book_id
-        and hp_pay_date between to_date(#{find_start_date}, 'yyyy-mm-dd')
+        and scs_pay_date between to_date(#{find_start_date}, 'yyyy-mm-dd')
         and to_date(#{find_end_date}||' 23:59:59', 'yyyy-mm-dd hh24:mi:ss'))
     </select>
 

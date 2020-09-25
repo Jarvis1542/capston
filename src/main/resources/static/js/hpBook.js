@@ -74,6 +74,8 @@ $(document).ready(function () {
 
     // 예약
     $('#hpBook').on('click', function () {
+        $('#hpBook').hide();
+        $('#hpBookCancel').show();
         let carNum = "";
         let start_date = new Date($('#start_date').val());
         let end_date = new Date($('#end_date').val());
@@ -121,13 +123,29 @@ $(document).ready(function () {
 
     // 결제
     $('#hpPay').on('click', function () {
+        let carNum = "";
+        let start_date = new Date($('#start_date').val());
+        for(let i=0; i<5; i++){
+            if($('#car'+i).length>0){
+                carNum = $('#car'+i).val();
+            }
+        }
+        for(let i=0; i<5; i++){
+            if($('#car'+i).length>0){
+                carNum = $('#car'+i).val();
+            }
+        }
+
         var data = {
             hp_name : $('#hp_name').text(),
             price : $('#price').text(),
             email : $('#email').val(),
             phone : $('#phone').val(),
-            user_name : $('#name').val()
+            user_name : $('#name').val(),
+            car_num : carNum,
+            start_date : start_date
         }
+
         $.ajax({
            data : data,
            type : 'post',
@@ -212,12 +230,44 @@ $(document).ready(function () {
         });
     });
 
+    $('#hpBookCancel').on('click', function () {
+        $('#hpBook').show();
+        $('#hpBookCancel').hide();
+        let data = {
+            email : $('#email').val(),
+            hp_name : $('#hp_name').text()
+        }
+
+        $.ajax({
+            data : data,
+            type : 'post',
+            url : '/rest/hpBookCancel',
+            success : function () {
+                alert('예약 취소 되었습니다.')
+            },
+            error : function (error) {
+                alert(JSON.stringify(error));
+            }
+        });
+    });
+
     if($('#change').val()==0){
         $('#addHpBookmark').show();
         $('#deleteHpBookmark').hide();
     }
+
     if($('#change').val()==1){
         $('#addHpBookmark').hide();
         $('#deleteHpBookmark').show();
+    }
+
+    if($('#checkHPBookBtn').val()==0){
+        $('#hpBook').show();
+        $('#hpBookCancel').hide();
+    }
+
+    if($('#checkHPBookBtn').val()==1){
+        $('#hpBook').hide();
+        $('#hpBookCancel').show();
     }
 });

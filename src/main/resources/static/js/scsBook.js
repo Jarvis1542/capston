@@ -77,6 +77,8 @@ $(document).ready(function () {
 
     // 예약
     $('#scsBook').on('click', function () {
+        $('#scsBook').hide();
+        $('#scsBookCancel').show();
         let carNum = "";
         let start_date = new Date($('#start_date').val());
         let end_date = new Date($('#end_date').val());
@@ -144,12 +146,22 @@ $(document).ready(function () {
 
     // 결제
     $('#scsPay').on('click', function () {
+        let carNum = "";
+        let start_date = new Date($('#start_date').val());
+        for(let i=0; i<5; i++){
+            if($('#car'+i).length>0){
+                carNum = $('#car'+i).val();
+            }
+        }
+
         var data = {
             scs_name : $('#scs_name').text(),
             price : $('#price').text(),
             email : $('#email').val(),
             phone : $('#phone').val(),
-            user_name : $('#name').val()
+            user_name : $('#name').val(),
+            car_num : carNum,
+            start_date : start_date
         }
         $.ajax({
             data : data,
@@ -157,6 +169,9 @@ $(document).ready(function () {
             url : '/rest/scsPay',
             success : function () {
 
+            },
+            error : function (error) {
+                alert(JSON.stringify(error));
             }
         });
 
@@ -235,13 +250,44 @@ $(document).ready(function () {
         });
     });
 
+    $('#scsBookCancel').on('click', function () {
+        $('#scsBook').show();
+        $('#scsBookCancel').hide();
+        let data = {
+            email : $('#email').val(),
+            scs_name : $('#scs_name').text()
+        }
+
+        $.ajax({
+            data : data,
+            type : 'post',
+            url : '/rest/scsBookCancel',
+            success : function () {
+                alert('예약 취소 되었습니다.')
+            },
+            error : function (error) {
+                alert(JSON.stringify(error));
+            }
+        });
+    });
 
     if($('#change').val()==0){
         $('#addSCSBookmark').show();
         $('#deleteSCSBookmark').hide();
     }
+
     if($('#change').val()==1){
         $('#addSCSBookmark').hide();
         $('#deleteSCSBookmark').show();
+    }
+
+    if($('#checkSCSBookBtn').val()==0){
+        $('#scsBook').show();
+        $('#scsBookCancel').hide();
+    }
+
+    if($('#checkSCSBookBtn').val()==1){
+        $('#scsBook').hide();
+        $('#scsBookCancel').show();
     }
 });

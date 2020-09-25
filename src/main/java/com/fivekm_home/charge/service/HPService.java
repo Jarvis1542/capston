@@ -2,6 +2,7 @@ package com.fivekm_home.charge.service;
 
 import com.fivekm_home.charge.domain.HP.*;
 import com.fivekm_home.charge.domain.PAGING.Criteria;
+import com.fivekm_home.charge.domain.SCS.SCS_pay;
 import com.fivekm_home.charge.mapper.HPMapper;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -62,6 +63,11 @@ public class HPService<T> {
         return hpMapper.hpSearchDataList();
     }
 
+    // 예약버튼확인
+    public int checkHPBookBtn(String email, String hp_name){
+        return hpMapper.checkHPBookBtn(email, hp_name);
+    }
+
     // 주차장 자리 변화 불러오기
     public ArrayList<HP_cnPlList> hpPlaceList() {
         return hpMapper.hpPlaceList();
@@ -84,6 +90,33 @@ public class HPService<T> {
     // 주차장 예약
     public void hpBook(HP_book hp_book) {
         hpMapper.hpBook(hp_book);
+    }
+
+    // 주차장 예약 체크 N -> y
+    public void updateHPBookCHk(HP_pay hp_pay){
+        hpMapper.updateHPBookCHk(hp_pay);
+    }
+
+    // 충전소 hp_chk = y 카운터 + 1
+    public void updateHPCnt(){
+        hpMapper.updateHPCnt();
+    }
+
+    public int checkHPChk(HP_pay hp_pay){
+        return hpMapper.checkHPChk(hp_pay);
+    }
+
+    public void hpPayCnt(){
+        hpMapper.hpPayCnt();
+    }
+
+    public int checkHPBookCnt(){
+        return hpMapper.checkHPBookCnt();
+    }
+
+    // book_id fk 넣기
+    public void hpPayBookIdUpdate(HP_pay hp_pay){
+        hpMapper.hpPayBookIdUpdate(hp_pay);
     }
 
     // 주차장 결제
@@ -112,4 +145,8 @@ public class HPService<T> {
         return hpMapper.hpMapSearch(hp_name);
     }
 
+    // 예약 취소
+    public void hpBookCancel(HP_book hp_book){
+        hpMapper.hpBookCancel(hp_book);
+    }
 }

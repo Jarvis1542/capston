@@ -40,8 +40,10 @@ public class SCSController {
                              Model model, HttpSession httpSession){
         // 로그인 되어있는지 검사부터 할께용
         if(httpSession.getAttribute("user") != null){
-            System.out.println("주차장 이름 : " + scs_name + "    사용자 이메일 : " + email);
+            System.out.println("충전소 이름 : " + scs_name + "    사용자 이메일 : " + email);
+            System.out.println("checkSCSBookBtn : " + scsService.checkSCSBookBtn(email, scs_name));
             model.addAttribute("charge", scsService.scsBookPage(scs_name));
+            model.addAttribute("checkSCSBookBtn", scsService.checkSCSBookBtn(email, scs_name));
 
             // 북마크 검사
             SCS_bookmark scs_bookmark = new SCS_bookmark();

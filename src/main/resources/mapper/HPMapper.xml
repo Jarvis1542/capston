@@ -77,20 +77,66 @@
         and hp_chk = 'Y'
     </select>
 
+    <select id="checkHPBookBtn" resultType="int">
+        select count(*) from hp_book_view
+        where email = #{email}
+        and hp_name = #{hp_name}
+        and hp_chk = 'N'
+        and hp_state = '예약준비'
+    </select>
+
     <insert id="hpBook">
         insert into hp_book_view values (
-            hp_book_seq.nextval, #{start_date}, #{end_date},
-            #{email}, #{car_num}, #{hp_name}, sysdate
+            to_char(systimestamp, 'yyyymmddhh24miss.ff3'), #{start_date}, #{end_date},
+            #{email}, #{car_num}, #{hp_name}, sysdate, 'N', 0, '예약준비'
         )
     </insert>
 
+    <update id="updateHPBookCHk">
+        update hp_book_view set hp_chk = 'Y', hp_state = '예약완료'
+        where hp_name = #{hp_name}
+        and email = #{email}
+        and start_date = #{start_date}
+    </update>
+
+    <update id="updateHPCnt">
+        update hp_book_view set hp_cnt = hp_cnt + 1
+        where hp_chk = 'Y'
+    </update>
+
+    <select id="checkHPChk" resultType="int">
+        select count(*) from hp_book_view
+        where hp_name = #{hp_name}
+        and email = #{email}
+        and start_date = #{start_date}
+        and hp_chk = 'Y'
+    </select>
+
     <insert id="hpPay">
-        insert into hp_pay_view values (
-            hp_pay_seq.nextval, 'card', #{user_name}, #{price},
-            #{email}, #{hp_name}, #{phone}, hp_book_seq.currval,
-            sysdate
+        insert into hp_pay_view (pay_id, pay_way, hp_name, price, email, phone,
+        hp_pay_date, car_num, hp_pay_cnt) values (
+        to_char(systimestamp, 'yyyymmddhh24miss.ff3'), 'card', #{hp_name}, #{price},
+        #{email}, #{phone}, sysdate, #{car_num}, 0
         )
     </insert>
+
+    <update id="hpPayBookIdUpdate">
+        update hp_pay set book_id = (select book_id from hp_book
+                                where email = #{email}
+                                and car_num = #{car_num}
+                                and hp_name = #{hp_name}
+                                and start_date = #{start_date}
+                                )
+        where hp_pay_cnt = 1
+    </update>
+
+    <update id="hpPayCnt">
+        update hp_pay set hp_pay_cnt = hp_pay_cnt + 1
+    </update>
+
+    <select id="checkHPBookCnt" resultType="int">
+        select count(*) from hp_pay where hp_pay_cnt = 1
+    </select>
 
     <select id="checkBookmark" resultType="int">
         select count(*)
@@ -123,4 +169,11 @@
         where h.res_name = r.res_name
         and hp_name like '%'||#{hp_name}||'%'
     </select>
+
+    <update id="hpBookCancel">
+        update hp_book_view set hp_state = '예약취소'
+        where email = #{email}
+        and hp_name = #{hp_name}
+        and hp_chk = 'N'
+    </update>
 </mapper>

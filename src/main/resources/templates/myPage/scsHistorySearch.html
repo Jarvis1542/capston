@@ -65,7 +65,7 @@
                         <span id="end_date" th:text="${#dates.format(scsSearchHistory.end_date, 'YYYY-MM-dd HH:mm:ss')}"/>
                         &emsp14;/&emsp14;<span id="used_time" th:text="${scsSearchHistory.used_time} + 'h'"/></td>
                     <td><span id="price" th:text="${scsSearchHistory.price}"/></td>
-                    <td><span id="pay_date" th:text="${#dates.format(scsSearchHistory.pay_date, 'YYYY-MM-dd HH:mm:ss')}"/></td>
+                    <td><span id="pay_date" th:text="${#dates.format(scsSearchHistory.scs_pay_date, 'YYYY-MM-dd HH:mm:ss')}"/></td>
                 </tr>
             </div>
             </tbody>
