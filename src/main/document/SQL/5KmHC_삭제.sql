@@ -1,9 +1,5 @@
 /* 시퀀스 삭제 */
 drop sequence qna_board_seq;
-drop sequence scs_pay_seq;
-drop sequence scs_book_seq;
-drop sequence hp_pay_seq;
-drop sequence hp_book_seq;
 drop sequence entry_info_seq;
 
 /* 뷰 삭제 */

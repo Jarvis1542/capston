@@ -69,16 +69,15 @@
         update scs_view
         set scs_chk = 'Y'
         where scs_name = #{scs_name}
-        and email = #{email}
-        and
     </update>
 
     <select id="scsSearchDataList" resultType="com.fivekm_home.charge.domain.SCS.SCS_search">
         select scs_name, scs_amount , oper_ins, min30_fee, addMin10_fee, road_addr, extra_addr,
-               start_manage_time, end_manage_time, scs_pic, lat, lng, scs_chk
+               start_manage_time, end_manage_time, scs_pic, lat, lng, scs_chk, scs_type
         from scs_view c, res_view r
         where c.res_name = r.res_name
-          and scs_chk = 'Y'
+        and scs_chk = 'Y'
+        order by scs_reg_date desc
     </select>
 
     <select id="checkSCSBookBtn" resultType="int">
@@ -165,6 +164,7 @@
 
     <select id="scsPlaceList" resultType="com.fivekm_home.charge.domain.SCS.SCS_chPlList">
         select * from SCS_CH_PL_VIEW
+        order by scs_ch_pl_reg_date desc
     </select>
 
     <select id="scsMapSearch" resultType="com.fivekm_home.charge.domain.SCS.SCS_mapSearch">
@@ -180,4 +180,22 @@
         and scs_name = #{scs_name}
         and scs_chk = 'N'
     </update>
+
+    <select id="typeFilter" resultType="com.fivekm_home.charge.domain.SCS.SCS_search">
+        select scs_name, scs_amount , oper_ins, min30_fee, addMin10_fee, road_addr, extra_addr,
+               start_manage_time, end_manage_time, scs_pic, lat, lng, scs_chk, scs_type
+        from scs_view c, res_view r
+        where c.res_name = r.res_name
+        and scs_chk = 'Y'
+        and regexp_like(scs_type ,#{realSend})
+        order by scs_reg_date desc
+    </select>
+
+    <select id="typePlaceFilter" resultType="com.fivekm_home.charge.domain.SCS.SCS_chPlList">
+        select * from SCS_CH_PL_VIEW
+        where scs_chk = 'Y'
+        and regexp_like(scs_type ,#{realSend})
+        order by scs_ch_pl_reg_date desc
+    </select>
+
 </mapper>

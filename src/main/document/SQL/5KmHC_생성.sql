@@ -26,7 +26,7 @@ create table car(
     car_id varchar2(255) not null,    /* EMAIL + SEQ.NUM = PK*/
     car_name varchar2(100) null ,  /* 차량 이름(별칭) */
     car_model varchar2(255) null, /* 차량 모델 */
-    car_scs_type varchar2(25) null,   /* 충전 방식 */
+    car_scs_type varchar2(100) null,   /* 충전 방식 */
     email varchar2(100) not null,    /* 사용자 이메일 - FK(MEMBER) */
     constraint car_car_id_pk primary key (car_id),
     constraint car_email_fk foreign key (email) references member (email)
@@ -62,19 +62,19 @@ create table res(
 );
 
 /* 경비 */
-create table mp /* management office 경비 줄인말 */
-(
-    email        varchar2(100), /* 경비 회원 이메일*/
-    mp_lic varchar2(2000), /*경비 교육 이수증*/
-    mp_co      varchar2(100), /*관리업체 이름*/
-    mp_co_num   varchar2(20), /*관리업체 번호*/
-    mp_reg_date      timestamp, /*경비 등록 일자*/
-    res_name      varchar2(300), /*거주지이름 (fk)*/
-    constraint mp_email_pk primary key (email),
-    constraint mp_res_name_fk foreign key (res_name) references res (res_name),
-    constraint mp_email_fk foreign key (email) references member(email)
-        on delete cascade
-);
+--create table mp /* management office 경비 줄인말 */
+--(
+--    email        varchar2(100), /* 경비 회원 이메일*/
+--    mp_lic varchar2(2000), /*경비 교육 이수증*/
+--    mp_co      varchar2(100), /*관리업체 이름*/
+--    mp_co_num   varchar2(20), /*관리업체 번호*/
+--    mp_reg_date      timestamp, /*경비 등록 일자*/
+--    res_name      varchar2(300), /*거주지이름 (fk)*/
+--    constraint mp_email_pk primary key (email),
+--    constraint mp_res_name_fk foreign key (res_name) references res (res_name),
+--    constraint mp_email_fk foreign key (email) references member(email)
+--        on delete cascade
+--);
 
 /* 카메라 */
 create table entry_info
@@ -103,7 +103,7 @@ create table scs
     scs_pic varchar2(2000),           /* 충전소 사진 */
     apt_map varchar2(2000),              /* 아파트 내부단지 지도 */
     cable varchar2(50) NULL,            /* 케이블 */
-    scs_type varchar2(50) NULL,       /* 충전 타입 */
+    scs_type varchar2(100) NULL,       /* 충전 타입 */
     scs_reg_date timestamp,                  /* 충전소 등록 날짜 */
     scs_chk  varchar2(1) default 'N', /* 승인 여부 */
     res_name     varchar2(300),          /* 거주지 등록자 이름 */
@@ -119,6 +119,8 @@ create table scs_ch_pl(
     scs_amount number,
     scs_chk varchar2(1) default 'N',
     res_name varchar2(300),
+    scs_ch_pl_reg_date timestamp,
+    scs_type varchar2(100),
     constraint scs_ch_pl_scs_name_pk primary key (scs_name),
     constraint scs_ch_pl_chk_ck check (scs_chk in('Y', 'N')),
     constraint scs_ch_pl_scs_name_fk foreign key (scs_name) references scs(scs_name)
@@ -198,6 +200,7 @@ create table hp_ch_pl(
     place number,
     hp_chk varchar2(1) default 'N',
     res_name varchar2(300),
+    hp_ch_pl_reg_date timestamp,
     constraint hp_ch_pl_hp_name_pk primary key (hp_name),
     constraint hp_ch_pl_hp_chk_ck check (hp_chk in('Y', 'N')),
     constraint hp_ch_pl_hp_name_fk foreign key (hp_name) references hp(hp_name)
@@ -279,8 +282,8 @@ as select * from reg;
 create view res_view
 as select * from res;
 /* 경비 */
-create view mp_view
-as select * from mp;
+--create view mp_view
+--as select * from mp;
 /* 카메라 */
 create view entry_info_view
 as select * from entry_info;
@@ -327,8 +330,8 @@ create or replace trigger insert_scs_ch_pl_view
     for each row
 declare
 begin
-    insert into scs_ch_pl_view (scs_name, scs_amount, res_name) values
-    (:new.scs_name, :new.scs_amount, :new.res_name);
+    insert into scs_ch_pl_view (scs_name, scs_amount, res_name, scs_ch_pl_reg_date, scs_type) values
+    (:new.scs_name, :new.scs_amount, :new.res_name, :new.scs_reg_date, :new.scs_type);
 end;
 /
 
@@ -338,8 +341,8 @@ create or replace trigger insert_hp_ch_pl_view
     for each row
 declare
 begin
-     insert into hp_ch_pl_view (hp_name, place, res_name) values
-     (:new.hp_name, :new.place, :new.res_name);
+     insert into hp_ch_pl_view (hp_name, place, res_name, hp_ch_pl_reg_date) values
+     (:new.hp_name, :new.place, :new.res_name, :new.hp_reg_date);
 end;
 /
 

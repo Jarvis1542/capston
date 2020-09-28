@@ -126,7 +126,7 @@ public class SCSService {
     }
 
     // 충전소 타입 검색
-    public ArrayList<SCS_type> scsType(ArrayList a){
+    public ArrayList<SCS_search> typeFilter(ArrayList a){
         StringBuffer buffer = new StringBuffer();
 
         for (Object val: a) {
@@ -135,7 +135,21 @@ public class SCSService {
 
         String send = buffer.toString();
         String realSend = send.substring(0, send.length()-1);
-        System.out.println("reslSend :" + send.substring(0, send.length()-1));
-        return scsMapper.scsType(realSend);
+        System.out.println("typeFilter realSend :" + send.substring(0, send.length()-1));
+        return scsMapper.typeFilter(realSend);
+    }
+
+    // 충전소 타입 검색
+    public ArrayList<SCS_chPlList> typePlaceFilter(ArrayList a){
+        StringBuffer buffer = new StringBuffer();
+
+        for (Object val: a) {
+            buffer.append(val+"|");
+        }
+
+        String send = buffer.toString();
+        String realSend = send.substring(0, send.length()-1);
+        System.out.println("typePlaceFilter realSend :" + send.substring(0, send.length()-1));
+        return scsMapper.typePlaceFilter(realSend);
     }
 }

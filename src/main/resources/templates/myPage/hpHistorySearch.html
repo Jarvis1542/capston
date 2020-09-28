@@ -30,6 +30,7 @@
         </div>
     </div>
 </div>
+<input type="hidden" th:value="${mem.email}" id="email">
 <div style="margin-left: 20%">
     <form th:action="${'/myPage/hpHistorySearch/'}+${session.user.email}" method="post">
         <br><input type="date" name="find_start_date">&emsp;~&emsp;<input type="date" name="find_end_date">&emsp;

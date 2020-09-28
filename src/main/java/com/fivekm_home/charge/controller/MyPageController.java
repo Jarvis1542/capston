@@ -92,8 +92,9 @@ public class MyPageController {
             MemberEdit memberEdit = new MemberEdit(sessionUser);
             model.addAttribute("mem", memberEdit);
             model.addAttribute("pagination", userPagination);
+            System.out.println("email : " + email + "    return : " + myPageService.scsHistorySearchList(userCriteria));
             model.addAttribute("scsSearchHistory", myPageService.scsHistorySearchList(userCriteria));
-            return "/myPage/hpHistorySearch";
+            return "/myPage/scsHistorySearch";
         }else {
             System.out.println("MyPageController : 로그인되어 있지 않아 로그인 페이지로 요청했습니다.");
             return "/index/login";
@@ -135,7 +136,7 @@ public class MyPageController {
         System.out.println("userSCSBookmark return : " + myPageService.userSCSBookmark(userHistoryCriteria));
         model.addAttribute("pagination", userPagination);
         model.addAttribute("scs", myPageService.userSCSBookmark(userHistoryCriteria));
-        return "/myPage/SCSBookmark";
+        return "/myPage/scsBookmark";
     }
 
     // 회원 주차장 즐겨찾기 목록 불러오기

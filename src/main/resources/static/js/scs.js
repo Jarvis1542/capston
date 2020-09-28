@@ -80,45 +80,6 @@ $('#keySearch').on('click', function () {
     });
 });
 
-// 충전소 타입별 검색
-var type = {
-    "AC3상" : false,
-    "DC콤보" : false,
-    "DC차데모" : false,
-    "수퍼차저" : false,
-    "완속" : false,
-    "데스티네이션" : false,
-}
-var types =[];
-function makeFilter(target){
-    var tval = target.value;
-    type[tval]=!type[tval];
-    console.log(type);
-
-    $.ajax({
-        data : JSON.stringify(type),
-        type : 'POST',
-        contentType:'application/json',
-        dataType: 'json',
-        url : '/rest/typeFilter',
-        success : function (data) {
-            console.log("타입data :" + JSON.stringify(data));
-            for(let i=0; i < data.length; i++) {
-                types[i] = data[i];
-                console.log("===============");
-                console.log("타입결과 충전소 이름 : " + types[i].scs_name);
-                console.log("타입결과 충전소 타입 : " + types[i].scs_type);
-
-
-            }
-        },
-        error : function (error) {
-            console.log('실패');
-            console.log(JSON.stringify(error));
-        }
-    });
-}
-
 // 로그인 엔터
 $("#search_frm input").keypress(function( event ) {
     if ( event.which == 13 ) {

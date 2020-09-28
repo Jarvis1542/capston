@@ -41,20 +41,6 @@ public class SCSRestController {
         scsService.scsReg(scs_reg);
     }
 
-    // 지도에 마크를 찍을 데이터 불러오기
-    @GetMapping("/rest/scsSearchData")
-    public ArrayList<SCS_search> scsSearchDataList(){
-        System.out.println("return : " + scsService.scsSearchDataList());
-        return scsService.scsSearchDataList();
-    }
-
-    // 지도에 충전소 자리 변화 불러오기
-    @GetMapping("/rest/scsPlaceData")
-    public ArrayList<SCS_chPlList> scsPlaceList(){
-        System.out.println("return scsPlaceList CONTROLLER : " + scsService.scsPlaceList());
-        return scsService.scsPlaceList();
-    }
-
     // 충전소 예약
     @PostMapping("/rest/scsBook")
     public void scsBook(SCS_book scs_book){
@@ -97,30 +83,61 @@ public class SCSRestController {
         return scsService.scsMapSearch(scs_name);
     }
 
+    // 지도에 마크를 찍을 데이터 불러오기
+    @PostMapping("/rest/scsSearchData")
+    public ArrayList<SCS_search> scsSearchDataList(){
+        System.out.println("return : " + scsService.scsSearchDataList());
+        return scsService.scsSearchDataList();
+    }
+
+    // 지도에 충전소 자리 변화 불러오기
+    @PostMapping("/rest/scsPlaceData")
+    public ArrayList<SCS_chPlList> scsPlaceList(){
+        System.out.println("return scsPlaceList CONTROLLER : " + scsService.scsPlaceList());
+        return scsService.scsPlaceList();
+    }
 
     // 충전소 타입 검색
     @PostMapping("/rest/typeFilter")
-    @ResponseBody
-    public ArrayList<SCS_type> scsType(@RequestBody String aa){
+    public ArrayList<SCS_search> typeFilter(@RequestBody String scs_type){
         ArrayList<String> params = new ArrayList<>();
-        System.out.println(aa);
+        System.out.println(scs_type);
         try{
-            HashMap<String,Boolean> c = new ObjectMapper().readValue(aa, HashMap.class);
+            HashMap<String,Boolean> c = new ObjectMapper().readValue(scs_type, HashMap.class);
 
             for (String key : c.keySet()) {
                 Boolean value =  c.get(key);
                 System.out.println(key + " : " + value);
                 if(c.get(key)) params.add(key);
             }
-//            return scsService.scsType(params);
-            System.out.println("return : " + scsService.scsType(params).toString());
+
+            System.out.println("typeFilter return : " + scsService.typeFilter(params).toString());
         } catch (Exception e){
             e.printStackTrace();
         }
-        return scsService.scsType(params);
+        return scsService.typeFilter(params);
     }
 
+    // 충전소 타입 자리 변화 검색
+    @PostMapping("/rest/typePlaceFilter")
+    public ArrayList<SCS_chPlList> typePlaceFilter(@RequestBody String scs_place_type){
+        ArrayList<String> params = new ArrayList<>();
+        System.out.println(scs_place_type);
+        try{
+            HashMap<String,Boolean> c = new ObjectMapper().readValue(scs_place_type, HashMap.class);
 
+            for (String key : c.keySet()) {
+                Boolean value =  c.get(key);
+                System.out.println(key + " : " + value);
+                if(c.get(key)) params.add(key);
+            }
+
+            System.out.println("typePlaceFilter return : " + scsService.typePlaceFilter(params).toString());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return scsService.typePlaceFilter(params);
+    }
     // 예약 취소
     @PostMapping("/rest/scsBookCancel")
     public void scsBookCancel(SCS_book scs_book){

@@ -64,12 +64,14 @@
     </select>
 
     <select id="userHpBookmark" resultType="com.fivekm_home.charge.domain.USER.UserBookmark">
-        select b.email, b.hp_name, hp_pic, road_addr, extra_addr, start_manage_time,
-        end_manage_time, min30_fee, addmin10_fee
+        select * from
+        (select b.email, b.hp_name, hp_pic, road_addr, extra_addr, start_manage_time,
+        end_manage_time, min30_fee, addmin10_fee, row_number() over(order by hp_bookmark_reg_date desc) ronum
         from hp_view s, hp_bookmark_view b, res_view r
         where s.hp_name = b.hp_name
         and s.res_name = r.res_name
-        and b.email = #{email}
+        and b.email = #{email})
+        where ronum between #{rowStart} and #{rowEnd}
     </select>
 
     <select id="userHpBookmarkCnt" resultType="int">
@@ -83,12 +85,14 @@
     </select>
 
     <select id="userSCSBookmark" resultType="com.fivekm_home.charge.domain.USER.UserBookmark">
-        select b.email, b.scs_name, scs_pic, road_addr, extra_addr, start_manage_time,
-        end_manage_time, min30_fee, addmin10_fee
+        select * from
+        (select b.email, b.scs_name, scs_pic, road_addr, extra_addr, start_manage_time,
+        end_manage_time, min30_fee, addmin10_fee, row_number() over(order by scs_bookmark_reg_date desc) ronum
         from scs_view s, scs_bookmark_view b, res_view r
         where s.scs_name = b.scs_name
         and s.res_name = r.res_name
-        and b.email = #{email}
+        and b.email = #{email})
+        where ronum between #{rowStart} and #{rowEnd}
     </select>
 
     <select id="userSCSBookmarkCnt" resultType="int">

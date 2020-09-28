@@ -29,9 +29,7 @@ public interface SCSMapper {
     ArrayList<SCS_chPlList> scsPlaceList(); // 주차장 자리 변화 불러오기
     ArrayList<SCS_mapSearch> scsMapSearch(String scs_name); // 충전소 지도 검색
     void scsBookCancel(SCS_book scs_book); // 예약 취소
-
-    // 충전소 타입 검색
-    ArrayList<SCS_type> scsType(String realSend);
-
+    ArrayList<SCS_search> typeFilter(String realSend); // 충전소 타입 검색
+    ArrayList<SCS_chPlList> typePlaceFilter(String realSend); // 충전소 타입 검색
 }
 
