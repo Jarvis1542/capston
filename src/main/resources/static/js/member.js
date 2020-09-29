@@ -414,7 +414,7 @@
            data : data,
            type : 'post',
            url : '/rest/updatePassword',
-           success : function (data) {
+           success : function () {
                 var html = "";
                 html += '<p class="asdf" style="font-size: 80%; color: green; ' +
                     'text-indent: 7em;"><strong>비밀번호 변경 완료되었습니다.</strong></p>';

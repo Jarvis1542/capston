@@ -95,10 +95,22 @@ $(document).ready(function () {
         else
             $('#price').text(min30_fee);
 
-        for(let i=0; i<5; i++){
-            if($('#car'+i).length>0){
-                carNum = $('#car'+i).val();
-            }
+        if($('#car0').length>0){
+            carNum = $('#car0').val();
+        }else{
+            event.preventDefault();
+            alert("예약할 차량을 선택해주십시오.");
+            return false;
+        }
+        if($('#start_date').val()=='' || $('#start_date').val()==null){
+            event.preventDefault();
+            alert('예약시작날짜를 정해주십시오.');
+            return false;
+        }
+        if($('#end_date').val()=='' || $('#end_date').val()==null){
+            event.preventDefault();
+            alert('예약종료날짜를 정해주십시오.');
+            return false;
         }
 
         var data = {

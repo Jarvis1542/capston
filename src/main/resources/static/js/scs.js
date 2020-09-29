@@ -62,22 +62,28 @@ $('#csRequestBtn').on('click', function () {
 });
 
 // 충전소 지도 검색
-$('#keySearch').on('click', function () {
-
-    var data = {
-        scs_name : $('#keyword').val()
-    }
-    $.ajax({
-        data : data,
-        type : 'POST',
-        url : '/rest/scsMapSearch',
-        success : function (data) {
-            setCenter(data[0].lat, data[0].lng);
-        },
-        error : function (error) {
-            alert(JSON.stringify(error));
+$('#keySearch').on('click', function (event) {
+    event.preventDefault();
+    if ($('#keyword').val() == '' || $('#keyword').val() == null){
+        event.preventDefault();
+        alert('검색어를 입력해 주세요!');
+        return;
+    }else{
+        var data = {
+            scs_name : $('#keyword').val()
         }
-    });
+        $.ajax({
+            data : data,
+            type : 'POST',
+            url : '/rest/scsMapSearch',
+            success : function (data) {
+                setCenter(data[0].lat, data[0].lng);
+            },
+            error : function (error) {
+                alert(JSON.stringify(error));
+            }
+        });
+    }
 });
 
 // 로그인 엔터

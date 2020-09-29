@@ -63,7 +63,7 @@
                                 <li class="wow fadeInRight" data-wow-duration="1s" data-wow-delay=".8s">추가 요금(10분당) :
                                     <span th:text="${scs.addmin10_fee+'원'}"></span></li>
                             </ul>
-                            <br><a class="boxed-btn3" th:href="@{'/chargingStation/scsBook/'+${scs.scs_name}+'+'
+                            <br><a class="boxed-btn3" th:href="@{'/chargingStation/scsBook/'+${scs.scs_name}+'/'
                                                 +${session.user.email}}">충전소 예약</a><br><br>
                         </div>
                     </div>

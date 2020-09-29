@@ -70,6 +70,73 @@
         line-height: 18px;
         height: 18px;
     }
+    .container {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 21px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    /* Hide the browser's default checkbox */
+    .container input[type="checkbox"] {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+    /* Create a custom checkbox */
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: #eee;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .container:hover input ~ .checkmark {
+        background-color: #ccc;
+    }
+
+    /* When the checkbox is checked, add a blue background */
+    .container input:checked ~ .checkmark {
+        background-color: #2196F3;
+    }
+
+    /* Create the checkmark/indicator (hidden when not checked) */
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the checkmark when checked */
+    .container input:checked ~ .checkmark:after {
+        display: block;
+    }
+
+    /* Style the checkmark/indicator */
+    .container .checkmark:after {
+        left: 9px;
+        top: 5px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+
 </style>
 <body>
 <header th:replace="layout/layout :: header"/>
@@ -104,31 +171,36 @@
             </div>
         </div>
 
-        <div class="row"  id="search_frm">
-        <label class="interval">
+    <div class="form-check-inline col-lg-12">
+        <label class="container">
             <input type="checkbox" id="ac3" name="scs_type[]" value="AC3상" class="d-inline-block" onchange="makeFilter(this)">AC3상
+            <span class="checkmark"></span>
         </label>
-        <label class="interval">
+        <label class="container">
             <input type="checkbox" id="combo" name="scs_type[]" value="DC콤보" class="d-inline-block" onchange="makeFilter(this)">DC콤보
+            <span class="checkmark"></span>
         </label>
-        <label class="interval">
+        <label class="container">
             <input type="checkbox" id="demo" name="scs_type[]" value="DC차데모" class="d-inline-block" onchange="makeFilter(this)">DC차데모
+            <span class="checkmark"></span>
         </label>
-        <label class="interval">
+        <label class="container">
             <input type="checkbox" id="super" name="scs_type[]" value="수퍼차저" class="d-inline-block" onchange="makeFilter(this)">수퍼차저
+            <span class="checkmark"></span>
         </label>
-        <label class="interval">
+        <label class="container">
             <input type="checkbox" id="slow" name="scs_type[]" value="완속" class="d-inline-block" onchange="makeFilter(this)">완속
+            <span class="checkmark"></span>
         </label>
-        <label class="interval">
+        <label class="container">
             <input type="checkbox" id="des" name="scs_type[]" value="데스티네이션" class="d-inline-block" onchange="makeFilter(this)">데스티네이션
+            <span class="checkmark"></span>
         </label>
-
-            <input type="text" name="keyword" id="keyword"/>
-            <button id="keySearch" type="button" onclick="setCenter()" class="btn btn-primary">조회</button>
+    </div><br>
+        <div id="search_frm">
+            <input type="text" name="keyword" id="keyword" style="width: 1000px; text-align: center" placeholder="충전소 이름을 입력해주세요!">&nbsp;&nbsp;
+            <button id="keySearch" type="button" onclick="setCenter()" class="btn btn-primary">검색</button>
         </div>
-
-
         <br>
         <div class="row justify-content-center">
             <div class="map_wrap">
@@ -202,104 +274,194 @@
         var tval = target.value;
         type[tval] = !type[tval];
         console.log(type);
+        if(type.AC3상 == false && type.DC차데모 == false && type.DC콤보 == false &&
+            type.데스티네이션 == false && type.수퍼차저 == false && type.완속 == false){
+            $.ajax({
 
-        $.ajax({
-            data: JSON.stringify(type),
-            type: 'post',
-            contentType: 'application/json',
-            dataType: 'json',
-            url: '/rest/typeFilter',
-            success: function (data) {
-                removeMarker();
-                for (let i = 0; i < data.length; i++) {
-                    typeSearch[i] = data[i];
-                    console.log("typeSearch[i] scs_name : " + i + "  " + typeSearch[i].scs_name);
-                    console.log("typeSearch[i] road_addr : " + i + "  " + typeSearch[i].road_addr);
-                    console.log("typeSearch[i] start_manage_time : " + i + "  " + typeSearch[i].start_manage_time);
-                    console.log("typeSearch[i] end_manage_time : " + i + "  " + typeSearch[i].end_manage_time);
-                    console.log("typeSearch[i] scs_amount : " + i + "  " + typeSearch[i].scs_amount);
-                    console.log("typeSearch[i] lat : " + i + "  " + typeSearch[i].lat);
-                    console.log("typeSearch[i] lng : " + i + "  "+ typeSearch[i].lng);
-                    console.log("typeSearch[i] min30_fee : " + i + "  " + typeSearch[i].min30_fee);
-                    console.log("typeSearch[i] addmin10_fee : " + i + "  " + typeSearch[i].addmin10_fee);
-                    console.log("===========================================");
-
-
-                    var placePosition = new kakao.maps.LatLng(data[i].lat, data[i].lng); // 마커를 생성합니다
-                    var marker = addMarker(placePosition);
-
-                    $wrap = $('<div class="dataLayerOnMap" />');
-                    $title = $('<div class="dataTitle" id="chargeName"/>').text(data[i].scs_name);
-                    $close = $('<div class="close" title="닫기" style="width: 15px; height: 15px; font-size: 25px; margin-right: 15px" onclick="closeOverlay('+i+')">X</div>');
-                    $body = $('<div class="body"/>');
-                    $img = $('<div class="dataPicture"><img src="'+data[i].scs_pic +'" style="height: 110px; width: 100px;"></div>');
-                    $desc = $('<div class="dataInfo" id="desc'+i+'">' +
-                        '<div class="dataAddress">'+data[i].road_addr+'</div>' +
-                        '<ul>' +
-                        '<li><span class="dataSubTitle">운영 정보</span>' +
-                        '<span>' +
-                        '시작운영시간 : '+data[i].start_manage_time+'<br>' +
-                        '종료운영시간 : '+data[i].end_manage_time+'<br>' +
-                        '충전소 수 : '+typePlace[i].scs_amount+' / '+data[i].scs_amount+'<br>' +
-                        '<a href="http://map.kakao.com/link/to/'+data[i].scs_name+ ',' +data[i].lat+ ','+data[i].lng+'"><button style="width: 100px; margin-left: 5px; margin-top: 5px" class="genric-btn primary small">길찾기</button></a>'+
-                        '</span>'+
-                        '</li>' +
-                        '<li><span class="dataSubTitle">주차 요금</span>' +
-                        '<span>' +
-                        '30분당 요금 : '+data[i].min30_fee+'<br>'+
-                        '10분당 추가요금 : '+data[i].addMin10_fee+'<br>'+
-                        '충전 타입 : '+data[i].scs_type+'<br>'+
-                        '<button style="width: 100px; margin-left: 5px; margin-top: 5px" onClick="mapBook(\'' + data[i].scs_name + '\')" class="genric-btn primary small">예약</button>'+
-                        '</span>'+
-                        '</li>'+
-                        '</ul>'+
-                        '</div>');
-
-                    $wrap.append($title).append($body);
-                    $body.append($img).append($desc);
-                    $title.append($close);
-
-                    wrap_arr.push($wrap);
-
-                    var content = wrap_arr[i][0].outerHTML;
-                    overlay[i] = new kakao.maps.CustomOverlay({
-                        content: content,
-                        position: marker.getPosition()
-                    });
-
-                    // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
-                    kakao.maps.event.addListener(marker, 'click', function() {
-                        overlay[i].setMap(map);
-                    });
+                url: '/rest/scsPlaceData',
+                type: 'post',
+                success: function (data) {
+                    for (let i = 0; i < data.length; i++) {
+                        place[i] = data[i];
+                    }
+                },
+                error: function (error) {
+                    alert(JSON.stringify(error));
                 }
-            },
-            error: function (error) {
-                console.log('실패');
-                console.log(JSON.stringify(error));
-            }
-        }); // 타입별 충전소 자리 및 오버레이
+            });// 충전소 자리 변화 불러오기 ajax 끝
 
-        $.ajax({
-            data: JSON.stringify(type),
-            type: 'post',
-            contentType: 'application/json',
-            dataType: 'json',
-            url: '/rest/typePlaceFilter',
-            success: function (data) {
-                removeMarker();
-                console.log("타입data :" + JSON.stringify(data));
-                for (let i = 0; i < data.length; i++) {
-                    typePlace[i] = data[i];
+            $.ajax({
+                url : '/rest/scsSearchData',
+                type : 'post',
+                cache : false,
+                success : function(data) {
+                    removeMarker();
+                    for (let i = 0; i < data.length; i++) {
+                        search[i] = data[i];
+                        // console.log("search[i] scs_name : " + search[i].scs_name);
+                        // console.log("search[i] road_addr : " + search[i].road_addr);
+                        // console.log("search[i] start_manage_time : " + search[i].start_manage_time);
+                        // console.log("search[i] end_manage_time : " + search[i].end_manage_time);
+                        // console.log("search[i] scs_amount : " + search[i].scs_amount);
+                        // console.log("search[i] lat : " + search[i].lat);
+                        // console.log("search[i] lng : " + search[i].lng);
+                        // console.log("search[i] min30_fee : " + search[i].min30_fee);
+                        // console.log("search[i] addmin10_fee : " + search[i].addmin10_fee);
+                        // console.log("===========================================");
+
+                        var placePosition = new kakao.maps.LatLng(search[i].lat, search[i].lng); // 마커를 생성합니다
+                        var marker = addMarker(placePosition);
+
+                        $wrap = $('<div class="dataLayerOnMap" />');
+                        $title = $('<div class="dataTitle" id="chargeName"/>').text(data[i].scs_name);
+                        $close = $('<div class="close" title="닫기" style="width: 15px; height: 15px; font-size: 25px; margin-right: 15px" onclick="closeOverlay('+i+')">X</div>');
+                        $body = $('<div class="body"/>');
+                        $img = $('<div class="dataPicture"><img src="'+search[i].scs_pic+'" style="height: 110px; width: 100px;"></div>');
+                        $desc = $('<div class="dataInfo" id="desc'+i+'">' +
+                            '<div class="dataAddress">'+search[i].road_addr+'</div>' +
+                            '<ul>' +
+                            '<li><span class="dataSubTitle">운영 정보</span>' +
+                            '<span>' +
+                            '시작운영시간 : '+search[i].start_manage_time+'<br>' +
+                            '종료운영시간 : '+search[i].end_manage_time+'<br>' +
+                            '충전소 수 : '+place[i].scs_amount+' / '+search[i].scs_amount+'<br>' +
+                            '<a href="http://map.kakao.com/link/to/'+search[i].scs_name+ ',' +search[i].lat+ ','+search[i].lng+'"><button style="width: 100px; margin-left: 5px; margin-top: 5px" class="genric-btn primary small">길찾기</button></a>'+
+                            '</span>'+
+                            '</li>' +
+                            '<li><span class="dataSubTitle">주차 요금</span>' +
+                            '<span>' +
+                            '30분당 요금 : '+search[i].min30_fee+'<br>'+
+                            '10분당 추가요금 : '+search[i].addMin10_fee+'<br>'+
+                            '충전 타입 : '+search[i].scs_type+'<br>'+
+                            '<button style="width: 100px; margin-left: 5px; margin-top: 5px" onClick="mapBook(\'' + search[i].scs_name + '\')" class="genric-btn primary small">예약</button>'+
+                            '</span>'+
+                            '</li>'+
+                            '</ul>'+
+                            '</div>');
+
+                        $wrap.append($title).append($body);
+                        $body.append($img).append($desc);
+                        $title.append($close);
+
+                        wrap_arr.push($wrap);
+
+                        var content = wrap_arr[i][0].outerHTML;
+                        overlay[i] = new kakao.maps.CustomOverlay({
+                            content: content,
+                            position: marker.getPosition()
+                        });
+
+                        // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+                        kakao.maps.event.addListener(marker, 'click', function() {
+                            overlay[i].setMap(map);
+                        });
+                    } // for문 끝
+
+                }, // success 끝
+                error : function (error) {
+                    alert(JSON.stringify(error));
                 }
-            },
-            error: function (error) {
-                console.log('실패');
-                console.log(JSON.stringify(error));
-            }
-        }); // type에 맞는 충전소 자리 변화
+            }); // 지도에 마크 찍을 데이터 불러오기 ajax 끝
+        }else {
+            $.ajax({
+                data: JSON.stringify(type),
+                type: 'post',
+                contentType: 'application/json',
+                dataType: 'json',
+                url: '/rest/typeFilter',
+                success: function (data) {
+                    removeMarker();
+                    for (let i = 0; i < data.length; i++) {
+                        typeSearch[i] = data[i];
+                        console.log("typeSearch[i] scs_name : " + i + "  " + typeSearch[i].scs_name);
+                        console.log("typeSearch[i] road_addr : " + i + "  " + typeSearch[i].road_addr);
+                        console.log("typeSearch[i] start_manage_time : " + i + "  " + typeSearch[i].start_manage_time);
+                        console.log("typeSearch[i] end_manage_time : " + i + "  " + typeSearch[i].end_manage_time);
+                        console.log("typeSearch[i] scs_amount : " + i + "  " + typeSearch[i].scs_amount);
+                        console.log("typeSearch[i] lat : " + i + "  " + typeSearch[i].lat);
+                        console.log("typeSearch[i] lng : " + i + "  "+ typeSearch[i].lng);
+                        console.log("typeSearch[i] min30_fee : " + i + "  " + typeSearch[i].min30_fee);
+                        console.log("typeSearch[i] addmin10_fee : " + i + "  " + typeSearch[i].addmin10_fee);
+                        console.log("===========================================");
+
+
+                        var placePosition = new kakao.maps.LatLng(data[i].lat, data[i].lng); // 마커를 생성합니다
+                        var marker = addMarker(placePosition);
+
+                        $wrap = $('<div class="dataLayerOnMap" />');
+                        $title = $('<div class="dataTitle" id="chargeName"/>').text(data[i].scs_name);
+                        $close = $('<div class="close" title="닫기" style="width: 15px; height: 15px; font-size: 25px; margin-right: 15px" onclick="closeOverlay('+i+')">X</div>');
+                        $body = $('<div class="body"/>');
+                        $img = $('<div class="dataPicture"><img src="'+data[i].scs_pic +'" style="height: 110px; width: 100px;"></div>');
+                        $desc = $('<div class="dataInfo" id="desc'+i+'">' +
+                            '<div class="dataAddress">'+data[i].road_addr+'</div>' +
+                            '<ul>' +
+                            '<li><span class="dataSubTitle">운영 정보</span>' +
+                            '<span>' +
+                            '시작운영시간 : '+data[i].start_manage_time+'<br>' +
+                            '종료운영시간 : '+data[i].end_manage_time+'<br>' +
+                            '충전소 수 : '+typePlace[i].scs_amount+' / '+data[i].scs_amount+'<br>' +
+                            '<a href="http://map.kakao.com/link/to/'+data[i].scs_name+ ',' +data[i].lat+ ','+data[i].lng+'"><button style="width: 100px; margin-left: 5px; margin-top: 5px" class="genric-btn primary small">길찾기</button></a>'+
+                            '</span>'+
+                            '</li>' +
+                            '<li><span class="dataSubTitle">주차 요금</span>' +
+                            '<span>' +
+                            '30분당 요금 : '+data[i].min30_fee+'<br>'+
+                            '10분당 추가요금 : '+data[i].addMin10_fee+'<br>'+
+                            '충전 타입 : '+data[i].scs_type+'<br>'+
+                            '<button style="width: 100px; margin-left: 5px; margin-top: 5px" onClick="mapBook(\'' + data[i].scs_name + '\')" class="genric-btn primary small">예약</button>'+
+                            '</span>'+
+                            '</li>'+
+                            '</ul>'+
+                            '</div>');
+
+                        $wrap.append($title).append($body);
+                        $body.append($img).append($desc);
+                        $title.append($close);
+
+                        wrap_arr.push($wrap);
+
+                        var content = wrap_arr[i][0].outerHTML;
+                        overlay[i] = new kakao.maps.CustomOverlay({
+                            content: content,
+                            position: marker.getPosition()
+                        });
+
+                        // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+                        kakao.maps.event.addListener(marker, 'click', function() {
+                            overlay[i].setMap(map);
+                        });
+                    }
+                },
+                error: function (error) {
+                    console.log('실패');
+                    console.log(JSON.stringify(error));
+                }
+            }); // 타입별 충전소 자리 및 오버레이
+
+            $.ajax({
+                data: JSON.stringify(type),
+                type: 'post',
+                contentType: 'application/json',
+                dataType: 'json',
+                url: '/rest/typePlaceFilter',
+                success: function (data) {
+                    removeMarker();
+                    console.log("타입data :" + JSON.stringify(data));
+                    for (let i = 0; i < data.length; i++) {
+                        typePlace[i] = data[i];
+                    }
+                },
+                error: function (error) {
+                    console.log('실패');
+                    console.log(JSON.stringify(error));
+                }
+            }); // type에 맞는 충전소 자리 변화
+        } // end of else
     } // end of function makeFilter
 
     $.ajax({
+
         url: '/rest/scsPlaceData',
         type: 'post',
         success: function (data) {
@@ -320,16 +482,16 @@
             removeMarker();
             for (let i = 0; i < data.length; i++) {
                 search[i] = data[i];
-                console.log("search[i] scs_name : " + search[i].scs_name);
-                console.log("search[i] road_addr : " + search[i].road_addr);
-                console.log("search[i] start_manage_time : " + search[i].start_manage_time);
-                console.log("search[i] end_manage_time : " + search[i].end_manage_time);
-                console.log("search[i] scs_amount : " + search[i].scs_amount);
-                console.log("search[i] lat : " + search[i].lat);
-                console.log("search[i] lng : " + search[i].lng);
-                console.log("search[i] min30_fee : " + search[i].min30_fee);
-                console.log("search[i] addmin10_fee : " + search[i].addmin10_fee);
-                console.log("===========================================");
+                // console.log("search[i] scs_name : " + search[i].scs_name);
+                // console.log("search[i] road_addr : " + search[i].road_addr);
+                // console.log("search[i] start_manage_time : " + search[i].start_manage_time);
+                // console.log("search[i] end_manage_time : " + search[i].end_manage_time);
+                // console.log("search[i] scs_amount : " + search[i].scs_amount);
+                // console.log("search[i] lat : " + search[i].lat);
+                // console.log("search[i] lng : " + search[i].lng);
+                // console.log("search[i] min30_fee : " + search[i].min30_fee);
+                // console.log("search[i] addmin10_fee : " + search[i].addmin10_fee);
+                // console.log("===========================================");
 
                 var placePosition = new kakao.maps.LatLng(search[i].lat, search[i].lng); // 마커를 생성합니다
                 var marker = addMarker(placePosition);

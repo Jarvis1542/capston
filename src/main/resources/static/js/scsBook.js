@@ -76,9 +76,7 @@ $(document).ready(function () {
     });
 
     // 예약
-    $('#scsBook').on('click', function () {
-        $('#scsBook').hide();
-        $('#scsBookCancel').show();
+    $('#scsBook').on('click', function (event) {
         let carNum = "";
         let start_date = new Date($('#start_date').val());
         let end_date = new Date($('#end_date').val());
@@ -118,12 +116,23 @@ $(document).ready(function () {
         else
             $('#price').text(min30_fee);
 
-        for(let i=0; i<5; i++){
-            if($('#car'+i).length>0){
-                carNum = $('#car'+i).val();
-            }
+        if($('#car0').length>0){
+            carNum = $('#car0').val();
+        }else{
+            event.preventDefault();
+            alert("예약할 차량을 선택해주십시오.");
+            return false;
         }
-
+        if($('#start_date').val()=='' || $('#start_date').val()==null){
+            event.preventDefault();
+            alert('예약시작날짜를 정해주십시오.');
+            return false;
+        }
+        if($('#end_date').val()=='' || $('#end_date').val()==null){
+            event.preventDefault();
+            alert('예약종료날짜를 정해주십시오.');
+            return false;
+        }
         var data = {
             start_date : result1,
             end_date : result2,
@@ -142,6 +151,8 @@ $(document).ready(function () {
                 alert(JSON.stringify(error));
             }
         });
+        $('#scsBook').hide();
+        $('#scsBookCancel').show();
     });
 
     // 결제

@@ -24,6 +24,7 @@ $('#loadMyCarModalBtn').on('click', function () {
                         '<a id="my_car'+i+'" href="#'+i+'">'+data[i].car_id+'</a>' +
                         '</li><br>'
                     );
+                    $('#hiddenCar').val(data[i].car_id);
                 }
             }
         },
